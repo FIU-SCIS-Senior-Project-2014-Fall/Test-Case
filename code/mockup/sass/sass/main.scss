@@ -36,6 +36,10 @@ body {
   }
 }
 
+.heading {
+  margin-bottom:25px;
+}
+
 /* Custom page footer */
 .footer {
   padding-top: 19px;
@@ -47,15 +51,17 @@ body {
   margin: 30px 0;
 }
 
-/* Main marketing message and sign up button */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
+#workspace .form-control, #workspace .btn {
+  border:1px none !important;
+  box-shadow:none !important;
+}
 
-  .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-  }
+#workspace input:hover {
+  border:1px solid #cccccc !important;
+}
+
+#workspace input:focus {
+  box-shadow:0px 0px 5px blue !important;
 }
 
 /* Supporting marketing content */

@@ -22,26 +22,31 @@
 
     <!-- Add your site or application content here -->
     <div class="container">
-      <div class="header">
+      <div class="row heading">
         <ul class="nav nav-pills pull-right">
           <li class="active"><a ng-href="#">Workspace</a></li>
           <li><a ng-href="#/about">Help</a></li>
-          <li>
-            <div class="dropdown">
+          <li class="dropdown">
               <a data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog"></span></a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
                 <li><a href="#"><span class="glyphicon glyphicon-inbox"></span> Configure Test Case Management</a></li>
                 <li><a href="#"><span class="glyphicon glyphicon-hdd"></span> Configure Repository</a></li>
               </ul>
-            </div></li>
+          </li>
         </ul>
-        <h3 class="text-muted">initProj</h3>
       </div>
       <div id="LeftPane"></div>
       <div ng-view=""></div>
 
-      <div class="footer">
-        <p>FIU SCIS Senior Project Test Case</p>
+      <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-11">
+          <div class="footer">
+
+            <p>FIU SCIS Senior Project Test Case</p>
+          </div>
+          </div>
       </div>
     </div>
 

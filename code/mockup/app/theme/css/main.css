@@ -36,42 +36,51 @@ body {
   padding-bottom: 19px;
 }
 
+/* line 39, ../../../sass/sass/main.scss */
+.heading {
+  margin-bottom: 25px;
+}
+
 /* Custom page footer */
-/* line 40, ../../../sass/sass/main.scss */
+/* line 44, ../../../sass/sass/main.scss */
 .footer {
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
 }
 
-/* line 46, ../../../sass/sass/main.scss */
+/* line 50, ../../../sass/sass/main.scss */
 .container-narrow > hr {
   margin: 30px 0;
 }
 
-/* Main marketing message and sign up button */
-/* line 51, ../../../sass/sass/main.scss */
-.jumbotron {
-  text-align: center;
-  border-bottom: 1px solid #e5e5e5;
+/* line 54, ../../../sass/sass/main.scss */
+#workspace .form-control, #workspace .btn {
+  border: 1px none !important;
+  box-shadow: none !important;
 }
-/* line 55, ../../../sass/sass/main.scss */
-.jumbotron .btn {
-  font-size: 21px;
-  padding: 14px 24px;
+
+/* line 59, ../../../sass/sass/main.scss */
+#workspace input:hover {
+  border: 1px solid #cccccc !important;
+}
+
+/* line 63, ../../../sass/sass/main.scss */
+#workspace input:focus {
+  box-shadow: 0px 0px 5px blue !important;
 }
 
 /* Supporting marketing content */
-/* line 62, ../../../sass/sass/main.scss */
+/* line 68, ../../../sass/sass/main.scss */
 .marketing {
   margin: 40px 0;
 }
-/* line 65, ../../../sass/sass/main.scss */
+/* line 71, ../../../sass/sass/main.scss */
 .marketing p + h4 {
   margin-top: 28px;
 }
 
-/* line 70, ../../../sass/sass/main.scss */
+/* line 76, ../../../sass/sass/main.scss */
 #LeftPane {
   position: fixed;
   width: 250px;
