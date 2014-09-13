@@ -36,51 +36,37 @@ body {
   padding-bottom: 19px;
 }
 
-/* line 39, ../../../sass/sass/main.scss */
+/* line 38, ../../../sass/sass/main.scss */
+.heading .nav {
+  position: static;
+}
+
+/* line 41, ../../../sass/sass/main.scss */
 .heading {
   margin-bottom: 25px;
+  z-index: 1001 !important;
+}
+
+/* line 46, ../../../sass/sass/main.scss */
+.dropdown-menu {
+  z-index: 1001 !important;
 }
 
 /* Custom page footer */
-/* line 44, ../../../sass/sass/main.scss */
+/* line 51, ../../../sass/sass/main.scss */
 .footer {
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
+  z-index: 90 !important;
 }
 
-/* line 50, ../../../sass/sass/main.scss */
+/* line 58, ../../../sass/sass/main.scss */
 .container-narrow > hr {
   margin: 30px 0;
 }
 
-/* line 54, ../../../sass/sass/main.scss */
-#workspace .form-control, #workspace .btn {
-  border: 1px none !important;
-  box-shadow: none !important;
-}
-
-/* line 59, ../../../sass/sass/main.scss */
-#workspace input:hover {
-  border: 1px solid #cccccc !important;
-}
-
-/* line 63, ../../../sass/sass/main.scss */
-#workspace input:focus {
-  box-shadow: 0px 0px 5px blue !important;
-}
-
-/* Supporting marketing content */
-/* line 68, ../../../sass/sass/main.scss */
-.marketing {
-  margin: 40px 0;
-}
-/* line 71, ../../../sass/sass/main.scss */
-.marketing p + h4 {
-  margin-top: 28px;
-}
-
-/* line 76, ../../../sass/sass/main.scss */
+/* line 62, ../../../sass/sass/main.scss */
 #LeftPane {
   position: fixed;
   width: 250px;
@@ -91,11 +77,11 @@ body {
   color: #dadada;
   padding-top: 15px;
 }
-/* line 85, ../../../sass/sass/main.scss */
+/* line 71, ../../../sass/sass/main.scss */
 #LeftPane h3 {
   padding: 0px 5px 10px 5px;
 }
-/* line 88, ../../../sass/sass/main.scss */
+/* line 74, ../../../sass/sass/main.scss */
 #LeftPane a {
   font-size: 12px;
   padding: 5px 10px;
@@ -106,30 +92,89 @@ body {
   -o-transition: ease-out .25s;
   transition: ease-out .25s;
 }
-/* line 98, ../../../sass/sass/main.scss */
+/* line 84, ../../../sass/sass/main.scss */
 #LeftPane a:hover {
   color: #666666;
 }
-/* line 101, ../../../sass/sass/main.scss */
+/* line 87, ../../../sass/sass/main.scss */
 #LeftPane .active a:hover, #LeftPane .active a {
   color: #333333;
 }
 
-/* line 107, ../../../sass/sass/main.scss */
+/* Position of row mujst be set in order to overcome dropdown z-index failing */
+/* line 93, ../../../sass/sass/main.scss */
+.row {
+  position: relative;
+}
+
+/* line 97, ../../../sass/sass/main.scss */
+.ng-scope {
+  z-index: 100 !important;
+}
+
+/* line 101, ../../../sass/sass/main.scss */
+#workspace {
+  z-index: 100 !important;
+}
+/* line 104, ../../../sass/sass/main.scss */
+#workspace .form-control, #workspace .btn {
+  border: 1px none !important;
+  box-shadow: none !important;
+}
+/* line 108, ../../../sass/sass/main.scss */
+#workspace input:hover {
+  border: 1px solid #cccccc !important;
+}
+/* line 111, ../../../sass/sass/main.scss */
+#workspace input:focus {
+  box-shadow: 0px 0px 5px blue !important;
+}
+/* line 114, ../../../sass/sass/main.scss */
 #workspace .arch {
   padding: 3px 0px;
 }
-/* line 112, ../../../sass/sass/main.scss */
+/* line 119, ../../../sass/sass/main.scss */
 #workspace .case {
   margin-left: 50px;
 }
-/* line 115, ../../../sass/sass/main.scss */
+/* line 122, ../../../sass/sass/main.scss */
 #workspace .step {
   margin-left: 100px;
 }
-/* line 118, ../../../sass/sass/main.scss */
+/* line 125, ../../../sass/sass/main.scss */
+#workspace .onlyHover {
+  width: 0px;
+  overflow: hidden;
+  -webkit-transition: ease-out .5s;
+  -moz-transition: ease-out .5s;
+  -o-transition: ease-out .5s;
+  transition: ease-out .5s;
+}
+/* line 133, ../../../sass/sass/main.scss */
 #workspace .input-group-addon {
   background-color: transparent;
   border: 1px none;
-  color: #888888;
+  color: #cccccc !important;
+  -webkit-transition: ease-out .5s;
+  -moz-transition: ease-out .5s;
+  -o-transition: ease-out .5s;
+  transition: ease-out .5s;
+}
+/* line 141, ../../../sass/sass/main.scss */
+#workspace .input-group-addon .glyphicon {
+  cursor: pointer;
+}
+/* line 144, ../../../sass/sass/main.scss */
+#workspace .input-group-addon .glyphicon:hover {
+  color: #000000 !important;
+}
+/* line 148, ../../../sass/sass/main.scss */
+#workspace .arch:hover .input-group-addon {
+  background-color: #dadada;
+  color: #44444444 !important;
+}
+/* line 151, ../../../sass/sass/main.scss */
+#workspace .arch:hover .input-group-addon .onlyHover {
+  width: auto;
+  margin-left: 8px;
 }

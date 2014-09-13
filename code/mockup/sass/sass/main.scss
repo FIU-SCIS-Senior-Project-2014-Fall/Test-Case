@@ -35,9 +35,16 @@ body {
     padding-bottom: 19px;
   }
 }
-
+.heading .nav {
+  position:static;
+}
 .heading {
   margin-bottom:25px;
+  z-index:1001 !important;
+}
+
+.dropdown-menu {
+  z-index:1001 !important;
 }
 
 /* Custom page footer */
@@ -45,32 +52,11 @@ body {
   padding-top: 19px;
   color: #777;
   border-top: 1px solid #e5e5e5;
+  z-index:90 !important;
 }
 
 .container-narrow > hr {
   margin: 30px 0;
-}
-
-#workspace .form-control, #workspace .btn {
-  border:1px none !important;
-  box-shadow:none !important;
-}
-
-#workspace input:hover {
-  border:1px solid #cccccc !important;
-}
-
-#workspace input:focus {
-  box-shadow:0px 0px 5px blue !important;
-}
-
-/* Supporting marketing content */
-.marketing {
-  margin: 40px 0;
-
-  p + h4 {
-    margin-top: 28px;
-  }
 }
 
 #LeftPane {
@@ -103,7 +89,28 @@ body {
   }
 }
 
+/* Position of row mujst be set in order to overcome dropdown z-index failing */
+.row {
+  position:relative;
+}
+
+.ng-scope {
+  z-index:100 !important;
+}
+
 #workspace {
+  z-index:100 !important;
+
+  .form-control, .btn {
+  border:1px none !important;
+  box-shadow:none !important;
+  }
+  input:hover {
+  border:1px solid #cccccc !important;
+  }
+  input:focus {
+  box-shadow:0px 0px 5px blue !important;
+  }
   .arch {
     padding:3px 0px;
   }
@@ -115,9 +122,35 @@ body {
   .step {
     margin-left:100px;
   }
+  .onlyHover {
+    width:0px;
+    overflow:hidden;
+    -webkit-transition: ease-out .5s;
+    -moz-transition: ease-out .5s;
+    -o-transition: ease-out .5s;
+    transition: ease-out .5s;
+  }
   .input-group-addon {
     background-color:transparent;
     border:1px none;
-    color:#888888;
+    color:#cccccc !important;
+    -webkit-transition: ease-out .5s;
+    -moz-transition: ease-out .5s;
+    -o-transition: ease-out .5s;
+    transition: ease-out .5s;
+    .glyphicon {
+      cursor:pointer;
+    }
+    .glyphicon:hover {
+      color:#000000 !important;
+    }
+  }
+  .arch:hover .input-group-addon {
+    background-color:#dadada;
+    color:#44444444 !important;
+    .onlyHover {
+      width:auto;
+      margin-left:8px;
+    }
   }
 }
