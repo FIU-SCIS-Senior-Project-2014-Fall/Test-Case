@@ -89,4 +89,47 @@ body {
   left: 0px;
   background-color: #333333;
   color: #dadada;
+  padding-top: 15px;
+}
+/* line 85, ../../../sass/sass/main.scss */
+#LeftPane h3 {
+  padding: 0px 5px 10px 5px;
+}
+/* line 88, ../../../sass/sass/main.scss */
+#LeftPane a {
+  font-size: 12px;
+  padding: 5px 10px;
+  color: #dadada;
+  border-radius: 0px;
+  -webkit-transition: ease-out .25s;
+  -moz-transition: ease-out .25s;
+  -o-transition: ease-out .25s;
+  transition: ease-out .25s;
+}
+/* line 98, ../../../sass/sass/main.scss */
+#LeftPane a:hover {
+  color: #666666;
+}
+/* line 101, ../../../sass/sass/main.scss */
+#LeftPane .active a:hover, #LeftPane .active a {
+  color: #333333;
+}
+
+/* line 107, ../../../sass/sass/main.scss */
+#workspace .arch {
+  padding: 3px 0px;
+}
+/* line 112, ../../../sass/sass/main.scss */
+#workspace .case {
+  margin-left: 50px;
+}
+/* line 115, ../../../sass/sass/main.scss */
+#workspace .step {
+  margin-left: 100px;
+}
+/* line 118, ../../../sass/sass/main.scss */
+#workspace .input-group-addon {
+  background-color: transparent;
+  border: 1px none;
+  color: #888888;
 }

@@ -81,4 +81,43 @@ body {
   left:0px;
   background-color:#333333;
   color:#dadada;
+  padding-top:15px;
+  h3 {
+    padding:0px 5px 10px 5px;
+  }
+  a {
+    font-size:12px;
+    padding:5px 10px;
+    color:#dadada;
+    border-radius:0px;
+    -webkit-transition: ease-out .25s;
+    -moz-transition: ease-out .25s;
+    -o-transition: ease-out .25s;
+    transition: ease-out .25s;
+  }
+  a:hover {
+    color:#666666;
+  }
+  .active a:hover, .active a {
+    color:#333333;
+  }
+}
+
+#workspace {
+  .arch {
+    padding:3px 0px;
+  }
+  .suite {
+  }
+  .case {
+    margin-left:50px;
+  }
+  .step {
+    margin-left:100px;
+  }
+  .input-group-addon {
+    background-color:transparent;
+    border:1px none;
+    color:#888888;
+  }
 }
