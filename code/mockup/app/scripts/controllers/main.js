@@ -125,7 +125,7 @@ angular.module('initProjApp').controller('MainCtrl', function ($scope, storage) 
 		}
 		return size;
 	};
-
+	// comments to come.
 	function findAdjacentSibling(index, type) {
 		var lastSibling = false;
 		for(var i = 0, j = $scope.entries.length; i < j; i++) {
