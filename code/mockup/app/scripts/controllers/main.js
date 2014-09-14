@@ -19,7 +19,8 @@ angular.module('initProjApp').controller('MainCtrl', function ($scope, storage) 
 			"name" : "Test Suite 1",
 			"type" : "suite",
 			"parent" : 0,
-			"size" : sizeByType("suite")
+			"size" : sizeByType("suite"),
+			"children" : []
 		});
 	}
 
@@ -36,7 +37,8 @@ angular.module('initProjApp').controller('MainCtrl', function ($scope, storage) 
 			"name" : "Default Suite after clear",
 			"type" : "suite",
 			"parent" : 0,
-			"size" : sizeByType("suite")
+			"size" : sizeByType("suite"),
+			"children" : []
 		});
 	}
 
@@ -46,10 +48,15 @@ angular.module('initProjApp').controller('MainCtrl', function ($scope, storage) 
 
     $scope.demoteClicked = function(index) {
     	var type = $scope.typeDownOne($scope.entries[index].type);
-    	if(type != false) {
-	    	$scope.entries[index].parent = findAdjacentSibling($scope.entries[index].id, $scope.entries[index].type);
-			$scope.entries[index].type = $scope.typeDownOne($scope.entries[index].type);
-			$scope.entries[index].size = sizeByType($scope.entries[index].type);
+		if(type != false) {
+			var copy = cloneEntry(index, true);
+			copy.id = $scope.entries[index].children.length;
+			copy.parent = findAdjacentSibling($scope.entries[index].id, $scope.entries[index].type).id;
+			copy.type = $scope.typeDownOne($scope.entries[index].type);
+			copy.size = sizeByType($scope.entries[index].type);
+			console.log(copy);
+			addChild(copy.parent, copy);
+			$scope.entries.splice(index, 1);
 		}
     };
 
@@ -62,6 +69,7 @@ angular.module('initProjApp').controller('MainCtrl', function ($scope, storage) 
     $scope.addEntryClicked = function(index) {
     	var copy = cloneEntry(index);
     	copy.name = "New Test " + copy.type;
+    	console.log(copy);
     	addEntry(copy);
     };
 
@@ -69,15 +77,31 @@ angular.module('initProjApp').controller('MainCtrl', function ($scope, storage) 
     	$scope.entries.splice(index, 1);
     };
 
-	function cloneEntry(index) {
+    function demoteEntry(entry, index, parent) {
+			entry.id = $scope.entries[index].children.length;
+			entry.parent = (parent >= 0) ? parent : findAdjacentSibling($scope.entries[index].id, $scope.entries[index].type).id;
+			entry.type = $scope.typeDownOne($scope.entries[index].type);
+			entry.size = sizeByType($scope.entries[index].type);
+			return entry;
+    }
+
+	function cloneEntry(index, incChildren) {
 		return {
 			"id" : $scope.entries.length,
 			"name" : $scope.entries[index].name,
 			"type" : $scope.entries[index].type,
 			"parent" : $scope.entries[index].id,
-			"size" : sizeByType($scope.entries[index].type)
+			"size" : sizeByType($scope.entries[index].type),
+			"children" : [] // always clear children
 		};
 	};
+
+	function addChild(parentId, child) {
+		for(var i = 0, j = $scope.entries.length; i < j; i++) {
+			if($scope.entries[i].id >= parentId)
+				$scope.entries[i].children.push(child);
+		}
+	}
 
 	function addEntry(entry) {
 		$scope.entries.push( {
@@ -85,7 +109,8 @@ angular.module('initProjApp').controller('MainCtrl', function ($scope, storage) 
 			"name" : entry.name,
 			"type" : entry.type,
 			"parent" : entry.parent,
-			"size" : entry.size
+			"size" : entry.size,
+			"children" : entry.children
 		});
 	};
 
