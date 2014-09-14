@@ -8,7 +8,6 @@
  * Controller of the initProjApp
  */
 angular.module('initProjApp').controller('MainCtrl', function ($scope, storage) {
-
   	storage.bind($scope,'entries');
 
   	$scope.viewType = 'ANYTHING';
@@ -23,6 +22,8 @@ angular.module('initProjApp').controller('MainCtrl', function ($scope, storage) 
 			"size" : sizeByType("suite")
 		});
 	}
+
+	$scope.types = ['step', 'case', 'suite'];
 
 	setTimeout(function() { $('.input-group-addon .glyphicon').tooltip();}, 1000);
 
@@ -41,30 +42,42 @@ angular.module('initProjApp').controller('MainCtrl', function ($scope, storage) 
 
 	$scope.preventDefault = function(event) {
 		event.preventDefault();
-	}
+	};
 
-    $scope.keyAction = function(event, index) {
-    	if(event.keyCode == '13')
-    		addSubEntry(index);
-    	else if(event.keyCode == '9') {
-    		if($scope.entries[index].id > 0) {
-		    	$scope.entries[index].parent = findParent($scope.entries[index].id, $scope.entries[index].type);
-		    	$scope.entries[index].type = typeDownOne($scope.entries[index].type);
-		    	$scope.entries[index].size = sizeByType($scope.entries[index].type);
-	    	}
-    	}
+    $scope.demoteClicked = function(index) {
+    	var type = $scope.typeDownOne($scope.entries[index].type);
+    	if(type != false) {
+	    	$scope.entries[index].parent = findAdjacentSibling($scope.entries[index].id, $scope.entries[index].type);
+			$scope.entries[index].type = $scope.typeDownOne($scope.entries[index].type);
+			$scope.entries[index].size = sizeByType($scope.entries[index].type);
+		}
     };
 
-	function addSubEntry(index) {
-		var type = typeDownOne($scope.entries[index].type);
-		addEntry({
+    $scope.promoteClicked = function(index) {
+    	$scope.entries[index].parent = findParent($scope.entries[index].id, $scope.entries[index].type);
+		$scope.entries[index].type = $scope.typeUpOne($scope.entries[index].type);
+		$scope.entries[index].size = sizeByType($scope.entries[index].type);
+    };
+
+    $scope.addEntryClicked = function(index) {
+    	var copy = cloneEntry(index);
+    	copy.name = "New Test " + copy.type;
+    	addEntry(copy);
+    };
+
+    $scope.removeEntryClicked = function(index) {
+    	$scope.entries.splice(index, 1);
+    };
+
+	function cloneEntry(index) {
+		return {
 			"id" : $scope.entries.length,
-			"name" : "New Test " + type,
-			"type" : type,
+			"name" : $scope.entries[index].name,
+			"type" : $scope.entries[index].type,
 			"parent" : $scope.entries[index].id,
-			"size" : sizeByType(type)
-		});
-	}
+			"size" : sizeByType($scope.entries[index].type)
+		};
+	};
 
 	function addEntry(entry) {
 		$scope.entries.push( {
@@ -74,27 +87,28 @@ angular.module('initProjApp').controller('MainCtrl', function ($scope, storage) 
 			"parent" : entry.parent,
 			"size" : entry.size
 		});
-	}
+	};
 
 
-	function typeDownOne(parentType) {
-		var newType = "";
-		switch(parentType) {
-			case "suite" :
-				newType = "case";
-				break;
-			case "case" :
-				newType = "step";
-				break;
-			case "step" :
-				newType = "step";
-				break;
-			default :
-				newType = "suite";
-				break;
-		}
-		return newType;
-	}
+	$scope.typeDownOne = function(parentType) {
+		if(typeof parentType === 'string')
+			parentType = $scope.types.indexOf(parentType);
+
+		if(parentType < $scope.types.length && parentType > 0)
+			return $scope.types[parentType - 1];
+		else
+			return $scope.types[parentType];
+	};
+
+	$scope.typeUpOne = function(parentType) {
+		if(typeof parentType === 'string')
+			parentType = $scope.types.indexOf(parentType);
+
+		if(parentType < ($scope.types.length - 1) && parentType >= 0)
+			return $scope.types[parentType + 1];
+		else
+			return $scope.types[parentType];
+	};
 
 	function sizeByType(type) {
 		var size = "";
@@ -110,16 +124,25 @@ angular.module('initProjApp').controller('MainCtrl', function ($scope, storage) 
 				break;
 		}
 		return size;
-	}
+	};
 
-	function findParent(index, type) {
-		var lastSibling = 0;
+	function findAdjacentSibling(index, type) {
+		var lastSibling = false;
 		for(var i = 0, j = $scope.entries.length; i < j; i++) {
 			if($scope.entries[i].id >= index)
 				break;
 			if($scope.entries[i].type == type)
-				lastSibling = $scope.entries[i].id;
+				lastSibling = $scope.entries[i];
 		}
 		return lastSibling;
-	}
+	};
+
+	function findParent(index, type) {
+		type = $scope.types.indexOf(type) - 1;
+		if(type >= 0)
+			return findAdjacentSibling(index, $scope.types[type]);
+		else
+			return false;
+
+	};
   });

@@ -1,37 +1,38 @@
-<div>
-  <div class="col-md-1">
-  </div>
-  <div class="col-md-11">
+
     <ol class="breadcrumb">
-      <li><a href="#">Workspace</a></li>
-      <li><a href="#">Test Suite</a></li>
-      <li class="active">Test Case</li>
+      <li class="active">Workspace</li>
     </ol>
     <div id="workspace">
     <div ng-repeat="test in entries | orderBy:['parent','id']"> <!-- loop of the cases -->
-      <div class="{{ test.type }} arch">
+      <div class="{{ test.type }} arch fadeInUp animated">
         <div class="input-group input-group{{ test.size }}">
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-chevron-down" data-toggle="tooltip" data-placement="bottom"
         title="Hide Children"></span>
             <span class="glyphicon glyphicon-plus onlyHover" data-toggle="tooltip" data-placement="bottom"
-        title="Create new test {{ test.type }}"></span>
+        title="Create new test {{ test.type }}" ng-click="addEntryClicked($index)"></span>
             <span class="glyphicon glyphicon-remove onlyHover" data-toggle="tooltip" data-placement="bottom"
-        title="Delete test {{ test.type }} named {{ test.name }}"></span>
+        title="Delete test {{ test.type }} named {{ test.name }}" ng-click="removeEntryClicked($index)"></span>
+        <span ng-if="types.indexOf(test.type) < (types.length - 1)">
+          <span class="glyphicon glyphicon-backward onlyHover" data-toggle="tooltip" data-placement="bottom"
+        title="Promote test {{ test.type }} to test {{ typeUpOne(test.type) }}" ng-click="promoteClicked($index)"></span>
+        </span>
+        <span ng-if="types.indexOf(test.type) > 0">
+          <span class="glyphicon glyphicon-forward onlyHover" data-toggle="tooltip" data-placement="bottom"
+        title="Demote test {{ test.type }} to test {{ typeDownOne(test.type) }}" ng-click="demoteClicked($index)"></span>
+        </span>
           </span>
-          <input type="text" class="form-control" value="{{ test.name }}" ng-keyup="keyAction($event, $index)" ng-keydown="preventDefault($event)">
+          <input type="text" class="form-control" value="{{ test.name }}" ng-keyup="keyAction($index)" ng-keydown="preventDefault($event)">
           <div class="input-group-btn">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
             <ul class="dropdown-menu dropdown-menu-right" role="menu">
               <li><a href="#">Copy Children</a></li>
               <li><a href="#">Link File</a></li>
               <li class="divider"></li>
-              <li><a href="#">Delete</a></li>
             </ul>
           </div><!-- /btn-group -->
         </div><!-- /input-group -->
       </div>
     </div>
     <button class="btn btn-default" ng-click="clearStorage()">Clear Storage</button>
-  </div>
-</div>
+    </div>

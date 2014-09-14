@@ -1,59 +1,30 @@
 /* line 5, ../../../sass/sass/main.scss */
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+.container {
+  margin-left: 0px;
+  padding-left: 0px;
 }
 
 /* Space out content a bit */
-/* line 13, ../../../sass/sass/main.scss */
-body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+/* line 11, ../../../sass/sass/main.scss */
+body, .MainBody, html, .container {
+  min-height: 100% !important;
+  height: 100% !important;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-/* line 19, ../../../sass/sass/main.scss */
-.header,
-.marketing,
-.footer {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-/* Custom page header */
-/* line 27, ../../../sass/sass/main.scss */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-  /* Make the masthead heading the same height as the navigation */
-}
-/* line 31, ../../../sass/sass/main.scss */
-.header h3 {
-  margin-top: 0;
-  margin-bottom: 0;
-  line-height: 40px;
-  padding-bottom: 19px;
-}
-
-/* line 38, ../../../sass/sass/main.scss */
-.heading .nav {
-  position: static;
-}
-
-/* line 41, ../../../sass/sass/main.scss */
+/* line 16, ../../../sass/sass/main.scss */
 .heading {
   margin-bottom: 25px;
+  margin-top: 15px;
   z-index: 1001 !important;
 }
 
-/* line 46, ../../../sass/sass/main.scss */
+/* line 22, ../../../sass/sass/main.scss */
 .dropdown-menu {
   z-index: 1001 !important;
 }
 
 /* Custom page footer */
-/* line 51, ../../../sass/sass/main.scss */
+/* line 27, ../../../sass/sass/main.scss */
 .footer {
   padding-top: 19px;
   color: #777;
@@ -61,27 +32,23 @@ body {
   z-index: 90 !important;
 }
 
-/* line 58, ../../../sass/sass/main.scss */
-.container-narrow > hr {
-  margin: 30px 0;
+/* line 34, ../../../sass/sass/main.scss */
+.leftPaneWrapper {
+  height: 100%;
 }
 
-/* line 62, ../../../sass/sass/main.scss */
+/* line 38, ../../../sass/sass/main.scss */
 #LeftPane {
-  position: fixed;
-  width: 250px;
-  height: 100%;
-  top: 0px;
-  left: 0px;
   background-color: #333333;
   color: #dadada;
-  padding-top: 15px;
+  padding-top: 10px;
+  height: 100%;
 }
-/* line 71, ../../../sass/sass/main.scss */
+/* line 43, ../../../sass/sass/main.scss */
 #LeftPane h3 {
   padding: 0px 5px 10px 5px;
 }
-/* line 74, ../../../sass/sass/main.scss */
+/* line 46, ../../../sass/sass/main.scss */
 #LeftPane a {
   font-size: 12px;
   padding: 5px 10px;
@@ -92,56 +59,58 @@ body {
   -o-transition: ease-out .25s;
   transition: ease-out .25s;
 }
-/* line 84, ../../../sass/sass/main.scss */
+/* line 56, ../../../sass/sass/main.scss */
 #LeftPane a:hover {
   color: #666666;
 }
-/* line 87, ../../../sass/sass/main.scss */
+/* line 59, ../../../sass/sass/main.scss */
 #LeftPane .active a:hover, #LeftPane .active a {
   color: #333333;
 }
 
 /* Position of row mujst be set in order to overcome dropdown z-index failing */
-/* line 93, ../../../sass/sass/main.scss */
+/* line 65, ../../../sass/sass/main.scss */
 .row {
   position: relative;
 }
 
-/* line 97, ../../../sass/sass/main.scss */
+/* line 69, ../../../sass/sass/main.scss */
 .ng-scope {
   z-index: 100 !important;
 }
 
-/* line 101, ../../../sass/sass/main.scss */
+/* line 73, ../../../sass/sass/main.scss */
 #workspace {
+  position: relative;
   z-index: 100 !important;
 }
-/* line 104, ../../../sass/sass/main.scss */
+/* line 77, ../../../sass/sass/main.scss */
 #workspace .form-control, #workspace .btn {
   border: 1px none !important;
   box-shadow: none !important;
 }
-/* line 108, ../../../sass/sass/main.scss */
+/* line 81, ../../../sass/sass/main.scss */
 #workspace input:hover {
   border: 1px solid #cccccc !important;
 }
-/* line 111, ../../../sass/sass/main.scss */
+/* line 84, ../../../sass/sass/main.scss */
 #workspace input:focus {
   box-shadow: 0px 0px 5px blue !important;
 }
-/* line 114, ../../../sass/sass/main.scss */
+/* line 87, ../../../sass/sass/main.scss */
 #workspace .arch {
+  position: relative;
   padding: 3px 0px;
 }
-/* line 119, ../../../sass/sass/main.scss */
+/* line 93, ../../../sass/sass/main.scss */
 #workspace .case {
   margin-left: 50px;
 }
-/* line 122, ../../../sass/sass/main.scss */
+/* line 96, ../../../sass/sass/main.scss */
 #workspace .step {
   margin-left: 100px;
 }
-/* line 125, ../../../sass/sass/main.scss */
+/* line 99, ../../../sass/sass/main.scss */
 #workspace .onlyHover {
   width: 0px;
   overflow: hidden;
@@ -150,7 +119,7 @@ body {
   -o-transition: ease-out .5s;
   transition: ease-out .5s;
 }
-/* line 133, ../../../sass/sass/main.scss */
+/* line 107, ../../../sass/sass/main.scss */
 #workspace .input-group-addon {
   background-color: transparent;
   border: 1px none;
@@ -160,20 +129,20 @@ body {
   -o-transition: ease-out .5s;
   transition: ease-out .5s;
 }
-/* line 141, ../../../sass/sass/main.scss */
+/* line 115, ../../../sass/sass/main.scss */
 #workspace .input-group-addon .glyphicon {
   cursor: pointer;
 }
-/* line 144, ../../../sass/sass/main.scss */
+/* line 118, ../../../sass/sass/main.scss */
 #workspace .input-group-addon .glyphicon:hover {
   color: #000000 !important;
 }
-/* line 148, ../../../sass/sass/main.scss */
+/* line 122, ../../../sass/sass/main.scss */
 #workspace .arch:hover .input-group-addon {
   background-color: #dadada;
   color: #44444444 !important;
 }
-/* line 151, ../../../sass/sass/main.scss */
+/* line 125, ../../../sass/sass/main.scss */
 #workspace .arch:hover .input-group-addon .onlyHover {
   width: auto;
   margin-left: 8px;
