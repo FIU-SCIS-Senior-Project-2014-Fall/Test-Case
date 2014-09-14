@@ -11,11 +11,9 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-	
     <link rel="stylesheet" href="theme/css/bootstrap.css">
     <link rel="stylesheet" href="theme/css/animate.css">
-
-
+    <link rel="stylesheet" href="theme/css/main.css">
     <!-- endbuild -->
   </head>
   <body ng-app="initProjApp">
@@ -25,45 +23,52 @@
 
     <!-- Add your site or application content here -->
     <div class="container">
-      <div class="row heading">
-        <ul class="nav nav-pills pull-right fadeInDown animated">
-          <li class="active"><a ng-href="#">Workspace</a></li>
-          <li><a ng-href="#/about">Help</a></li>
-          <li class="dropdown">
-              <a data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-cog"></span></a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                <li><a href="#"><span class="glyphicon glyphicon-inbox"></span> Configure Test Case Management</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-hdd"></span> Configure Repository</a></li>
-              </ul>
-          </li>
-        </ul>
-      </div>
-      <div id="LeftPane" class="fadeInLeft animated ">
-        <h3>Test Suites</h3>
-        <ul class="nav nav-pills nav-stacked">
-          <li class="active"><a href="#"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;&nbsp;Test Suite 1</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-folder-close"></span>&nbsp;&nbsp;&nbsp;Test Suite 2</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-folder-close"></span>&nbsp;&nbsp;&nbsp;Test Suite 3</a></li>
-        </ul>
-      </div>
-      <div ng-view="" class="fadeIn animated"></div>
-
-      <div class="row">
-        <div class="col-md-1">
+      <div class="row MainBody">
+        <div class="col-md-3 leftPaneWrapper">
+        <div id="LeftPane" class="fadeInLeft animated ">
+            <h3>Test Suites</h3>
+            <ul class="nav nav-pills nav-stacked">
+              <li class="active"><a href="#"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;&nbsp;Test Suite 1</a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-folder-close"></span>&nbsp;&nbsp;&nbsp;Test Suite 2</a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-folder-close"></span>&nbsp;&nbsp;&nbsp;Test Suite 3</a></li>
+            </ul>
+          </div>
         </div>
-        <div class="col-md-11">
-		
-		<br></br>
-		<br></br>
-		<br></br>
+        <div class="col-md-9 fadeIn animated">
+          <div class="row heading">
+            <div class="col-md-8">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></button>
+                </span>
+              </div><!-- /input-group -->
+            </div>
+            <div class="col-md-4">
+            <ul class="nav nav-pills pull-right fadeInDown animated">
+              <li class="active"><a ng-href="#">Workspace</a></li>
+              <li><a ng-href="#/about">Help</a></li>
+              <li class="dropdown">
+                  <a data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <li><a href="#"><span class="glyphicon glyphicon-inbox"></span> Configure Test Case Management</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-hdd"></span> Configure Repository</a></li>
+                  </ul>
+              </li>
+            </ul>
+            </div>
+          </div>
+        <div ng-view="" class="row"></div>
+        <div class="row">
+        <div class="col-md-12">
           <div class="footer fadeInUp animated">
-
             <p><a href="http://cis.fiu.edu/" target="_blank">FIU SCIS</a> Senior Project Test Case Management for <a href="http://www.ultimatesoftware.com/" target="_blank">Ultimate Software</a></p>
           </div>
           </div>
       </div>
+        </div>
+      </div>
     </div>
-
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -107,13 +112,11 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-
+	<script src="bower_components/angularLocalStorage/src/angularLocalStorage.js"></script>
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
-		<script src="scripts/controllers/login.js"></script>
-	
         <!-- endbuild -->
 </body>
 </html>
