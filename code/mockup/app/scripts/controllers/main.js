@@ -27,6 +27,12 @@ angular.module('initProjApp').controller('MainCtrl', function ($scope, storage) 
 	$scope.types = ['step', 'case', 'suite'];
 
 	setTimeout(function() { $('.input-group-addon .glyphicon').tooltip();}, 1000);
+	setTimeout(function() { 
+		toastr.success('File Updated', 'The file "test.cs" has been updated since last tested.');
+	}, 5000);
+	setTimeout(function() { 
+		toastr.error('File Removed', 'The file "test.cs" associated with "test case" has been removed.');
+	}, 4000);
 
 	$scope.clearStorage = function() {
 		storage.clearAll();
