@@ -27,7 +27,7 @@
       <div class="row MainBody">
         <div class="col-md-3 leftPaneWrapper">
         <div id="LeftPane" class="fadeInLeft animated ">
-            <h3>Test Suites</h3>
+            <h3>Test Suites <button class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span></button></h3>
             <ul class="nav nav-pills nav-stacked">
               <li class="active"><a href="#"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;&nbsp;Test Suite 1</a></li>
               <li><a href="#"><span class="glyphicon glyphicon-folder-close"></span>&nbsp;&nbsp;&nbsp;Test Suite 2</a></li>
@@ -47,8 +47,14 @@
             </div>
             <div class="col-md-5">
             <ul class="nav nav-pills pull-right fadeInDown animated">
-              <li class="active"><a ng-href="#">Workspace</a></li>
-              <li><a ng-href="#/about">Help</a></li>
+              <li class="dropdown active">
+                  <a data-toggle="dropdown">Workspace <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <li><a ng-href="/">Requested Layout</a></li>
+                    <li><a ng-href="#/alternative">Alternative Layout</a></li>
+                  </ul>
+              </li>
+              <li><a href="#">Help</a></li>
               <li><a ng-href="login.html">Logout</a></li>
               <li class="dropdown">
                   <a data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
@@ -119,7 +125,7 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/alternative.js"></script>
         <!-- endbuild -->
 </body>
 </html>

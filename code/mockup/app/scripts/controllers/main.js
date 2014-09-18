@@ -8,6 +8,11 @@
  * Controller of the initProjApp
  */
 angular.module('initProjApp').controller('MainCtrl', function ($scope, storage) {
+
+	$scope.resc = {
+		"cpyChd": "Copy Children",
+		"ascFile": "Associate File"
+	};
   	storage.bind($scope,'entries');
 
   	$scope.viewType = 'ANYTHING';

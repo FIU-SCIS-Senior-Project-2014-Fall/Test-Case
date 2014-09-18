@@ -8,7 +8,7 @@
  * Controller of the initProjApp
  */
 angular.module('initProjApp')
-  .controller('AboutCtrl', function ($scope) {
+  .controller('AlternativeCtrl', function ($scope) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',

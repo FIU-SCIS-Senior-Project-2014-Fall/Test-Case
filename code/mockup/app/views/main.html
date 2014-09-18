@@ -1,7 +1,16 @@
-
-    <ol class="breadcrumb">
-      <li class="active">Workspace</li>
-    </ol>
+  <div class="row">
+      <div class="col-md-9">
+        <ol class="breadcrumb">
+          <li class="active">Workspace</li>
+        </ol>
+      </div>
+      <div class="col-md-3">
+        <div class="btn-group pull-right">
+          <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;&nbsp;View</button>
+          <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;&nbsp;Edit</button>
+        </div>
+      </div>
+    </div>
     <div id="workspace">
       <div class="panel-group" id="accordion">
         <div ng-repeat="test in entries | orderBy:['id']"> <!-- loop of the suites -->
@@ -29,8 +38,8 @@
                   <div class="input-group-btn">
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                     <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                      <li><a href="#">Copy Children</a></li>
-                      <li><a href="#">Link File</a></li>
+                      <li><a href="#">{{ resc.cpyChd }}</a></li>
+                      <li><a href="#">{{ resc.ascFile }}</a></li>
                       <li class="divider"></li>
                     </ul>
                   </div><!-- /btn-group -->
