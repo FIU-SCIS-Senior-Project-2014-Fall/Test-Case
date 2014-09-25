@@ -25,22 +25,24 @@
                 title="Create new test {{ test.type }}" ng-click="addEntryClicked($index)"></span>
                     <span class="glyphicon glyphicon-remove onlyHover" data-toggle="tooltip" data-placement="bottom"
                 title="Delete test {{ test.type }} named {{ test.name }}" ng-click="removeEntryClicked($index)"></span>
-                <span ng-if="types.indexOf(test.type) < (types.length - 1)">
+                    <span class="glyphicon glyphicon-move onlyHover" data-toggle="tooltip" data-placement="bottom" title="Move Ordering" ng-click=""></span>
+                <!--<span ng-if="types.indexOf(test.type) < (types.length - 1)">
                   <span class="glyphicon glyphicon-backward onlyHover" data-toggle="tooltip" data-placement="bottom"
                 title="Promote test {{ test.type }} to test {{ typeUpOne(test.type) }}" ng-click="promoteClicked($index)"></span>
                 </span>
                 <span ng-if="types.indexOf(test.type) > 0">
                   <span class="glyphicon glyphicon-forward onlyHover" data-toggle="tooltip" data-placement="bottom"
                 title="Demote test {{ test.type }} to test {{ typeDownOne(test.type) }}" ng-click="demoteClicked($index)"></span>
-                </span>
+                </span>-->
                   </span>
-                  <input type="text" class="form-control" value="{{ test.name }}" ng-keyup="keyAction($index)" ng-keydown="preventDefault($event)">
+                  <input type="text" class="form-control" ng-model="test.name">
                   <div class="input-group-btn">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-ok-sign green"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
                     <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                      <li><a href="#">{{ resc.filesOk }}</a></li>
+                      <li class="divider"></li>
                       <li><a href="#">{{ resc.cpyChd }}</a></li>
                       <li><a href="#">{{ resc.ascFile }}</a></li>
-                      <li class="divider"></li>
                     </ul>
                   </div><!-- /btn-group -->
                 </div><!-- /input-group -->
@@ -57,26 +59,48 @@
                       <span class="glyphicon glyphicon-plus onlyHover" data-toggle="tooltip" data-placement="bottom"
                   title="Create new case {{ case.type }}" ng-click="addEntryClicked($index)"></span>
                       <span class="glyphicon glyphicon-remove onlyHover" data-toggle="tooltip" data-placement="bottom"
-                  title="Delete case {{ case.type }} named {{ case.name }}" ng-click="removeEntryClicked($index)"></span>
-                  <span ng-if="types.indexOf(case.type) < (types.length - 1)">
-                    <span class="glyphicon glyphicon-backward onlyHover" data-toggle="tooltip" data-placement="bottom"
-                  title="Promote case {{ case.type }} to case {{ typeUpOne(case.type) }}" ng-click="promoteClicked($index)"></span>
-                  </span>
-                  <span ng-if="types.indexOf(case.type) > 0">
-                    <span class="glyphicon glyphicon-forward onlyHover" data-toggle="tooltip" data-placement="bottom"
-                  title="Demote case {{ case.type }} to case {{ typeDownOne(case.type) }}" ng-click="demoteClicked($index)"></span>
-                  </span>
+                  title="Delete case {{ case.type }} named {{ case.name }}" ng-click="removeCaseEntryClicked($parent.$index,$index)"></span>
+                  <span class="glyphicon glyphicon-move onlyHover" data-toggle="tooltip" data-placement="bottom" title="Move Ordering" ng-click=""></span>
+                <!--<span ng-if="types.indexOf(test.type) < (types.length - 1)">
+                  <span class="glyphicon glyphicon-backward onlyHover" data-toggle="tooltip" data-placement="bottom"
+                title="Promote test {{ test.type }} to test {{ typeUpOne(test.type) }}" ng-click="promoteClicked($index)"></span>
+                </span>
+                <span ng-if="types.indexOf(test.type) > 0">
+                  <span class="glyphicon glyphicon-forward onlyHover" data-toggle="tooltip" data-placement="bottom"
+                title="Demote test {{ test.type }} to test {{ typeDownOne(test.type) }}" ng-click="demoteClicked($index)"></span>
+                </span>-->
                     </span>
-                    <input type="text" class="form-control" value="{{ case.name }}" ng-keyup="keyAction($index)" ng-keydown="preventDefault($event)">
+                    <input type="text" class="form-control" ng-model="case.name">
                     <div class="input-group-btn">
-                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-exclamation-sign red"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
                       <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                        <li><a href="#">{{ resc.filesRmv }}</a></li>
+                        <li class="divider"></li>
                         <li><a href="#">Copy Children</a></li>
                         <li><a href="#">Link File</a></li>
-                        <li class="divider"></li>
                       </ul>
                     </div><!-- /btn-group -->
                   </div><!-- /input-group -->
+                  <!--
+                  <span class="pull-left">Saving </span>
+                  <div id="fountainG">
+                    <div id="fountainG_1" class="fountainG">
+                    </div>
+                    <div id="fountainG_2" class="fountainG">
+                    </div>
+                    <div id="fountainG_3" class="fountainG">
+                    </div>
+                    <div id="fountainG_4" class="fountainG">
+                    </div>
+                    <div id="fountainG_5" class="fountainG">
+                    </div>
+                    <div id="fountainG_6" class="fountainG">
+                    </div>
+                    <div id="fountainG_7" class="fountainG">
+                    </div>
+                    <div id="fountainG_8" class="fountainG">
+                    </div>
+                  </div>-->
                 </div>
               </div>
             </div>
