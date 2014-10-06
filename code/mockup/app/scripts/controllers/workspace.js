@@ -11,6 +11,8 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 
 	$scope.timeOut = 0;
 
+	$scope.timeOut = 0;
+
 	$scope.resc = {
 		"cpyChd": "Copy Children",
 		"ascFile": "Associate File",
@@ -108,12 +110,17 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		$scope.entries[index].size = sizeByType($scope.entries[index].type);
     };
 
+<<<<<<< HEAD:code/mockup/app/scripts/controllers/workspace.js
     $scope.addCaseClicked = function(index) {
     	addSubEntry(index, -1);
     };
 
     $scope.addStepClicked = function(index, parent) {
     	addSubEntry(index, parent);
+=======
+    $scope.addEntryClicked = function(index) {
+    	addSubEntry(index);
+>>>>>>> 77d5f63af9391539a68dc650e80add4af59a690b:code/mockup/app/scripts/controllers/main.js
     };
 
     $scope.removeEntryClicked = function(index) {
@@ -165,6 +172,21 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 			"parent" : 0,
 			"size" : sizeByType($scope.types[2]),
 			"children" : []
+<<<<<<< HEAD:code/mockup/app/scripts/controllers/workspace.js
+=======
+		});
+	};
+
+	function addSubEntry(index) {
+		var type = $scope.typeDownOne($scope.entries[index].type);
+		$scope.entries[index].children.push( {
+			"id" : 0,
+			"name" : "New " + type,
+			"type" : type,
+			"parent" : $scope.entries[index].id,
+			"size" : sizeByType(type),
+			"children" : []
+>>>>>>> 77d5f63af9391539a68dc650e80add4af59a690b:code/mockup/app/scripts/controllers/main.js
 		});
 	};
 
