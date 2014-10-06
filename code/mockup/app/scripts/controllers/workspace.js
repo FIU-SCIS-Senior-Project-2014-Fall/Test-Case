@@ -16,7 +16,9 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		"ascFile": "Associate File",
 		"filesOk": "All files are OK!",
 		"filesChg": "A file has changed since last test!",
-		"filesRmv": "A file has been removed since last test!"
+		"filesRmv": "A file has been removed since last test!",
+		"tfs": "TFS",
+		"localStore": "Local"
 	};
   	storage.bind($scope,'entries');
 
@@ -58,6 +60,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 			"type" : "suite",
 			"parent" : 0,
 			"size" : sizeByType("suite"),
+			"store" : ["Local"],
 			"children" : []
 		});
 		$scope.suite = $scope.entries[0];
@@ -77,12 +80,38 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 			return "active";
 	}
 
+	$scope.addStore = function(index, storeName) {
+		var id = $.inArray(storeName, $scope.entries[index].store);
+		if(id < 0)
+			$scope.entries[index].store.push(storeName);
+	}
+
+	$scope.hasStore = function(index, storeName) {
+		if($.inArray(storeName, $scope.entries[index].store) >= 0)
+			return true;
+		return false;
+	}
+
+	$scope.removeStore = function(index, storeName) {
+		var id = $.inArray(storeName, $scope.entries[index].store);
+		if(id >= 0)
+			$scope.entries[index].store.splice(id, 1);
+	}
+
+	$scope.toggleStore = function(index, storeName) {
+		if($scope.hasStore(index, storeName))
+			$scope.removeStore(index, storeName);
+		else
+			$scope.addStore(index, storeName);
+	}
+
 	$scope.addSuite = function() {
 		addEntry({
 			"id" : 0,
 			"name" : "New Suite",
 			"type" : "suite",
 			"parent" : 0,
+			"store" : ["Local"],
 			"size" : sizeByType("suite"),
 			"children" : []
 		});
@@ -118,10 +147,16 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 
     $scope.removeEntryClicked = function(index) {
     	$scope.entries.splice(index, 1);
+    	$scope.active = $scope.entries.length - 1;
+    	$scope.suite = $scope.entries[$scope.active];
     };
 
     $scope.removeCaseEntryClicked = function(parent, index) {
     	$scope.entries[parent].children.splice(index, 1);
+    }
+
+    $scope.removeStepEntryClicked = function(suite, parent, index) {
+    	$scope.entries[suite].children[parent].children.splice(index, 1);
     }
 
     $scope.saveEntry = function() {
@@ -132,11 +167,11 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
     }
 
     function demoteEntry(entry, index, parent) {
-			entry.id = $scope.entries[index].children.length;
-			entry.parent = (parent >= 0) ? parent : findAdjacentSibling($scope.entries[index].id, $scope.entries[index].type).id;
-			entry.type = $scope.typeDownOne($scope.entries[index].type);
-			entry.size = sizeByType($scope.entries[index].type);
-			return entry;
+		entry.id = $scope.entries[index].children.length;
+		entry.parent = (parent >= 0) ? parent : findAdjacentSibling($scope.entries[index].id, $scope.entries[index].type).id;
+		entry.type = $scope.typeDownOne($scope.entries[index].type);
+		entry.size = sizeByType($scope.entries[index].type);
+		return entry;
     }
 
 	function cloneEntry(index, incChildren) {
@@ -145,6 +180,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 			"name" : $scope.entries[index].name,
 			"type" : $scope.entries[index].type,
 			"parent" : $scope.entries[index].id,
+			"store" : $scope.entries[index].store,
 			"size" : sizeByType($scope.entries[index].type),
 			"children" : [] // always clear children
 		};
@@ -163,6 +199,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 			"name" : "New Suite",
 			"type" : $scope.types[2],
 			"parent" : 0,
+			"store" : ["Local"],
 			"size" : sizeByType($scope.types[2]),
 			"children" : []
 		});

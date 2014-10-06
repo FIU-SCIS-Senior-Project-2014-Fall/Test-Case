@@ -8,8 +8,7 @@
                 <div class="on-hover">
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer enim ex, eleifend sit amet eleifend in, interdum id orci.</p>
                   <p>
-                    <span class="label label-primary">TFS</span> 
-                    <span class="label label-success">Local</span>
+                    <span class="label label-primary" ng-repeat="store in test.store">{{ store }}</span> 
                   </p>
                 </div>
               </li>
@@ -71,8 +70,8 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-              <li role="presentation"><a role="menuitem" tabindex="-1">Server 1</a></li>
-              <li role="presentation"><a role="menuitem" tabindex="-1">Server 2</a></li>
+              <li role="presentation" ng-class="{active: hasStore(active, 'TFS:Server 1')}"><a role="menuitem" tabindex="-1" ng-click="toggleStore(active, 'TFS:Server 1')">Server 1</a></li>
+              <li role="presentation" ng-class="{active: hasStore(active, 'TFS:Server 2')}"><a role="menuitem" tabindex="-1" ng-click="toggleStore(active, 'TFS:Server 2')">Server 2</a></li>
             </ul>
           </div>
         </div>
@@ -120,7 +119,7 @@
                       <span class="glyphicon glyphicon-plus onlyHover" data-toggle="tooltip" data-placement="bottom"
                   title="Create new case {{ case.type }}" ng-click="addStepClicked($index, active)"></span>
                       <span class="glyphicon glyphicon-remove onlyHover" data-toggle="tooltip" data-placement="bottom"
-                  title="Delete case {{ case.type }} named {{ case.name }}" ng-click="removeCaseEntryClicked($parent.$index,$index)"></span>
+                  title="Delete case {{ case.type }} named {{ case.name }}" ng-click="removeCaseEntryClicked(active,$index)"></span>
                   <span class="glyphicon glyphicon-move onlyHover" data-toggle="tooltip" data-placement="bottom" title="Move Ordering" ng-click=""></span>
                     </span>
                     <input type="text" class="form-control" ng-model="case.name">
@@ -139,7 +138,7 @@
                       <div class="input-group input-group{{ step.size }}">
                         <span class="input-group-addon">
                           <span class="glyphicon glyphicon-remove onlyHover" data-toggle="tooltip" data-placement="bottom"
-                      title="Delete step named {{ step.name }}" ng-click="removeCaseEntryClicked($parent.$index,$index)"></span>
+                      title="Delete step named {{ step.name }}" ng-click="removeStepEntryClicked(active,$parent.$index, $index)"></span>
                       <span class="glyphicon glyphicon-move onlyHover" data-toggle="tooltip" data-placement="bottom" title="Move Ordering" ng-click=""></span>
                     <!--<span ng-if="types.indexOf(test.type) < (types.length - 1)">
                       <span class="glyphicon glyphicon-backward onlyHover" data-toggle="tooltip" data-placement="bottom"
