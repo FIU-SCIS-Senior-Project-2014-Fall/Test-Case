@@ -7,6 +7,11 @@ $icon-font-path: "../fonts/";
   padding-left:0px;
 }
 
+.no-block {
+  display:inline;
+  width:auto;
+}
+
 /* Space out content a bit */
 body, .MainBody, html, .container {
   min-height:100% !important;
@@ -44,20 +49,48 @@ body, .MainBody, html, .container {
     padding:0px 5px 10px 5px;
   }
   a {
-    font-size:12px;
-    padding:5px 10px;
+    font-size:16px;
+    padding:8px 8px;
     color:#dadada;
     border-radius:0px;
     -webkit-transition: ease-out .25s;
     -moz-transition: ease-out .25s;
     -o-transition: ease-out .25s;
     transition: ease-out .25s;
+    cursor:pointer;
   }
   a:hover {
     color:#666666;
   }
   .active a:hover, .active a {
-    color:#333333;
+    color:#ffffff;
+    background-color:#000000;
+  }
+  li {
+    -webkit-transition: ease-out .5s;
+    -moz-transition: ease-out .5s;
+    -o-transition: ease-out .5s;
+    transition: ease-out .5s;
+  }
+  li.active, li:hover {
+    background-color:#111111;
+  }
+
+  li.active p, li:hover p {
+    padding:5px 8px;
+  }
+
+  .on-hover {
+    max-height:0px;
+    overflow:hidden;
+    -webkit-transition: ease-out .5s;
+    -moz-transition: ease-out .5s;
+    -o-transition: ease-out .5s;
+    transition: ease-out .5s;
+  }
+
+  li:hover .on-hover, li.active .on-hover {
+    max-height:200px;
   }
 }
 
@@ -127,4 +160,12 @@ body, .MainBody, html, .container {
       margin-left:8px;
     }
   }
+}
+
+.green {
+  color:#5CB85C;
+}
+
+.red {
+  color:#D9534F;
 }

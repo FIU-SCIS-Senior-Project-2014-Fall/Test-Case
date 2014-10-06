@@ -4,27 +4,33 @@
   padding-left: 0px;
 }
 
+/* line 10, ../../../sass/sass/main.scss */
+.no-block {
+  display: inline;
+  width: auto;
+}
+
 /* Space out content a bit */
-/* line 11, ../../../sass/sass/main.scss */
+/* line 16, ../../../sass/sass/main.scss */
 body, .MainBody, html, .container {
   min-height: 100% !important;
   height: 100% !important;
 }
 
-/* line 16, ../../../sass/sass/main.scss */
+/* line 21, ../../../sass/sass/main.scss */
 .heading {
   margin-bottom: 25px;
   margin-top: 15px;
   z-index: 1001 !important;
 }
 
-/* line 22, ../../../sass/sass/main.scss */
+/* line 27, ../../../sass/sass/main.scss */
 .dropdown-menu {
   z-index: 1001 !important;
 }
 
 /* Custom page footer */
-/* line 27, ../../../sass/sass/main.scss */
+/* line 32, ../../../sass/sass/main.scss */
 .footer {
   padding-top: 19px;
   color: #777;
@@ -32,85 +38,115 @@ body, .MainBody, html, .container {
   z-index: 90 !important;
 }
 
-/* line 34, ../../../sass/sass/main.scss */
+/* line 39, ../../../sass/sass/main.scss */
 .leftPaneWrapper {
   height: 100%;
 }
 
-/* line 38, ../../../sass/sass/main.scss */
+/* line 43, ../../../sass/sass/main.scss */
 #LeftPane {
   background-color: #333333;
   color: #dadada;
   padding-top: 10px;
   height: 100%;
 }
-/* line 43, ../../../sass/sass/main.scss */
+/* line 48, ../../../sass/sass/main.scss */
 #LeftPane h3 {
   padding: 0px 5px 10px 5px;
 }
-/* line 46, ../../../sass/sass/main.scss */
+/* line 51, ../../../sass/sass/main.scss */
 #LeftPane a {
-  font-size: 12px;
-  padding: 5px 10px;
+  font-size: 16px;
+  padding: 8px 8px;
   color: #dadada;
   border-radius: 0px;
   -webkit-transition: ease-out .25s;
   -moz-transition: ease-out .25s;
   -o-transition: ease-out .25s;
   transition: ease-out .25s;
+  cursor: pointer;
 }
-/* line 56, ../../../sass/sass/main.scss */
+/* line 62, ../../../sass/sass/main.scss */
 #LeftPane a:hover {
   color: #666666;
 }
-/* line 59, ../../../sass/sass/main.scss */
+/* line 65, ../../../sass/sass/main.scss */
 #LeftPane .active a:hover, #LeftPane .active a {
-  color: #333333;
+  color: #ffffff;
+  background-color: #000000;
+}
+/* line 69, ../../../sass/sass/main.scss */
+#LeftPane li {
+  -webkit-transition: ease-out .5s;
+  -moz-transition: ease-out .5s;
+  -o-transition: ease-out .5s;
+  transition: ease-out .5s;
+}
+/* line 75, ../../../sass/sass/main.scss */
+#LeftPane li.active, #LeftPane li:hover {
+  background-color: #111111;
+}
+/* line 79, ../../../sass/sass/main.scss */
+#LeftPane li.active p, #LeftPane li:hover p {
+  padding: 5px 8px;
+}
+/* line 83, ../../../sass/sass/main.scss */
+#LeftPane .on-hover {
+  max-height: 0px;
+  overflow: hidden;
+  -webkit-transition: ease-out .5s;
+  -moz-transition: ease-out .5s;
+  -o-transition: ease-out .5s;
+  transition: ease-out .5s;
+}
+/* line 92, ../../../sass/sass/main.scss */
+#LeftPane li:hover .on-hover, #LeftPane li.active .on-hover {
+  max-height: 200px;
 }
 
 /* Position of row mujst be set in order to overcome dropdown z-index failing */
-/* line 65, ../../../sass/sass/main.scss */
+/* line 98, ../../../sass/sass/main.scss */
 .row {
   position: relative;
 }
 
-/* line 69, ../../../sass/sass/main.scss */
+/* line 102, ../../../sass/sass/main.scss */
 .ng-scope {
   z-index: 100 !important;
 }
 
-/* line 73, ../../../sass/sass/main.scss */
+/* line 106, ../../../sass/sass/main.scss */
 #workspace {
   position: relative;
   z-index: 100 !important;
 }
-/* line 77, ../../../sass/sass/main.scss */
+/* line 110, ../../../sass/sass/main.scss */
 #workspace .form-control, #workspace .btn {
   border: 1px none !important;
   box-shadow: none !important;
 }
-/* line 81, ../../../sass/sass/main.scss */
+/* line 114, ../../../sass/sass/main.scss */
 #workspace input:hover {
   border: 1px solid #cccccc !important;
 }
-/* line 84, ../../../sass/sass/main.scss */
+/* line 117, ../../../sass/sass/main.scss */
 #workspace input:focus {
   box-shadow: 0px 0px 5px blue !important;
 }
-/* line 87, ../../../sass/sass/main.scss */
+/* line 120, ../../../sass/sass/main.scss */
 #workspace .arch {
   position: relative;
   padding: 3px 0px;
 }
-/* line 93, ../../../sass/sass/main.scss */
+/* line 126, ../../../sass/sass/main.scss */
 #workspace .case {
   margin-left: 50px;
 }
-/* line 96, ../../../sass/sass/main.scss */
+/* line 129, ../../../sass/sass/main.scss */
 #workspace .step {
   margin-left: 100px;
 }
-/* line 99, ../../../sass/sass/main.scss */
+/* line 132, ../../../sass/sass/main.scss */
 #workspace .onlyHover {
   width: 0px;
   overflow: hidden;
@@ -119,7 +155,7 @@ body, .MainBody, html, .container {
   -o-transition: ease-out .5s;
   transition: ease-out .5s;
 }
-/* line 107, ../../../sass/sass/main.scss */
+/* line 140, ../../../sass/sass/main.scss */
 #workspace .input-group-addon {
   background-color: transparent;
   border: 1px none;
@@ -129,21 +165,31 @@ body, .MainBody, html, .container {
   -o-transition: ease-out .5s;
   transition: ease-out .5s;
 }
-/* line 115, ../../../sass/sass/main.scss */
+/* line 148, ../../../sass/sass/main.scss */
 #workspace .input-group-addon .glyphicon {
   cursor: pointer;
 }
-/* line 118, ../../../sass/sass/main.scss */
+/* line 151, ../../../sass/sass/main.scss */
 #workspace .input-group-addon .glyphicon:hover {
   color: #000000 !important;
 }
-/* line 122, ../../../sass/sass/main.scss */
+/* line 155, ../../../sass/sass/main.scss */
 #workspace .arch:hover .input-group-addon {
   background-color: #dadada;
   color: #44444444 !important;
 }
-/* line 125, ../../../sass/sass/main.scss */
+/* line 158, ../../../sass/sass/main.scss */
 #workspace .arch:hover .input-group-addon .onlyHover {
   width: auto;
   margin-left: 8px;
+}
+
+/* line 165, ../../../sass/sass/main.scss */
+.green {
+  color: #5CB85C;
+}
+
+/* line 169, ../../../sass/sass/main.scss */
+.red {
+  color: #D9534F;
 }

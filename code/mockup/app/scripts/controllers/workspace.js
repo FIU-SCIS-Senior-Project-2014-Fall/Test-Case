@@ -7,15 +7,23 @@
  * # MainCtrl
  * Controller of the initProjApp
  */
-angular.module('initProjApp').controller('MainCtrl', function ($scope, storage) {
+angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, storage) {
+
+	$scope.timeOut = 0;
 
 	$scope.resc = {
 		"cpyChd": "Copy Children",
-		"ascFile": "Associate File"
+		"ascFile": "Associate File",
+		"filesOk": "All files are OK!",
+		"filesChg": "A file has changed since last test!",
+		"filesRmv": "A file has been removed since last test!"
 	};
   	storage.bind($scope,'entries');
 
   	$scope.viewType = 'ANYTHING';
+
+  	if(!$scope.types || $scope.types.length < 3)
+		$scope.types = ['step', 'case', 'suite'];
 
 	if(!$scope.entries || $scope.entries.length <= 0) {
 	    $scope.entries = [];
@@ -29,7 +37,8 @@ angular.module('initProjApp').controller('MainCtrl', function ($scope, storage) 
 		});
 	}
 
-	$scope.types = ['step', 'case', 'suite'];
+	$scope.active = 0;
+	$scope.suite = $scope.entries[0];
 
 	setTimeout(function() { $('.input-group-addon .glyphicon').tooltip();}, 1000);
 	setTimeout(function() { 
@@ -51,11 +60,33 @@ angular.module('initProjApp').controller('MainCtrl', function ($scope, storage) 
 			"size" : sizeByType("suite"),
 			"children" : []
 		});
+		$scope.suite = $scope.entries[0];
 	}
 
 	$scope.preventDefault = function(event) {
 		event.preventDefault();
 	};
+
+	$scope.makeActive = function(index) {
+		$scope.active = index;
+		$scope.suite = $scope.entries[index];
+	}
+
+	$scope.isActive = function(index) {
+		if(index == $scope.active)
+			return "active";
+	}
+
+	$scope.addSuite = function() {
+		addEntry({
+			"id" : 0,
+			"name" : "New Suite",
+			"type" : "suite",
+			"parent" : 0,
+			"size" : sizeByType("suite"),
+			"children" : []
+		});
+	}
 
     $scope.demoteClicked = function(index) {
     	var type = $scope.typeDownOne($scope.entries[index].type);
@@ -77,16 +108,28 @@ angular.module('initProjApp').controller('MainCtrl', function ($scope, storage) 
 		$scope.entries[index].size = sizeByType($scope.entries[index].type);
     };
 
-    $scope.addEntryClicked = function(index) {
-    	var copy = cloneEntry(index);
-    	copy.name = "New Test " + copy.type;
-    	console.log(copy);
-    	addEntry(copy);
+    $scope.addCaseClicked = function(index) {
+    	addSubEntry(index, -1);
+    };
+
+    $scope.addStepClicked = function(index, parent) {
+    	addSubEntry(index, parent);
     };
 
     $scope.removeEntryClicked = function(index) {
     	$scope.entries.splice(index, 1);
     };
+
+    $scope.removeCaseEntryClicked = function(parent, index) {
+    	$scope.entries[parent].children.splice(index, 1);
+    }
+
+    $scope.saveEntry = function() {
+    	clearTimeout($scope.timeOut);
+    	$scope.timeOut = setTimeout(function() {
+
+    	}, 1000);
+    }
 
     function demoteEntry(entry, index, parent) {
 			entry.id = $scope.entries[index].children.length;
@@ -114,15 +157,39 @@ angular.module('initProjApp').controller('MainCtrl', function ($scope, storage) 
 		}
 	}
 
-	function addEntry(entry) {
+	function addEntry() {
 		$scope.entries.push( {
-			"id" : entry.id,
-			"name" : entry.name,
-			"type" : entry.type,
-			"parent" : entry.parent,
-			"size" : entry.size,
-			"children" : entry.children
+			"id" : 0,
+			"name" : "New Suite",
+			"type" : $scope.types[2],
+			"parent" : 0,
+			"size" : sizeByType($scope.types[2]),
+			"children" : []
 		});
+	};
+
+	function addSubEntry(index, parent) {
+		if(parent >= 0) {
+			var type = $scope.typeDownOne($scope.entries[parent].children[index].type);
+			$scope.entries[parent].children[index].children.push( {
+				"id" : 0,
+				"name" : "New " + type,
+				"type" : type,
+				"parent" : $scope.entries[parent].children[index].id,
+				"size" : sizeByType(type),
+				"children" : []
+			});
+		} else {
+			var type = $scope.typeDownOne($scope.entries[index].type);
+			$scope.entries[index].children.push( {
+				"id" : 0,
+				"name" : "New " + type,
+				"type" : type,
+				"parent" : $scope.entries[index].id,
+				"size" : sizeByType(type),
+				"children" : []
+			});
+		}
 	};
 
 
@@ -181,4 +248,16 @@ angular.module('initProjApp').controller('MainCtrl', function ($scope, storage) 
 			return false;
 
 	};
-  });
+  }).directive("saveEntry", function() {
+	  var linkFunction = function(scope, element, attributes) {
+	    var entry = element.children()[0];
+	    $(paragraph).on("click", function() {
+	      $(this).css({ "background-color": "red" });
+	    });
+	  };
+
+	  return {
+	    restrict: "E",
+	    link: linkFunction
+	  };
+	});;
