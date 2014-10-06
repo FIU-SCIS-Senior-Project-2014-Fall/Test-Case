@@ -23,66 +23,9 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container">
-      <div class="row MainBody">
-        <div class="col-md-3 leftPaneWrapper">
-        <div id="LeftPane" class="fadeInLeft animated ">
-            <h3>Test Suites <button class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span></button></h3>
-            <ul class="nav nav-pills nav-stacked">
-              <li class="active"><a href="#"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;&nbsp;Test Suite 1</a></li>
-              <li><a href="#"><span class="glyphicon glyphicon-folder-close"></span>&nbsp;&nbsp;&nbsp;Test Suite 2</a></li>
-              <li><a href="#"><span class="glyphicon glyphicon-folder-close"></span>&nbsp;&nbsp;&nbsp;Test Suite 3</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md-9 fadeIn animated">
-          <div class="row heading">
-            <div class="col-md-7">
-              <div class="input-group">
-                <div class="input-group-btn">
-                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Context <span class="caret"></span></button>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Suite</a></li>
-                      <li><a href="#">Global</a></li>
-                    </ul>
-                </div><!-- /btn-group -->
-                <input type="text" class="form-control" placeholder="Search...">
-                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-              </div><!-- /input-group -->
-            </div>
-            <div class="col-md-5">
-            <ul class="nav nav-pills pull-right fadeInDown animated">
-              <li class="dropdown active">
-                  <a data-toggle="dropdown">Workspace <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                    <li><a ng-href="/">Requested Layout</a></li>
-                    <li><a ng-href="#/alternative">Alternative Layout</a></li>
-                  </ul>
-              </li>
-              <li><a href="#">Help</a></li>
-              <li><a ng-href="login.html">Logout</a></li>
-              <li class="dropdown">
-                  <a data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                    <li><a href="#"><span class="glyphicon glyphicon-inbox"></span> Configure Test Case Management</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-hdd"></span> Configure Repository</a></li>
-                  </ul>
-              </li>
-            </ul>
-            </div>
-          </div>
-        <div ng-view="" class="row"></div>
-        <div class="row">
-        <div class="col-md-12">
-          <div class="footer fadeInUp animated">
-            <p><a href="http://cis.fiu.edu/" target="_blank">FIU SCIS</a> Senior Project Test Case Management for <a href="http://www.ultimatesoftware.com/" target="_blank">Ultimate Software</a></p>
-          </div>
-          </div>
-      </div>
-        </div>
-      </div>
+    <div class="container" ng-view="">
+
+        
     </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -131,7 +74,7 @@
    <script src="theme/js/toastr.js"></script>
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/workspace.js"></script>
         <script src="scripts/controllers/alternative.js"></script>
         <!-- endbuild -->
 </body>
