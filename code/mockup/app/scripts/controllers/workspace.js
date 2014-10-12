@@ -14,6 +14,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	$scope.resc = {
 		"cpyChd": "Copy Children",
 		"ascFile": "Associate File",
+		"genChart": "Generate Analysis",
 		"filesOk": "All files are OK!",
 		"filesChg": "A file has changed since last test!",
 		"filesRmv": "A file has been removed since last test!"
