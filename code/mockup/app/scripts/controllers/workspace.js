@@ -8,6 +8,11 @@
  * Controller of the initProjApp
  */
 angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, storage) {
+	$scope.disabled = false;
+	$scope.canEdit = true;
+	
+	if(!$scope.idStore || $scope.idStore <= 0)
+		$scope.idStore = 1;
 
 	$scope.getEntryTemplate = function () { return {
 		"id" : 0,
@@ -19,6 +24,11 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		"summary" : "",
 		"children" : []
 	}; };
+
+	$scope.createId = function() {
+		$scope.idStore++;
+		return $scope.idStore;
+	}
 
 	$scope.timeOut = 0;
 
@@ -52,14 +62,6 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	$scope.copyBuffer = false;
 	$scope.active = 0;
 	$scope.suite = $scope.entries[0];
-
-	if(!$scope.idStore || $scope.idStore <= 0)
-		$scope.idStore = 1;
-
-	$scope.createId = function() {
-		$scope.idStore++;
-		return $scope.idStore;
-	}
 
 	setTimeout(function() { $('.input-group-addon .glyphicon').tooltip();}, 1000);
 
