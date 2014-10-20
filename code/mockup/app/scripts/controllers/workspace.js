@@ -31,7 +31,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	if(!$scope.entries || $scope.entries.length <= 0) {
 	    $scope.entries = [];
 	    addEntry({
-			"id" : 0,
+			"id" : $scope.createId(),
 			"name" : "Test Suite 1",
 			"type" : "suite",
 			"parent" : 0,
@@ -44,6 +44,14 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	$scope.active = 0;
 	$scope.suite = $scope.entries[0];
 
+	if(!$scope.idStore || $scope.idStore <= 0)
+		$scope.idStore = 1;
+
+	$scope.createId = function() {
+		$scope.idStore++;
+		return $scope.idStore;
+	}
+
 	setTimeout(function() { $('.input-group-addon .glyphicon').tooltip();}, 1000);
 
 	$scope.clearStorage = function() {
@@ -51,7 +59,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		storage.bind($scope,'entries');
 		$scope.entries = [];
 	    addEntry({
-			"id" : 0,
+			"id" : $scope.createId(),
 			"name" : "Default Suite after clear",
 			"type" : "suite",
 			"parent" : 0,
@@ -73,7 +81,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		var len = $scope.entries[$scope.active].children[index].children.length;
 		var i = 0;
 		// alter step parents, also attempt to give uniqueness to object, else repeater will fail.
-		$scope.copyBuffer = $scope.copyBuffer.map(function(x) { x.name += " >> from " + $scope.entries[$scope.active].children[x.parent].name; x.parent = index; x.id = len + i++; return x; });
+		$scope.copyBuffer = $scope.copyBuffer.map(function(x) { x.name += " >> from " + $scope.entries[$scope.active].children[x.parent].name; x.parent = index; x.id = $scope.createId(); return x; });
 
 		var len = $scope.entries[$scope.active].children[index].children.length;
 		if(len > 0) {
@@ -134,7 +142,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 
 	$scope.addSuite = function() {
 		addEntry({
-			"id" : 0,
+			"id" : $scope.createId(),
 			"name" : "New Suite",
 			"type" : "suite",
 			"parent" : 0,
@@ -144,11 +152,15 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		});
 	}
 
+	$scope.collapse = function(index) {
+		$("#case-body"+index).toggle();
+	}
+
     $scope.demoteClicked = function(index) {
     	var type = $scope.typeDownOne($scope.entries[index].type);
 		if(type != false) {
 			var copy = cloneEntry(index, true);
-			copy.id = $scope.entries[index].children.length;
+			copy.id = $scope.createId();
 			copy.parent = findAdjacentSibling($scope.entries[index].id, $scope.entries[index].type).id;
 			copy.type = $scope.typeDownOne($scope.entries[index].type);
 			copy.size = sizeByType($scope.entries[index].type);
@@ -194,7 +206,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
     }
 
     function demoteEntry(entry, index, parent) {
-		entry.id = $scope.entries[index].children.length;
+		entry.id = $scope.createId();
 		entry.parent = (parent >= 0) ? parent : findAdjacentSibling($scope.entries[index].id, $scope.entries[index].type).id;
 		entry.type = $scope.typeDownOne($scope.entries[index].type);
 		entry.size = sizeByType($scope.entries[index].type);
@@ -203,7 +215,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 
 	function cloneEntry(index, incChildren) {
 		return {
-			"id" : $scope.entries.length,
+			"id" : $scope.createId(),
 			"name" : $scope.entries[index].name,
 			"type" : $scope.entries[index].type,
 			"parent" : $scope.entries[index].id,
@@ -222,7 +234,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 
 	function addEntry() {
 		$scope.entries.push( {
-			"id" : 0,
+			"id" : $scope.createId(),
 			"name" : "New Suite",
 			"type" : $scope.types[2],
 			"parent" : 0,
@@ -236,7 +248,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		if(parent >= 0) {
 			var type = $scope.typeDownOne($scope.entries[parent].children[index].type);
 			$scope.entries[parent].children[index].children.push( {
-				"id" : 0,
+				"id" : $scope.createId(),
 				"name" : "New " + type,
 				"type" : type,
 				"parent" : $scope.entries[parent].children[index].id,
@@ -246,7 +258,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		} else {
 			var type = $scope.typeDownOne($scope.entries[index].type);
 			$scope.entries[index].children.push( {
-				"id" : 0,
+				"id" : $scope.createId(),
 				"name" : "New " + type,
 				"type" : type,
 				"parent" : $scope.entries[index].id,

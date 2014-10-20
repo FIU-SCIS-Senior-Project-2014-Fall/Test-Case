@@ -115,7 +115,7 @@
                   <div class="input-group input-group{{ case.size }}">
                     <span class="input-group-addon">
                       <span class="glyphicon glyphicon-chevron-up" data-toggle="collapse" data-placement="bottom"
-                  title="Hide Children" data-parent="#accordion" href="#collapse{{ case.id }}"></span>
+                  title="Hide Children" ng-click="collapse(case.id)"></span>
                       <span class="glyphicon glyphicon-plus onlyHover" data-toggle="tooltip" data-placement="bottom"
                   title="Create new case {{ case.type }}" ng-click="addStepClicked($index, active)"></span>
                       <span class="glyphicon glyphicon-remove onlyHover" data-toggle="tooltip" data-placement="bottom"
@@ -134,33 +134,35 @@
                       </ul>
                     </div><!-- /btn-group -->
                   </div><!-- /input-group -->
-                  <div ng-repeat="step in case.children | filter:search_box"> <!-- loop of the cases -->
-                    <div class="{{ step.type }} arch fadeInUp animated">
-                      <div class="input-group input-group{{ step.size }}">
-                        <span class="input-group-addon">
-                          <span class="glyphicon glyphicon-remove onlyHover" data-toggle="tooltip" data-placement="bottom"
-                      title="Delete step named {{ step.name }}" ng-click="removeStepEntryClicked(active,$parent.$index, $index)"></span>
-                      <span class="glyphicon glyphicon-move onlyHover" data-toggle="tooltip" data-placement="bottom" title="Move Ordering" ng-click=""></span>
-                    <!--<span ng-if="types.indexOf(test.type) < (types.length - 1)">
-                      <span class="glyphicon glyphicon-backward onlyHover" data-toggle="tooltip" data-placement="bottom"
-                    title="Promote test {{ test.type }} to test {{ typeUpOne(test.type) }}" ng-click="promoteClicked($index)"></span>
-                    </span>
-                    <span ng-if="types.indexOf(test.type) > 0">
-                      <span class="glyphicon glyphicon-forward onlyHover" data-toggle="tooltip" data-placement="bottom"
-                    title="Demote test {{ test.type }} to test {{ typeDownOne(test.type) }}" ng-click="demoteClicked($index)"></span>
-                    </span>-->
-                        </span>
-                        <input type="text" class="form-control" ng-model="step.name">
-                        <div class="input-group-btn">
-                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-exclamation-sign red"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
-                          <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                            <li><a href="#">{{ resc.filesRmv }}</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Copy Children</a></li>
-                            <li><a href="#">Link File</a></li>
-                          </ul>
-                        </div><!-- /btn-group -->
-                      </div><!-- /input-group -->
+                  <div id="case-body{{ case.id }}">
+                    <div ng-repeat="step in case.children | filter:search_box"> <!-- loop of the cases -->
+                      <div class="{{ step.type }} arch fadeInUp animated">
+                        <div class="input-group input-group{{ step.size }}">
+                          <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-remove onlyHover" data-toggle="tooltip" data-placement="bottom"
+                        title="Delete step named {{ step.name }}" ng-click="removeStepEntryClicked(active,$parent.$index, $index)"></span>
+                        <span class="glyphicon glyphicon-move onlyHover" data-toggle="tooltip" data-placement="bottom" title="Move Ordering" ng-click=""></span>
+                      <!--<span ng-if="types.indexOf(test.type) < (types.length - 1)">
+                        <span class="glyphicon glyphicon-backward onlyHover" data-toggle="tooltip" data-placement="bottom"
+                      title="Promote test {{ test.type }} to test {{ typeUpOne(test.type) }}" ng-click="promoteClicked($index)"></span>
+                      </span>
+                      <span ng-if="types.indexOf(test.type) > 0">
+                        <span class="glyphicon glyphicon-forward onlyHover" data-toggle="tooltip" data-placement="bottom"
+                      title="Demote test {{ test.type }} to test {{ typeDownOne(test.type) }}" ng-click="demoteClicked($index)"></span>
+                      </span>-->
+                          </span>
+                          <input type="text" class="form-control" ng-model="step.name">
+                          <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-exclamation-sign red"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
+                            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                              <li><a href="#">{{ resc.filesRmv }}</a></li>
+                              <li class="divider"></li>
+                              <li><a href="#">Copy Children</a></li>
+                              <li><a href="#">Link File</a></li>
+                            </ul>
+                          </div><!-- /btn-group -->
+                        </div><!-- /input-group -->
+                      </div>
                     </div>
                   </div>
                 </div>

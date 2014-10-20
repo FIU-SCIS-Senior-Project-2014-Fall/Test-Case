@@ -25,6 +25,13 @@ body, .MainBody, html, .container {
 }
 
 .dropdown-menu {
+  -webkit-transition: ease-out .25s;
+  -moz-transition: ease-out .25s;
+  -o-transition: ease-out .25s;
+  transition: ease-out .25s;
+}
+
+.dropdown-menu, .dropdown-menu li, .dropdown-menu li a {
   z-index:1001 !important;
 }
 
