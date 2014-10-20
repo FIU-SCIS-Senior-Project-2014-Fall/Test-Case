@@ -169,7 +169,7 @@ body, .MainBody, html, .container {
       color:#000000 !important;
     }
   }
-  .arch:hover .input-group-addon {
+  .arch:hover > div > .input-group-addon {
     background-color:#dadada;
     color:#44444444 !important;
     .onlyHover {

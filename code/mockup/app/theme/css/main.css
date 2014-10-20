@@ -191,12 +191,12 @@ body, .MainBody, html, .container {
   color: #000000 !important;
 }
 /* line 172, ../../../sass/sass/main.scss */
-#workspace .arch:hover .input-group-addon {
+#workspace .arch:hover > div > .input-group-addon {
   background-color: #dadada;
   color: #44444444 !important;
 }
 /* line 175, ../../../sass/sass/main.scss */
-#workspace .arch:hover .input-group-addon .onlyHover {
+#workspace .arch:hover > div > .input-group-addon .onlyHover {
   width: auto;
   margin-left: 8px;
 }
