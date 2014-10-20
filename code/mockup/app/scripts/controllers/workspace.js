@@ -18,7 +18,8 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		"filesChg": "A file has changed since last test!",
 		"filesRmv": "A file has been removed since last test!",
 		"tfs": "TFS",
-		"localStore": "Local"
+		"localStore": "Local",
+		"pasteSteps": "Paste Steps"
 	};
   	storage.bind($scope,'entries');
 
@@ -39,16 +40,11 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		});
 	}
 
+	$scope.copyBuffer = false;
 	$scope.active = 0;
 	$scope.suite = $scope.entries[0];
 
 	setTimeout(function() { $('.input-group-addon .glyphicon').tooltip();}, 1000);
-	setTimeout(function() { 
-		toastr.success('File Updated', 'The file "test.cs" has been updated since last tested.');
-	}, 5000);
-	setTimeout(function() { 
-		toastr.error('File Removed', 'The file "test.cs" associated with "test case" has been removed.');
-	}, 4000);
 
 	$scope.clearStorage = function() {
 		storage.clearAll();
@@ -64,6 +60,37 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 			"children" : []
 		});
 		$scope.suite = $scope.entries[0];
+	}
+
+	$scope.copySteps = function(index) {
+		$scope.copyBuffer = $scope.entries[$scope.active].children[index].children.deepClone();
+		console.log($scope.copyBuffer);
+	}
+
+	$scope.pasteSteps = function(index) {
+		if(!$scope.copyBuffer)
+			return;
+		var len = $scope.entries[$scope.active].children[index].children.length;
+		var i = 0;
+		// alter step parents, also attempt to give uniqueness to object, else repeater will fail.
+		$scope.copyBuffer = $scope.copyBuffer.map(function(x) { x.name += " >> from " + $scope.entries[$scope.active].children[x.parent].name; x.parent = index; x.id = len + i++; return x; });
+
+		var len = $scope.entries[$scope.active].children[index].children.length;
+		if(len > 0) {
+			$scope.entries[$scope.active].children[index].children = $scope.entries[$scope.active].children[index].children.concat($scope.copyBuffer);
+		}
+		else
+			$scope.entries[$scope.active].children[index].children = $scope.copyBuffer;
+		if(len < $scope.entries[$scope.active].children[index].children.length) {
+			$scope.copyBuffer = false;
+			toastr.success('Copy Success!', 'The children were copied successfully.');
+		} else {
+			toastr.error('Copy Error', 'Copy operation was not successful, entries still in buffer.');
+		}
+	}
+
+	$scope.hasCopyBuffer = function() {
+		return $scope.copyBuffer != false;
 	}
 
 	$scope.preventDefault = function(event) {
@@ -285,6 +312,17 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 			return false;
 
 	};
+
+	/* utilities */
+
+	Array.prototype.clone = function() {
+		return this.slice(0);
+	};
+
+	Array.prototype.deepClone = function() {
+		return JSON.parse(JSON.stringify(this));
+	};
+
   }).directive("saveEntry", function() {
 	  var linkFunction = function(scope, element, attributes) {
 	    var entry = element.children()[0];
@@ -297,4 +335,4 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	    restrict: "E",
 	    link: linkFunction
 	  };
-	});;
+	});

@@ -128,7 +128,8 @@
                       <ul class="dropdown-menu dropdown-menu-right" role="menu">
                         <li><a href="#">{{ resc.filesRmv }}</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Copy Children</a></li>
+                        <li><a ng-click="copySteps($index)">Copy Children</a></li>
+                        <li ng-if="hasCopyBuffer()"><a ng-click="pasteSteps($index)">{{ resc.pasteSteps }}</a></li>
                         <li><a href="#">Link File</a></li>
                       </ul>
                     </div><!-- /btn-group -->

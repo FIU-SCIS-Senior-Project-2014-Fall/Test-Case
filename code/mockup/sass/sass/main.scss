@@ -28,6 +28,10 @@ body, .MainBody, html, .container {
   z-index:1001 !important;
 }
 
+.dropdown-menu li a {
+  cursor:pointer;
+}
+
 /* Custom page footer */
 .footer {
   padding-top: 19px;
