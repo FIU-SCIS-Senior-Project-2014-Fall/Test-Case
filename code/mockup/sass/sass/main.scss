@@ -24,7 +24,7 @@ body, .MainBody, html, .container {
   z-index:1001 !important;
 }
 
-.dropdown-menu {
+.dropdown-menu, .animation {
   -webkit-transition: ease-out .25s;
   -moz-transition: ease-out .25s;
   -o-transition: ease-out .25s;

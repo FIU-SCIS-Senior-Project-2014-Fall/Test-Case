@@ -25,7 +25,7 @@ body, .MainBody, html, .container {
 }
 
 /* line 27, ../../../sass/sass/main.scss */
-.dropdown-menu {
+.dropdown-menu, .animation {
   -webkit-transition: ease-out .25s;
   -moz-transition: ease-out .25s;
   -o-transition: ease-out .25s;

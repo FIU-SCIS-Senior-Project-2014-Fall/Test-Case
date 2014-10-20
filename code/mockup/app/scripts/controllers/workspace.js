@@ -71,24 +71,27 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	}
 
 	$scope.copySteps = function(index) {
-		$scope.copyBuffer = $scope.entries[$scope.active].children[index].children.deepClone();
-		console.log($scope.copyBuffer);
+		$scope.copyBuffer = index;
 	}
 
 	$scope.pasteSteps = function(index) {
-		if(!$scope.copyBuffer)
+		if($scope.copyBuffer === false)
 			return;
 		var len = $scope.entries[$scope.active].children[index].children.length;
-		var i = 0;
+		var tmp = $scope.entries[$scope.active].children[$scope.copyBuffer].children.deepClone();
 		// alter step parents, also attempt to give uniqueness to object, else repeater will fail.
-		$scope.copyBuffer = $scope.copyBuffer.map(function(x) { x.name += " >> from " + $scope.entries[$scope.active].children[x.parent].name; x.parent = index; x.id = $scope.createId(); return x; });
-
+		tmp = tmp.map(function(x) { 
+			x.name += " >> from " + $scope.entries[$scope.active].children[$scope.copyBuffer].name; 
+			x.id = $scope.createId(); 
+			x.parent = $scope.entries[$scope.active].children[index].id; 
+			return x; 
+		});
 		var len = $scope.entries[$scope.active].children[index].children.length;
 		if(len > 0) {
-			$scope.entries[$scope.active].children[index].children = $scope.entries[$scope.active].children[index].children.concat($scope.copyBuffer);
+			$scope.entries[$scope.active].children[index].children = $scope.entries[$scope.active].children[index].children.concat(tmp);
 		}
 		else
-			$scope.entries[$scope.active].children[index].children = $scope.copyBuffer;
+			$scope.entries[$scope.active].children[index].children = tmp;
 		if(len < $scope.entries[$scope.active].children[index].children.length) {
 			$scope.copyBuffer = false;
 			toastr.success('Copy Success!', 'The children were copied successfully.');
@@ -98,7 +101,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	}
 
 	$scope.hasCopyBuffer = function() {
-		return $scope.copyBuffer != false;
+		return $scope.copyBuffer !== false;
 	}
 
 	$scope.preventDefault = function(event) {
