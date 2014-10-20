@@ -65,12 +65,12 @@ body, .MainBody, html, .container {
 }
 /* line 59, ../../../sass/sass/main.scss */
 #LeftPane h3 {
-  padding: 0px 5px 10px 5px;
+  padding: 0px 10px 10px 10px;
 }
 /* line 62, ../../../sass/sass/main.scss */
 #LeftPane a {
   font-size: 16px;
-  padding: 8px 8px;
+  padding: 8px 0px;
   color: #dadada;
   border-radius: 0px;
   -webkit-transition: ease-out .25s;
@@ -90,24 +90,40 @@ body, .MainBody, html, .container {
 }
 /* line 80, ../../../sass/sass/main.scss */
 #LeftPane li {
+  padding: 5px 10px;
   -webkit-transition: ease-out .5s;
   -moz-transition: ease-out .5s;
   -o-transition: ease-out .5s;
   transition: ease-out .5s;
 }
-/* line 86, ../../../sass/sass/main.scss */
+/* line 87, ../../../sass/sass/main.scss */
 #LeftPane li.active, #LeftPane li:hover {
   background-color: #111111;
 }
-/* line 90, ../../../sass/sass/main.scss */
-#LeftPane li.active p, #LeftPane li:hover p {
-  padding: 5px 8px;
-}
-/* line 94, ../../../sass/sass/main.scss */
+/* line 91, ../../../sass/sass/main.scss */
 #LeftPane .label {
   margin-right: 5px;
 }
-/* line 98, ../../../sass/sass/main.scss */
+/* line 94, ../../../sass/sass/main.scss */
+#LeftPane .form-control {
+  border: 1px solid #111;
+  background-color: #111;
+  color: #ccc;
+  border-radius: 0px;
+  margin: 3px 0px;
+  height: 100px;
+  -webkit-transition: ease-out .25s;
+  -moz-transition: ease-out .25s;
+  -o-transition: ease-out .25s;
+  transition: ease-out .25s;
+  resize: none;
+}
+/* line 108, ../../../sass/sass/main.scss */
+#LeftPane .form-control:hover {
+  border: 1px solid #666;
+  background-color: #333;
+}
+/* line 113, ../../../sass/sass/main.scss */
 #LeftPane .on-hover {
   max-height: 0px;
   overflow: hidden;
@@ -116,54 +132,69 @@ body, .MainBody, html, .container {
   -o-transition: ease-out .5s;
   transition: ease-out .5s;
 }
-/* line 107, ../../../sass/sass/main.scss */
+/* line 122, ../../../sass/sass/main.scss */
 #LeftPane li:hover .on-hover, #LeftPane li.active .on-hover {
   max-height: 200px;
 }
 
 /* Position of row mujst be set in order to overcome dropdown z-index failing */
-/* line 113, ../../../sass/sass/main.scss */
+/* line 128, ../../../sass/sass/main.scss */
 .row {
   position: relative;
 }
 
-/* line 117, ../../../sass/sass/main.scss */
+/* line 132, ../../../sass/sass/main.scss */
 .ng-scope {
   z-index: 100 !important;
 }
 
-/* line 121, ../../../sass/sass/main.scss */
+/* line 136, ../../../sass/sass/main.scss */
 #workspace {
   position: relative;
   z-index: 100 !important;
 }
-/* line 125, ../../../sass/sass/main.scss */
+/* line 140, ../../../sass/sass/main.scss */
 #workspace .form-control, #workspace .btn {
   border: 1px none !important;
   box-shadow: none !important;
 }
-/* line 129, ../../../sass/sass/main.scss */
+/* line 144, ../../../sass/sass/main.scss */
+#workspace .item-summary {
+  height: 0px;
+  opacity: 0;
+  border-top: 1px none;
+  background-color: #efefeb;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 5px;
+  overflow: hidden;
+  -webkit-transition: ease-out .5s;
+  -moz-transition: ease-out .5s;
+  -o-transition: ease-out .5s;
+  transition: ease-out .5s;
+}
+/* line 158, ../../../sass/sass/main.scss */
 #workspace input:hover {
   border: 1px solid #cccccc !important;
 }
-/* line 132, ../../../sass/sass/main.scss */
+/* line 161, ../../../sass/sass/main.scss */
 #workspace input:focus {
   box-shadow: 0px 0px 5px blue !important;
 }
-/* line 135, ../../../sass/sass/main.scss */
+/* line 164, ../../../sass/sass/main.scss */
 #workspace .arch {
   position: relative;
   padding: 3px 0px;
 }
-/* line 141, ../../../sass/sass/main.scss */
+/* line 170, ../../../sass/sass/main.scss */
 #workspace .case {
-  margin-left: 50px;
+  margin-left: 0px;
 }
-/* line 144, ../../../sass/sass/main.scss */
+/* line 173, ../../../sass/sass/main.scss */
 #workspace .step {
-  margin-left: 100px;
+  margin-left: 10px;
 }
-/* line 147, ../../../sass/sass/main.scss */
+/* line 176, ../../../sass/sass/main.scss */
 #workspace .onlyHover {
   width: 0px;
   overflow: hidden;
@@ -172,41 +203,51 @@ body, .MainBody, html, .container {
   -o-transition: ease-out .5s;
   transition: ease-out .5s;
 }
-/* line 156, ../../../sass/sass/main.scss */
+/* line 185, ../../../sass/sass/main.scss */
 #workspace .input-group-addon {
   background-color: transparent;
   border: 1px none;
+  border-bottom-left-radius: 0px;
   color: #cccccc !important;
   -webkit-transition: ease-out .5s;
   -moz-transition: ease-out .5s;
   -o-transition: ease-out .5s;
   transition: ease-out .5s;
 }
-/* line 165, ../../../sass/sass/main.scss */
+/* line 195, ../../../sass/sass/main.scss */
 #workspace .input-group-addon .glyphicon {
   cursor: pointer;
 }
-/* line 168, ../../../sass/sass/main.scss */
+/* line 198, ../../../sass/sass/main.scss */
 #workspace .input-group-addon .glyphicon:hover {
   color: #000000 !important;
 }
-/* line 172, ../../../sass/sass/main.scss */
+/* line 202, ../../../sass/sass/main.scss */
 #workspace .arch:hover > div > .input-group-addon {
   background-color: #dadada;
   color: #44444444 !important;
 }
-/* line 175, ../../../sass/sass/main.scss */
+/* line 205, ../../../sass/sass/main.scss */
 #workspace .arch:hover > div > .input-group-addon .onlyHover {
   width: auto;
   margin-left: 8px;
 }
+/* line 211, ../../../sass/sass/main.scss */
+#workspace .arch:hover > .item-summary {
+  height: 150px;
+  opacity: 1;
+}
+/* line 216, ../../../sass/sass/main.scss */
+#workspace .arch:hover > .item-summary > textarea {
+  height: 100%;
+}
 
-/* line 182, ../../../sass/sass/main.scss */
+/* line 221, ../../../sass/sass/main.scss */
 .green {
   color: #5CB85C;
 }
 
-/* line 186, ../../../sass/sass/main.scss */
+/* line 225, ../../../sass/sass/main.scss */
 .red {
   color: #D9534F;
 }

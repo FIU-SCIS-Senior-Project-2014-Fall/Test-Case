@@ -57,11 +57,11 @@ body, .MainBody, html, .container {
   padding-top:10px;
   height:100%;
   h3 {
-    padding:0px 5px 10px 5px;
+    padding:0px 10px 10px 10px;
   }
   a {
     font-size:16px;
-    padding:8px 8px;
+    padding:8px 0px;
     color:#dadada;
     border-radius:0px;
     -webkit-transition: ease-out .25s;
@@ -78,6 +78,7 @@ body, .MainBody, html, .container {
     background-color:#000000;
   }
   li {
+    padding:5px 10px;
     -webkit-transition: ease-out .5s;
     -moz-transition: ease-out .5s;
     -o-transition: ease-out .5s;
@@ -87,12 +88,26 @@ body, .MainBody, html, .container {
     background-color:#111111;
   }
 
-  li.active p, li:hover p {
-    padding:5px 8px;
-  }
-
   .label {
     margin-right:5px;
+  }
+  .form-control {
+    border:1px solid #111;
+    background-color:#111;
+    color:#ccc;
+    border-radius:0px;
+    margin:3px 0px;
+    height:100px;
+    -webkit-transition: ease-out .25s;
+    -moz-transition: ease-out .25s;
+    -o-transition: ease-out .25s;
+    transition: ease-out .25s;
+    resize: none;
+  }
+
+  .form-control:hover {
+    border:1px solid #666;
+    background-color:#333;
   }
 
   .on-hover {
@@ -126,6 +141,20 @@ body, .MainBody, html, .container {
   border:1px none !important;
   box-shadow:none !important;
   }
+  .item-summary {
+    height:0px;
+    opacity:0;
+    border-top:1px none;
+    background-color:#efefeb;
+    border:1px solid #ccc;
+    padding:10px;
+    margin-bottom:5px;
+    overflow:hidden;
+    -webkit-transition: ease-out .5s;
+    -moz-transition: ease-out .5s;
+    -o-transition: ease-out .5s;
+    transition: ease-out .5s;
+  }
   input:hover {
   border:1px solid #cccccc !important;
   }
@@ -139,10 +168,10 @@ body, .MainBody, html, .container {
   .suite {
   }
   .case {
-    margin-left:50px;
+    margin-left:0px;
   }
   .step {
-    margin-left:100px;
+    margin-left:10px;
   }
   .onlyHover {
     width:0px;
@@ -156,6 +185,7 @@ body, .MainBody, html, .container {
   .input-group-addon {
     background-color:transparent;
     border:1px none;
+    border-bottom-left-radius:0px;
     color:#cccccc !important;
     -webkit-transition: ease-out .5s;
     -moz-transition: ease-out .5s;
@@ -176,6 +206,15 @@ body, .MainBody, html, .container {
       width:auto;
       margin-left:8px;
     }
+  }
+
+  .arch:hover > .item-summary {
+    height:150px;
+    opacity:1;
+  }
+
+  .arch:hover > .item-summary > textarea {
+    height:100%;
   }
 }
 
