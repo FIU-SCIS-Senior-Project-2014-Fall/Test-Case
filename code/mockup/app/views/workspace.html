@@ -130,7 +130,8 @@
                       <ul class="dropdown-menu dropdown-menu-right" role="menu">
                         <li><a href="#">{{ resc.filesRmv }}</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Copy Children</a></li>
+                        <li><a ng-click="copySteps($index)">Copy Children</a></li>
+                        <li ng-if="hasCopyBuffer()"><a ng-click="pasteSteps($index)">{{ resc.pasteSteps }}</a></li>
                         <li><a href="#">Link File</a></li>
                       </ul>
                     </div><!-- /btn-group -->
@@ -140,7 +141,7 @@
                       <div class="input-group input-group{{ step.size }}">
                         <span class="input-group-addon">
                           <span class="glyphicon glyphicon-remove onlyHover" data-toggle="tooltip" data-placement="bottom"
-                      title="Delete step named {{ step.name }}" ng-click="removeCaseEntryClicked($parent.$index,$index)"></span>
+                      title="Delete step named {{ step.name }}" ng-click="removeStepClicked($parent.$index,$index)"></span>
                       <span class="glyphicon glyphicon-move onlyHover" data-toggle="tooltip" data-placement="bottom" title="Move Ordering" ng-click=""></span>
                     <!--<span ng-if="types.indexOf(test.type) < (types.length - 1)">
                       <span class="glyphicon glyphicon-backward onlyHover" data-toggle="tooltip" data-placement="bottom"
@@ -157,7 +158,6 @@
                           <ul class="dropdown-menu dropdown-menu-right" role="menu">
                             <li><a href="#">{{ resc.filesRmv }}</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">Copy Children</a></li>
                             <li><a href="#">Link File</a></li>
                           </ul>
                         </div><!-- /btn-group -->

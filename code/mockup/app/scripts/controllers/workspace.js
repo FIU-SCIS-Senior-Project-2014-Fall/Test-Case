@@ -17,7 +17,8 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		"genChart": "Generate Analysis",
 		"filesOk": "All files are OK!",
 		"filesChg": "A file has changed since last test!",
-		"filesRmv": "A file has been removed since last test!"
+		"filesRmv": "A file has been removed since last test!",
+		"pasteSteps": "Paste Steps"
 	};
   	storage.bind($scope,'entries');
 
@@ -38,6 +39,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		});
 	}
 
+	$scope.copyBuffer = false;
 	$scope.active = 0;
 	$scope.suite = $scope.entries[0];
 
@@ -62,6 +64,36 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 			"children" : []
 		});
 		$scope.suite = $scope.entries[0];
+	}
+
+	$scope.copySteps = function(index) {
+		$scope.copyBuffer = [];
+		var len = $scope.entries[$scope.active].children[index].children.length;
+		for(var i = 0; i < len; i++)
+			$scope.copyBuffer.push(Object.create($scope.entries[$scope.active].children[index].children[i]));
+	}
+
+	$scope.pasteSteps = function(index) {
+		if(!$scope.copyBuffer)
+			return;
+
+		$scope.copyBuffer = $scope.copyBuffer.map(function(x) { x.parent = index; return x; });
+
+		var len = $scope.entries[$scope.active].children[index].children.length;
+		if(len > 0)
+			$scope.entries[$scope.active].children[index].children = $scope.entries[$scope.active].children[index].children.concat($scope.copyBuffer);
+		else
+			$scope.entries[$scope.active].children[index].children = $scope.copyBuffer;
+		if(len < $scope.entries[$scope.active].children[index].children.length) {
+			$scope.copyBuffer = false;
+			toastr.success('Copy Success!', 'The children were copied successfully.');
+		} else {
+			toastr.error('Copy Error', 'Copy operation was not successful, entries still in buffer.');
+		}
+	}
+
+	$scope.hasCopyBuffer = function() {
+		return $scope.copyBuffer != false;
 	}
 
 	$scope.preventDefault = function(event) {
@@ -123,6 +155,10 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 
     $scope.removeCaseEntryClicked = function(parent, index) {
     	$scope.entries[parent].children.splice(index, 1);
+    }
+
+    $scope.removeStepClicked = function(parent, index) {
+    	$scope.entries[$scope.active].children[parent].children.splice(index, 1);
     }
 
     $scope.saveEntry = function() {
