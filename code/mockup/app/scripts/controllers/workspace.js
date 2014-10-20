@@ -9,6 +9,17 @@
  */
 angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, storage) {
 
+	$scope.getEntryTemplate = function () { return {
+		"id" : 0,
+		"name" : "",
+		"type" : "",
+		"parent" : 0,
+		"size" : "",
+		"order" : 0,
+		"summary" : "",
+		"children" : []
+	}; };
+
 	$scope.timeOut = 0;
 
 	$scope.resc = {
@@ -30,14 +41,12 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 
 	if(!$scope.entries || $scope.entries.length <= 0) {
 	    $scope.entries = [];
-	    addEntry({
-			"id" : $scope.createId(),
-			"name" : "Test Suite 1",
-			"type" : "suite",
-			"parent" : 0,
-			"size" : sizeByType("suite"),
-			"children" : []
-		});
+	    var tmp = $scope.getEntryTemplate();
+	    tmp.id = $scope.createId();
+	    tmp.name = "New Test Suite";
+	    tmp.type = "suite";
+	    tmp. size = sizeByType("suite");
+	    addEntry(tmp);
 	}
 
 	$scope.copyBuffer = false;
@@ -58,16 +67,13 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		storage.clearAll();
 		storage.bind($scope,'entries');
 		$scope.entries = [];
-	    addEntry({
-			"id" : $scope.createId(),
-			"name" : "Default Suite after clear",
-			"type" : "suite",
-			"parent" : 0,
-			"size" : sizeByType("suite"),
-			"store" : ["Local"],
-			"children" : []
-		});
-		$scope.suite = $scope.entries[0];
+		var tmp = getEntryTemplate();
+		tmp.id = $scope.createId();
+		tmp.name = "Cleared";
+		tmp.type = "suite";
+		tmp.size = sizeByType("suite");
+		tmp.store = ["Local"];
+	    addEntry(tmp);
 	}
 
 	$scope.copySteps = function(index) {

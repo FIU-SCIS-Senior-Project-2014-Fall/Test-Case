@@ -6,7 +6,7 @@
               <li class="{{isActive($index)}}" ng-repeat="test in entries | orderBy:['id']">
                 <a ng-click="makeActive($index)"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;&nbsp;{{ test.name }} ({{ test.children.length }})</a>
                 <div class="on-hover">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer enim ex, eleifend sit amet eleifend in, interdum id orci.</p>
+                  <textarea class="form-control" ng-model="test.summary" placeholder="Summary goes here..."></textarea>
                   <p>
                     <span class="label label-primary" ng-repeat="store in test.store">{{ store }}</span> 
                   </p>
@@ -134,6 +134,10 @@
                       </ul>
                     </div><!-- /btn-group -->
                   </div><!-- /input-group -->
+                  <div class="item-summary">
+                    <textarea class="form-control" ng-model="case.summary" placeholder="Summary goes here...">
+                    </textarea>
+                  </div>
                   <div id="case-body{{ case.id }}" class="animation">
                     <div ng-repeat="step in case.children track by $index | filter:search_box"> <!-- loop of the cases -->
                       <div class="{{ step.type }} arch fadeInUp animated">
