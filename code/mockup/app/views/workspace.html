@@ -153,7 +153,7 @@
                   </div>
                   <div id="case-body{{ case.id }}" class="animation">
                     <div ng-repeat="step in case.children track by $index | filter:search_box"> <!-- loop of the cases -->
-                      <div class="{{ step.type }} arch fadeInUp animated">
+                      <div class="{{ step.type }} arch suite-master fadeInUp animated">
                         <div class="input-group input-group{{ step.size }}">
                           <span class="input-group-addon">
                             {{step.order}}.&nbsp; 
