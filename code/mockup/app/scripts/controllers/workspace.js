@@ -8,29 +8,6 @@
  * Controller of the initProjApp
  */
 angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, storage) {
-	$scope.disabled = false;
-	$scope.canEdit = true;
-	
-	if(!$scope.idStore || $scope.idStore <= 0)
-		$scope.idStore = 1;
-
-	$scope.getEntryTemplate = function () { return {
-		"id" : 0,
-		"name" : "",
-		"type" : "",
-		"parent" : 0,
-		"size" : "",
-		"order" : 0,
-		"summary" : "",
-		"children" : []
-	}; };
-
-	$scope.createId = function() {
-		$scope.idStore++;
-		return $scope.idStore;
-	}
-
-	$scope.timeOut = 0;
 
 	$scope.resc = {
 		"cpyChd": "Copy Children",
@@ -43,6 +20,35 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		"pasteSteps": "Paste Steps"
 	};
   	storage.bind($scope,'entries');
+  	storage.bind($scope,'idStore');
+
+  	$scope.disabled = false;
+	$scope.canEdit = true;
+	
+	if(!$scope.idStore || $scope.idStore <= 0)
+		$scope.idStore = 1;
+
+	$scope.getEntryTemplate = function () { return {
+		"id" : 0,
+		"name" : "",
+		"type" : "",
+		"parent" : 0,
+		"size" : "",
+		"order" : 0,
+		"tags" : [],
+		"result" : "",
+		"toggle" : false,
+		"summary" : "",
+		"store" : ["Local"],
+		"children" : []
+	}; };
+
+	$scope.createId = function() {
+		$scope.idStore++;
+		return $scope.idStore;
+	}
+
+	$scope.timeOut = 0;
 
   	$scope.viewType = 'ANYTHING';
 
@@ -69,7 +75,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		storage.clearAll();
 		storage.bind($scope,'entries');
 		$scope.entries = [];
-		var tmp = getEntryTemplate();
+		var tmp = $scope.getEntryTemplate();
 		tmp.id = $scope.createId();
 		tmp.name = "Cleared";
 		tmp.type = "suite";
@@ -152,19 +158,33 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	}
 
 	$scope.addSuite = function() {
-		addEntry({
-			"id" : $scope.createId(),
-			"name" : "New Suite",
-			"type" : "suite",
-			"parent" : 0,
-			"store" : ["Local"],
-			"size" : sizeByType("suite"),
-			"children" : []
-		});
+		var tmp = $scope.getEntryTemplate();
+	    tmp.id = $scope.createId();
+	    tmp.name = "New Test Suite";
+	    tmp.type = "suite";
+	    tmp. size = sizeByType("suite");
+	    addEntry(tmp);
 	}
 
-	$scope.collapse = function(index) {
-		$("#case-body"+index).toggle();
+	$scope.toggle = function(index) {
+		if($scope.entries[$scope.active].children[index].toggle)
+			$scope.entries[$scope.active].children[index].toggle = false;
+		else
+			$scope.entries[$scope.active].children[index].toggle = true;
+	}
+
+	$scope.toggleClass = function(index) {
+		if($scope.entries[$scope.active].children[index].toggle)
+			return "test-expand";
+		else
+			return "test-in";
+	}
+
+	$scope.toggleButton = function(index) {
+		if($scope.entries[$scope.active].children[index].toggle)
+			return "glyphicon-chevron-up";
+		else
+			return "glyphicon-chevron-down";
 	}
 
     $scope.demoteClicked = function(index) {
@@ -207,6 +227,8 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 
     $scope.removeStepEntryClicked = function(suite, parent, index) {
     	$scope.entries[suite].children[parent].children.splice(index, 1);
+    	for(var i = index, k = $scope.entries[suite].children[parent].children.length; i < k ; i++)
+    		$scope.entries[suite].children[parent].children[i].order = $scope.entries[suite].children[parent].children[i].order - 1;
     }
 
     $scope.saveEntry = function() {
@@ -224,18 +246,6 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		return entry;
     }
 
-	function cloneEntry(index, incChildren) {
-		return {
-			"id" : $scope.createId(),
-			"name" : $scope.entries[index].name,
-			"type" : $scope.entries[index].type,
-			"parent" : $scope.entries[index].id,
-			"store" : $scope.entries[index].store,
-			"size" : sizeByType($scope.entries[index].type),
-			"children" : [] // always clear children
-		};
-	};
-
 	function addChild(parentId, child) {
 		for(var i = 0, j = $scope.entries.length; i < j; i++) {
 			if($scope.entries[i].id >= parentId)
@@ -243,39 +253,38 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		}
 	}
 
-	function addEntry() {
-		$scope.entries.push( {
-			"id" : $scope.createId(),
-			"name" : "New Suite",
-			"type" : $scope.types[2],
-			"parent" : 0,
-			"store" : ["Local"],
-			"size" : sizeByType($scope.types[2]),
-			"children" : []
-		});
+	function addEntry(entry) {
+		if(!entry) {
+			var tmp = $scope.getEntryTemplate();
+		    tmp.id = $scope.createId();
+		    tmp.name = "New Test Suite";
+		    tmp.type = $scope.types[2];
+		    tmp. size = sizeByType($scope.types[2]);
+		    $scope.entries.push(tmp);
+		} else {
+			$scope.entries.push(entry);
+		}
 	};
 
 	function addSubEntry(index, parent) {
+		var tmp = $scope.getEntryTemplate();
+		tmp.id = $scope.createId();
 		if(parent >= 0) {
 			var type = $scope.typeDownOne($scope.entries[parent].children[index].type);
-			$scope.entries[parent].children[index].children.push( {
-				"id" : $scope.createId(),
-				"name" : "New " + type,
-				"type" : type,
-				"parent" : $scope.entries[parent].children[index].id,
-				"size" : sizeByType(type),
-				"children" : []
-			});
+			tmp.name = "New " + type;
+		    tmp.type = type;
+		    tmp.order = $scope.entries[parent].children[index].children.length + 1;
+		    tmp.size = sizeByType(type);
+		    tmp.parent = $scope.entries[parent].children[index].id;
+			$scope.entries[parent].children[index].children.push(tmp);
 		} else {
 			var type = $scope.typeDownOne($scope.entries[index].type);
-			$scope.entries[index].children.push( {
-				"id" : $scope.createId(),
-				"name" : "New " + type,
-				"type" : type,
-				"parent" : $scope.entries[index].id,
-				"size" : sizeByType(type),
-				"children" : []
-			});
+			tmp.name = "New " + type;
+		    tmp.type = type;
+		    tmp.order = $scope.entries[index].children.length + 1;
+		    tmp.size = sizeByType(type);
+		    tmp.parent = $scope.entries[index].id;
+			$scope.entries[index].children.push(tmp);
 		}
 	};
 

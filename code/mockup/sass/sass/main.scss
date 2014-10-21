@@ -146,7 +146,7 @@ body, .MainBody, html, .container {
     opacity:0;
     border-top:1px none;
     background-color:#efefeb;
-    border:1px solid #ccc;
+    border-bottom:1px solid #ccc;
     padding:10px;
     margin-bottom:5px;
     overflow:hidden;
@@ -167,7 +167,10 @@ body, .MainBody, html, .container {
   }
   .arch {
     position:relative;
-    padding:3px 0px;
+    padding:0px 0px 3px 0px;
+    border:1px none;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
   }
   .suite {
   }
@@ -203,22 +206,43 @@ body, .MainBody, html, .container {
       color:#000000 !important;
     }
   }
-  .arch:hover > div > .input-group-addon {
+
+  .test-expand {
+    border:1px solid #ccc;
+  }
+  .arch .test-expand {
+    border:1px none;
+  }
+
+  .test-expand .id {
+    margin-left:5px;
+  }
+
+  .test-expand > div > .input-group-addon, .suite-master:hover > div > .input-group-addon {
     background-color:#dadada;
-    color:#44444444 !important;
+    color:#444444 !important;
     .onlyHover {
       width:auto;
       margin-left:8px;
     }
   }
 
-  .arch:hover > .item-summary {
-    height:300px;
+  .test-expand > .item-summary {
+    height:350px;
     opacity:1;
   }
 
-  .arch:hover > .item-summary > textarea {
-    height:150px;
+  .step-title {
+    width:66%;
+    border-right:1px solid #ccc;
+  }
+
+  .step-result {
+    width:33%;
+  }
+
+  .arch .label {
+    margin-left:3px;
   }
 
   .ta-scroll-window > .ta-bind {
@@ -236,6 +260,14 @@ body, .MainBody, html, .container {
 
 /* TextAngular */
 /* add generic styling for the editor */
+.ta-toolbar {
+  margin-bottom:5px;
+}
+
+.ta-toolbar .btn[name="h2"],.ta-toolbar .btn[name="h5"],.ta-toolbar .btn[name="h6"], .ta-toolbar .btn[name="quote"] {
+  display:none;
+}
+
 .ta-root.focussed > .ta-scroll-window.form-control {
   border-color: #66afe9;
   outline: 0;
@@ -245,7 +277,7 @@ body, .MainBody, html, .container {
 }
 
 .ta-editor.ta-html, .ta-scroll-window.form-control {
-  min-height: 300px;
+  min-height: 200px;
   height: auto;
   overflow: auto;
   font-family: inherit;
@@ -259,7 +291,7 @@ body, .MainBody, html, .container {
 
 .ta-scroll-window > .ta-bind {
   height: auto;
-  min-height: 300px;
+  min-height: 200px;
   padding: 6px 12px;
 }
 
@@ -327,4 +359,8 @@ body, .MainBody, html, .container {
   border: 1px solid black;
   cursor: se-resize;
   background-color: white;
+}
+
+.ta-toolbar .btn {
+  font-size:10px;
 }
