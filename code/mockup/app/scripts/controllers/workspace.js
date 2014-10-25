@@ -253,6 +253,13 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		}
 	}
 
+	$scope.createByEnterKey = function(index, type) {
+		if(type == "step" || type == "case")
+			addSubEntry(index, $scope.active);
+		else
+			addSubEntry($scope.active, -1);
+	}
+
 	function addEntry(entry) {
 		if(!entry) {
 			var tmp = $scope.getEntryTemplate();
@@ -355,16 +362,41 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		return JSON.parse(JSON.stringify(this));
 	};
 
-  }).directive("saveEntry", function() {
-	  var linkFunction = function(scope, element, attributes) {
-	    var entry = element.children()[0];
-	    $(paragraph).on("click", function() {
-	      $(this).css({ "background-color": "red" });
-	    });
-	  };
+  });
 
-	  return {
-	    restrict: "E",
-	    link: linkFunction
-	  };
-	});
+
+// this is rough, still setup with debugging.
+angular.module('initProjApp').directive("tfProcesskey", function() {
+	return function(scope, element, attributes) {
+		var className = attributes.tfProcesskey;
+	  	element.bind("keydown keypress", function(e) {
+	  		if(e.which == 13) {
+	  			var id = $(element).attr("id");
+	  			var likeElements = $("." + className);
+	  			var eq = likeElements.index( $("#" + id) );
+	  			var ele = likeElements.eq(eq + 1);
+	  			if(ele.length > 0)
+	  				ele.focus();
+	  			else {
+	  				var entry = $(element).attr("entry"), type = $(element).attr("e-type");
+	  				scope.createByEnterKey(entry, type);
+	  				scope.$apply();
+	  			}
+	  			e.preventDefault();
+	  		}
+	  		else if(e.which == 9) {
+	  			var id = $(element).attr("id");
+	  			var likeElements = $('input.tf-proc-control');
+	  			var eq = likeElements.index( $("#" + id) );
+	  			var ele = likeElements.eq(eq + 1);
+	  			if(ele.length > 0)
+	  				ele.focus();
+	  			else
+	  				$(".edit-title").eq(0).focus()
+	  			e.preventDefault();
+	  		}
+	  		
+	  	});
+	    
+	};
+});
