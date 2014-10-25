@@ -381,6 +381,14 @@ angular.module('initProjApp').directive("tfProcesskey", function() {
 	  				var entry = $(element).attr("entry"), type = $(element).attr("e-type");
 	  				scope.createByEnterKey(entry, type);
 	  				scope.$apply();
+	  				setTimeout(function() {
+	  					var id = $(element).attr("id");
+			  			var likeElements = $("." + className);
+			  			var eq = likeElements.index( $("#" + id) );
+			  			var ele = likeElements.eq(eq + 1);
+			  			if(ele.length > 0)
+			  				ele.focus();
+	  				}, 300);
 	  			}
 	  			e.preventDefault();
 	  		}
