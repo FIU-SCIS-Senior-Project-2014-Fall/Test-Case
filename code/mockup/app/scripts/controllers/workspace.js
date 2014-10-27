@@ -365,8 +365,12 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
   });
 
 
+
+
+
 // this is rough, still setup with debugging.
-angular.module('initProjApp').directive("tfProcesskey", function() {
+angular.module('initProjApp').directive("tfProcesskey", function() 
+{
 	return function(scope, element, attributes) {
 		var className = attributes.tfProcesskey;
 	  	element.bind("keydown keypress", function(e) {
@@ -408,3 +412,4 @@ angular.module('initProjApp').directive("tfProcesskey", function() {
 	    
 	};
 });
+

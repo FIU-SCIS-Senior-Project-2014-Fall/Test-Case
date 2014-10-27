@@ -1,3 +1,5 @@
+<script src="directives.js"></script>
+<script src="angular-file-upload.min.js"></script> 
 <div class="row MainBody">
         <div class="col-md-3 leftPaneWrapper">
         <div id="LeftPane" class="fadeInLeft animated ">
@@ -20,6 +22,7 @@
             <div class="col-md-7">
               <div class="input-group">
                 <div class="input-group-btn">
+                    <button type="button" ng-file-select="onFileSelect($files)" data-multiple="true"></button>
                   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Context <span class="caret"></span></button>
                     <ul class="dropdown-menu" role="menu">
                       <li><a href="#">Suite</a></li>
@@ -129,6 +132,37 @@
                       </span>
                     </span>
                     <input type="text" id="c{{ case.id }}" e-type="case" entry="{{ $index }}" class="form-control tf-proc-control edit-title" ng-model="case.name" tf-processkey="edit-title">
+                  
+                    <div class="input-group-btn">
+                      <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-stats"></button>
+                    </div>
+
+                    
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close<                    /span></button>
+                              <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                            </div>
+                            <div class="modal-body">
+                              ...
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    <div class="input-group-btn">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                        <li><input type="file" ng-file-select="onFileSelect($files)" multiple accept="image/*"></li>
+                      </ul>
+                    </div>
+
                     <div class="input-group-btn">
                       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-exclamation-sign red"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
                       <ul class="dropdown-menu dropdown-menu-right" role="menu">
@@ -198,13 +232,18 @@
         </div>
     </div>
     <button class="btn btn-default" ng-click="clearStorage()">Clear Storage</button>
+    <span custom-popover></span>
     </div>
     <div class="row">
         <div class="col-md-12">
           <div class="footer fadeInUp animated">
+
             <p><a href="http://cis.fiu.edu/" target="_blank">FIU SCIS</a> Senior Project Test Case Management for <a href="http://www.ultimatesoftware.com/" target="_blank">Ultimate Software</a></p>
           </div>
           </div>
       </div>
         </div>
       </div>
+
+
+      
