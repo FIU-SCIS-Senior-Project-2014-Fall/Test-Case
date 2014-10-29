@@ -3,13 +3,39 @@
         <div id="LeftPane" class="fadeInLeft animated ">
             <h3>Test Suites <button class="btn btn-primary pull-right" ng-click="addSuite()"><span class="glyphicon glyphicon-plus"></span></button></h3>
             <ul class="nav nav-pills nav-stacked">
-              <li class="{{isActive($index)}}" ng-repeat="test in entries | orderBy:['id']">
-                <a ng-click="makeActive($index)"><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;&nbsp;{{ test.name }} ({{ test.children.length }})</a>
-                <div class="on-hover">
-                  <textarea class="form-control" ng-model="test.summary" placeholder="Summary goes here..."></textarea>
-                  <p>
-                    <span class="label label-primary" ng-repeat="store in test.store">{{ store }}</span> 
-                  </p>
+              <li class="{{isActive(test.id)}} clearfix cf" ng-repeat="test in entries | orderBy:['id']">
+                <div class="{{ isSuiteToggle($index) }}">
+                <p>
+                  <span class="controls">
+                    <span class="glyphicon glyphicon-chevron-{{ isSuiteToggle($index) }} hoverable" ng-click="toggleSuite($index)"></span>
+                    <span class="glyphicon glyphicon-indent-left onlyHover hoverable" ng-click="nestSuite($index)" ng-if=" $index > 0 "></span>
+                  </span>
+                  <span ng-click="makeActive($index)">{{ test.name }} ({{ test.suites.length }})</span>
+                </p>
+                <ul class="nav nav-pills nav-stacked" ng-if="test.suites.length > 0">
+                  <li class="{{isActive(aTest.id)}}" ng-repeat="aTest in test.suites | orderBy:['id']">
+                    <div class="{{ isSuiteToggle($index, $parent.$index) }}">
+                      <p>
+                        <span class="controls">
+                          <span class="glyphicon glyphicon-chevron-{{ isSuiteToggle($index, $parent.$index) }} hoverable" ng-click="toggleSuite($index, $parent.$index)"></span>
+                          <span class="glyphicon glyphicon-indent-right hoverable onlyHover" ng-click="unNestSuite($index, $parent.$index)"></span>
+                          <span class="glyphicon glyphicon-indent-left hoverable onlyHover" ng-click="nestSuite($index, $parent.$index)" ng-if=" $index > 0 "></span>
+                        </span>
+                        <span ng-click="makeActive($index, $parent.$index)">{{ aTest.name }} ({{ aTest.suites.length }})</span>
+                      </p>
+                      <ul class="nav nav-pills nav-stacked" ng-if="test.suites.length > 0">
+                        <li class="{{isActive(bTest.id)}}" ng-repeat="bTest in aTest.suites | orderBy:['id']">
+                            <p>
+                              <span class="controls">
+                                <span class="glyphicon glyphicon-indent-right hoverable onlyHover" ng-click="unNestSuite($index, $parent.$index)"></span>
+                              </span>
+                              <span ng-click="makeActive($index, $parent.$index)">{{ bTest.name }}</span>
+                            </p>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
                 </div>
               </li>
             </ul>
@@ -54,12 +80,13 @@
             </div>
           </div>
   <div class="row">
-      <div class="col-md-4">
+      <div class="col-md-9">
         <ol class="breadcrumb">
           <li><a>Workspace</a></li>
           <li class="active">{{ suite.name }}</li>
         </ol>
       </div>
+      <!--
       <div class="col-md-5">
         <div class="input-group pull-right">
           <span class="input-group-addon"><span class="glyphicon glyphicon-hdd"></span> Storage</span>
@@ -70,12 +97,13 @@
               <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-              <li role="presentation" ng-class="{active: hasStore(active, 'TFS:Server 1')}"><a role="menuitem" tabindex="-1" ng-click="toggleStore(active, 'TFS:Server 1')">Server 1</a></li>
-              <li role="presentation" ng-class="{active: hasStore(active, 'TFS:Server 2')}"><a role="menuitem" tabindex="-1" ng-click="toggleStore(active, 'TFS:Server 2')">Server 2</a></li>
+              <li role="presentation" ng-class="{active: hasStore(active.root, 'TFS:Server 1')}"><a role="menuitem" tabindex="-1" ng-click="toggleStore(active.root, 'TFS:Server 1')">Server 1</a></li>
+              <li role="presentation" ng-class="{active: hasStore(active.root, 'TFS:Server 2')}"><a role="menuitem" tabindex="-1" ng-click="toggleStore(active.root, 'TFS:Server 2')">Server 2</a></li>
             </ul>
           </div>
         </div>
       </div>
+      -->
       <div class="col-md-3">
         <div class="btn-group pull-right">
           <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;&nbsp;View</button>
@@ -91,9 +119,9 @@
                 <div class="input-group input-group{{ suite.size }}">
                   <span class="input-group-addon">
                     <span class="glyphicon glyphicon-plus onlyHover" data-toggle="tooltip" data-placement="bottom"
-                title="Create new test case" ng-click="addCaseClicked(active)"></span>
+                title="Create new test case" ng-click="addCaseClicked()"></span>
                     <span class="glyphicon glyphicon-remove onlyHover" data-toggle="tooltip" data-placement="bottom"
-                title="Delete test suite named {{ suite.name }}" ng-click="removeEntryClicked(active)"></span>
+                title="Delete test suite named {{ suite.name }}" ng-click="removeEntryClicked()"></span>
                     <span>
                       <strong>ID: </strong> TestSuite{{suite.id}}
                     </span>
@@ -120,9 +148,9 @@
                       <span class="glyphicon {{ toggleButton($index) }}" data-placement="bottom"
                   title="Hide Children" ng-click="toggle($index)"></span>
                       <span class="glyphicon glyphicon-plus onlyHover" data-toggle="tooltip" data-placement="bottom"
-                  title="Create new case {{ case.type }}" ng-click="addStepClicked($index, active)"></span>
+                  title="Create new case {{ case.type }}" ng-click="addStepClicked($index)"></span>
                       <span class="glyphicon glyphicon-remove onlyHover" data-toggle="tooltip" data-placement="bottom"
-                  title="Delete case {{ case.type }} named {{ case.name }}" ng-click="removeCaseEntryClicked(active,$index)"></span>
+                  title="Delete case {{ case.type }} named {{ case.name }}" ng-click="removeCaseEntryClicked($index)"></span>
                   <span class="glyphicon glyphicon-move onlyHover" data-toggle="tooltip" data-placement="bottom" title="Move Ordering" ng-click=""></span>
                       <span class="id">
                         <strong>ID: </strong> TestCase{{case.id}}
@@ -167,7 +195,7 @@
                             {{step.order}}.&nbsp; 
                             <span class="glyphicon glyphicon-remove onlyHover" data-toggle="tooltip" data-placement="bottom"
                             
-                        title="Delete step named {{ step.name }}" ng-click="removeStepEntryClicked(active,$parent.$index, $index)"></span>
+                        title="Delete step named {{ step.name }}" ng-click="removeStepEntryClicked($parent.$index, $index)"></span>
                         <span class="glyphicon glyphicon-move onlyHover" data-toggle="tooltip" data-placement="bottom" title="Move Ordering" ng-click=""></span>
                       <!--<span ng-if="types.indexOf(test.type) < (types.length - 1)">
                         <span class="glyphicon glyphicon-backward onlyHover" data-toggle="tooltip" data-placement="bottom"
@@ -218,8 +246,6 @@
         </div>
       </div>
 
-     <script type="text/javascript" src="javascripts/jquery.js"></script> 
-     <script type="text/javascript" src="javascripts/chart.js"></script> 
      <script type="text/javascript"> 
  
  

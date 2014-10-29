@@ -54,37 +54,101 @@ body, .MainBody, html, .container {
 #LeftPane {
   background-color:#333333;
   color:#dadada;
+  background: #444444; /* Old browsers */
+  background: -moz-linear-gradient(left, #444444 7%, #333333 99%, #333333 99%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right top, color-stop(7%,#444444), color-stop(99%,#333333), color-stop(99%,#333333)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left, #444444 7%,#333333 99%,#333333 99%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left, #444444 7%,#333333 99%,#333333 99%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left, #444444 7%,#333333 99%,#333333 99%); /* IE10+ */
+  background: linear-gradient(to right, #444444 7%,#333333 99%,#333333 99%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#444444', endColorstr='#333333',GradientType=1 ); /* IE6-9 */
   padding-top:10px;
-  height:100%;
+  min-height:100%;
+  overflow:hidden;
   h3 {
     padding:0px 10px 10px 10px;
   }
-  a {
+  p {
     font-size:16px;
-    padding:8px 0px;
+    padding:8px 3px;
+    margin:0px;
     color:#dadada;
-    border-radius:0px;
     -webkit-transition: ease-out .25s;
     -moz-transition: ease-out .25s;
     -o-transition: ease-out .25s;
     transition: ease-out .25s;
     cursor:pointer;
+    white-space: nowrap;
+    overflow:hidden;
   }
-  a:hover {
-    color:#666666;
-  }
-  .active a:hover, .active a {
+  p:hover {
     color:#ffffff;
-    background-color:#000000;
   }
-  li {
-    padding:5px 10px;
+
+  .nav .nav {
+    margin-left:25px;
+    -webkit-transition: ease-out .5s;
+    -moz-transition: ease-out .5s;
+    -o-transition: ease-out .5s;
+    transition: ease-out .5s;
+    overflow:hidden;
+  }
+
+  .nav .nav .nav {
+    margin-left:50px;
+  }
+
+  .up .nav, .down .nav .up .nav {
+    max-height:0px;
+  }
+
+  .down .nav {
+    max-height:100%;
+  }
+
+  p .glyphicon {
+    color:#999999;
+    margin-left:8px;
     -webkit-transition: ease-out .5s;
     -moz-transition: ease-out .5s;
     -o-transition: ease-out .5s;
     transition: ease-out .5s;
   }
-  li.active, li:hover {
+  .controls {
+    margin-right:8px;
+    -webkit-transition: ease-out .5s;
+    -moz-transition: ease-out .5s;
+    -o-transition: ease-out .5s;
+    transition: ease-out .5s;
+    .onlyHover {
+      width:0px;
+      overflow:hidden;
+      margin-left:0px;
+    }
+  }
+  p:hover .controls {
+    .onlyHover {
+      width:auto;
+      margin-left:8px;
+    }
+  }
+  p .hoverable {
+    color:#cccccc;
+  }
+  p .hoverable:hover {
+    color:#ffffff;
+    cursor:pointer;
+  }
+
+  li {
+    padding:0px;
+    -webkit-transition: ease-out .5s;
+    -moz-transition: ease-out .5s;
+    -o-transition: ease-out .5s;
+    transition: ease-out .5s;
+  }
+  
+  li.active > div > p, li:hover > div > p:hover, li.active > p, li:hover > p:hover {
     background-color:#111111;
   }
 
@@ -109,19 +173,14 @@ body, .MainBody, html, .container {
     border:1px solid #666;
     background-color:#333;
   }
+}
 
-  .on-hover {
-    max-height:0px;
-    overflow:hidden;
-    -webkit-transition: ease-out .5s;
-    -moz-transition: ease-out .5s;
-    -o-transition: ease-out .5s;
-    transition: ease-out .5s;
-  }
-
-  li:hover .on-hover, li.active .on-hover {
-    max-height:200px;
-  }
+.custom-menu {
+    z-index:1000;
+    position: absolute;
+    background-color:#dadada;
+    border: 1px solid black;
+    padding: 2px;
 }
 
 /* Position of row mujst be set in order to overcome dropdown z-index failing */

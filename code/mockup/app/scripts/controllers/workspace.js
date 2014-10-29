@@ -33,6 +33,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		"name" : "",
 		"type" : "",
 		"parent" : 0,
+		"parentIndex" : -1,
 		"size" : "",
 		"order" : 0,
 		"tags" : [],
@@ -40,7 +41,8 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		"toggle" : false,
 		"summary" : "",
 		"store" : ["Local"],
-		"children" : []
+		"children" : [],
+		"suites" : []
 	}; };
 
 	$scope.createId = function() {
@@ -66,7 +68,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	}
 
 	$scope.copyBuffer = false;
-	$scope.active = 0;
+	$scope.active = { "index" : 0 };
 	$scope.suite = $scope.entries[0];
 
 	setTimeout(function() { $('.input-group-addon .glyphicon').tooltip();}, 1000);
@@ -91,22 +93,22 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	$scope.pasteSteps = function(index) {
 		if($scope.copyBuffer === false)
 			return;
-		var len = $scope.entries[$scope.active].children[index].children.length;
-		var tmp = $scope.entries[$scope.active].children[$scope.copyBuffer].children.deepClone();
+		var len = $scope.suite.children[index].children.length;
+		var tmp = $scope.suite.children[$scope.copyBuffer].children.deepClone();
 		// alter step parents, also attempt to give uniqueness to object, else repeater will fail.
 		tmp = tmp.map(function(x) { 
-			x.name += " >> from " + $scope.entries[$scope.active].children[$scope.copyBuffer].name; 
+			x.name += " >> from " + $scope.suite.children[$scope.copyBuffer].name; 
 			x.id = $scope.createId(); 
-			x.parent = $scope.entries[$scope.active].children[index].id; 
+			x.parent = $scope.suite.children[index].id; 
 			return x; 
 		});
-		var len = $scope.entries[$scope.active].children[index].children.length;
+		var len = $scope.suite.children[index].children.length;
 		if(len > 0) {
-			$scope.entries[$scope.active].children[index].children = $scope.entries[$scope.active].children[index].children.concat(tmp);
+			$scope.suite.children[index].children = $scope.suite.children[index].children.concat(tmp);
 		}
 		else
-			$scope.entries[$scope.active].children[index].children = tmp;
-		if(len < $scope.entries[$scope.active].children[index].children.length) {
+			$scope.suite.children[index].children = tmp;
+		if(len < $scope.suite.children[index].children.length) {
 			$scope.copyBuffer = false;
 			toastr.success('Copy Success!', 'The children were copied successfully.');
 		} else {
@@ -122,16 +124,29 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		event.preventDefault();
 	};
 
-	$scope.makeActive = function(index) {
-		$scope.active = index;
-		$scope.suite = $scope.entries[index];
+	$scope.makeActive = function(index, parent) {
+		$scope.active = {"root": -1, "parent": -1, "index" : -1};
+		if(typeof parent === 'undefined') {
+			$scope.active.index = index;
+			$scope.suite = $scope.entries[index];
+		} else if($scope.entries[parent].parentIndex < 0) {
+			$scope.active.parent = parent;
+			$scope.active.index = index;
+			$scope.suite = $scope.entries[parent].suites[index];
+		} else {
+			$scope.active.root = $scope.entries[parent].parentIndex;
+			$scope.active.parent = parent;
+			$scope.active.index = index;
+			$scope.suite = $scope.entries[$scope.entries[parent].parentIndex].suites[parent].suites[index];
+		}
 	}
 
-	$scope.isActive = function(index) {
-		if(index == $scope.active)
+	$scope.isActive = function(id) {
+		if(id == $scope.suite.id)
 			return "active";
 	}
 
+	/* going to move
 	$scope.addStore = function(index, storeName) {
 		var id = $.inArray(storeName, $scope.entries[index].store);
 		if(id < 0)
@@ -157,6 +172,8 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 			$scope.addStore(index, storeName);
 	}
 
+	end move */
+
 	$scope.addSuite = function() {
 		var tmp = $scope.getEntryTemplate();
 	    tmp.id = $scope.createId();
@@ -167,21 +184,18 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	}
 
 	$scope.toggle = function(index) {
-		if($scope.entries[$scope.active].children[index].toggle)
-			$scope.entries[$scope.active].children[index].toggle = false;
-		else
-			$scope.entries[$scope.active].children[index].toggle = true;
+		$scope.suite.children[index].toggle = !$scope.suite.children[index].toggle;
 	}
 
 	$scope.toggleClass = function(index) {
-		if($scope.entries[$scope.active].children[index].toggle)
+		if($scope.suite.children[index].toggle)
 			return "test-expand";
 		else
 			return "test-in";
 	}
 
 	$scope.toggleButton = function(index) {
-		if($scope.entries[$scope.active].children[index].toggle)
+		if($scope.suite.children[index].toggle)
 			return "glyphicon-chevron-up";
 		else
 			return "glyphicon-chevron-down";
@@ -211,24 +225,23 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
     	addSubEntry(index, -1);
     };
 
-    $scope.addStepClicked = function(index, parent) {
-    	addSubEntry(index, parent);
+    $scope.addStepClicked = function(index) {
+    	addSubEntry(index);
     };
 
     $scope.removeEntryClicked = function(index) {
     	$scope.entries.splice(index, 1);
-    	$scope.active = $scope.entries.length - 1;
-    	$scope.suite = $scope.entries[$scope.active];
+    	$scope.makeActive(0);
     };
 
-    $scope.removeCaseEntryClicked = function(parent, index) {
-    	$scope.entries[parent].children.splice(index, 1);
+    $scope.removeCaseEntryClicked = function(index) {
+    	$scope.suite.children.splice(index, 1);
     }
 
-    $scope.removeStepEntryClicked = function(suite, parent, index) {
-    	$scope.entries[suite].children[parent].children.splice(index, 1);
-    	for(var i = index, k = $scope.entries[suite].children[parent].children.length; i < k ; i++)
-    		$scope.entries[suite].children[parent].children[i].order = $scope.entries[suite].children[parent].children[i].order - 1;
+    $scope.removeStepEntryClicked = function(parent, index) {
+    	$scope.suite.children[parent].children.splice(index, 1);
+    	for(var i = index, k = $scope.suite.children[parent].children.length; i < k ; i++)
+    		$scope.suite.children[parent].children[i].order = $scope.suite.children[parent].children[i].order - 1;
     }
 
     $scope.saveEntry = function() {
@@ -255,9 +268,9 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 
 	$scope.createByEnterKey = function(index, type) {
 		if(type == "step" || type == "case")
-			addSubEntry(index, $scope.active);
+			addSubEntry(index);
 		else
-			addSubEntry($scope.active, -1);
+			addSubEntry();
 	}
 
 	function addEntry(entry) {
@@ -273,25 +286,25 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		}
 	};
 
-	function addSubEntry(index, parent) {
+	function addSubEntry(index) {
 		var tmp = $scope.getEntryTemplate();
 		tmp.id = $scope.createId();
-		if(parent >= 0) {
-			var type = $scope.typeDownOne($scope.entries[parent].children[index].type);
+		if(typeof index === "undefined") {
+			var type = $scope.typeDownOne($scope.suite.type);
 			tmp.name = "New " + type;
 		    tmp.type = type;
-		    tmp.order = $scope.entries[parent].children[index].children.length + 1;
+		    tmp.order = $scope.suite.children.length + 1;
 		    tmp.size = sizeByType(type);
-		    tmp.parent = $scope.entries[parent].children[index].id;
-			$scope.entries[parent].children[index].children.push(tmp);
+		    tmp.parent = $scope.suite.id;
+			$scope.suite.children.push(tmp);
 		} else {
-			var type = $scope.typeDownOne($scope.entries[index].type);
+			var type = $scope.typeDownOne($scope.suite.children[index].type);
 			tmp.name = "New " + type;
 		    tmp.type = type;
-		    tmp.order = $scope.entries[index].children.length + 1;
+		    tmp.order = $scope.suite.children[index].children.length + 1;
 		    tmp.size = sizeByType(type);
-		    tmp.parent = $scope.entries[index].id;
-			$scope.entries[index].children.push(tmp);
+		    tmp.parent = $scope.suite.children[index].id;
+			$scope.suite.children[index].children.push(tmp);
 		}
 	};
 
@@ -315,6 +328,84 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		else
 			return $scope.types[parentType];
 	};
+
+	$scope.nestSuite = function (index, parent)
+	{
+		if(index <= 0)
+			return;
+
+		if(typeof parent === 'undefined') {
+			$scope.entries[index].parent = $scope.entries[index - 1].id;
+			$scope.entries[index].parentIndex = index - 1;
+			$scope.entries[index - 1].suites.push($scope.entries[index]);
+			$scope.entries.splice(index, 1);
+		} else {
+			$scope.entries[parent].suites[index].parent = $scope.entries[parent].suites[index - 1].id; 
+			$scope.entries[parent].suites[index].parentIndex = index - 1;
+			$scope.entries[parent].suites[index - 1].suites.push($scope.entries[parent].suites[index]);
+			$scope.entries[parent].suites.splice(index, 1);
+		}
+	};
+
+	$scope.unNestSuite = function (index, parent, root)
+	{
+		if(index <= 0)
+			return;
+		if(typeof root === 'undefined') {
+			$scope.entries[parent].suites[index].parent = 0
+			$scope.entries[parent].suites[index].parentIndex = -1;
+			$scope.entries.push($scope.entries[parent].suites[index]);
+			$scope.entries[parent].suites.splice(index, 1);
+		} else {
+			$scope.entries[root].suites[parent].suites[index].parent = $scope.entries[root].id;
+			$scope.entries[root].suites[parent].suites[index].parentIndex = root;
+			$scope.entries[root].suites.push($scope.entries[root].suites[parent].suites[index]);
+			$scope.entries[root].suites[parent].suites.splice(index, 1);
+		}
+	};
+
+	$scope.isSuiteToggle = function(index, parent) {
+		if(index < 0)
+			return;
+		var toggle = false;
+		if(typeof parent === 'undefined')
+			toggle = $scope.entries[index].toggle;
+		else
+			toggle = $scope.entries[parent].suites[index].toggle;
+
+		if(toggle)
+			return "down";
+		else
+			return "up";
+	};
+
+	$scope.toggleSuite = function(index, parent) {
+		if(index < 0)
+			return;
+
+		if(typeof parent === 'undefined')
+			$scope.entries[index].toggle = !$scope.entries[index].toggle;
+		else
+			$scope.entries[parent].suites[index].toggle = !$scope.entries[parent].suites[index].toggle;
+	}
+
+	$scope.getActiveSuite = function() {
+		if(typeof $scope.active.root < 0 && typeof $scope.active.parent < 0) 
+			return $scope.getSuite($scope.active.index);
+		else if(typeof $scope.active.root < 0)
+			return $scope.getSuite($scope.active.index, $scope.active.parent);
+		else
+			return $scope.getSuite($scope.active.index, $scope.active.parent, $scope.active.root);
+	};
+
+	$scope.getSuite = function(index, parent, root) {
+		if(typeof root === 'undefined' && typeof parent === 'undefined') 
+			return $scope.entries[index];
+		else if(typeof root === 'undefined' && parent)
+			return $scope.entries[parent].suites[index];
+		else
+			return $scope.entries[root].suites[parent].suites[index];
+	}
 
 	function sizeByType(type) {
 		var size = "";
@@ -365,7 +456,15 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
   });
 
 
-
+angular.module('initProjApp').directive("tfContextmenu", function() {
+	return function(scope, element, attributes) {
+		$(element).bind("contextmenu", function(e) {
+	    	e.preventDefault();
+	    	$("<div class='custom-menu'>Custom menu</div>").appendTo("body").css({top: e.pageY + "px", left: e.pageX + "px"});
+		});
+		return false;
+	};
+});
 
 
 // this is rough, still setup with debugging.
