@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="file:///C:/PROGRAM FILES (X86)/MICROSOFT VISUAL STUDIO 12.0/COMMON7/IDE/EXTENSIONS/MICROSOFT/ARCHITECTURE TOOLS/EXTENSIBILITY/Logging/CodeGenLog.xslt"?>
+<Log xmlns="http://schemas.microsoft.com/VisualStudio/2010/CodeGen.RE.Log" Label="Code Generation/Text Transformation Log">
+  <MessageClass Name="Message" Label="Message" Option="Show informational messages" />
+  <MessageClass Name="Warning" Label="Warning" Option="Show warnings" />
+  <MessageClass Name="Error" Label="Error" Option="Show errors" />
+  <MessageClass Name="Property" Label="Property" Option="Show metadata" />
+  <MessageClass Name="Diagnostic" Label="Message" Option="Show diagnostic messages" />
+  <Message Timestamp="2014-10-28T19:59:55" Importance="High" Text="Code generation or text transformation started." />
+  <Message Timestamp="2014-10-28T19:59:56" Importance="Diagnostic" Text="Name = ClassTemplate" />
+  <Message Timestamp="2014-10-28T19:59:56" Importance="Diagnostic" Text="Overwrite = True" />
+  <Message Timestamp="2014-10-28T19:59:56" Importance="Diagnostic" Text="ProjectPath = ..\BackendModelLib\BackendModelLib.csproj" />
+  <Message Timestamp="2014-10-28T19:59:56" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
+  <Message Timestamp="2014-10-28T19:59:56" Importance="Diagnostic" Text="TargetName = {Name}" />
+  <Message Timestamp="2014-10-28T19:59:56" Importance="Diagnostic" Text="TemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\ClassTemplate.t4" />
+  <Message Timestamp="2014-10-28T19:59:56" Importance="Diagnostic" Text="ResolvedTemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\ClassTemplate.t4" />
+  <Message Timestamp="2014-10-28T19:59:56" Importance="Medium" Text="BackendModel's Text Template Binding: 'ClassTemplate' will apply ClassTemplate.t4 to: 'BackendModel::TestSharedStep' -  (Class), 'BackendModel::TestStep' -  (Class), 'BackendModel::TestSuite' -  (Class), 'BackendModel::TestCase' -  (Class) " />
+  <Message Timestamp="2014-10-28T20:00:07" Importance="Medium" Text="Project Added: C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\BackendModelLib\BackendModelLib.csproj" />
+  <Message Timestamp="2014-10-28T20:00:07" Importance="Medium" Text="'BackendModel::TestSharedStep' -  (Class) : success (file created) - C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\BackendModelLib\GeneratedCode\TestSharedStep.cs" />
+  <Message Timestamp="2014-10-28T20:00:08" Importance="Medium" Text="'BackendModel::TestStep' -  (Class) : success (file created) - C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\BackendModelLib\GeneratedCode\TestStep.cs" />
+  <Message Timestamp="2014-10-28T20:00:09" Importance="Medium" Text="'BackendModel::TestSuite' -  (Class) : success (file created) - C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\BackendModelLib\GeneratedCode\TestSuite.cs" />
+  <Message Timestamp="2014-10-28T20:00:10" Importance="Medium" Text="'BackendModel::TestCase' -  (Class) : success (file created) - C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\BackendModelLib\GeneratedCode\TestCase.cs" />
+  <Message Timestamp="2014-10-28T20:00:10" Importance="Diagnostic" Text="Name = InterfaceTemplate" />
+  <Message Timestamp="2014-10-28T20:00:10" Importance="Diagnostic" Text="Overwrite = True" />
+  <Message Timestamp="2014-10-28T20:00:10" Importance="Diagnostic" Text="ProjectPath = ..\BackendModelLib\BackendModelLib.csproj" />
+  <Message Timestamp="2014-10-28T20:00:10" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
+  <Message Timestamp="2014-10-28T20:00:10" Importance="Diagnostic" Text="TargetName = {Name}" />
+  <Message Timestamp="2014-10-28T20:00:10" Importance="Diagnostic" Text="TemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\InterfaceTemplate.t4" />
+  <Message Timestamp="2014-10-28T20:00:10" Importance="Diagnostic" Text="ResolvedTemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\InterfaceTemplate.t4" />
+  <Message Timestamp="2014-10-28T20:00:10" Importance="Medium" Text="BackendModel's Text Template Binding: 'InterfaceTemplate' will apply InterfaceTemplate.t4 to: 'BackendModel::TestItemInterface' -  (Interface) " />
+  <Message Timestamp="2014-10-28T20:00:11" Importance="Medium" Text="'BackendModel::TestItemInterface' -  (Interface) : success (file created) - C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\BackendModelLib\GeneratedCode\TestItemInterface.cs" />
+  <Message Timestamp="2014-10-28T20:00:11" Importance="Diagnostic" Text="Name = StructTemplate" />
+  <Message Timestamp="2014-10-28T20:00:11" Importance="Diagnostic" Text="Overwrite = True" />
+  <Message Timestamp="2014-10-28T20:00:11" Importance="Diagnostic" Text="ProjectPath = ..\BackendModelLib\BackendModelLib.csproj" />
+  <Message Timestamp="2014-10-28T20:00:11" Importance="Diagnostic" Text="TargetDirectory = GeneratedCode\{PackageStructure}" />
+  <Message Timestamp="2014-10-28T20:00:11" Importance="Diagnostic" Text="TargetName = {Name}" />
+  <Message Timestamp="2014-10-28T20:00:11" Importance="Diagnostic" Text="TemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\StructTemplate.t4" />
+  <Message Timestamp="2014-10-28T20:00:11" Importance="Diagnostic" Text="ResolvedTemplateFilePath = C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO 12.0\COMMON7\IDE\EXTENSIONS\MICROSOFT\ARCHITECTURE TOOLS\EXTENSIBILITY\Templates\Text\StructTemplate.t4" />
+  <Message Timestamp="2014-10-28T20:00:11" Importance="Medium" Text="BackendModel's Text Template Binding: 'StructTemplate' will apply StructTemplate.t4 to: 'BackendModel::TestSharedStep' -  (Class), 'BackendModel::TestStep' -  (Class), 'BackendModel::TestSuite' -  (Class), 'BackendModel::TestCase' -  (Class) " />
+  <Message Timestamp="2014-10-28T20:00:12" Importance="Diagnostic" Text="'BackendModel::TestSharedStep' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2014-10-28T20:00:12" Importance="Diagnostic" Text="'BackendModel::TestStep' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2014-10-28T20:00:12" Importance="Diagnostic" Text="'BackendModel::TestSuite' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2014-10-28T20:00:12" Importance="Diagnostic" Text="'BackendModel::TestCase' -  (Class): no file generated because the 'AppliesToElement' method of the template 'StructTemplate.t4' evaluated to false." />
+  <Message Timestamp="2014-10-28T20:00:13" Importance="Diagnostic" Text="The selection included 8 elements which were not bound to a template." />
+  <Message Timestamp="2014-10-28T20:00:13" Importance="Diagnostic" Text="'BackendModel::' -  (InterfaceRealization): no bound template." />
+  <Message Timestamp="2014-10-28T20:00:13" Importance="Diagnostic" Text="'BackendModel::' -  (Association): no bound template." />
+  <Message Timestamp="2014-10-28T20:00:13" Importance="Diagnostic" Text="'BackendModel::' -  (InterfaceRealization): no bound template." />
+  <Message Timestamp="2014-10-28T20:00:13" Importance="Diagnostic" Text="'BackendModel::' -  (InterfaceRealization): no bound template." />
+  <Message Timestamp="2014-10-28T20:00:13" Importance="Diagnostic" Text="'BackendModel::' -  (InterfaceRealization): no bound template." />
+  <Message Timestamp="2014-10-28T20:00:13" Importance="Diagnostic" Text="'BackendModel::' -  (Association): no bound template." />
+  <Message Timestamp="2014-10-28T20:00:13" Importance="Diagnostic" Text="'BackendModel::' -  (Association): no bound template." />
+  <Message Timestamp="2014-10-28T20:00:13" Importance="Diagnostic" Text="'BackendModel::' -  (Association): no bound template." />
+  <Message Timestamp="2014-10-28T20:00:13" Importance="High" Text="Code generation complete. Errors: 0. Warnings: 0." />
+</Log>

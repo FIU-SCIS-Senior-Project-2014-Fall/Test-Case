@@ -9,15 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class TestStep : TestItemInterface
+public class TestSuite : TestItemInterface
 {
-	public virtual TestCase TestCase
-	{
-		get;
-		set;
-	}
-
-	public virtual TestSharedStep TestSharedStep
+	public virtual list<TestCase> testCases
 	{
 		get;
 		set;

@@ -9,15 +9,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class TestStep : TestItemInterface
+public class TestSharedStep : TestItemInterface
 {
-	public virtual TestCase TestCase
+	public virtual List<TestStep> steps
 	{
 		get;
 		set;
 	}
 
-	public virtual TestSharedStep TestSharedStep
+	public virtual TestCase TestCase
 	{
 		get;
 		set;
