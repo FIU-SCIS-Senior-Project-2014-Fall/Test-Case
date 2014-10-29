@@ -39,9 +39,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AtomicItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestCase.cs" />
+    <Compile Include="TestItemInterface.cs" />
+    <Compile Include="TestSharedStep.cs" />
     <Compile Include="TestStep.cs" />
     <Compile Include="TestSuite.cs" />
   </ItemGroup>

@@ -39,6 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GeneratedCode\TestCase.cs" />
+    <Compile Include="GeneratedCode\TestItemInterface.cs" />
+    <Compile Include="GeneratedCode\TestSharedStep.cs" />
+    <Compile Include="GeneratedCode\TestStep.cs" />
+    <Compile Include="GeneratedCode\TestSuite.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
