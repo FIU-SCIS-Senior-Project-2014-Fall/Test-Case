@@ -1,0 +1,38 @@
+<h3>Test Suites <button class="btn btn-primary pull-right" ng-click="addSuite()"><span class="glyphicon glyphicon-plus"></span></button></h3>
+<ul class="nav nav-pills nav-stacked">
+  <li class="{{isActive(test.id)}} clearfix cf" ng-repeat="test in entries">
+    <div class="{{ isSuiteToggle($index) }}">
+    <p>
+      <span class="controls">
+        <span class="glyphicon glyphicon-chevron-{{ isSuiteToggle($index) }} hoverable" ng-click="toggleSuite($index)"></span>
+        <span class="glyphicon glyphicon-indent-left onlyHover hoverable" ng-click="nestSuite($index)" ng-if=" $index > 0 "></span>
+      </span>
+      <span ng-click="makeActive($index)">{{ test.name }} ({{ test.suites.length }})</span>
+    </p>
+    <ul class="nav nav-pills nav-stacked">
+      <li class="{{isActive(aTest.id)}}" ng-repeat="aTest in test.suites">
+        <div class="{{ isSuiteToggle($index, $parent.$index) }}">
+          <p>
+            <span class="controls">
+              <span class="glyphicon glyphicon-chevron-{{ isSuiteToggle($index, $parent.$index) }} hoverable" ng-click="toggleSuite($index, $parent.$index)"></span>
+              <span class="glyphicon glyphicon-indent-right hoverable onlyHover" ng-click="unNestSuite($index, $parent.$index)"></span>
+              <span class="glyphicon glyphicon-indent-left hoverable onlyHover" ng-click="nestSuite($index, $parent.$index)"></span>
+            </span>
+            <span ng-click="makeActive($index, $parent.$index)">{{ aTest.name }} ({{ aTest.suites.length }})</span>
+          </p>
+          <ul class="nav nav-pills nav-stacked">
+            <li class="{{isActive(bTest.id)}}" ng-repeat="bTest in aTest.suites">
+                <p>
+                  <span class="controls">
+                    <span class="glyphicon glyphicon-indent-right hoverable onlyHover" ng-click="unNestSuite($index, $parent.$index, $parent.$parent.$index)"></span>
+                  </span>
+                  <span ng-click="makeActive($index, $parent.$index, $parent.$parent.$index)">{{ bTest.name }}</span>
+                </p>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+    </div>
+  </li>
+</ul>

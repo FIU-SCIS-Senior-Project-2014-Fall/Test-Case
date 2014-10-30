@@ -339,7 +339,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 			$scope.entries[index].parentIndex = index - 1;
 			$scope.entries[index - 1].suites.push($scope.entries[index]);
 			$scope.entries.splice(index, 1);
-		} else {
+		} else if($scope.entries[parent].suites[index].suites.length <= 0) { // do not nest to bottom tier if there are children
 			$scope.entries[parent].suites[index].parent = $scope.entries[parent].suites[index - 1].id; 
 			$scope.entries[parent].suites[index].parentIndex = index - 1;
 			$scope.entries[parent].suites[index - 1].suites.push($scope.entries[parent].suites[index]);
@@ -349,7 +349,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 
 	$scope.unNestSuite = function (index, parent, root)
 	{
-		if(index <= 0)
+		if(index < 0)
 			return;
 		if(typeof root === 'undefined') {
 			$scope.entries[parent].suites[index].parent = 0
