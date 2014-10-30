@@ -77,12 +77,15 @@ body, .MainBody, html, .container {
     -moz-transition: ease-out .25s;
     -o-transition: ease-out .25s;
     transition: ease-out .25s;
-    cursor:pointer;
     white-space: nowrap;
     overflow:hidden;
   }
   p:hover {
     color:#ffffff;
+  }
+
+  p span.suite-name {
+    cursor:pointer;
   }
 
   .nav .nav {
