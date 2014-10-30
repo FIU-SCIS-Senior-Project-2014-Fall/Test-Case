@@ -12,7 +12,7 @@
                   </span>
                   <span ng-click="makeActive($index)">{{ test.name }} ({{ test.suites.length }})</span>
                 </p>
-                <ul class="nav nav-pills nav-stacked" ng-if="test.suites.length > 0">
+                <ul class="nav nav-pills nav-stacked">
                   <li class="{{isActive(aTest.id)}}" ng-repeat="aTest in test.suites | orderBy:['id']">
                     <div class="{{ isSuiteToggle($index, $parent.$index) }}">
                       <p>
@@ -23,13 +23,13 @@
                         </span>
                         <span ng-click="makeActive($index, $parent.$index)">{{ aTest.name }} ({{ aTest.suites.length }})</span>
                       </p>
-                      <ul class="nav nav-pills nav-stacked" ng-if="test.suites.length > 0">
+                      <ul class="nav nav-pills nav-stacked">
                         <li class="{{isActive(bTest.id)}}" ng-repeat="bTest in aTest.suites | orderBy:['id']">
                             <p>
                               <span class="controls">
                                 <span class="glyphicon glyphicon-indent-right hoverable onlyHover" ng-click="unNestSuite($index, $parent.$index)"></span>
                               </span>
-                              <span ng-click="makeActive($index, $parent.$index)">{{ bTest.name }}</span>
+                              <span ng-click="makeActive($index, $parent.$index, $parent.$parent.$index)">{{ bTest.name }}</span>
                             </p>
                         </li>
                       </ul>

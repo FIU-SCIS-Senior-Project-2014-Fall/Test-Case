@@ -124,20 +124,20 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		event.preventDefault();
 	};
 
-	$scope.makeActive = function(index, parent) {
+	$scope.makeActive = function(index, parent, root) {
 		$scope.active = {"root": -1, "parent": -1, "index" : -1};
-		if(typeof parent === 'undefined') {
+		if(typeof parent === 'undefined' && typeof root === 'undefined') {
 			$scope.active.index = index;
 			$scope.suite = $scope.entries[index];
-		} else if($scope.entries[parent].parentIndex < 0) {
+		} else if(typeof root === 'undefined') {
 			$scope.active.parent = parent;
 			$scope.active.index = index;
 			$scope.suite = $scope.entries[parent].suites[index];
 		} else {
-			$scope.active.root = $scope.entries[parent].parentIndex;
+			$scope.active.root = root;
 			$scope.active.parent = parent;
 			$scope.active.index = index;
-			$scope.suite = $scope.entries[$scope.entries[parent].parentIndex].suites[parent].suites[index];
+			$scope.suite = $scope.entries[root].suites[parent].suites[index];
 		}
 	}
 
@@ -421,26 +421,6 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 				break;
 		}
 		return size;
-	};
-	// comments to come.
-	function findAdjacentSibling(index, type) {
-		var lastSibling = false;
-		for(var i = 0, j = $scope.entries.length; i < j; i++) {
-			if($scope.entries[i].id >= index)
-				break;
-			if($scope.entries[i].type == type)
-				lastSibling = $scope.entries[i];
-		}
-		return lastSibling;
-	};
-
-	function findParent(index, type) {
-		type = $scope.types.indexOf(type) - 1;
-		if(type >= 0)
-			return findAdjacentSibling(index, $scope.types[type]);
-		else
-			return false;
-
 	};
 
 	/* utilities */
