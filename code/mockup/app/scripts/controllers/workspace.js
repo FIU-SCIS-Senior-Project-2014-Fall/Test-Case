@@ -334,7 +334,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		if(index <= 0)
 			return;
 
-		if(typeof parent === 'undefined') {
+		if(typeof parent === 'undefined' && $scope.entries[index].suites.length <= 0) {
 			$scope.entries[index].parent = $scope.entries[index - 1].id;
 			$scope.entries[index].parentIndex = index - 1;
 			$scope.entries[index - 1].suites.push($scope.entries[index]);
