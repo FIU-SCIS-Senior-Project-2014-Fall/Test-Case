@@ -9,13 +9,13 @@ var TestFlow = function(scope) {
 	createSuite = function(name) {
 		var newSuite = this.getAtomic();
 		newSuite.name = name;
-		newSuite.id = AtomicOperations.createId();
 		newSuite.attributes.parent = 0;
 		newSuite.attributes.size = Attributes.sizes[0];
 		newSuite.attributes.order = this.elments.length;
 		newSuite.bind(AtomicOperations);
 		newSuite.addChildren();
 		newSuite.addSuites();
+		newSuite.createId();
 		this.elements.push(newSuite);
 	}
 

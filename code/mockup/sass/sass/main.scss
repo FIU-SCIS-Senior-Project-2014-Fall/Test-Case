@@ -12,6 +12,10 @@ $icon-font-path: "../fonts/";
   width:auto;
 }
 
+.no-show {
+  display:none !important;
+}
+
 /* Space out content a bit */
 body, .MainBody, html, .container {
   min-height:100% !important;

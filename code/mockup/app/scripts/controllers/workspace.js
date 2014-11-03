@@ -68,8 +68,13 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	}
 
 	$scope.copyBuffer = false;
+	// currently active suite
 	$scope.active = { "index" : 0 };
 	$scope.suite = $scope.entries[0];
+
+	// new suite which can be downgraded into a case
+	$scope.newSuiteIndex = -1;
+	$scope.newSuite = {};
 
 	setTimeout(function() { $('.input-group-addon .glyphicon').tooltip();}, 1000);
 
@@ -177,7 +182,10 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	$scope.addSuite = function() {
 		var tmp = $scope.getEntryTemplate();
 	    tmp.id = $scope.createId();
-	    tmp.name = "New Test Suite";
+	    if(typeof name === "undefined")
+		    tmp.name = "New Test Suite";
+		else
+		    tmp.name = name;
 	    tmp.type = "suite";
 	    tmp. size = sizeByType("suite");
 	    addEntry(tmp);
@@ -274,16 +282,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	}
 
 	function addEntry(entry) {
-		if(!entry) {
-			var tmp = $scope.getEntryTemplate();
-		    tmp.id = $scope.createId();
-		    tmp.name = "New Test Suite";
-		    tmp.type = $scope.types[2];
-		    tmp. size = sizeByType($scope.types[2]);
-		    $scope.entries.push(tmp);
-		} else {
-			$scope.entries.push(entry);
-		}
+		$scope.entries.push(entry);
 	};
 
 	function addSubEntry(index) {
@@ -407,6 +406,10 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 			return $scope.entries[root].suites[parent].suites[index];
 	}
 
+	$scope.isNewAlterableSuite = function() {
+		return $scope.newSuiteIndex >= 0;
+	}
+
 	function sizeByType(type) {
 		var size = "";
 		switch(type) {
@@ -446,7 +449,6 @@ angular.module('initProjApp').directive("tfContextmenu", function() {
 	};
 });
 
-
 // this is rough, still setup with debugging.
 angular.module('initProjApp').directive("tfProcesskey", function() 
 {
@@ -454,25 +456,37 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 		var className = attributes.tfProcesskey;
 	  	element.bind("keydown keypress", function(e) {
 	  		if(e.which == 13) {
-	  			var id = $(element).attr("id");
-	  			var likeElements = $("." + className);
-	  			var eq = likeElements.index( $("#" + id) );
-	  			var ele = likeElements.eq(eq + 1);
-	  			if(ele.length > 0)
-	  				ele.focus();
-	  			else {
-	  				var entry = $(element).attr("entry"), type = $(element).attr("e-type");
-	  				scope.createByEnterKey(entry, type);
+	  			if($(element).attr("e-type") == "suite") {
+	  				scope.addSuite();
+	  				scope.newSuiteIndex = scope.entries.length - 1;
+	  				scope.newSuite = scope.entries[scope.entries.length - 1];
 	  				scope.$apply();
 	  				setTimeout(function() {
-	  					var id = $(element).attr("id");
-			  			var likeElements = $("." + className);
-			  			var eq = likeElements.index( $("#" + id) );
-			  			var ele = likeElements.eq(eq + 1);
-			  			if(ele.length > 0)
-			  				ele.focus();
-	  				}, 300);
+				  		$("#s" + scope.newSuiteIndex).focus();
+		  				}, 300);
 	  			}
+	  			else 
+	  			{
+		  			var id = $(element).attr("id");
+		  			var likeElements = $("." + className);
+		  			var eq = likeElements.index( $("#" + id) );
+		  			var ele = likeElements.eq(eq + 1);
+		  			if(ele.length > 0)
+		  				ele.focus();
+		  			else {
+		  				var entry = $(element).attr("entry"), type = $(element).attr("e-type");
+		  				scope.createByEnterKey(entry, type);
+		  				scope.$apply();
+		  				setTimeout(function() {
+		  					var id = $(element).attr("id");
+				  			var likeElements = $("." + className);
+				  			var eq = likeElements.index( $("#" + id) );
+				  			var ele = likeElements.eq(eq + 1);
+				  			if(ele.length > 0)
+				  				ele.focus();
+		  				}, 300);
+		  			}
+		  		}
 	  			e.preventDefault();
 	  		}
 	  		else if(e.which == 9) {

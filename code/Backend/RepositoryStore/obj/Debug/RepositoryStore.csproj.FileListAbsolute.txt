@@ -1,0 +1,5 @@
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\RepositoryStore\bin\Debug\RepositoryStore.dll
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\RepositoryStore\bin\Debug\RepositoryStore.pdb
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\RepositoryStore\obj\Debug\RepositoryStore.csprojResolveAssemblyReference.cache
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\RepositoryStore\obj\Debug\RepositoryStore.dll
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\RepositoryStore\obj\Debug\RepositoryStore.pdb

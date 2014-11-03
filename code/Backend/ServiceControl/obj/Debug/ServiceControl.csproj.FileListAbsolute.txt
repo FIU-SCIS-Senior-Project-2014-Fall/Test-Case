@@ -1,0 +1,4 @@
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\ServiceControl\bin\Debug\ServiceControl.dll
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\ServiceControl\bin\Debug\ServiceControl.pdb
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\ServiceControl\obj\Debug\ServiceControl.dll
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\ServiceControl\obj\Debug\ServiceControl.pdb

@@ -1,0 +1,5 @@
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\AutomationControl\bin\Debug\AutomationControl.dll
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\AutomationControl\bin\Debug\AutomationControl.pdb
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\AutomationControl\obj\Debug\AutomationControl.csprojResolveAssemblyReference.cache
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\AutomationControl\obj\Debug\AutomationControl.dll
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\AutomationControl\obj\Debug\AutomationControl.pdb
