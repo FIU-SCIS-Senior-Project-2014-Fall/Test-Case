@@ -44,7 +44,7 @@
             </div>
           </div>
   <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-6">
         <ol class="breadcrumb">
           <li><a>Workspace</a></li>
           <li class="active">{{ suite.name }}</li>
@@ -68,10 +68,14 @@
         </div>
       </div>
       -->
-      <div class="col-md-3">
-        <div class="btn-group pull-right">
+      <div class="col-md-6">
+        <div class="btn-group pull-left">
           <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;&nbsp;View</button>
           <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;&nbsp;Edit</button>
+        </div>
+        <div class="pull-right">
+          <button class="btn btn-primary commit"><span class="glyphicon glyphicon-plus"></span> Commit</button>
+          <button class="btn btn-danger commit"><span class="glyphicon glyphicon-repeat"></span> Revert</button>
         </div>
       </div>
     </div>

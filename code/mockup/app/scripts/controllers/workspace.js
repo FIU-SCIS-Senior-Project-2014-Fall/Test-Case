@@ -7,6 +7,8 @@
  * # MainCtrl
  * Controller of the initProjApp
  */
+ var keys = {}; // evil global
+
 angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, storage) {
 
 	$scope.resc = {
@@ -39,6 +41,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		"tags" : [],
 		"result" : "",
 		"toggle" : false,
+		"toggleDetails" : false,
 		"summary" : "",
 		"store" : ["Local"],
 		"children" : [],
@@ -195,6 +198,10 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		$scope.suite.children[index].toggle = !$scope.suite.children[index].toggle;
 	}
 
+	$scope.toggleDetails = function(index) {
+		$scope.suite.children[index].toggleDetails = !$scope.suite.children[index].toggleDetails;
+	}
+
 	$scope.toggleClass = function(index) {
 		if($scope.suite.children[index].toggle)
 			return "test-expand";
@@ -202,8 +209,22 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 			return "test-in";
 	}
 
+	$scope.toggleDetailsClass = function(index) {
+		if($scope.suite.children[index].toggleDetails)
+			return " summary-expand";
+		else
+			return "";
+	}
+
 	$scope.toggleButton = function(index) {
 		if($scope.suite.children[index].toggle)
+			return "glyphicon-chevron-up";
+		else
+			return "glyphicon-chevron-down";
+	}
+
+	$scope.toggleDetailsButton = function(index) {
+		if($scope.suite.children[index].toggleDetails)
 			return "glyphicon-chevron-up";
 		else
 			return "glyphicon-chevron-down";
@@ -305,6 +326,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		    tmp.parent = $scope.suite.children[index].id;
 			$scope.suite.children[index].children.push(tmp);
 		}
+		return tmp.id;
 	};
 
 
@@ -410,6 +432,29 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		return $scope.newSuiteIndex >= 0;
 	}
 
+	$scope.addNewSuiteFromKeyPress = function() {
+		$scope.addSuite();
+	  	$scope.newSuiteIndex = $scope.entries.length - 1;
+	  	$scope.newSuite = $scope.entries[$scope.newSuiteIndex];
+	  	setTimeout(function() {
+			$("#s" + $scope.entries[$scope.newSuiteIndex].id).focus();
+		}, 500);
+	}
+
+	$scope.addNewCaseFromKeyPress = function() {
+		var id = addSubEntry();
+	  	setTimeout(function() {
+			$("#c" + id).focus();
+		}, 300);
+	}
+
+	$scope.addNewStepFromKeyPress = function(index) {
+		var id = addSubEntry(index);
+	  	setTimeout(function() {
+			$("#st" + id).focus();
+		}, 500);
+	}
+
 	function sizeByType(type) {
 		var size = "";
 		switch(type) {
@@ -454,18 +499,18 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 {
 	return function(scope, element, attributes) {
 		var className = attributes.tfProcesskey;
-	  	element.bind("keydown keypress", function(e) {
+	  	element.bind("keydown", function(e) {
+	  		keys[e.which] = true; // add key to current press combo
 	  		if(e.which == 13) {
-	  			if($(element).attr("e-type") == "suite") {
-	  				scope.addSuite();
-	  				scope.newSuiteIndex = scope.entries.length - 1;
-	  				scope.newSuite = scope.entries[scope.entries.length - 1];
-	  				scope.$apply();
-	  				setTimeout(function() {
-				  		$("#s" + scope.newSuiteIndex).focus();
-		  				}, 300);
+	  			e.preventDefault();
+	  			if($(element).attr("e-type") == "suite" && $(element).val().length > 0) {
+	  				scope.addNewSuiteFromKeyPress();
+	  			} else if($(element).attr("e-type") == "case" && $(element).val().length > 0 && $(element).attr("entry") == $(element).attr("last")) {
+	  				scope.addNewCaseFromKeyPress();
+	  			} else if($(element).attr("e-type") == "step" && $(element).val().length > 0 && $(element).attr("step-entry") == $(element).attr("last")) {
+	  				scope.addNewStepFromKeyPress($(element).attr("entry"));
 	  			}
-	  			else 
+	  			else if($(element).val().length > 0)
 	  			{
 		  			var id = $(element).attr("id");
 		  			var likeElements = $("." + className);
@@ -487,21 +532,44 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 		  				}, 300);
 		  			}
 		  		}
-	  			e.preventDefault();
+		  		scope.$apply();
 	  		}
-	  		else if(e.which == 9) {
-	  			var id = $(element).attr("id");
-	  			var likeElements = $('input.tf-proc-control');
-	  			var eq = likeElements.index( $("#" + id) );
-	  			var ele = likeElements.eq(eq + 1);
-	  			if(ele.length > 0)
-	  				ele.focus();
-	  			else
-	  				$(".edit-title").eq(0).focus()
+	  		else if(keys[9] && keys[16]) {
+	  			alert("alt-tab");
 	  			e.preventDefault();
+	  		} else if(e.which == 9) {
+	  			e.preventDefault();
+	  			if($(element).attr("e-type") == "suite" && $(element).attr("entry") > 0) {
+	  				var title = $(element).val();
+	  				scope.entries.splice([scope.newSuiteIndex], 1);
+	  				scope.addNewCaseFromKeyPress();
+	  				scope.suite.children[scope.suite.children.length - 1].name = title;
+	  				scope.newSuiteIndex = -1;
+	  				scope.newSuite = {};
+	  				scope.$apply();
+	  			} else if($(element).attr("e-type") == "case" && $(element).attr("entry") > 0) {
+	  				var title = $(element).val();
+	  				scope.suite.children.splice($(element).attr("entry"), 1);
+	  				scope.addNewStepFromKeyPress(($(element).attr("entry") - 1));
+	  				scope.toggle($(element).attr("entry") - 1);
+	  				scope.suite.children[$(element).attr("entry") - 1].children[scope.suite.children[$(element).attr("entry") - 1].children.length - 1].name = title;
+	  				scope.$apply();
+	  			} else {
+		  			var id = $(element).attr("id");
+		  			var likeElements = $('input.tf-proc-control');
+		  			var eq = likeElements.index( $("#" + id) );
+		  			var ele = likeElements.eq(eq + 1);
+		  			if(ele.length > 0)
+		  				ele.focus();
+		  			else
+		  				$(".edit-title").eq(0).focus();
+		  		}
 	  		}
-	  		
 	  	});
+
+		element.bind("keyup", function(e) {
+			delete keys[e.which];
+		});
 	    
 	};
 });

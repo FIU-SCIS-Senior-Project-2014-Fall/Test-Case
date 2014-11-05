@@ -236,52 +236,58 @@ body, .MainBody, html, .container {
 }
 /* line 210, ../../../sass/sass/main.scss */
 #workspace .item-summary {
-  height: 0px;
-  opacity: 0;
+  height: 45px;
   border-top: 1px none;
   background-color: #efefeb;
-  border-bottom: 1px solid #ccc;
   padding: 10px;
-  margin-bottom: 5px;
   overflow: hidden;
   -webkit-transition: ease-out .5s;
   -moz-transition: ease-out .5s;
   -o-transition: ease-out .5s;
   transition: ease-out .5s;
 }
-/* line 224, ../../../sass/sass/main.scss */
+/* line 221, ../../../sass/sass/main.scss */
 #workspace .item-summary p {
   padding: 8px 0px;
+  -webkit-transition: ease-out .5s;
+  -moz-transition: ease-out .5s;
+  -o-transition: ease-out .5s;
+  transition: ease-out 0.5s;
 }
-/* line 227, ../../../sass/sass/main.scss */
+/* line 228, ../../../sass/sass/main.scss */
 #workspace .item-summary p .btn {
   margin-left: 10px;
 }
-/* line 228, ../../../sass/sass/main.scss */
+/* line 230, ../../../sass/sass/main.scss */
+#workspace .case-data {
+  max-height: 0px;
+  overflow: hidden;
+}
+/* line 235, ../../../sass/sass/main.scss */
 #workspace input:hover {
   border: 1px solid #cccccc !important;
 }
-/* line 231, ../../../sass/sass/main.scss */
+/* line 239, ../../../sass/sass/main.scss */
 #workspace input:focus {
-  box-shadow: 0px 0px 5px blue !important;
+  box-shadow: 0px 0px 5px #8dc63f !important;
 }
-/* line 234, ../../../sass/sass/main.scss */
+/* line 243, ../../../sass/sass/main.scss */
 #workspace .arch {
   position: relative;
-  padding: 0px 0px 3px 0px;
+  padding: 0px;
   border: 1px none;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
-/* line 243, ../../../sass/sass/main.scss */
+/* line 252, ../../../sass/sass/main.scss */
 #workspace .case {
   margin-left: 0px;
 }
-/* line 246, ../../../sass/sass/main.scss */
+/* line 255, ../../../sass/sass/main.scss */
 #workspace .step {
   margin-left: 10px;
 }
-/* line 249, ../../../sass/sass/main.scss */
+/* line 258, ../../../sass/sass/main.scss */
 #workspace .onlyHover {
   width: 0px;
   overflow: hidden;
@@ -290,93 +296,104 @@ body, .MainBody, html, .container {
   -o-transition: ease-out .5s;
   transition: ease-out .5s;
 }
-/* line 258, ../../../sass/sass/main.scss */
+/* line 267, ../../../sass/sass/main.scss */
 #workspace .input-group-addon {
   background-color: transparent;
   border: 1px none;
-  border-bottom-left-radius: 0px;
   color: #cccccc !important;
   -webkit-transition: ease-out .5s;
   -moz-transition: ease-out .5s;
   -o-transition: ease-out .5s;
   transition: ease-out .5s;
 }
-/* line 268, ../../../sass/sass/main.scss */
+/* line 276, ../../../sass/sass/main.scss */
 #workspace .input-group-addon .glyphicon {
   cursor: pointer;
 }
-/* line 271, ../../../sass/sass/main.scss */
+/* line 279, ../../../sass/sass/main.scss */
 #workspace .input-group-addon .glyphicon:hover {
   color: #000000 !important;
 }
-/* line 276, ../../../sass/sass/main.scss */
+/* line 284, ../../../sass/sass/main.scss */
 #workspace .test-expand {
   border: 1px solid #ccc;
+  margin: 10px 0px;
 }
-/* line 279, ../../../sass/sass/main.scss */
+/* line 288, ../../../sass/sass/main.scss */
 #workspace .arch .test-expand {
   border: 1px none;
 }
-/* line 283, ../../../sass/sass/main.scss */
+/* line 292, ../../../sass/sass/main.scss */
 #workspace .test-expand .id {
   margin-left: 5px;
 }
-/* line 287, ../../../sass/sass/main.scss */
-#workspace .test-expand > div > .input-group-addon, #workspace .suite-master:hover > div > .input-group-addon {
+/* line 296, ../../../sass/sass/main.scss */
+#workspace .test-expand > div > .input-group-addon, #workspace .suite-master:hover > div > .input-group-addon, #workspace .test-case:hover > div > .input-group-addon {
   background-color: #dadada;
   color: #444444 !important;
 }
-/* line 290, ../../../sass/sass/main.scss */
-#workspace .test-expand > div > .input-group-addon .onlyHover, #workspace .suite-master:hover > div > .input-group-addon .onlyHover {
+/* line 299, ../../../sass/sass/main.scss */
+#workspace .test-expand > div > .input-group-addon .onlyHover, #workspace .suite-master:hover > div > .input-group-addon .onlyHover, #workspace .test-case:hover > div > .input-group-addon .onlyHover {
   width: auto;
   margin-left: 8px;
 }
-/* line 296, ../../../sass/sass/main.scss */
-#workspace .test-expand > .item-summary {
-  height: 350px;
-  opacity: 1;
+/* line 305, ../../../sass/sass/main.scss */
+#workspace .test-expand > .case-data {
+  max-height: 99999999px;
 }
-/* line 301, ../../../sass/sass/main.scss */
+/* line 309, ../../../sass/sass/main.scss */
+#workspace .summary-expand {
+  height: 395px;
+}
+/* line 313, ../../../sass/sass/main.scss */
+#workspace .case-body {
+  padding: 10px 0px;
+}
+/* line 317, ../../../sass/sass/main.scss */
+#workspace .details {
+  padding-bottom: 10px;
+}
+/* line 321, ../../../sass/sass/main.scss */
 #workspace .step-title {
   width: 66%;
   border-right: 1px solid #ccc;
 }
-/* line 306, ../../../sass/sass/main.scss */
+/* line 326, ../../../sass/sass/main.scss */
 #workspace .step-result {
   width: 33%;
 }
-/* line 310, ../../../sass/sass/main.scss */
+/* line 330, ../../../sass/sass/main.scss */
 #workspace .arch .label {
   margin-left: 3px;
 }
-/* line 314, ../../../sass/sass/main.scss */
+/* line 334, ../../../sass/sass/main.scss */
 #workspace .ta-scroll-window > .ta-bind {
   max-height: 150px !important;
 }
 
-/* line 319, ../../../sass/sass/main.scss */
+/* line 339, ../../../sass/sass/main.scss */
 .green {
   color: #5CB85C;
 }
 
-/* line 323, ../../../sass/sass/main.scss */
+/* line 343, ../../../sass/sass/main.scss */
 .red {
   color: #D9534F;
 }
 
 /* TextAngular */
 /* add generic styling for the editor */
-/* line 329, ../../../sass/sass/main.scss */
+/* line 349, ../../../sass/sass/main.scss */
 .ta-toolbar {
   margin-bottom: 5px;
 }
 
-/* line 333, ../../../sass/sass/main.scss */
+/* line 353, ../../../sass/sass/main.scss */
 .ta-toolbar .btn[name="h2"], .ta-toolbar .btn[name="h5"], .ta-toolbar .btn[name="h6"], .ta-toolbar .btn[name="quote"] {
   display: none;
 }
 
-/* line 337, ../../../sass/sass/main.scss */
+/* line 357, ../../../sass/sass/main.scss */
 .ta-root.focussed > .ta-scroll-window.form-control {
   border-color: #66afe9;
   outline: 0;
@@ -385,7 +402,7 @@ body, .MainBody, html, .container {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
 }
 
-/* line 345, ../../../sass/sass/main.scss */
+/* line 365, ../../../sass/sass/main.scss */
 .ta-editor.ta-html, .ta-scroll-window.form-control {
   min-height: 200px;
   height: auto;
@@ -394,33 +411,33 @@ body, .MainBody, html, .container {
   font-size: 100%;
 }
 
-/* line 353, ../../../sass/sass/main.scss */
+/* line 373, ../../../sass/sass/main.scss */
 .ta-scroll-window.form-control {
   position: relative;
   padding: 0;
 }
 
-/* line 358, ../../../sass/sass/main.scss */
+/* line 378, ../../../sass/sass/main.scss */
 .ta-scroll-window > .ta-bind {
   height: auto;
   min-height: 200px;
   padding: 6px 12px;
 }
 
-/* line 364, ../../../sass/sass/main.scss */
+/* line 384, ../../../sass/sass/main.scss */
 .ta-editor:focus {
   user-select: text;
 }
 
 /* add the styling for the awesomness of the resizer */
-/* line 369, ../../../sass/sass/main.scss */
+/* line 389, ../../../sass/sass/main.scss */
 .ta-resizer-handle-overlay {
   z-index: 100;
   position: absolute;
   display: none;
 }
 
-/* line 375, ../../../sass/sass/main.scss */
+/* line 395, ../../../sass/sass/main.scss */
 .ta-resizer-handle-overlay > .ta-resizer-handle-info {
   position: absolute;
   bottom: 16px;
@@ -431,7 +448,7 @@ body, .MainBody, html, .container {
   opacity: 0.7;
 }
 
-/* line 385, ../../../sass/sass/main.scss */
+/* line 405, ../../../sass/sass/main.scss */
 .ta-resizer-handle-overlay > .ta-resizer-handle-background {
   position: absolute;
   bottom: 5px;
@@ -442,14 +459,14 @@ body, .MainBody, html, .container {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-/* line 395, ../../../sass/sass/main.scss */
+/* line 415, ../../../sass/sass/main.scss */
 .ta-resizer-handle-overlay > .ta-resizer-handle-corner {
   width: 10px;
   height: 10px;
   position: absolute;
 }
 
-/* line 401, ../../../sass/sass/main.scss */
+/* line 421, ../../../sass/sass/main.scss */
 .ta-resizer-handle-overlay > .ta-resizer-handle-corner-tl {
   top: 0;
   left: 0;
@@ -457,7 +474,7 @@ body, .MainBody, html, .container {
   border-top: 1px solid black;
 }
 
-/* line 408, ../../../sass/sass/main.scss */
+/* line 428, ../../../sass/sass/main.scss */
 .ta-resizer-handle-overlay > .ta-resizer-handle-corner-tr {
   top: 0;
   right: 0;
@@ -465,7 +482,7 @@ body, .MainBody, html, .container {
   border-top: 1px solid black;
 }
 
-/* line 415, ../../../sass/sass/main.scss */
+/* line 435, ../../../sass/sass/main.scss */
 .ta-resizer-handle-overlay > .ta-resizer-handle-corner-bl {
   bottom: 0;
   left: 0;
@@ -473,7 +490,7 @@ body, .MainBody, html, .container {
   border-bottom: 1px solid black;
 }
 
-/* line 422, ../../../sass/sass/main.scss */
+/* line 442, ../../../sass/sass/main.scss */
 .ta-resizer-handle-overlay > .ta-resizer-handle-corner-br {
   bottom: 0;
   right: 0;
@@ -482,7 +499,7 @@ body, .MainBody, html, .container {
   background-color: white;
 }
 
-/* line 430, ../../../sass/sass/main.scss */
+/* line 450, ../../../sass/sass/main.scss */
 .ta-toolbar .btn {
   font-size: 10px;
 }

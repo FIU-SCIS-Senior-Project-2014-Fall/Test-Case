@@ -208,13 +208,10 @@ body, .MainBody, html, .container {
   box-shadow:none !important;
   }
   .item-summary {
-    height:0px;
-    opacity:0;
+    height:45px;
     border-top:1px none;
     background-color:#efefeb;
-    border-bottom:1px solid #ccc;
     padding:10px;
-    margin-bottom:5px;
     overflow:hidden;
     -webkit-transition: ease-out .5s;
     -moz-transition: ease-out .5s;
@@ -223,17 +220,29 @@ body, .MainBody, html, .container {
   }
   .item-summary p {
     padding:8px 0px;
+    -webkit-transition: ease-out .5s;
+    -moz-transition: ease-out .5s;
+    -o-transition: ease-out .5s;
+    transition: ease-out .5s
   }
   .item-summary p .btn { margin-left:10px; }
+
+  .case-data {
+    max-height:0px;
+    overflow:hidden;
+  }
+
   input:hover {
-  border:1px solid #cccccc !important;
+    border:1px solid #cccccc !important;
   }
+
   input:focus {
-  box-shadow:0px 0px 5px blue !important;
+    box-shadow:0px 0px 5px #8dc63f !important;
   }
+
   .arch {
     position:relative;
-    padding:0px 0px 3px 0px;
+    padding:0px;
     border:1px none;
     border-top-left-radius:5px;
     border-top-right-radius:5px;
@@ -258,7 +267,6 @@ body, .MainBody, html, .container {
   .input-group-addon {
     background-color:transparent;
     border:1px none;
-    border-bottom-left-radius:0px;
     color:#cccccc !important;
     -webkit-transition: ease-out .5s;
     -moz-transition: ease-out .5s;
@@ -275,6 +283,7 @@ body, .MainBody, html, .container {
 
   .test-expand {
     border:1px solid #ccc;
+    margin:10px 0px;
   }
   .arch .test-expand {
     border:1px none;
@@ -284,7 +293,7 @@ body, .MainBody, html, .container {
     margin-left:5px;
   }
 
-  .test-expand > div > .input-group-addon, .suite-master:hover > div > .input-group-addon {
+  .test-expand > div > .input-group-addon, .suite-master:hover > div > .input-group-addon, .test-case:hover > div > .input-group-addon {
     background-color:#dadada;
     color:#444444 !important;
     .onlyHover {
@@ -293,9 +302,20 @@ body, .MainBody, html, .container {
     }
   }
 
-  .test-expand > .item-summary {
-    height:350px;
-    opacity:1;
+  .test-expand > .case-data {
+    max-height:99999999px;
+  }
+
+  .summary-expand {
+    height:395px;
+  }
+
+  .case-body {
+    padding:10px 0px;
+  }
+
+  .details {
+    padding-bottom:10px;
   }
 
   .step-title {
