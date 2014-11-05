@@ -314,7 +314,6 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		tmp.id = $scope.createId();
 		if(typeof index === "undefined") {
 			var type = $scope.typeDownOne($scope.suite.type);
-			tmp.name = "New " + type;
 		    tmp.type = type;
 		    tmp.order = $scope.suite.children.length + 1;
 		    tmp.size = sizeByType(type);
@@ -322,7 +321,6 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 			$scope.suite.children.push(tmp);
 		} else {
 			var type = $scope.typeDownOne($scope.suite.children[index].type);
-			tmp.name = "New " + type;
 		    tmp.type = type;
 		    tmp.order = $scope.suite.children[index].children.length + 1;
 		    tmp.size = sizeByType(type);
@@ -543,6 +541,10 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 					scope.addNewSuiteFromKeyPress();
 					scope.entries[scope.entries.length - 1].name = $(element).val();
 					scope.suite.children.splice($(element).attr("entry"), 1);
+					scope.newSuiteIndex = -1;
+					scope.newSuite = {}
+					scope.active = scope.entries.length - 1;
+					scope.suite = scope.entries[scope.entries.length - 1];
 					scope.$apply();
 	  			} else if($(element).attr("e-type") == "step") {
 	  				scope.addNewCaseFromKeyPress();
@@ -550,6 +552,7 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 					scope.suite.children[scope.suite.children.length - 1].name = $(element).val();
 					scope.$apply();
 	  			}
+	  			keys = {};
 	  		} else if(e.which == 9) {
 	  			e.preventDefault();
 	  			if($(element).attr("e-type") == "suite" && $(element).attr("entry") > 0) {
@@ -580,8 +583,8 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 	  		}
 	  	});
 
-		element.bind("keyup", function(e) {
-			delete keys[e.which];
+		element.bind("keyup", function() {
+			keys = {};
 		});
 	    
 	};
