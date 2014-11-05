@@ -194,8 +194,11 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	    addEntry(tmp);
 	}
 
-	$scope.toggle = function(index) {
-		$scope.suite.children[index].toggle = !$scope.suite.children[index].toggle;
+	$scope.toggle = function(index, force) {
+		if(typeof force === "undefined")
+			$scope.suite.children[index].toggle = !$scope.suite.children[index].toggle;
+		else
+			$scope.suite.children[index].toggle = true;
 	}
 
 	$scope.toggleDetails = function(index) {
@@ -535,8 +538,18 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 		  		scope.$apply();
 	  		}
 	  		else if(keys[9] && keys[16]) {
-	  			alert("alt-tab");
 	  			e.preventDefault();
+	  			if($(element).attr("e-type") == "case") {
+					scope.addNewSuiteFromKeyPress();
+					scope.entries[scope.entries.length - 1].name = $(element).val();
+					scope.suite.children.splice($(element).attr("entry"), 1);
+					scope.$apply();
+	  			} else if($(element).attr("e-type") == "step") {
+	  				scope.addNewCaseFromKeyPress();
+					scope.suite.children[$(element).attr("entry")].children.splice($(element).attr("step-entry"), 1);
+					scope.suite.children[scope.suite.children.length - 1].name = $(element).val();
+					scope.$apply();
+	  			}
 	  		} else if(e.which == 9) {
 	  			e.preventDefault();
 	  			if($(element).attr("e-type") == "suite" && $(element).attr("entry") > 0) {
@@ -551,7 +564,7 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 	  				var title = $(element).val();
 	  				scope.suite.children.splice($(element).attr("entry"), 1);
 	  				scope.addNewStepFromKeyPress(($(element).attr("entry") - 1));
-	  				scope.toggle($(element).attr("entry") - 1);
+	  				scope.toggle($(element).attr("entry") - 1, true);
 	  				scope.suite.children[$(element).attr("entry") - 1].children[scope.suite.children[$(element).attr("entry") - 1].children.length - 1].name = title;
 	  				scope.$apply();
 	  			} else {
