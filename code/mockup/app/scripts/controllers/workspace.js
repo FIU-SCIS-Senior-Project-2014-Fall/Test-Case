@@ -149,6 +149,14 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		}
 	}
 
+	$scope.setNewSuite = function(index) {
+		$scope.newSuiteIndex = index;
+		if(index < 0)
+			$scope.newSuite = {};
+		else
+			$scope.newSuite = $scope.entries[index];
+	}
+
 	$scope.isActive = function(id) {
 		if(id == $scope.suite.id)
 			return "active";
@@ -541,10 +549,8 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 					scope.addNewSuiteFromKeyPress();
 					scope.entries[scope.entries.length - 1].name = $(element).val();
 					scope.suite.children.splice($(element).attr("entry"), 1);
-					scope.newSuiteIndex = -1;
-					scope.newSuite = {}
-					scope.active = scope.entries.length - 1;
-					scope.suite = scope.entries[scope.entries.length - 1];
+					scope.setNewSuite(-1);
+					scope.makeActive(scope.entries.length - 1);
 					scope.$apply();
 	  			} else if($(element).attr("e-type") == "step") {
 	  				scope.addNewCaseFromKeyPress();
@@ -560,8 +566,7 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 	  				scope.entries.splice([scope.newSuiteIndex], 1);
 	  				scope.addNewCaseFromKeyPress();
 	  				scope.suite.children[scope.suite.children.length - 1].name = title;
-	  				scope.newSuiteIndex = -1;
-	  				scope.newSuite = {};
+	  				scope.setNewSuite(-1);
 	  				scope.$apply();
 	  			} else if($(element).attr("e-type") == "case" && $(element).attr("entry") > 0) {
 	  				var title = $(element).val();
