@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="7c8cdf8f-6cea-41cf-8ce2-932772af5414" name="UMLClassDiagramDataStore" linkedPackageId="77f3041a-c21c-4cb5-9345-1c20552e2acb" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" dslVersion="1.0.0.0" Id="7c8cdf8f-6cea-41cf-8ce2-932772af5414" name="UMLClassDiagramDataStore" linkedPackageId="77f3041a-c21c-4cb5-9345-1c20552e2acb" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
   <appliedStereotypesInternal>
     <stereotypeInstance Id="2b1b2bf4-9ccb-4f90-af62-8cd203597ced" name="namespace" profile="CSharpProfile">
       <elementDefinition Id="f8a3817f-f764-4040-b59a-39aaf20916ca" />
@@ -107,6 +107,34 @@
           </stereotypeInstance>
         </appliedStereotypesInternal>
         <elementDefinition Id="ad1a9dcd-f793-4024-9d1e-6ed48b11b1b7" />
+        <targetEnds>
+          <association Id="7b890dd7-adae-4502-8df3-352cdfdc7eab" isDerived="false" sourceEndRoleName="DataStoreAdapter" targetEndRoleName="DataStoreController" isLeaf="false" isAbstract="false">
+            <classMoniker Id="f4ba9b06-b730-436d-820a-ecf43e553409" LastKnownName="DataStoreController" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="368d4b8a-ba3a-48d8-9fbf-af614623e0ca" name="DataStoreAdapter" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString Id="ac12e302-97b3-4a35-92e9-132f52330932" name="Lower" value="n">
+                      <elementDefinition Id="a5848911-4f61-4002-aaed-3476d32cbc00" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="38ea66e4-280b-4cad-9a5d-bc9853f3a3c1" name="Upper" value="n">
+                      <elementDefinition Id="9f961b1c-24aa-46b7-ab3b-1e59f184d03e" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="537de3c7-65ad-44fb-be19-6784e26c0e29" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b20359d5-dab8-463e-891a-cd3e1dada391" name="DataStoreController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="b4111e9f-d597-490a-8901-a55ff865db92" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="0f9f2c3a-4621-4345-a1e2-57aa11031ad3" />
+          </association>
+        </targetEnds>
         <ownedAttributes>
           <property Id="4617dd35-197f-4124-83a1-91a139562efc" name="host" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
             <appliedStereotypesInternal>
@@ -271,6 +299,28 @@
             <elementDefinition Id="b85de5a3-5fd8-41b3-809f-1889c4d3be9b" />
           </property>
         </ownedAttributes>
+        <ownedOperations>
+          <operation Id="42142453-b7bd-47ea-ae0f-60ab59e90794" name="insertItem" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="a1267a6b-af87-4043-8835-69d19afe246c" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="fc872da2-c08f-4cc3-ab15-93b80ab2ba5b" name="User user" direction="In" isUnique="false">
+                  <elementDefinition Id="b3e93713-18cc-479c-8485-cef6221ead25" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="af243622-bf37-4b50-849a-13643d1dea44" name="TestPlan testPlan" direction="In" isUnique="false">
+                  <elementDefinition Id="c90e732f-e137-47df-8bf8-62ddcc048e54" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="1f105f5f-ae8e-47bd-9798-f3d32ff590a7" name="TestModel testElement" direction="In" isUnique="false">
+                  <elementDefinition Id="2130f45f-7be6-472a-adc7-7093949c1772" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
       </Interface>
     </logicalClassDesignerModelHasTypes>
     <packageHasNamedElement>
@@ -324,6 +374,28 @@
             <elementDefinition Id="a055c8b7-61a5-4b5a-9a69-04df37a5a1c2" />
           </interfaceRealization>
         </suppliersInternal>
+        <ownedOperationsInternal>
+          <operation Id="e0babc98-68ed-40a4-90e3-19908006144e" name="insertItem" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="837b887a-7a35-4323-8c4f-b8745ae89a64" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="dd8946a0-b739-4fe7-8321-63139f31b85c" name="User user" direction="In" isUnique="false">
+                  <elementDefinition Id="358af0e8-b827-40b9-b898-0a3db0f2b23c" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="dfffc3d6-f470-4503-abb9-d01399a8aeee" name="TestPlan testPlan" direction="In" isUnique="false">
+                  <elementDefinition Id="9b46f856-ac5a-4123-88c1-7107b977bc9b" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="144727ac-1021-4b2b-a03b-a78224fd0ebf" name="TestModel testElement" direction="In" isUnique="false">
+                  <elementDefinition Id="32d6e9cf-769d-475d-8ddd-450a0e0f161f" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
@@ -372,6 +444,28 @@
             <elementDefinition Id="47130c58-38ac-41eb-b684-e4dcc1b900d1" />
           </interfaceRealization>
         </suppliersInternal>
+        <ownedOperationsInternal>
+          <operation Id="23793d44-76b6-4dc1-8fec-e797ac937fe7" name="insertItem" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="d8951a5b-8e7b-49b1-80a4-e86d0bbeeafe" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="76a6301c-8668-4c44-813e-f04f7bfde9e1" name="User user" direction="In" isUnique="false">
+                  <elementDefinition Id="37b2521b-cf93-4a31-b886-24acfa4be4c6" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="3a04f5e2-0730-42a7-8387-2fc6c5866aac" name="TestPlan testPlan" direction="In" isUnique="false">
+                  <elementDefinition Id="4109806e-846a-40b0-b691-588527c876d7" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="a1b43c2d-3f3c-433a-985b-f9abbd2cd1f2" name="TestModel testElement" direction="In" isUnique="false">
+                  <elementDefinition Id="cc46f4bf-fca9-42a7-aa1f-4f5513cee9d7" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
@@ -414,6 +508,103 @@
           </stereotypeInstance>
         </appliedStereotypesInternal>
         <elementDefinition Id="30105644-714e-4c74-b547-cc6f9b3c7960" />
+        <ownedAttributesInternal>
+          <property Id="cb55b70a-199e-4a11-86c1-b067860012e9" name="List&lt;DataStoreAdapter&gt; dataStores" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="00c25875-0e7e-4afb-839a-574168f70002" />
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="d456aa99-5fd8-4059-aa47-7db64d7a6e41" name="insertItem" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="df9daed8-09f4-4517-90ee-daab2cb047c0" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="00bc9224-261b-45bb-bb57-54a19bc07b21" name="User user" direction="In" isUnique="false">
+                  <elementDefinition Id="a6d31106-9d65-4830-95cd-ae8a816e5f7e" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="35137bda-34f5-444b-835f-b70ad9936e98" name="TestPlan testPlan" direction="In" isUnique="false">
+                  <elementDefinition Id="80e19b5a-e5ec-4334-8c95-296bcc9d7cfc" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="5a10c605-abd9-467a-85b6-1e234c2978bb" name="TestModel testElement" direction="In" isUnique="false">
+                  <elementDefinition Id="d0e02538-5879-4be7-bca8-a12578f118e9" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="0fdb2043-a90f-48ea-9063-d62c662d2a5f" name="insertNewFile" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="ecf1ea7c-5dd5-4760-bc38-aee5d1d64114" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="97d405e8-7c93-4870-94fc-49a185c8f702" name="User user" direction="In" isUnique="false">
+                  <elementDefinition Id="a81befbc-ef57-455a-b2fb-ef2cb1010af6" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="f61498eb-c660-43b0-b52a-21f81d6bdba8" name="TestPlan testPlan" direction="In" isUnique="false">
+                  <elementDefinition Id="23d0904d-9d1c-4592-8db5-f2432457143e" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="de843f21-bcb6-4d49-ab09-aba4698f70f4" name="FileInfo info" direction="In" isUnique="false">
+                  <elementDefinition Id="a997f3c4-db6a-4505-8150-6d3150ae61f0" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="b7c48676-4bf8-43e8-801b-eb19aabaf891" name="ConfigurationStore" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="74ac3989-ffac-4a3f-a146-757a9e6c24f2" />
+        <targetEnds>
+          <association Id="b8208640-b4df-4e9b-85b1-6bd4f5dac46b" isDerived="false" sourceEndRoleName="ConfigurationStore" targetEndRoleName="DataStoreController" isLeaf="false" isAbstract="false">
+            <classMoniker Id="f4ba9b06-b730-436d-820a-ecf43e553409" LastKnownName="DataStoreController" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="b66c605a-5374-47fa-a98e-ccdf54102fbe" name="ConfigurationStore" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="5718c2c8-b601-48bc-b4bb-cbaf263e7aa1" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="75df1a13-5c24-460a-a94c-ce9585905e9f" name="DataStoreController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="e25df4d0-b7cf-4e6b-8969-20e8960f22be" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="e397c8ec-ceec-433b-8f26-1ab002b0e7e8" />
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="7b6fe860-8432-441e-a7d9-e5f92a2ed596" name="List&lt;Config&gt; configurations" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="222cb635-7f56-4aca-9921-f6e271a7218d" />
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="db0bb74a-4ddd-472a-9606-53996ae7b908" name="getUserConfiguration" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="40663a53-a114-4622-85da-e9398938f482" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="1a660141-aafb-43ba-b449-88e986b3f4f0" name="User user" direction="In" isUnique="false">
+                  <elementDefinition Id="76ee6e0b-f714-48c9-82a6-54c34fb4d440" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="e340dec8-d276-4db6-a953-df7aff4fb53f" name="getTestPlanConfiguration" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="a9efcb40-7616-42d4-8a64-921f98265434" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="7f555b9a-9783-454b-9a90-e3b073aa5b3f" name="TestPlan testPlan" direction="In" isUnique="false">
+                  <elementDefinition Id="f0b2ad05-044b-47f7-8d55-4e8bd89c8800" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
   </packagedElements>

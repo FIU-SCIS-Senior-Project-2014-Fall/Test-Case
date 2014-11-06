@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner"
   dslVersion="1.0.0.0"
   Id="f0f944a8-553d-47aa-802a-5ac3bb5f7fb7"
   name="BackendModel" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -1067,6 +1067,60 @@
             </propertyInstances>
           </stereotypeInstance>
         </appliedStereotypesInternal>
+        <targetEnds>
+          <association
+            Id="0f9f2c3a-4621-4345-a1e2-57aa11031ad3"
+            isDerived="false"
+            sourceEndRoleName="DataStoreAdapter"
+            targetEndRoleName="DataStoreController"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="30105644-714e-4c74-b547-cc6f9b3c7960"
+              LastKnownName="DataStoreController"
+              LastKnownLocation="BackendModel.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="537de3c7-65ad-44fb-be19-6784e26c0e29"
+                  name="DataStoreAdapter"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false">
+                  <lowerValueInternal>
+                    <literalString
+                      Id="a5848911-4f61-4002-aaed-3476d32cbc00"
+                      name="Lower"
+                      value="n" />
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString
+                      Id="9f961b1c-24aa-46b7-ab3b-1e59f184d03e"
+                      name="Upper"
+                      value="n" />
+                  </upperValueInternal>
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b4111e9f-d597-490a-8901-a55ff865db92"
+                  name="DataStoreController"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
         <ownedAttributes>
           <property
             Id="e5a365f8-6729-4846-a922-c26f030ac075"
@@ -1288,6 +1342,40 @@
             </appliedStereotypesInternal>
           </property>
         </ownedAttributes>
+        <ownedOperations>
+          <operation
+            Id="a1267a6b-af87-4043-8835-69d19afe246c"
+            name="insertItem"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="b3e93713-18cc-479c-8485-cef6221ead25"
+                  name="User user"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="c90e732f-e137-47df-8bf8-62ddcc048e54"
+                  name="TestPlan testPlan"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="2130f45f-7be6-472a-adc7-7093949c1772"
+                  name="TestModel testElement"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
       </Interface>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -1349,6 +1437,40 @@
               LastKnownLocation="BackendModel.uml" />
           </interfaceRealization>
         </suppliersInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="837b887a-7a35-4323-8c4f-b8745ae89a64"
+            name="insertItem"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="358af0e8-b827-40b9-b898-0a3db0f2b23c"
+                  name="User user"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="9b46f856-ac5a-4123-88c1-7107b977bc9b"
+                  name="TestPlan testPlan"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="32d6e9cf-769d-475d-8ddd-450a0e0f161f"
+                  name="TestModel testElement"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -1410,6 +1532,40 @@
               LastKnownLocation="BackendModel.uml" />
           </interfaceRealization>
         </suppliersInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="d8951a5b-8e7b-49b1-80a4-e86d0bbeeafe"
+            name="insertItem"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="37b2521b-cf93-4a31-b886-24acfa4be4c6"
+                  name="User user"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="4109806e-846a-40b0-b691-588527c876d7"
+                  name="TestPlan testPlan"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="cc46f4bf-fca9-42a7-aa1f-4f5513cee9d7"
+                  name="TestModel testElement"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -1462,6 +1618,85 @@
             </propertyInstances>
           </stereotypeInstance>
         </appliedStereotypesInternal>
+        <ownedAttributesInternal>
+          <property
+            Id="00c25875-0e7e-4afb-839a-574168f70002"
+            name="List&lt;DataStoreAdapter&gt; dataStores"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="df9daed8-09f4-4517-90ee-daab2cb047c0"
+            name="insertItem"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="a6d31106-9d65-4830-95cd-ae8a816e5f7e"
+                  name="User user"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="80e19b5a-e5ec-4334-8c95-296bcc9d7cfc"
+                  name="TestPlan testPlan"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="d0e02538-5879-4be7-bca8-a12578f118e9"
+                  name="TestModel testElement"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="ecf1ea7c-5dd5-4760-bc38-aee5d1d64114"
+            name="insertNewFile"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="a81befbc-ef57-455a-b2fb-ef2cb1010af6"
+                  name="User user"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="23d0904d-9d1c-4592-8db5-f2432457143e"
+                  name="TestPlan testPlan"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="a997f3c4-db6a-4505-8150-6d3150ae61f0"
+                  name="FileInfo info"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
     <packageHasNamedElement>
@@ -1517,6 +1752,1441 @@
         isAbstract="false"
         isLeaf="false"
         isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="74ac3989-ffac-4a3f-a146-757a9e6c24f2"
+        name="ConfigurationStore"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="e397c8ec-ceec-433b-8f26-1ab002b0e7e8"
+            isDerived="false"
+            sourceEndRoleName="ConfigurationStore"
+            targetEndRoleName="DataStoreController"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="30105644-714e-4c74-b547-cc6f9b3c7960"
+              LastKnownName="DataStoreController"
+              LastKnownLocation="BackendModel.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="5718c2c8-b601-48bc-b4bb-cbaf263e7aa1"
+                  name="ConfigurationStore"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e25df4d0-b7cf-4e6b-8969-20e8960f22be"
+                  name="DataStoreController"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property
+            Id="222cb635-7f56-4aca-9921-f6e271a7218d"
+            name="List&lt;Config&gt; configurations"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false" />
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="40663a53-a114-4622-85da-e9398938f482"
+            name="getUserConfiguration"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="76ee6e0b-f714-48c9-82a6-54c34fb4d440"
+                  name="User user"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="a9efcb40-7616-42d4-8a64-921f98265434"
+            name="getTestPlanConfiguration"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="f0b2ad05-044b-47f7-8d55-4e8bd89c8800"
+                  name="TestPlan testPlan"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <interaction
+        Id="c208e6ef-6dad-40c7-955e-fa0c64dd0f47"
+        name="AddElementSequenceDiagram"
+        collapseFragmentsFlag="false"
+        isActiveClass="false"
+        isAbstract="false"
+        isLeaf="false"
+        isReentrant="false">
+        <fragments>
+          <behaviorExecutionSpecification
+            Id="f10b67c4-f715-4747-8e09-bd593a26dcf1"
+            name="BehaviorExecutionSpecification1">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="a8b15432-5398-4c16-bf16-639cdd61e47f"
+                LastKnownName="DataStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="9fe32107-2865-449b-aa6f-e6a4348200b1"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="BackendModel.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="9b71b846-277f-4d9c-9916-d50599d7364c"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="BackendModel.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="ffbef29e-dc45-44a3-beb4-5a57274f7200"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="BackendModel.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="20b5a0e4-3ac1-43b3-9279-e3d38bf05e23"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="BackendModel.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="6c47c033-8a03-4711-9def-52eb2825170e"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="BackendModel.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="6904bdf4-8a31-4a39-9227-05c32dba3794"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="BackendModel.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="53c9b17c-63b6-4cba-b2b8-b677ba0b246e"
+                LastKnownName="MessageOccurrenceSpecification12"
+                LastKnownLocation="BackendModel.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="23122ca4-1d7d-44b5-8cf1-71fb0da703a4"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="BackendModel.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="9b71b846-277f-4d9c-9916-d50599d7364c"
+            name="ExecutionOccurrenceSpecification1">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="05da1c21-3ebc-4c1b-a063-ac3ef194d8f1"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="BackendModel.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="a8b15432-5398-4c16-bf16-639cdd61e47f"
+                LastKnownName="DataStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="3a5dbd91-389e-419d-94c2-5fe7c8048876"
+            name="MessageOccurrenceSpecification1">
+            <event>
+              <sendOperationEventMoniker
+                Id="31d4a581-9d00-474f-a92b-dbb50afbac06"
+                LastKnownLocation="BackendModel.uml" />
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="c6c357d9-32a4-4b77-a861-04a0e7cacfe3"
+                LastKnownName="ServiceFacade"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="ffbef29e-dc45-44a3-beb4-5a57274f7200"
+            name="MessageOccurrenceSpecification2">
+            <event>
+              <receiveOperationEventMoniker
+                Id="292ea804-b9cd-4186-bd24-d40fcdc0730b"
+                LastKnownLocation="BackendModel.uml" />
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="a8b15432-5398-4c16-bf16-639cdd61e47f"
+                LastKnownName="DataStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="fddb134f-1439-47c4-9c2e-e458f4917b17"
+            name="BehaviorExecutionSpecification2">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="e051332c-180b-455d-9b14-a2468619e59a"
+                LastKnownName="ConfigurationStore"
+                LastKnownLocation="BackendModel.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="7b5c6c50-b6d0-4126-a95d-96c5319dc7bd"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="BackendModel.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="398c85f7-5e74-40e2-b6d5-7a3aeee84db1"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="BackendModel.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="1dade120-6e4e-4070-bfb3-68b4e786e337"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="BackendModel.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="737ae5bb-7393-4022-84f4-9f194d156adf"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="BackendModel.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="398c85f7-5e74-40e2-b6d5-7a3aeee84db1"
+            name="ExecutionOccurrenceSpecification3">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="e537e9d9-723b-48e2-93bd-53f6412b4ec5"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="BackendModel.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e051332c-180b-455d-9b14-a2468619e59a"
+                LastKnownName="ConfigurationStore"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="20b5a0e4-3ac1-43b3-9279-e3d38bf05e23"
+            name="MessageOccurrenceSpecification5">
+            <event>
+              <sendOperationEventMoniker
+                Id="3c24cd38-eb6c-48c3-9b51-140e80d88a1c"
+                LastKnownLocation="BackendModel.uml" />
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="a8b15432-5398-4c16-bf16-639cdd61e47f"
+                LastKnownName="DataStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="1dade120-6e4e-4070-bfb3-68b4e786e337"
+            name="MessageOccurrenceSpecification6">
+            <event>
+              <receiveOperationEventMoniker
+                Id="8c1e44ef-0476-4282-b727-0d8198b7ac32"
+                LastKnownLocation="BackendModel.uml" />
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e051332c-180b-455d-9b14-a2468619e59a"
+                LastKnownName="ConfigurationStore"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="737ae5bb-7393-4022-84f4-9f194d156adf"
+            name="MessageOccurrenceSpecification7">
+            <covered>
+              <lifelineMoniker
+                Id="e051332c-180b-455d-9b14-a2468619e59a"
+                LastKnownName="ConfigurationStore"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="6c47c033-8a03-4711-9def-52eb2825170e"
+            name="MessageOccurrenceSpecification8">
+            <covered>
+              <lifelineMoniker
+                Id="a8b15432-5398-4c16-bf16-639cdd61e47f"
+                LastKnownName="DataStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="7b5c6c50-b6d0-4126-a95d-96c5319dc7bd"
+            name="ExecutionOccurrenceSpecification4">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="18b275b3-5032-405e-821d-05a851263b0b"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="BackendModel.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="e051332c-180b-455d-9b14-a2468619e59a"
+                LastKnownName="ConfigurationStore"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="08ec4efd-074c-4af8-8a19-b8022a9a6acb"
+            name="BehaviorExecutionSpecification3">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="71d9d00d-ca2e-4fb5-a6d2-60f3c52da815"
+                LastKnownName="DataStoreAdapter"
+                LastKnownLocation="BackendModel.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="7b10079a-b013-460d-bd43-bb75f0b3592d"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="BackendModel.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="210baa7a-21e9-41f7-9ca1-3d209fb98cf2"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="BackendModel.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="6140f4ee-b42f-4f08-8b7b-591914ccd6b6"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="BackendModel.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="36005652-e7e5-4a1c-afde-b884a3f7d000"
+                LastKnownName="MessageOccurrenceSpecification11"
+                LastKnownLocation="BackendModel.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="210baa7a-21e9-41f7-9ca1-3d209fb98cf2"
+            name="ExecutionOccurrenceSpecification5">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="65b322a0-fed9-4f05-a6df-767fd5d1301f"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="BackendModel.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="71d9d00d-ca2e-4fb5-a6d2-60f3c52da815"
+                LastKnownName="DataStoreAdapter"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="6904bdf4-8a31-4a39-9227-05c32dba3794"
+            name="MessageOccurrenceSpecification9">
+            <event>
+              <sendOperationEventMoniker
+                Id="e5bdbecd-e8eb-4e24-b5b9-89a84fc54b95"
+                LastKnownLocation="BackendModel.uml" />
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="a8b15432-5398-4c16-bf16-639cdd61e47f"
+                LastKnownName="DataStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="6140f4ee-b42f-4f08-8b7b-591914ccd6b6"
+            name="MessageOccurrenceSpecification10">
+            <event>
+              <receiveOperationEventMoniker
+                Id="e987d320-b964-4f41-9a10-d6b456e80dea"
+                LastKnownLocation="BackendModel.uml" />
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="71d9d00d-ca2e-4fb5-a6d2-60f3c52da815"
+                LastKnownName="DataStoreAdapter"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="36005652-e7e5-4a1c-afde-b884a3f7d000"
+            name="MessageOccurrenceSpecification11">
+            <covered>
+              <lifelineMoniker
+                Id="71d9d00d-ca2e-4fb5-a6d2-60f3c52da815"
+                LastKnownName="DataStoreAdapter"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="53c9b17c-63b6-4cba-b2b8-b677ba0b246e"
+            name="MessageOccurrenceSpecification12">
+            <covered>
+              <lifelineMoniker
+                Id="a8b15432-5398-4c16-bf16-639cdd61e47f"
+                LastKnownName="DataStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="7b10079a-b013-460d-bd43-bb75f0b3592d"
+            name="ExecutionOccurrenceSpecification6">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="2e73a3d0-cb45-4856-8f07-bebe59012c23"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="BackendModel.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="71d9d00d-ca2e-4fb5-a6d2-60f3c52da815"
+                LastKnownName="DataStoreAdapter"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="23122ca4-1d7d-44b5-8cf1-71fb0da703a4"
+            name="MessageOccurrenceSpecification3">
+            <covered>
+              <lifelineMoniker
+                Id="a8b15432-5398-4c16-bf16-639cdd61e47f"
+                LastKnownName="DataStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="72aa2df9-8cfe-4e19-884d-fd1a200474aa"
+            name="MessageOccurrenceSpecification4">
+            <covered>
+              <lifelineMoniker
+                Id="c6c357d9-32a4-4b77-a861-04a0e7cacfe3"
+                LastKnownName="ServiceFacade"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="9fe32107-2865-449b-aa6f-e6a4348200b1"
+            name="ExecutionOccurrenceSpecification2">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="156fabdf-4f4c-43fa-89b9-c6da25b03b22"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="BackendModel.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="a8b15432-5398-4c16-bf16-639cdd61e47f"
+                LastKnownName="DataStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+        </fragments>
+        <lifelines>
+          <lifeline
+            Id="c6c357d9-32a4-4b77-a861-04a0e7cacfe3"
+            name="ServiceFacade"
+            isActor="false"
+            lifelineDisplayName="ServiceFacade">
+            <represents>
+              <propertyMoniker
+                Id="a5501659-3d89-46d2-958a-651e305c169c"
+                LastKnownLocation="BackendModel.uml" />
+            </represents>
+            <topLevelOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="3a5dbd91-389e-419d-94c2-5fe7c8048876"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="BackendModel.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="72aa2df9-8cfe-4e19-884d-fd1a200474aa"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="BackendModel.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="a8b15432-5398-4c16-bf16-639cdd61e47f"
+            name="DataStoreController"
+            isActor="false"
+            lifelineDisplayName="DataStoreController">
+            <represents>
+              <propertyMoniker
+                Id="e3a8df52-d647-41a2-9b45-28bf28e47051"
+                LastKnownLocation="BackendModel.uml" />
+            </represents>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="9b71b846-277f-4d9c-9916-d50599d7364c"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="BackendModel.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="9fe32107-2865-449b-aa6f-e6a4348200b1"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="BackendModel.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="e051332c-180b-455d-9b14-a2468619e59a"
+            name="ConfigurationStore"
+            isActor="false"
+            lifelineDisplayName="ConfigurationStore">
+            <represents>
+              <propertyMoniker
+                Id="77e10ae6-775f-4844-97bf-5b6c398cd8a9"
+                LastKnownLocation="BackendModel.uml" />
+            </represents>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="398c85f7-5e74-40e2-b6d5-7a3aeee84db1"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="BackendModel.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="7b5c6c50-b6d0-4126-a95d-96c5319dc7bd"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="BackendModel.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="71d9d00d-ca2e-4fb5-a6d2-60f3c52da815"
+            name="DataStoreAdapter"
+            isActor="false"
+            lifelineDisplayName="DataStoreAdapter">
+            <represents>
+              <propertyMoniker
+                Id="58aa576a-df92-48f5-b4f2-23ce2360f8df"
+                LastKnownLocation="BackendModel.uml" />
+            </represents>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="210baa7a-21e9-41f7-9ca1-3d209fb98cf2"
+                LastKnownName="ExecutionOccurrenceSpecification5"
+                LastKnownLocation="BackendModel.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="7b10079a-b013-460d-bd43-bb75f0b3592d"
+                LastKnownName="ExecutionOccurrenceSpecification6"
+                LastKnownLocation="BackendModel.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+        </lifelines>
+        <messages>
+          <message
+            Id="2c5e6d56-161a-4557-8a77-478606c10761"
+            name="insertItem(User user, TestPlan testPlan, TestModel testElement)"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false"
+            signatureText="+ insertItem(User user, TestPlan testPlan, TestModel testElement)">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="3a5dbd91-389e-419d-94c2-5fe7c8048876"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="BackendModel.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="ffbef29e-dc45-44a3-beb4-5a57274f7200"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="BackendModel.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="ff311ccc-ba64-4b35-9317-61016cb6547d"
+            name="getTestPlanConfiguration(TestPlan testPlan)"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false"
+            signatureText="+ getTestPlanConfiguration(TestPlan testPlan)">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="20b5a0e4-3ac1-43b3-9279-e3d38bf05e23"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="BackendModel.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="1dade120-6e4e-4070-bfb3-68b4e786e337"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="BackendModel.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="a6eeebc0-36cb-4b37-8a07-c9e7d1e7ff77"
+            name="TestPlanConfiguration"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="737ae5bb-7393-4022-84f4-9f194d156adf"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="BackendModel.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="6c47c033-8a03-4711-9def-52eb2825170e"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="BackendModel.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="00ac3266-713d-4c04-b89c-b441455861bd"
+            name="insertItem(User user, TestPlan testPlan, TestModel testElement)"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false"
+            signatureText="+ insertItem(User user, TestPlan testPlan, TestModel testElement)">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="6904bdf4-8a31-4a39-9227-05c32dba3794"
+                LastKnownName="MessageOccurrenceSpecification9"
+                LastKnownLocation="BackendModel.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="6140f4ee-b42f-4f08-8b7b-591914ccd6b6"
+                LastKnownName="MessageOccurrenceSpecification10"
+                LastKnownLocation="BackendModel.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="edc89e15-b7ce-429a-b08b-769e50b7e8dd"
+            name="OperationSuccesful"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="36005652-e7e5-4a1c-afde-b884a3f7d000"
+                LastKnownName="MessageOccurrenceSpecification11"
+                LastKnownLocation="BackendModel.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="53c9b17c-63b6-4cba-b2b8-b677ba0b246e"
+                LastKnownName="MessageOccurrenceSpecification12"
+                LastKnownLocation="BackendModel.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="ae84c737-0413-4b34-a8e3-fb6e1accd1f8"
+            name="OperationSuccessful"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="23122ca4-1d7d-44b5-8cf1-71fb0da703a4"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="BackendModel.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="72aa2df9-8cfe-4e19-884d-fd1a200474aa"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="BackendModel.uml" />
+            </receiveEvent>
+          </message>
+        </messages>
+        <ownedAttributesInternal>
+          <property
+            Id="34917105-3392-4e44-92b9-c7b4e5238292"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="40c9d93d-e0fd-467b-ad7e-da597a3c6e99"
+                LastKnownName="Lifeline1"
+                LastKnownLocation="BackendModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="a5501659-3d89-46d2-958a-651e305c169c"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="736f180b-7596-4021-a198-3a6c12425d6e"
+                LastKnownName="ServiceFacade"
+                LastKnownLocation="BackendModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="e3a8df52-d647-41a2-9b45-28bf28e47051"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="30105644-714e-4c74-b547-cc6f9b3c7960"
+                LastKnownName="DataStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="77e10ae6-775f-4844-97bf-5b6c398cd8a9"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="74ac3989-ffac-4a3f-a146-757a9e6c24f2"
+                LastKnownName="ConfigurationStore"
+                LastKnownLocation="BackendModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="58aa576a-df92-48f5-b4f2-23ce2360f8df"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="ad1a9dcd-f793-4024-9d1e-6ed48b11b1b7"
+                LastKnownName="DataStoreAdapter"
+                LastKnownLocation="BackendModel.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </interaction>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="40c9d93d-e0fd-467b-ad7e-da597a3c6e99"
+        name="Lifeline1"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="736f180b-7596-4021-a198-3a6c12425d6e"
+        name="ServiceFacade"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="05da1c21-3ebc-4c1b-a063-ac3ef194d8f1"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="156fabdf-4f4c-43fa-89b9-c6da25b03b22"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <sendOperationEvent
+        Id="31d4a581-9d00-474f-a92b-dbb50afbac06">
+        <operation>
+          <operationMoniker
+            Id="df9daed8-09f4-4517-90ee-daab2cb047c0"
+            LastKnownName="insertItem"
+            LastKnownLocation="BackendModel.uml" />
+        </operation>
+      </sendOperationEvent>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <receiveOperationEvent
+        Id="292ea804-b9cd-4186-bd24-d40fcdc0730b">
+        <operation>
+          <operationMoniker
+            Id="df9daed8-09f4-4517-90ee-daab2cb047c0"
+            LastKnownName="insertItem"
+            LastKnownLocation="BackendModel.uml" />
+        </operation>
+      </receiveOperationEvent>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="e537e9d9-723b-48e2-93bd-53f6412b4ec5"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="18b275b3-5032-405e-821d-05a851263b0b"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <sendOperationEvent
+        Id="3c24cd38-eb6c-48c3-9b51-140e80d88a1c">
+        <operation>
+          <operationMoniker
+            Id="a9efcb40-7616-42d4-8a64-921f98265434"
+            LastKnownName="getTestPlanConfiguration"
+            LastKnownLocation="BackendModel.uml" />
+        </operation>
+      </sendOperationEvent>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <receiveOperationEvent
+        Id="8c1e44ef-0476-4282-b727-0d8198b7ac32">
+        <operation>
+          <operationMoniker
+            Id="a9efcb40-7616-42d4-8a64-921f98265434"
+            LastKnownName="getTestPlanConfiguration"
+            LastKnownLocation="BackendModel.uml" />
+        </operation>
+      </receiveOperationEvent>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="65b322a0-fed9-4f05-a6df-767fd5d1301f"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="2e73a3d0-cb45-4856-8f07-bebe59012c23"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <sendOperationEvent
+        Id="e5bdbecd-e8eb-4e24-b5b9-89a84fc54b95">
+        <operation>
+          <operationMoniker
+            Id="a1267a6b-af87-4043-8835-69d19afe246c"
+            LastKnownName="insertItem"
+            LastKnownLocation="BackendModel.uml" />
+        </operation>
+      </sendOperationEvent>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <receiveOperationEvent
+        Id="e987d320-b964-4f41-9a10-d6b456e80dea">
+        <operation>
+          <operationMoniker
+            Id="a1267a6b-af87-4043-8835-69d19afe246c"
+            LastKnownName="insertItem"
+            LastKnownLocation="BackendModel.uml" />
+        </operation>
+      </receiveOperationEvent>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <interaction
+        Id="870c188f-f772-42e3-aab2-312cfc93a39f"
+        name="UploadFileSequenceDiagram"
+        collapseFragmentsFlag="false"
+        isActiveClass="false"
+        isAbstract="false"
+        isLeaf="false"
+        isReentrant="false">
+        <fragments>
+          <behaviorExecutionSpecification
+            Id="8c470233-f3d5-47e8-a82c-6db4dbd22d07"
+            name="BehaviorExecutionSpecification1">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="df1dfef7-1334-4e75-8447-a3b14449d3f6"
+                LastKnownName="FileStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="becb639f-21c9-4a12-a4da-b5ca324b59c5"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="BackendModel.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="0529ef85-1b35-4089-a720-8ee0e1d305d4"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="BackendModel.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="e75dde1d-9962-47dd-9590-3ee181386f8e"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="BackendModel.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="327acf31-c43e-46de-9c1e-21d3d182f8f4"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="BackendModel.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="0529ef85-1b35-4089-a720-8ee0e1d305d4"
+            name="ExecutionOccurrenceSpecification1">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="a4b81f76-c2c7-42f8-a878-dae4d53ee8bd"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="BackendModel.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="df1dfef7-1334-4e75-8447-a3b14449d3f6"
+                LastKnownName="FileStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="3340ca18-0131-4d77-b7d4-c1c950426400"
+            name="MessageOccurrenceSpecification1">
+            <event>
+              <sendOperationEventMoniker
+                Id="fbae3f7c-e845-4acc-986d-9b8adf3001f0"
+                LastKnownLocation="BackendModel.uml" />
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="777e8c11-4723-43e2-a2e6-12b285ebe680"
+                LastKnownName="ServiceFacade"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="e75dde1d-9962-47dd-9590-3ee181386f8e"
+            name="MessageOccurrenceSpecification2">
+            <event>
+              <receiveOperationEventMoniker
+                Id="889e46bb-1977-47f6-b744-0d1281ad92d9"
+                LastKnownLocation="BackendModel.uml" />
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="df1dfef7-1334-4e75-8447-a3b14449d3f6"
+                LastKnownName="FileStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="327acf31-c43e-46de-9c1e-21d3d182f8f4"
+            name="MessageOccurrenceSpecification3">
+            <covered>
+              <lifelineMoniker
+                Id="df1dfef7-1334-4e75-8447-a3b14449d3f6"
+                LastKnownName="FileStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="2e74deb2-7088-4ab3-8983-19771fa5fe69"
+            name="MessageOccurrenceSpecification4">
+            <covered>
+              <lifelineMoniker
+                Id="777e8c11-4723-43e2-a2e6-12b285ebe680"
+                LastKnownName="ServiceFacade"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="becb639f-21c9-4a12-a4da-b5ca324b59c5"
+            name="ExecutionOccurrenceSpecification2">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="ae158d9d-39d4-4de3-ab15-a190ab320cdb"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="BackendModel.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="df1dfef7-1334-4e75-8447-a3b14449d3f6"
+                LastKnownName="FileStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <behaviorExecutionSpecification
+            Id="2b840df2-e029-4388-a582-485a1e2106a1"
+            name="BehaviorExecutionSpecification2">
+            <coveredLifelines>
+              <lifelineMoniker
+                Id="3d0165d3-3a7b-436a-8767-20aa597f5b90"
+                LastKnownName="DataStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </coveredLifelines>
+            <finish>
+              <executionOccurrenceSpecificationMoniker
+                Id="5d95e023-f874-4c5e-adba-2a7fba4bf862"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="BackendModel.uml" />
+            </finish>
+            <start>
+              <executionOccurrenceSpecificationMoniker
+                Id="2ce3756d-059a-41b6-b2ff-8714510b8fbe"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="BackendModel.uml" />
+            </start>
+            <nestedOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="f8f13924-e683-43d1-bce7-57ff380b4149"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="BackendModel.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="3c61cc7a-c828-41e8-8dee-d23fe95f38cf"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="BackendModel.uml" />
+            </nestedOccurrences>
+          </behaviorExecutionSpecification>
+          <executionOccurrenceSpecification
+            Id="2ce3756d-059a-41b6-b2ff-8714510b8fbe"
+            name="ExecutionOccurrenceSpecification3">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="49ccfbe9-691e-4643-9232-eb59150973cf"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="BackendModel.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3d0165d3-3a7b-436a-8767-20aa597f5b90"
+                LastKnownName="DataStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="665cf3a9-22c4-49cb-84b3-dffb92199c21"
+            name="MessageOccurrenceSpecification5">
+            <event>
+              <sendOperationEventMoniker
+                Id="15fa5e87-875c-44fc-a465-eb52693397d9"
+                LastKnownLocation="BackendModel.uml" />
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="777e8c11-4723-43e2-a2e6-12b285ebe680"
+                LastKnownName="ServiceFacade"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="f8f13924-e683-43d1-bce7-57ff380b4149"
+            name="MessageOccurrenceSpecification6">
+            <event>
+              <receiveOperationEventMoniker
+                Id="63c1f2b5-03e9-46af-b6ce-25209644f60d"
+                LastKnownLocation="BackendModel.uml" />
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3d0165d3-3a7b-436a-8767-20aa597f5b90"
+                LastKnownName="DataStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="3c61cc7a-c828-41e8-8dee-d23fe95f38cf"
+            name="MessageOccurrenceSpecification7">
+            <covered>
+              <lifelineMoniker
+                Id="3d0165d3-3a7b-436a-8767-20aa597f5b90"
+                LastKnownName="DataStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="3223b1c0-8153-4ecd-b038-03953e098bcc"
+            name="MessageOccurrenceSpecification8">
+            <covered>
+              <lifelineMoniker
+                Id="777e8c11-4723-43e2-a2e6-12b285ebe680"
+                LastKnownName="ServiceFacade"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <executionOccurrenceSpecification
+            Id="5d95e023-f874-4c5e-adba-2a7fba4bf862"
+            name="ExecutionOccurrenceSpecification4">
+            <event>
+              <executionOccurrenceSpecificationReferencesEvent>
+                <executionEventMoniker
+                  Id="1df81c3c-f7fa-493d-afd0-f3de34547d5d"
+                  LastKnownName="ExecutionEvent"
+                  LastKnownLocation="BackendModel.uml" />
+              </executionOccurrenceSpecificationReferencesEvent>
+            </event>
+            <covered>
+              <lifelineMoniker
+                Id="3d0165d3-3a7b-436a-8767-20aa597f5b90"
+                LastKnownName="DataStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </covered>
+          </executionOccurrenceSpecification>
+        </fragments>
+        <lifelines>
+          <lifeline
+            Id="777e8c11-4723-43e2-a2e6-12b285ebe680"
+            name="ServiceFacade"
+            isActor="false"
+            lifelineDisplayName="ServiceFacade">
+            <represents>
+              <propertyMoniker
+                Id="e64dbb44-2e37-4b07-984c-06e7e8d388ea"
+                LastKnownLocation="BackendModel.uml" />
+            </represents>
+            <topLevelOccurrences>
+              <messageOccurrenceSpecificationMoniker
+                Id="3340ca18-0131-4d77-b7d4-c1c950426400"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="BackendModel.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="2e74deb2-7088-4ab3-8983-19771fa5fe69"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="BackendModel.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="665cf3a9-22c4-49cb-84b3-dffb92199c21"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="BackendModel.uml" />
+              <messageOccurrenceSpecificationMoniker
+                Id="3223b1c0-8153-4ecd-b038-03953e098bcc"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="BackendModel.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="df1dfef7-1334-4e75-8447-a3b14449d3f6"
+            name="FileStoreController"
+            isActor="false"
+            lifelineDisplayName="FileStoreController">
+            <represents>
+              <propertyMoniker
+                Id="be735b47-db15-461e-b124-2fc315814f93"
+                LastKnownLocation="BackendModel.uml" />
+            </represents>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="0529ef85-1b35-4089-a720-8ee0e1d305d4"
+                LastKnownName="ExecutionOccurrenceSpecification1"
+                LastKnownLocation="BackendModel.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="becb639f-21c9-4a12-a4da-b5ca324b59c5"
+                LastKnownName="ExecutionOccurrenceSpecification2"
+                LastKnownLocation="BackendModel.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+          <lifeline
+            Id="3d0165d3-3a7b-436a-8767-20aa597f5b90"
+            name="DataStoreController"
+            isActor="false"
+            lifelineDisplayName="DataStoreController">
+            <represents>
+              <propertyMoniker
+                Id="a08c5380-ce47-489e-8be0-d9ab955da442"
+                LastKnownLocation="BackendModel.uml" />
+            </represents>
+            <topLevelOccurrences>
+              <executionOccurrenceSpecificationMoniker
+                Id="2ce3756d-059a-41b6-b2ff-8714510b8fbe"
+                LastKnownName="ExecutionOccurrenceSpecification3"
+                LastKnownLocation="BackendModel.uml" />
+              <executionOccurrenceSpecificationMoniker
+                Id="5d95e023-f874-4c5e-adba-2a7fba4bf862"
+                LastKnownName="ExecutionOccurrenceSpecification4"
+                LastKnownLocation="BackendModel.uml" />
+            </topLevelOccurrences>
+          </lifeline>
+        </lifelines>
+        <messages>
+          <message
+            Id="3649097b-cb59-41c4-90b6-64c5ed3464c1"
+            name="uploadNewFile(User user, File file)"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false"
+            signatureText="+ uploadNewFile(User user, File file)">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="3340ca18-0131-4d77-b7d4-c1c950426400"
+                LastKnownName="MessageOccurrenceSpecification1"
+                LastKnownLocation="BackendModel.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="e75dde1d-9962-47dd-9590-3ee181386f8e"
+                LastKnownName="MessageOccurrenceSpecification2"
+                LastKnownLocation="BackendModel.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="703aa58a-beff-4f3f-960c-00e43817bdf6"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="327acf31-c43e-46de-9c1e-21d3d182f8f4"
+                LastKnownName="MessageOccurrenceSpecification3"
+                LastKnownLocation="BackendModel.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="2e74deb2-7088-4ab3-8983-19771fa5fe69"
+                LastKnownName="MessageOccurrenceSpecification4"
+                LastKnownLocation="BackendModel.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="62a9d394-2dc3-47c2-8481-0bf89af969c2"
+            name="insertNewFile(User user, TestPlan testPlan, FileInfo info)"
+            messageKind="Complete"
+            messageSort="SynchCall"
+            createSelfMessage="false"
+            signatureText="+ insertNewFile(User user, TestPlan testPlan, FileInfo info)">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="665cf3a9-22c4-49cb-84b3-dffb92199c21"
+                LastKnownName="MessageOccurrenceSpecification5"
+                LastKnownLocation="BackendModel.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="f8f13924-e683-43d1-bce7-57ff380b4149"
+                LastKnownName="MessageOccurrenceSpecification6"
+                LastKnownLocation="BackendModel.uml" />
+            </receiveEvent>
+          </message>
+          <message
+            Id="c410990a-b5a0-48f0-811d-56b5d092af7c"
+            name="&lt;&lt;return&gt;&gt;"
+            messageKind="Complete"
+            messageSort="Reply"
+            createSelfMessage="false">
+            <sendEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="3c61cc7a-c828-41e8-8dee-d23fe95f38cf"
+                LastKnownName="MessageOccurrenceSpecification7"
+                LastKnownLocation="BackendModel.uml" />
+            </sendEvent>
+            <receiveEvent>
+              <messageOccurrenceSpecificationMoniker
+                Id="3223b1c0-8153-4ecd-b038-03953e098bcc"
+                LastKnownName="MessageOccurrenceSpecification8"
+                LastKnownLocation="BackendModel.uml" />
+            </receiveEvent>
+          </message>
+        </messages>
+        <ownedAttributesInternal>
+          <property
+            Id="e64dbb44-2e37-4b07-984c-06e7e8d388ea"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="736f180b-7596-4021-a198-3a6c12425d6e"
+                LastKnownName="ServiceFacade"
+                LastKnownLocation="BackendModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="be735b47-db15-461e-b124-2fc315814f93"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="fcfc389a-a9e3-41ef-a794-14df7fd3f708"
+                LastKnownName="FileStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="a08c5380-ce47-489e-8be0-d9ab955da442"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <classMoniker
+                Id="30105644-714e-4c74-b547-cc6f9b3c7960"
+                LastKnownName="DataStoreController"
+                LastKnownLocation="BackendModel.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributesInternal>
+      </interaction>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="fcfc389a-a9e3-41ef-a794-14df7fd3f708"
+        name="FileStoreController"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <ownedOperationsInternal>
+          <operation
+            Id="66c62b3f-def9-4f3c-9224-49095e5d0374"
+            name="uploadNewFile"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="5aafbd65-2bde-47ed-9cc2-3b4f57301a77"
+                  name="User user"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="927fcc9f-588e-4035-b3fb-a3a8210113ee"
+                  name="File file"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="a4b81f76-c2c7-42f8-a878-dae4d53ee8bd"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="ae158d9d-39d4-4de3-ab15-a190ab320cdb"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <sendOperationEvent
+        Id="fbae3f7c-e845-4acc-986d-9b8adf3001f0">
+        <operation>
+          <operationMoniker
+            Id="66c62b3f-def9-4f3c-9224-49095e5d0374"
+            LastKnownName="uploadNewFile"
+            LastKnownLocation="BackendModel.uml" />
+        </operation>
+      </sendOperationEvent>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <receiveOperationEvent
+        Id="889e46bb-1977-47f6-b744-0d1281ad92d9">
+        <operation>
+          <operationMoniker
+            Id="66c62b3f-def9-4f3c-9224-49095e5d0374"
+            LastKnownName="uploadNewFile"
+            LastKnownLocation="BackendModel.uml" />
+        </operation>
+      </receiveOperationEvent>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="49ccfbe9-691e-4643-9232-eb59150973cf"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <executionEvent
+        Id="1df81c3c-f7fa-493d-afd0-f3de34547d5d"
+        name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <sendOperationEvent
+        Id="15fa5e87-875c-44fc-a465-eb52693397d9">
+        <operation>
+          <operationMoniker
+            Id="ecf1ea7c-5dd5-4760-bc38-aee5d1d64114"
+            LastKnownName="insertNewFile"
+            LastKnownLocation="BackendModel.uml" />
+        </operation>
+      </sendOperationEvent>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <receiveOperationEvent
+        Id="63c1f2b5-03e9-46af-b6ce-25209644f60d">
+        <operation>
+          <operationMoniker
+            Id="ecf1ea7c-5dd5-4760-bc38-aee5d1d64114"
+            LastKnownName="insertNewFile"
+            LastKnownLocation="BackendModel.uml" />
+        </operation>
+      </receiveOperationEvent>
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
