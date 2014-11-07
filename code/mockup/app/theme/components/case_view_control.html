@@ -1,5 +1,5 @@
 <div ng-repeat="case in suite.children | filter:search_box"> <!-- loop of the cases -->
-  <div class="{{ case.type }} arch fadeInUp animated test-case {{ toggleClass($index) }}">
+  <div class="{{ case.type }} arch fadeInUp animated test-case {{ toggleClass($index) }}" draggable="true">
     <div class="input-group input-group{{ case.size }}">
       <span class="input-group-addon">
         <span class="glyphicon {{ toggleButton($index) }}" data-placement="bottom"

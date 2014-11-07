@@ -274,7 +274,6 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 
 	function addEntry(entry) {
 		$scope.entries.push(entry);
-		$("#myModal").modal();
 	};
 
 	function addSubEntry(index) {
@@ -446,6 +445,21 @@ angular.module('initProjApp').directive("tfContextmenu", function() {
 	    	e.preventDefault();
 	    	$("<div class='custom-menu'>Custom menu</div>").appendTo("body").css({top: e.pageY + "px", left: e.pageX + "px"});
 		});
+		return false;
+	};
+});
+
+angular.module('initProjApp').directive("tfDraggable", function() {
+	return function(scope, element, attributes) {
+		$(element).bind("dragstart", function(e) {
+	    	ev.dataTransfer.setData("dragId", ev.target.id);
+		});
+		return false;
+	};
+});
+
+angular.module('initProjApp').directive("tfDrop", function() {
+	return function(scope, element, attributes) {
 		return false;
 	};
 });
