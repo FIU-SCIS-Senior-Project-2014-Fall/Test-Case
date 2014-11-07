@@ -2,7 +2,7 @@ $icon-font-path: "../fonts/";
 // bower:scss
 // endbower
 // hi
-.container {
+.container-fluid {
   margin-left:0px;
   padding-left:0px;
 }
@@ -17,15 +17,30 @@ $icon-font-path: "../fonts/";
 }
 
 /* Space out content a bit */
-body, .MainBody, html, .container {
+body, .MainBody, html, .container-fluid {
   min-height:100% !important;
   height:100% !important;
 }
 
+#top-bar {
+  position:relative;
+  background-color:#8dc641;
+  padding:10px 10px;
+  box-shadow:0px 0px 5px rgba(0,0,0,0.5);
+  z-index:1010 !important;
+
+  .nav-inline { margin:0px; padding:0px; list-style-type: none; }
+  .nav-inline li { display: inline; float: left; margin-right:5px; }
+}
+
 .heading {
   margin-bottom:25px;
-  margin-top:15px;
   z-index:1001 !important;
+  background-color:#9a8c7e;
+  padding:10px 0px;
+  a {
+    color:#ffffff;
+  }
 }
 
 .dropdown-menu, .animation {
@@ -53,11 +68,7 @@ body, .MainBody, html, .container {
 
 .leftPaneWrapper {
   height:100%;
-}
-
-#LeftPane {
   background-color:#333333;
-  color:#dadada;
   background: #444444; /* Old browsers */
   background: -moz-linear-gradient(left, #444444 7%, #333333 99%, #333333 99%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, right top, color-stop(7%,#444444), color-stop(99%,#333333), color-stop(99%,#333333)); /* Chrome,Safari4+ */
@@ -66,6 +77,10 @@ body, .MainBody, html, .container {
   background: -ms-linear-gradient(left, #444444 7%,#333333 99%,#333333 99%); /* IE10+ */
   background: linear-gradient(to right, #444444 7%,#333333 99%,#333333 99%); /* W3C */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#444444', endColorstr='#333333',GradientType=1 ); /* IE6-9 */
+}
+
+#LeftPane {
+  color:#dadada;
   padding-top:10px;
   min-height:100%;
   overflow:hidden;

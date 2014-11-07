@@ -7,7 +7,7 @@
         </div>
         <div class="col-md-9 fadeIn animated">
           <div class="row heading">
-            <div class="col-md-7">
+            <div class="col-md-5">
               <div class="input-group">
                 <div class="input-group-btn">
                   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Context <span class="caret"></span></button>
@@ -22,63 +22,30 @@
                 </span>
               </div><!-- /input-group -->
             </div>
-            <div class="col-md-5">
+            <div class="col-md-7">
             <ul class="nav nav-pills pull-right fadeInDown animated">
-              <li class="dropdown active">
-                  <a data-toggle="dropdown">Workspace <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                    <li><a ng-href="/">Requested Layout</a></li>
-                    <li><a ng-href="#/alternative">Alternative Layout</a></li>
-                  </ul>
+              <li>
+                <div class="btn-group">
+                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;&nbsp;View</button>
+                  <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;&nbsp;Edit</button>
+                </div>
               </li>
-              <li><a href="#">Help</a></li>
-              <li><a ng-href="login.html">Logout</a></li>
-              <li class="dropdown">
-                  <a data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span></a>
-                  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                    <li><a href="#"><span class="glyphicon glyphicon-inbox"></span> Configure Test Case Management</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-hdd"></span> Configure Repository</a></li>
-                  </ul>
+              <li><button class="btn btn-primary commit"><span class="glyphicon glyphicon-repeat"></span> Sync</button></li>
+              <li>
+                  <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                      <span class="glyphicon glyphicon-cog"></span> Configure Test Plan
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Hosts</a></li>
+                      <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Repositories</a></li>
+                    </ul>
+                  </div>
               </li>
             </ul>
             </div>
           </div>
-  <div class="row">
-      <div class="col-md-6">
-        <ol class="breadcrumb">
-          <li><a>Workspace</a></li>
-          <li class="active">{{ suite.name }}</li>
-        </ol>
-      </div>
-      <!--
-      <div class="col-md-5">
-        <div class="input-group pull-right">
-          <span class="input-group-addon"><span class="glyphicon glyphicon-hdd"></span> Storage</span>
-          <div class="input-group-btn">
-            <button type="button" class="btn btn-primary" disabled="disabled">Local</button>
-            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-                TFS
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-              <li role="presentation" ng-class="{active: hasStore(active.root, 'TFS:Server 1')}"><a role="menuitem" tabindex="-1" ng-click="toggleStore(active.root, 'TFS:Server 1')">Server 1</a></li>
-              <li role="presentation" ng-class="{active: hasStore(active.root, 'TFS:Server 2')}"><a role="menuitem" tabindex="-1" ng-click="toggleStore(active.root, 'TFS:Server 2')">Server 2</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      -->
-      <div class="col-md-6">
-        <div class="btn-group pull-left">
-          <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-lock"></span>&nbsp;&nbsp;&nbsp;View</button>
-          <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;&nbsp;Edit</button>
-        </div>
-        <div class="pull-right">
-          <button class="btn btn-primary commit"><span class="glyphicon glyphicon-plus"></span> Commit</button>
-          <button class="btn btn-danger commit"><span class="glyphicon glyphicon-repeat"></span> Revert</button>
-        </div>
-      </div>
-    </div>
     <div id="workspace">
       <div ng-include src="'theme/components/suite_view_control.html'"></div>
     <button class="btn btn-default" ng-click="clearStorage()">Clear Storage</button>
@@ -142,25 +109,3 @@
  
     </script> 
   </head> 
-     <span custom-popover></span>
-
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">Metrics Test Case 1</h4>
-      </div>
-      <div class="modal-body">
-        <canvas id="myChart" width="400" height="400"></canvas> 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>      
-      

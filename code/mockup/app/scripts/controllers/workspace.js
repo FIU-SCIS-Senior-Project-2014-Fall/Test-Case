@@ -274,6 +274,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 
 	function addEntry(entry) {
 		$scope.entries.push(entry);
+		$("#myModal").modal();
 	};
 
 	function addSubEntry(index) {
