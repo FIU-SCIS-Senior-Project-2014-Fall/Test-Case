@@ -2,6 +2,11 @@ $icon-font-path: "../fonts/";
 // bower:scss
 // endbower
 // hi
+
+body {
+  background-color:#dadada;
+}
+
 .container-fluid {
   margin-left:0px;
   padding-left:0px;
@@ -14,6 +19,16 @@ $icon-font-path: "../fonts/";
 
 .no-show {
   display:none !important;
+}
+
+.search input {
+  height:33px;
+}
+
+.panel-group .panel {
+  border-radius:0px;
+  border:1px none;
+  box-shadow:0px 0px 15px rgba(0,0,0,0.20);
 }
 
 /* Space out content a bit */
