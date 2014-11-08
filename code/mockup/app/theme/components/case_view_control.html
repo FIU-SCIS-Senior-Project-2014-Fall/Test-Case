@@ -1,7 +1,7 @@
 <div ng-repeat="case in suite.children track by $index | filter:search_box"> <!-- loop of the cases -->
-  <div ng-if="$index == 0" class="droppable" tf-drop="0">&nbsp;</div>
-  <div class="{{ case.type }} arch fadeInUp animated test-case {{ toggleClass($index) }}" id="case{{$index}}" draggable="true" tf-draggable>
-    <div class="input-group input-group{{ case.size }}">
+  <div ng-if="$index == 0" class="droppable" tf-drop="0" data-drag="caseDrag">&nbsp;</div>
+  <div class="{{ case.type }} arch fadeInUp animated test-case {{ toggleClass($index) }}">
+    <div class="input-group test-case input-group{{ case.size }}" id="case{{$index}}" draggable="true" tf-draggable>
       <span class="input-group-addon">
         <span class="glyphicon {{ toggleButton($index) }}" data-placement="bottom"
     title="Hide Children" ng-click="toggle($index)"></span>
@@ -35,7 +35,7 @@
     </div><!-- /input-group -->
     <div class="case-data">
       <div id="case-body{{ case.id }}" class="animation case-body">
-        <div ng-include="'theme/components/step_view_control.html'"></div>
+        <div ng-include="'theme/components/step_view_control.html'" class="data-drag drag-container" data-drag="stepDrag"></div>
       </div>
       <div class="item-summary {{ toggleDetailsClass($index) }}">
         <div class="clearfix cf details">
@@ -53,5 +53,5 @@
       </div>
     </div>
   </div>
-  <div class="droppable" tf-drop="{{$index + 1}}">&nbsp;</div>
+  <div class="droppable" tf-drop="{{$index + 1}}" data-drag="caseDrag">&nbsp;</div>
 </div>

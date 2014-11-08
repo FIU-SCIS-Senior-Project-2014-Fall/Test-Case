@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the initProjApp
  */
- var keys = {}, dragId = -1; // evil global and drag flag
+ var keys = {}, dragId = -1, dragParent = {}; // evil global and drag flag
 
 angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, storage) {
 
@@ -245,6 +245,13 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 			return "";
 	};
 
+	$scope.isFirst = function(index, css) {
+		if(index <= 0)
+			return css;
+		else
+			return "";
+	}
+
     $scope.addCaseClicked = function(index) {
     	addSubEntry(index, -1);
     };
@@ -427,12 +434,53 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		}, 500);
 	}
 
-	$scope.changeOrder = function(id, newPosition) {
+	$scope.changeSuiteOrder = function(id, newPosition) {
+		var index = id.replace("suite", "");
+		if(index == newPosition - 1)
+			return;
+		if(newPosition > index)
+			newPosition--;
+		var temp = $scope.entries[index];
+		console.log(index + ", " + id + ", " + newPosition);
+		$scope.entries.splice(index, 1);
+		if($scope.entries <= newPosition)
+			newPosition = $scope.entries.length;
+		$scope.entries.splice(newPosition, 0, temp);
+	};
+
+	$scope.changeCaseOrder = function(id, newPosition) {
 		var index = id.replace("case", "");
+		if(index == newPosition - 1)
+			return;
+		if(newPosition > index)
+			newPosition--;
 		var temp = $scope.suite.children[index];
 		console.log(index + ", " + id + ", " + newPosition);
 		$scope.suite.children.splice(index, 1);
+		if($scope.suite.children.length <= newPosition)
+			newPosition = $scope.suite.children.length;
 		$scope.suite.children.splice(newPosition, 0, temp);
+	};
+
+	$scope.changeStepOrder = function(id, newPosition, parent) {
+		console.log(index + ", " + id + ", " + newPosition + ", " + parent);
+		var index = id.replace("step", "");
+		if(index == newPosition - 1)
+			return;
+		if(newPosition > index)
+			newPosition--;
+		var temp = $scope.suite.children[parent].children[index];
+		$scope.suite.children[parent].children.splice(index, 1);
+		if($scope.suite.children[parent].children.length <= newPosition)
+			newPosition = $scope.suite.children[parent].children.length;
+		$scope.suite.children[parent].children.splice(newPosition, 0, temp);
+	};
+
+	$scope.addIf = function(add, ifNum, compNum) {
+		if(ifNum == compNum)
+			return compNum + add;
+		else
+			return compNum;
 	};
 
 	function sizeByType(type) {
@@ -477,12 +525,14 @@ angular.module('initProjApp').directive("tfContextmenu", function() {
 angular.module('initProjApp').directive("tfDraggable", function() {
 	return function(scope, element, attributes) {
 		element.bind("dragstart", function(e) {
-			$(element).parents(".siblings-container").addClass("dragging");
+			var dragEle = $(element).closest(".data-drag");
+			dragEle.addClass("dragging");
+			dragParent = dragEle.attr("data-drag");
 	    	dragId = e.target.id;
 		});
 		
 		element.bind("dragend", function(e) {
-			$(element).parents(".siblings-container").removeClass("dragging");
+			$(element).closest(".drag-container").removeClass("dragging");
 			$(".droppable").removeClass("drag-hover");
 	    	dragId = -1;
 		});
@@ -493,17 +543,28 @@ angular.module('initProjApp').directive("tfDraggable", function() {
 angular.module('initProjApp').directive("tfDrop", function() {
 	return function(scope, element, attributes) {
 		element.bind("dragover", function(e) {
-			ignoreDrag(e);
-			$(this).addClass("drag-hover");
+			if(dragParent == element.attr("data-drag")) {
+				ignoreDrag(e);
+				$(this).addClass("drag-hover");
+			}
 		});
 		element.bind("dragleave", function(e) {
-			ignoreDrag(e);
-			$(this).removeClass("drag-hover");
+			if(dragParent == element.attr("data-drag")) {
+				ignoreDrag(e);
+				$(this).removeClass("drag-hover");
+			}
 		});
 		element.bind("drop", function(e) {
-			ignoreDrag(e);
-			scope.changeOrder(dragId, attributes.tfDrop);
-			scope.$apply();
+			if(dragParent == element.attr("data-drag")) {
+				ignoreDrag(e);
+				if($("#" + dragId).hasClass("test-suite"))
+					scope.changeSuiteOrder(dragId, attributes.tfDrop);
+				else if($("#" + dragId).hasClass("test-case"))
+					scope.changeCaseOrder(dragId, attributes.tfDrop);
+				else if($("#" + dragId).hasClass("test-step"))
+					scope.changeStepOrder(dragId, attributes.tfDrop, $("#" + dragId).attr("parent"));
+				scope.$apply();
+			}
 		});
 		return false;
 	};

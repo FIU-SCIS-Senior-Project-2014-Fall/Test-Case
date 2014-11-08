@@ -249,6 +249,30 @@ body, .MainBody, html, .container-fluid {
   z-index:100 !important;
 }
 
+/* drag n drop */
+.droppable {
+    height:0px;
+    overflow:hidden;
+    display:block;
+  }
+  .dragging {
+  border:3px solid #8dc641;
+  .droppable {
+    height:15px;
+    display:block !important;
+    -webkit-transition: ease-out .25s;
+    -moz-transition: ease-out .25s;
+    -o-transition: ease-out .25s;
+    transition: ease-out .25s;
+    border:1px dashed #dadada;
+  }
+  .droppable.drag-hover {
+    border: 2px solid #8dc641;
+    height: 34px;
+    cursor:default !important;
+  }
+}
+
 #workspace {
   position:relative;
   z-index:100 !important;
@@ -356,26 +380,6 @@ body, .MainBody, html, .container-fluid {
       margin-left:8px;
     }
   }
-  .droppable {
-    height:0px;
-    overflow:hidden;
-  }
-  .dragging {
-  border:3px solid #8dc641;
-  .droppable {
-    height:15px;
-    -webkit-transition: ease-out .25s;
-    -moz-transition: ease-out .25s;
-    -o-transition: ease-out .25s;
-    transition: ease-out .25s;
-    border:1px dashed #dadada;
-  }
-  .droppable.drag-hover {
-    border: 2px solid #8dc641;
-    height: 34px;
-    cursor:default !important;
-  }
-}
 
   .test-expand > .case-data {
     max-height:99999999px;

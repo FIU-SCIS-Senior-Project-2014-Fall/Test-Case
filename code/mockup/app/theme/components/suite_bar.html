@@ -10,8 +10,8 @@
         <input type="text" class="form-control" id="newSuiteText" placeholder="Type new suite name here..." />
       </p>
     </li>
-    <li ng-repeat-start="test in entries" class="droppable" tf-drop="suite{{$index}}">&nbsp;</li>
-    <li class="{{isActive(test.id)}} clearfix cf">
+    <li ng-repeat-start="test in entries" class="no-show{{isFirst($index,' droppable ')}}" tf-drop="0" data-drag="suiteDrag">&nbsp;</li>
+    <li class="{{isActive(test.id)}} clearfix cf test-suite" tf-draggable id="suite{{$index}}" data-parent="-1" data-root="-1"  draggable="true">
       <div class="{{ isSuiteToggle($index) }}">
       <p>
         <span class="controls">
@@ -47,6 +47,6 @@
       </ul>
       </div>
     </li>
-    <li ng-repeat-end class="no-show{{isLast($index, entries, ' droppable ')}}" tf-drop="suite{{$index}}"></li>
+    <li ng-repeat-end class="droppable" tf-drop="{{$index + 1}}" data-drag="suiteDrag"></li>
   </ul>
 </div>

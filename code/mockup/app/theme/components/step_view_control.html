@@ -1,5 +1,6 @@
 <div ng-repeat="step in case.children track by $index | filter:search_box"> <!-- loop of the cases -->
-  <div class="{{ step.type }} arch suite-master fadeInUp animated">
+  <div ng-if="$index == 0" class="droppable" tf-drop="0" data-drag="stepDrag">&nbsp;</div>
+  <div class="{{ step.type }} arch suite-master test-step fadeInUp animated" id="step{{$index}}" parent="{{$parent.$index}}" draggable="true"  tf-draggable>
     <div class="input-group input-group{{ step.size }}">
       <span class="input-group-addon">
         {{$index + 1}}.&nbsp; 
@@ -26,4 +27,5 @@
       </div><!-- /btn-group -->
     </div><!-- /input-group -->
   </div>
+  <div class="droppable" tf-drop="{{$index + 1}}" data-drag="stepDrag">&nbsp;</div>
 </div>
