@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the initProjApp
  */
- var keys = {}; // evil global
+ var keys = {}, dragId = -1; // evil global and drag flag
 
 angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, storage) {
 
@@ -37,7 +37,6 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		"parent" : 0,
 		"parentIndex" : -1,
 		"size" : "",
-		"order" : 0,
 		"tags" : [],
 		"result" : "",
 		"toggle" : false,
@@ -81,13 +80,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		storage.clearAll();
 		storage.bind($scope,'entries');
 		$scope.entries = [];
-		var tmp = $scope.getEntryTemplate();
-		tmp.id = $scope.createId();
-		tmp.name = "Cleared";
-		tmp.type = "suite";
-		tmp.size = sizeByType("suite");
-		tmp.store = ["Local"];
-	    addEntry(tmp);
+		$scope.addSuite();
 	}
 
 	$scope.copySteps = function(index) {
@@ -177,17 +170,32 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	}
 
 	end move */
-
-	$scope.addSuite = function() {
+	$scope.addSuite = function(name, parent, root) {
+		if(typeof name === "undefined" && $("#newSuiteText").val().length <= 0)
+			return;
 		var tmp = $scope.getEntryTemplate();
 	    tmp.id = $scope.createId();
-	    if(typeof name === "undefined")
-		    tmp.name = "New Test Suite";
-		else
-		    tmp.name = name;
+	    if(typeof name === "undefined" && $("#newSuiteText").val().length > 0) {
+	    	tmp.name = $("#newSuiteText").val();
+	    	$("#newSuiteText").val("");
+	    } else
+			tmp.name = "New Suite";
 	    tmp.type = "suite";
 	    tmp. size = sizeByType("suite");
-	    addEntry(tmp);
+	    if(typeof parent === "undefined") {
+	    	addEntry(tmp);
+	    	$scope.makeActive(0);
+	    } else if(typeof root === "undefined") {
+	    	addEntry(tmp, parent);
+	    	if($scope.isSuiteToggle(parent) != "down")
+	    		$scope.toggleSuite(parent);
+	    	$scope.makeActive(0, parent);
+	    } else {
+	    	addEntry(tmp, parent, root);
+	    	if($scope.isSuiteToggle(parent, root) != "down")
+	    		$scope.toggleSuite(parent, root);
+	    	$scope.makeActive(0, parent, root);
+	    }
 	}
 
 	$scope.toggle = function(index, force) {
@@ -229,6 +237,14 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 			return "glyphicon-chevron-down";
 	}
 
+	$scope.isLast = function(index, arr, css) {
+		console.log(index + " , " + arr + " , " + css);
+		if(index >= arr.length - 1)
+			return css;
+		else
+			return "";
+	};
+
     $scope.addCaseClicked = function(index) {
     	addSubEntry(index, -1);
     };
@@ -248,8 +264,6 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 
     $scope.removeStepEntryClicked = function(parent, index) {
     	$scope.suite.children[parent].children.splice(index, 1);
-    	for(var i = index, k = $scope.suite.children[parent].children.length; i < k ; i++)
-    		$scope.suite.children[parent].children[i].order = $scope.suite.children[parent].children[i].order - 1;
     }
 
     $scope.saveEntry = function() {
@@ -272,8 +286,13 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 			addSubEntry();
 	}
 
-	function addEntry(entry) {
-		$scope.entries.push(entry);
+	function addEntry(entry, parent, root) {
+		if(typeof parent === "undefined")
+			$scope.entries.splice(0, 0, entry);
+		else if(typeof root === "undefined")
+			$scope.entries[parent].suites.splice(0, 0, entry);
+		else
+			$scope.entries[root].suites[parent].suites.splice(0, 0, entry);
 	};
 
 	function addSubEntry(index) {
@@ -282,14 +301,12 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		if(typeof index === "undefined") {
 			var type = $scope.typeDownOne($scope.suite.type);
 		    tmp.type = type;
-		    tmp.order = $scope.suite.children.length + 1;
 		    tmp.size = sizeByType(type);
 		    tmp.parent = $scope.suite.id;
 			$scope.suite.children.push(tmp);
 		} else {
 			var type = $scope.typeDownOne($scope.suite.children[index].type);
 		    tmp.type = type;
-		    tmp.order = $scope.suite.children[index].children.length + 1;
 		    tmp.size = sizeByType(type);
 		    tmp.parent = $scope.suite.children[index].id;
 			$scope.suite.children[index].children.push(tmp);
@@ -410,6 +427,14 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		}, 500);
 	}
 
+	$scope.changeOrder = function(id, newPosition) {
+		var index = id.replace("case", "");
+		var temp = $scope.suite.children[index];
+		console.log(index + ", " + id + ", " + newPosition);
+		$scope.suite.children.splice(index, 1);
+		$scope.suite.children.splice(newPosition, 0, temp);
+	};
+
 	function sizeByType(type) {
 		var size = "";
 		switch(type) {
@@ -451,8 +476,15 @@ angular.module('initProjApp').directive("tfContextmenu", function() {
 
 angular.module('initProjApp').directive("tfDraggable", function() {
 	return function(scope, element, attributes) {
-		$(element).bind("dragstart", function(e) {
-	    	ev.dataTransfer.setData("dragId", ev.target.id);
+		element.bind("dragstart", function(e) {
+			$(element).parents(".siblings-container").addClass("dragging");
+	    	dragId = e.target.id;
+		});
+		
+		element.bind("dragend", function(e) {
+			$(element).parents(".siblings-container").removeClass("dragging");
+			$(".droppable").removeClass("drag-hover");
+	    	dragId = -1;
 		});
 		return false;
 	};
@@ -460,6 +492,19 @@ angular.module('initProjApp').directive("tfDraggable", function() {
 
 angular.module('initProjApp').directive("tfDrop", function() {
 	return function(scope, element, attributes) {
+		element.bind("dragover", function(e) {
+			ignoreDrag(e);
+			$(this).addClass("drag-hover");
+		});
+		element.bind("dragleave", function(e) {
+			ignoreDrag(e);
+			$(this).removeClass("drag-hover");
+		});
+		element.bind("drop", function(e) {
+			ignoreDrag(e);
+			scope.changeOrder(dragId, attributes.tfDrop);
+			scope.$apply();
+		});
 		return false;
 	};
 });
@@ -540,3 +585,9 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 	};
 });
 
+
+// drag utilities
+function ignoreDrag(e) {
+  e.stopPropagation();
+  e.preventDefault();
+}

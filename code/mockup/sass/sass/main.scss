@@ -122,17 +122,16 @@ body, .MainBody, html, .container-fluid {
     cursor:pointer;
   }
 
+  .top-tier {
+    padding-top:10px;
+  }
+
   .nav .nav {
-    margin-left:25px;
     -webkit-transition: ease-out .5s;
     -moz-transition: ease-out .5s;
     -o-transition: ease-out .5s;
     transition: ease-out .5s;
     overflow:hidden;
-  }
-
-  .nav .nav .nav {
-    margin-left:50px;
   }
 
   .up .nav, .down .nav .up .nav {
@@ -187,18 +186,20 @@ body, .MainBody, html, .container-fluid {
   
   li.active > div > p, li:hover > div > p:hover, li.active > p, li:hover > p:hover {
     background-color:#111111;
+    cursor:move;
   }
 
   .label {
     margin-right:5px;
   }
   .form-control {
-    border:1px solid #111;
-    background-color:#111;
+    display:inline;
+    width: 250px;
+    border:1px solid #666;
+    background-color:#333;
     color:#ccc;
     border-radius:0px;
-    margin:3px 0px;
-    height:100px;
+    margin:0px 5px;
     -webkit-transition: ease-out .25s;
     -moz-transition: ease-out .25s;
     -o-transition: ease-out .25s;
@@ -207,8 +208,27 @@ body, .MainBody, html, .container-fluid {
   }
 
   .form-control:hover {
-    border:1px solid #666;
-    background-color:#333;
+    border:1px solid #111;
+    background-color:#222;
+  }
+
+  .suite-bar {
+    border-left:1px dotted #999999;
+    margin-left:10px;
+  }
+
+  .up .suite-bar {
+    border-left:1px none;
+    margin-left:25px;
+  }
+
+  .down .suite-bar {
+    border-left:1px dotted #999999;
+    margin-left:25px;
+  }
+
+  .suite-bar .tree-span {
+    color:#999999;
   }
 }
 
@@ -285,6 +305,11 @@ body, .MainBody, html, .container-fluid {
   .step {
     margin-left:10px;
   }
+
+  .test-case {
+    cursor:move;
+  }
+
   .onlyHover {
     width:0px;
     overflow:hidden;
@@ -331,6 +356,26 @@ body, .MainBody, html, .container-fluid {
       margin-left:8px;
     }
   }
+  .droppable {
+    height:0px;
+    overflow:hidden;
+  }
+  .dragging {
+  border:3px solid #8dc641;
+  .droppable {
+    height:15px;
+    -webkit-transition: ease-out .25s;
+    -moz-transition: ease-out .25s;
+    -o-transition: ease-out .25s;
+    transition: ease-out .25s;
+    border:1px dashed #dadada;
+  }
+  .droppable.drag-hover {
+    border: 2px solid #8dc641;
+    height: 34px;
+    cursor:default !important;
+  }
+}
 
   .test-expand > .case-data {
     max-height:99999999px;

@@ -1,5 +1,6 @@
-<div ng-repeat="case in suite.children | filter:search_box"> <!-- loop of the cases -->
-  <div class="{{ case.type }} arch fadeInUp animated test-case {{ toggleClass($index) }}" draggable="true">
+<div ng-repeat="case in suite.children track by $index | filter:search_box"> <!-- loop of the cases -->
+  <div ng-if="$index == 0" class="droppable" tf-drop="0">&nbsp;</div>
+  <div class="{{ case.type }} arch fadeInUp animated test-case {{ toggleClass($index) }}" id="case{{$index}}" draggable="true" tf-draggable>
     <div class="input-group input-group{{ case.size }}">
       <span class="input-group-addon">
         <span class="glyphicon {{ toggleButton($index) }}" data-placement="bottom"
@@ -8,7 +9,6 @@
     title="Create new case {{ case.type }}" ng-click="addStepClicked($index)"></span>
         <span class="glyphicon glyphicon-remove onlyHover" data-toggle="tooltip" data-placement="bottom"
     title="Delete case {{ case.type }} named {{ case.name }}" ng-click="removeCaseEntryClicked($index)"></span>
-    <span class="glyphicon glyphicon-move onlyHover" data-toggle="tooltip" data-placement="bottom" title="Move Ordering" ng-click=""></span>
         <span class="id">
           <strong>ID: </strong> TestCase{{case.id}}
         </span>
@@ -53,4 +53,5 @@
       </div>
     </div>
   </div>
+  <div class="droppable" tf-drop="{{$index + 1}}">&nbsp;</div>
 </div>

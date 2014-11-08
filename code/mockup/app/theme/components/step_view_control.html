@@ -2,7 +2,7 @@
   <div class="{{ step.type }} arch suite-master fadeInUp animated">
     <div class="input-group input-group{{ step.size }}">
       <span class="input-group-addon">
-        {{step.order}}.&nbsp; 
+        {{$index + 1}}.&nbsp; 
         <span class="glyphicon glyphicon-remove onlyHover" data-toggle="tooltip" data-placement="bottom"  
     title="Delete step named {{ step.name }}" ng-click="removeStepEntryClicked($parent.$index, $index)"></span>
     <span class="glyphicon glyphicon-move onlyHover" data-toggle="tooltip" data-placement="bottom" title="Move Ordering" ng-click=""></span>
