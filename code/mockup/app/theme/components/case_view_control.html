@@ -1,4 +1,4 @@
-<div ng-repeat="case in suite.children track by $index | filter:search_box" tf-reversezorder> <!-- loop of the cases -->
+<div ng-repeat="case in suite.children track by $index | filter:$parent.search_box" tf-reversezorder> <!-- loop of the cases -->
   <div ng-if="$index == 0" class="droppable" tf-drop="0" data-drag="caseDrag">&nbsp;</div>
   <div class="{{ case.type }} arch fadeInUp animated test-case {{ toggleClass($index) }}">
     <div class="input-group test-case input-group{{ case.size }}" id="case{{$index}}" draggable="true" tf-draggable>

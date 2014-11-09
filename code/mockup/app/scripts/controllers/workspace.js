@@ -26,6 +26,8 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 
   	$scope.disabled = false;
 	$scope.canEdit = true;
+
+	$scope.search_box = "";
 	
 	if(!$scope.idStore || $scope.idStore <= 0)
 		$scope.idStore = 1;
@@ -599,6 +601,8 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 	  		keys[e.which] = true; // add key to current press combo
 	  		if(e.which == 13) {
 	  			e.preventDefault();
+	  			if($(element).attr("e-type") == "suite" && $(element).val().length > 0)
+	  				scope.addNewCaseFromKeyPress();
 	  			if($(element).attr("e-type") == "case" && $(element).val().length > 0 && $(element).attr("entry") == $(element).attr("last")) {
 	  				scope.addNewCaseFromKeyPress();
 	  			} else if($(element).attr("e-type") == "step" && $(element).val().length > 0 && $(element).attr("step-entry") == $(element).attr("last")) {
