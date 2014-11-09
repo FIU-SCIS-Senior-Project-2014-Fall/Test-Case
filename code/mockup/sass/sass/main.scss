@@ -7,6 +7,10 @@ body {
   background-color:#dadada;
 }
 
+.btn {
+  font-weight:bold;
+}
+
 .container-fluid {
   margin-left:0px;
   padding-left:0px;
@@ -77,7 +81,6 @@ body, .MainBody, html, .container-fluid {
 .footer {
   padding-top: 19px;
   color: #777;
-  border-top: 1px solid #e5e5e5;
   z-index:90 !important;
 }
 
@@ -245,10 +248,6 @@ body, .MainBody, html, .container-fluid {
   position:relative;
 }
 
-.ng-scope {
-  z-index:100 !important;
-}
-
 /* drag n drop */
 .droppable {
     height:0px;
@@ -398,12 +397,12 @@ body, .MainBody, html, .container-fluid {
   }
 
   .step-title {
-    width:66%;
+    width:49%;
     border-right:1px solid #ccc;
   }
 
   .step-result {
-    width:33%;
+    width:49%;
   }
 
   .arch .label {

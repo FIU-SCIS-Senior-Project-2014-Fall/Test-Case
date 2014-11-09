@@ -1,37 +1,19 @@
-<div ng-repeat="case in suite.children track by $index | filter:search_box"> <!-- loop of the cases -->
+<div ng-repeat="case in suite.children track by $index | filter:search_box" tf-reversezorder> <!-- loop of the cases -->
   <div ng-if="$index == 0" class="droppable" tf-drop="0" data-drag="caseDrag">&nbsp;</div>
   <div class="{{ case.type }} arch fadeInUp animated test-case {{ toggleClass($index) }}">
     <div class="input-group test-case input-group{{ case.size }}" id="case{{$index}}" draggable="true" tf-draggable>
       <span class="input-group-addon">
         <span class="glyphicon {{ toggleButton($index) }}" data-placement="bottom"
-    title="Hide Children" ng-click="toggle($index)"></span>
+    title="Show / hide test case" ng-click="toggle($index)" tf-tooltip></span>
         <span class="glyphicon glyphicon-plus onlyHover" data-toggle="tooltip" data-placement="bottom"
-    title="Create new case {{ case.type }}" ng-click="addStepClicked($index)"></span>
+    title="Create step" ng-click="addStepClicked($index)" tf-tooltip></span>
         <span class="glyphicon glyphicon-remove onlyHover" data-toggle="tooltip" data-placement="bottom"
-    title="Delete case {{ case.type }} named {{ case.name }}" ng-click="removeCaseEntryClicked($index)"></span>
+    title="Delete test case" ng-click="removeCaseEntryClicked($index)" tf-tooltip></span>
         <span class="id">
           <strong>ID: </strong> TestCase{{case.id}}
         </span>
       </span>
-    
-
       <input type="text" id="c{{ case.id }}" e-type="case" entry="{{ $index }}" last="{{ suite.children.length - 1}}" class="form-control tf-proc-control edit-title" ng-model="case.name" tf-processkey="edit-title">
-    
-      <div class="input-group-btn">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-stats"></button>
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-paperclip"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
-        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-          <li><input type="file" ng-file-select="onFileSelect($files)" multiple accept="image/*"></li>
-        </ul>
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-exclamation-sign red"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
-        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-          <li><a href="#">{{ resc.filesRmv }}</a></li>
-          <li class="divider"></li>
-          <li><a ng-click="copySteps($index)">Copy Children</a></li>
-          <li ng-if="hasCopyBuffer()"><a ng-click="pasteSteps($index)">{{ resc.pasteSteps }}</a></li>
-          <li><a href="#">Link File</a></li>
-        </ul>
-      </div><!-- /btn-group -->
     </div><!-- /input-group -->
     <div class="case-data">
       <div id="case-body{{ case.id }}" class="animation case-body">

@@ -7,7 +7,7 @@
  * # MainCtrl
  * Controller of the initProjApp
  */
- var keys = {}, dragId = -1, dragParent = {}; // evil global and drag flag
+ var keys = {}, dragId = -1, dragParent = {}, zIndex = 5000; // evil global and drag flag
 
 angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, storage) {
 
@@ -73,8 +73,6 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	// currently active suite
 	$scope.active = { "index" : 0 };
 	$scope.suite = $scope.entries[0];
-
-	setTimeout(function() { $('.input-group-addon .glyphicon').tooltip(); }, 1000);
 
 	$scope.clearStorage = function() {
 		storage.clearAll();
@@ -199,8 +197,11 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	}
 
 	$scope.toggle = function(index, force) {
-		if(typeof force === "undefined")
+		if(typeof force === "undefined") {
 			$scope.suite.children[index].toggle = !$scope.suite.children[index].toggle;
+			if($scope.suite.children[index].toggle && $scope.suite.children[index].children.length <= 0)
+				addSubEntry(index);
+		}
 		else
 			$scope.suite.children[index].toggle = true;
 	}
@@ -316,6 +317,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		    tmp.type = type;
 		    tmp.size = sizeByType(type);
 		    tmp.parent = $scope.suite.children[index].id;
+		    $scope.toggle(index, true);
 			$scope.suite.children[index].children.push(tmp);
 		}
 		return tmp.id;
@@ -476,6 +478,10 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		$scope.suite.children[parent].children.splice(newPosition, 0, temp);
 	};
 
+	$scope.reverseZindex = function(e) {
+		$(e).css({'z-index': zIndex--, 'position': 'relative'});
+	}
+
 	$scope.addIf = function(add, ifNum, compNum) {
 		if(ifNum == compNum)
 			return compNum + add;
@@ -518,6 +524,20 @@ angular.module('initProjApp').directive("tfContextmenu", function() {
 	    	e.preventDefault();
 	    	$("<div class='custom-menu'>Custom menu</div>").appendTo("body").css({top: e.pageY + "px", left: e.pageX + "px"});
 		});
+		return false;
+	};
+});
+
+angular.module('initProjApp').directive("tfTooltip", function() {
+	return function(scope, element, attributes) {
+		element.tooltip();
+		return false;
+	};
+});
+
+angular.module('initProjApp').directive("tfReversezorder", function() {
+	return function(scope, element, attributes) {
+		scope.reverseZindex(element);
 		return false;
 	};
 });

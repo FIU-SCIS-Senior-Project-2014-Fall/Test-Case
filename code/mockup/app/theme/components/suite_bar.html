@@ -16,8 +16,10 @@
       <p>
         <span class="controls">
           <span class="tree-span">····</span>
-          <span class="glyphicon glyphicon-chevron-{{ isSuiteToggle($index) }} hoverable" ng-click="toggleSuite($index)"></span>
-          <span class="glyphicon glyphicon-plus onlyHover hoverable" ng-click="addSuite('', $index)"></span>
+          <span class="glyphicon glyphicon-chevron-{{ isSuiteToggle($index) }} hoverable" ng-click="toggleSuite($index)" data-toggle="tooltip" data-placement="bottom"  
+    title="Show / hide suite children" tf-tooltip></span>
+          <span class="glyphicon glyphicon-plus onlyHover hoverable" ng-click="addSuite('', $index)" data-toggle="tooltip" data-placement="bottom"  
+    title="Add nested suite" tf-tooltip></span>
         </span>
         <span ng-click="makeActive($index)" class="suite-name">{{ test.name }} ({{ test.suites.length }})</span>
       </p>

@@ -5,9 +5,9 @@
             <div class="input-group input-group{{ suite.size }}">
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-plus onlyHover" data-toggle="tooltip" data-placement="bottom"
-            title="Create new test case" ng-click="addCaseClicked()"></span>
+            title="Create new test case" ng-click="addCaseClicked()" tf-tooltip></span>
                 <span class="glyphicon glyphicon-remove onlyHover" data-toggle="tooltip" data-placement="bottom"
-            title="Delete test suite named {{ suite.name }}" ng-click="removeEntryClicked()"></span>
+            title="Delete suite" ng-click="removeEntryClicked()" tf-tooltip></span>
                 <span>
                   <strong>ID: </strong> TestSuite{{suite.id}}
                 </span>
