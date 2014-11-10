@@ -11,7 +11,7 @@ namespace TFSTest
     {
         static void Main(string[] args)
         {
-            string Uri = "http://tc-dev.cis.fiu.edu:8080/tfs";
+            string Uri = "http://tc-dev.cis.fiu.edu:8080/tfs/";
             string Collection = "DefaultCollection";
             string Project = "HelloWorld";
 
