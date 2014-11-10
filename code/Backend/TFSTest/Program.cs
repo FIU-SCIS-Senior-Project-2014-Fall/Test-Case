@@ -15,15 +15,24 @@ namespace TFSTest
             string Collection = "DefaultCollection";
             string Project = "HelloWorld";
 
-            var mtmManager = new MtmManager(Uri, Collection, Project);
-            var tfsManager = new TfsManager(Uri, Collection, Project);
+            try
+            {
+                var mtmManager = new MtmManager(Uri, Collection, Project);
+                var tfsManager = new TfsManager(Uri, Collection, Project);
 
-            var testSuite = tfsManager.CreateWorkItem(tfsManager.GetWorkItemType("Test Suite"), "FIU Hello Suite",
-                new Dictionary<WorkItemField, string>
+                var testSuite = tfsManager.CreateWorkItem(tfsManager.GetWorkItemType("Test Suite"), "FIU Hello Suite",
+                    new Dictionary<WorkItemField, string>
                 {
                     {WorkItemField.Stories, "ULV1511"},
                     {WorkItemField.Author1, "Justin Phillips"}
                 });
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.InnerException.ToString());
+            }
+            Console.ReadLine();
+            
         }
     }
 }
