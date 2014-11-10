@@ -202,7 +202,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		if(typeof force === "undefined") {
 			$scope.suite.children[index].toggle = !$scope.suite.children[index].toggle;
 			if($scope.suite.children[index].toggle && $scope.suite.children[index].children.length <= 0)
-				addSubEntry(index);
+				addSubEntry(0, index);
 		}
 		else
 			$scope.suite.children[index].toggle = true;
@@ -241,7 +241,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	}
 
 	$scope.isLast = function(index, arr, css) {
-		console.log(index + " , " + arr + " , " + css);
+		//console.log(index + " , " + arr + " , " + css);
 		if(index >= arr.length - 1)
 			return css;
 		else
@@ -255,12 +255,12 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 			return "";
 	}
 
-    $scope.addCaseClicked = function(index) {
-    	addSubEntry(index, -1);
+    $scope.addCaseClicked = function() {
+    	addSubEntry(0);
     };
 
     $scope.addStepClicked = function(index) {
-    	addSubEntry(index);
+    	addSubEntry(0, index);
     };
 
     $scope.removeEntryClicked = function(index) {
@@ -289,13 +289,6 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		}
 	}
 
-	$scope.createByEnterKey = function(index, type) {
-		if(type == "step" || type == "case")
-			addSubEntry(index);
-		else
-			addSubEntry();
-	}
-
 	function addEntry(entry, parent, root) {
 		if(typeof parent === "undefined")
 			$scope.entries.splice(0, 0, entry);
@@ -305,7 +298,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 			$scope.entries[root].suites[parent].suites.splice(0, 0, entry);
 	};
 
-	function addSubEntry(index) {
+	function addSubEntry(sibling, index) {
 		var tmp = $scope.getEntryTemplate();
 		tmp.id = $scope.createId();
 		if(typeof index === "undefined") {
@@ -313,14 +306,20 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		    tmp.type = type;
 		    tmp.size = sizeByType(type);
 		    tmp.parent = $scope.suite.id;
-			$scope.suite.children.push(tmp);
+		    if($scope.suite.children.length > 0 && sibling >= 0 && sibling < $scope.suite.children.length)
+				$scope.suite.children.splice(sibling, 0, tmp);
+			else
+				$scope.suite.children.push(tmp);
 		} else {
 			var type = $scope.typeDownOne($scope.suite.children[index].type);
 		    tmp.type = type;
 		    tmp.size = sizeByType(type);
 		    tmp.parent = $scope.suite.children[index].id;
 		    $scope.toggle(index, true);
-			$scope.suite.children[index].children.push(tmp);
+		    if($scope.suite.children[index].children.length > 0 && sibling >= 0 && sibling < $scope.suite.children[index].children.length)
+				$scope.suite.children[index].children.splice(sibling, 0, tmp);
+			else
+				$scope.suite.children[index].children.push(tmp);
 		}
 		return tmp.id;
 	};
@@ -424,19 +423,26 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 			return $scope.entries[root].suites[parent].suites[index];
 	}
 
-	$scope.addNewCaseFromKeyPress = function() {
-		var id = addSubEntry();
+	$scope.addNewCaseFromKeyPress = function(sibling) {
+		var id = addSubEntry(sibling);
 	  	setTimeout(function() {
 			$("#c" + id).focus();
 		}, 300);
 	}
 
-	$scope.addNewStepFromKeyPress = function(index) {
-		var id = addSubEntry(index);
+	$scope.addNewStepFromKeyPress = function(sibling, index) {
+		var id = addSubEntry(sibling, index);
 	  	setTimeout(function() {
 			$("#st" + id).focus();
-		}, 500);
+		}, 300);
 	}
+
+	$scope.getPlaceHolder = function(parent, index, tag) {
+		if($scope.suite.children[parent].children[index].name.length <= 0)
+			return tag;
+		else
+			return "";
+	};
 
 	$scope.changeSuiteOrder = function(id, newPosition) {
 		var index = id.replace("suite", "");
@@ -445,7 +451,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		if(newPosition > index)
 			newPosition--;
 		var temp = $scope.entries[index];
-		console.log(index + ", " + id + ", " + newPosition);
+		//console.log(index + ", " + id + ", " + newPosition);
 		$scope.entries.splice(index, 1);
 		if($scope.entries <= newPosition)
 			newPosition = $scope.entries.length;
@@ -459,7 +465,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		if(newPosition > index)
 			newPosition--;
 		var temp = $scope.suite.children[index];
-		console.log(index + ", " + id + ", " + newPosition);
+		//console.log(index + ", " + id + ", " + newPosition);
 		$scope.suite.children.splice(index, 1);
 		if($scope.suite.children.length <= newPosition)
 			newPosition = $scope.suite.children.length;
@@ -467,7 +473,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	};
 
 	$scope.changeStepOrder = function(id, newPosition, parent) {
-		console.log(index + ", " + id + ", " + newPosition + ", " + parent);
+		//console.log(index + ", " + id + ", " + newPosition + ", " + parent);
 		var index = id.replace("step", "");
 		if(index == newPosition - 1)
 			return;
@@ -602,29 +608,20 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 	  		if(e.which == 13) {
 	  			e.preventDefault();
 	  			if($(element).attr("e-type") == "suite" && $(element).val().length > 0)
-	  				scope.addNewCaseFromKeyPress();
-	  			else if($(element).attr("e-type") == "case" && $(element).val().length > 0 && $(element).attr("entry") == $(element).attr("last")) {
-	  				scope.addNewCaseFromKeyPress();
-	  			} else if($(element).attr("e-type") == "step" && $(element).val().length > 0 && $(element).attr("step-entry") == $(element).attr("last")) {
-	  				scope.addNewStepFromKeyPress($(element).attr("entry"));
+	  				scope.addNewCaseFromKeyPress(0);
+	  			else if($(element).attr("e-type") == "case" && $(element).val().length > 0) {
+	  				scope.addNewCaseFromKeyPress(Number($(element).attr("entry")) + 1);
+	  			} else if($(element).attr("e-type") == "step" && $(element).val().length > 0) {
+	  				scope.addNewStepFromKeyPress(Number($(element).attr("step-entry")) + 1, $(element).attr("entry"));
 	  			}
-	  			else if($(element).val().length > 0)
-	  			{
-		  			var id = $(element).attr("id");
-		  			var likeElements = $("." + className);
-		  			var eq = likeElements.index( $("#" + id) );
-		  			var ele = likeElements.eq(eq + 1);
-		  			if(ele.length > 0)
-		  				ele.focus();
-		  		}
 		  		scope.$apply();
 	  		}
 	  		else if(keys[9] && keys[16]) {
 	  			e.preventDefault();
 	  			if($(element).attr("e-type") == "step") {
-	  				scope.addNewCaseFromKeyPress();
+	  				scope.addNewCaseFromKeyPress(Number($(element).attr("entry")) + 1);
 					scope.suite.children[$(element).attr("entry")].children.splice($(element).attr("step-entry"), 1);
-					scope.suite.children[scope.suite.children.length - 1].name = $(element).val();
+					scope.suite.children[Number($(element).attr("entry")) + 1].name = $(element).val();
 					scope.$apply();
 	  			}
 	  			keys = {};
@@ -633,7 +630,7 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 	  			if($(element).attr("e-type") == "case" && $(element).attr("entry") > 0) {
 	  				var title = $(element).val();
 	  				scope.suite.children.splice($(element).attr("entry"), 1);
-	  				scope.addNewStepFromKeyPress(($(element).attr("entry") - 1));
+	  				scope.addNewStepFromKeyPress(scope.suite.children[$(element).attr("entry") - 1].children.length, ($(element).attr("entry") - 1));
 	  				scope.toggle($(element).attr("entry") - 1, true);
 	  				scope.suite.children[$(element).attr("entry") - 1].children[scope.suite.children[$(element).attr("entry") - 1].children.length - 1].name = title;
 	  				scope.$apply();

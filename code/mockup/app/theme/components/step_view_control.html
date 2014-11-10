@@ -12,11 +12,11 @@
           <input type="text" id="st{{ step.id }}" e-type="step" entry="{{ $parent.$index }}" step-entry="{{ $index }}" last="{{ case.children.length - 1 }}" class="form-control tf-proc-control edit-title" ng-model="step.name" placeholder="Step description..." tf-processkey="edit-title">
         </div>
         <div class="form-group step-result">
-          <input type="text" id="str{{ step.id }}" e-type="step" entry="{{ $parent.$index }}" step-entry="{{ $index }}" last="{{ case.children.length - 1 }}" class="form-control tf-proc-control edit-result" ng-model="step.result" placeholder="Expected result..." tf-processkey="edit-result">
+          <input type="text" id="str{{ step.id }}" e-type="step" entry="{{ $parent.$index }}" step-entry="{{ $index }}" last="{{ case.children.length - 1 }}" class="form-control tf-proc-control edit-result" ng-model="step.result" placeholder="{{getPlaceHolder($parent.$index, $index, 'Expected result...')}}" tf-processkey="edit-result">
         </div>
       </div>
       <div class="input-group-btn">
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-exclamation-sign red"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-ok-sign green"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
         <ul class="dropdown-menu dropdown-menu-right" role="menu">
           <li><a href="#">{{ resc.filesRmv }}</a></li>
           <li class="divider"></li>
