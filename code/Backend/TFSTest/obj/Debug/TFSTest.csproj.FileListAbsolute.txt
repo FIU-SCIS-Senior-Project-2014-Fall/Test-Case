@@ -1,0 +1,11 @@
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TFSTest\bin\Debug\TFSTest.exe.config
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TFSTest\bin\Debug\TFSTest.exe
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TFSTest\bin\Debug\TFSTest.pdb
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TFSTest\bin\Debug\Microsoft.TeamFoundation.WorkItemTracking.Client.DataStoreLoader.dll
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TFSTest\bin\Debug\vTeam.TfsApi.dll
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TFSTest\bin\Debug\Newtonsoft.Json.dll
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TFSTest\bin\Debug\vTeam.TfsApi.pdb
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TFSTest\bin\Debug\Microsoft.WITDataStore.dll
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TFSTest\obj\Debug\TFSTest.csprojResolveAssemblyReference.cache
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TFSTest\obj\Debug\TFSTest.exe
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TFSTest\obj\Debug\TFSTest.pdb
