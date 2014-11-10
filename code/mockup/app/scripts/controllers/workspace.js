@@ -603,7 +603,7 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 	  			e.preventDefault();
 	  			if($(element).attr("e-type") == "suite" && $(element).val().length > 0)
 	  				scope.addNewCaseFromKeyPress();
-	  			if($(element).attr("e-type") == "case" && $(element).val().length > 0 && $(element).attr("entry") == $(element).attr("last")) {
+	  			else if($(element).attr("e-type") == "case" && $(element).val().length > 0 && $(element).attr("entry") == $(element).attr("last")) {
 	  				scope.addNewCaseFromKeyPress();
 	  			} else if($(element).attr("e-type") == "step" && $(element).val().length > 0 && $(element).attr("step-entry") == $(element).attr("last")) {
 	  				scope.addNewStepFromKeyPress($(element).attr("entry"));
@@ -616,19 +616,6 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 		  			var ele = likeElements.eq(eq + 1);
 		  			if(ele.length > 0)
 		  				ele.focus();
-		  			else {
-		  				var entry = $(element).attr("entry"), type = $(element).attr("e-type");
-		  				scope.createByEnterKey(entry, type);
-		  				scope.$apply();
-		  				setTimeout(function() {
-		  					var id = $(element).attr("id");
-				  			var likeElements = $("." + className);
-				  			var eq = likeElements.index( $("#" + id) );
-				  			var ele = likeElements.eq(eq + 1);
-				  			if(ele.length > 0)
-				  				ele.focus();
-		  				}, 300);
-		  			}
 		  		}
 		  		scope.$apply();
 	  		}
