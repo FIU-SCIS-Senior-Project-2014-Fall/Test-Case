@@ -30,3 +30,5 @@ C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\bin\Antlr3.Runt
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\obj\Debug\WebService.csprojResolveAssemblyReference.cache
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\obj\Debug\WebService.dll
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\obj\Debug\WebService.pdb
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\bin\Microsoft.TeamFoundation.Client.dll
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\bin\Microsoft.TeamFoundation.WorkItemTracking.Client.dll
