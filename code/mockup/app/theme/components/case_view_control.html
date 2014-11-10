@@ -1,7 +1,7 @@
 <div ng-repeat="case in suite.children track by $index | filter:$parent.search_box" tf-reversezorder> <!-- loop of the cases -->
   <div ng-if="$index == 0" class="droppable" tf-drop="0" data-drag="caseDrag">&nbsp;</div>
   <div class="{{ case.type }} arch fadeInUp animated test-case {{ toggleClass($index) }}">
-    <div class="input-group test-case input-group{{ case.size }}" id="case{{$index}}" draggable="true" tf-draggable>
+    <div class="input-group test-case test-case-drag input-group{{ case.size }}" id="case{{$index}}" draggable="true" tf-draggable>
       <span class="input-group-addon">
         <span class="glyphicon {{ toggleButton($index) }}" data-placement="bottom"
     title="Show / hide test case" ng-click="toggle($index)" tf-tooltip></span>

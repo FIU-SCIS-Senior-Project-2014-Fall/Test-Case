@@ -379,7 +379,7 @@ body, .MainBody, html, .container-fluid {
   margin-left: 10px;
 }
 /* line 332, ../../../sass/sass/main.scss */
-#workspace .test-case {
+#workspace .test-case-drag {
   cursor: move;
 }
 /* line 336, ../../../sass/sass/main.scss */
