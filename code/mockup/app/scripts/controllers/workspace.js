@@ -694,7 +694,7 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 		  			else
 		  				$(".edit-title").eq(0).focus();
 		  		}
-		  		keys = {};
+		  		keys.splice(9, 1);
 	  		}
 	  	});
 
