@@ -18,6 +18,12 @@ namespace WebService
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Logout",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Logout", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }
