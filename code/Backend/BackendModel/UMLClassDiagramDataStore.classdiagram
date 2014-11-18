@@ -320,6 +320,21 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation Id="abaf5369-ed31-42b9-bb9d-4a2b2a4572d5" name="editItem" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="42cbe471-e73e-4513-bd20-ba8008e5ab35" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="c3b1d938-a0d4-4427-bcf7-3103dcad6fc0" name="User user" direction="In" isUnique="false">
+                  <elementDefinition Id="5be4bdb8-d6bc-4955-8b6a-9c0f8af75730" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="03f30818-2289-4c89-aee7-4166561f1f25" name="TestItemBase item" direction="In" isUnique="false">
+                  <elementDefinition Id="d8e41c6f-bbe2-4cdc-b74f-1e72093501e3" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperations>
       </Interface>
     </logicalClassDesignerModelHasTypes>
@@ -395,6 +410,21 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation Id="7bb20e8e-305a-4eb6-9939-7df0202b5526" name="editItem" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="a656311a-1039-462e-9919-f52a8da6b5be" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="46d9f214-1baa-4c15-9f92-e13805d32b5c" name="User user" direction="In" isUnique="false">
+                  <elementDefinition Id="84149d5a-5f31-4b9e-993b-88a0a8e1858f" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="9ec25f38-0d5f-4023-b8c7-61f4bdcae69a" name="TestItemBase item" direction="In" isUnique="false">
+                  <elementDefinition Id="c3fcd617-2e19-4141-a5e9-b2c082b2c0ed" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
@@ -461,6 +491,21 @@
               <operationHasOwnedParameters>
                 <parameter Id="a1b43c2d-3f3c-433a-985b-f9abbd2cd1f2" name="TestModel testElement" direction="In" isUnique="false">
                   <elementDefinition Id="cc46f4bf-fca9-42a7-aa1f-4f5513cee9d7" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="65877fd4-a736-4d88-a3e3-fa34e561df15" name="editItem" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="2de6751b-97ef-45b0-93e6-80351b28b545" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="6a66ec0e-cc2d-4c69-b1f9-37b57a95c7cb" name="User user" direction="In" isUnique="false">
+                  <elementDefinition Id="def1e3f3-f2d8-418e-8b38-f7f9a7fe08fc" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="c82f4d24-20e1-4f84-9de4-58127b41c9ba" name="TestItemBase item" direction="In" isUnique="false">
+                  <elementDefinition Id="c23018b3-f5ad-43ff-b12c-4700d95ced9f" />
                 </parameter>
               </operationHasOwnedParameters>
             </ownedParameters>

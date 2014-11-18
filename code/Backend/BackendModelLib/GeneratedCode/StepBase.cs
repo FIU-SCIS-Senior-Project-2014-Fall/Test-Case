@@ -9,19 +9,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class TestSharedStep : TestItemBase, StepBase
+public interface StepBase 
 {
-	public virtual List<TestStep> steps
-	{
-		get;
-		set;
-	}
-
-	public virtual TestCase TestCase
-	{
-		get;
-		set;
-	}
+	string result { get;set; }
 
 }
 

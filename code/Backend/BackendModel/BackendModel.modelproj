@@ -29,6 +29,13 @@
       <SubType>Content</SubType>
       <DependentUpon>AddElementSequenceDiagram.sequencediagram</DependentUpon>
     </Content>
+    <Content Include="EditItemSequenceDiagram.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="EditItemSequenceDiagram.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>EditItemSequenceDiagram.sequencediagram</DependentUpon>
+    </Content>
     <Content Include="UMLClassDiagramDataStore.classdiagram">
       <SubType>Content</SubType>
     </Content>

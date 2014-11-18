@@ -9,15 +9,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class TestSharedStep : TestItemBase, StepBase
+public class Collection : TestItemBase
 {
-	public virtual List<TestStep> steps
+	public virtual GUID host
 	{
 		get;
 		set;
 	}
 
-	public virtual TestCase TestCase
+	public virtual List<Project> projects
 	{
 		get;
 		set;
