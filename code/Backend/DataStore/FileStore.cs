@@ -9,18 +9,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class Collection : TestItemBase
+public class FileStore
 {
-	public virtual GUID host
+	public virtual string path
 	{
 		get;
 		set;
 	}
 
-	public virtual List<Project> projects
+	public virtual void getFiles(object TestPlanElement)
 	{
-		get;
-		set;
+		throw new System.NotImplementedException();
 	}
 
 }

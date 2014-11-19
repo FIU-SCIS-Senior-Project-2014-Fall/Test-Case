@@ -9,11 +9,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public interface TestItemInterface 
+public class ServiceFacade
 {
-	GUID id { get;set; }
+	private DataStoreController dataStore
+	{
+		get;
+		set;
+	}
 
-	string name { get;set; }
+	private User user
+	{
+		get;
+		set;
+	}
+
+	public virtual void getProjects()
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual void getTestPlan(object int testPlanId)
+	{
+		throw new System.NotImplementedException();
+	}
 
 }
 

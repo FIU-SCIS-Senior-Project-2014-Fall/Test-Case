@@ -11,5 +11,21 @@ using System.Text;
 
 public class DataStoreController
 {
+	public virtual object List<DataStoreAdapter> dataStores
+	{
+		get;
+		set;
+	}
+
+	public virtual void insertItem(object User user, object TestPlan testPlan, object TestModel testElement)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual void insertNewFile(object User user, object TestPlan testPlan, object FileInfo info)
+	{
+		throw new System.NotImplementedException();
+	}
+
 }
 

@@ -36,6 +36,20 @@
       <SubType>Content</SubType>
       <DependentUpon>EditItemSequenceDiagram.sequencediagram</DependentUpon>
     </Content>
+    <Content Include="GetProjectsSequenceDiagram.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="GetProjectsSequenceDiagram.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>GetProjectsSequenceDiagram.sequencediagram</DependentUpon>
+    </Content>
+    <Content Include="GetUserConfigurationSequenceDiagram.sequencediagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="GetUserConfigurationSequenceDiagram.sequencediagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>GetUserConfigurationSequenceDiagram.sequencediagram</DependentUpon>
+    </Content>
     <Content Include="UMLClassDiagramDataStore.classdiagram">
       <SubType>Content</SubType>
     </Content>
@@ -49,6 +63,13 @@
     <Content Include="UMLClassDiagramRepository.classdiagram.layout">
       <SubType>Content</SubType>
       <DependentUpon>UMLClassDiagramRepository.classdiagram</DependentUpon>
+    </Content>
+    <Content Include="UMLClassDiagramServiceFacade.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UMLClassDiagramServiceFacade.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>UMLClassDiagramServiceFacade.classdiagram</DependentUpon>
     </Content>
     <Content Include="UMLClassDiagramTestCaseModel.classdiagram">
       <SubType>Content</SubType>

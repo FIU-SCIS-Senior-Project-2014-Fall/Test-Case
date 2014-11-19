@@ -9,19 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class TestStep : TestItemBase, StepBase
+public class SvnRepositoryAdapter
 {
-	public virtual TestCase TestCase
-	{
-		get;
-		set;
-	}
-
-	public virtual TestSharedStep TestSharedStep
-	{
-		get;
-		set;
-	}
-
 }
 

@@ -11,5 +11,20 @@ using System.Text;
 
 public class TestFlowDataStore : DataStoreAdapter
 {
+	public virtual void insertItem(object User user, object TestPlan testPlan, object TestModel testElement)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual void editItem(object User user, object TestItemBase item)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual void removeItem(object User user, object TestStep step)
+	{
+		throw new System.NotImplementedException();
+	}
+
 }
 

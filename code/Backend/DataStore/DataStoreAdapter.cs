@@ -9,19 +9,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class TestSharedStep : TestItemBase, StepBase
+public interface DataStoreAdapter 
 {
-	public virtual List<TestStep> steps
-	{
-		get;
-		set;
-	}
+	string host { get;set; }
 
-	public virtual TestCase TestCase
-	{
-		get;
-		set;
-	}
+	string name { get;set; }
+
+	ICredentials authentication { get;set; }
+
+	DataStoreController DataStoreController { get;set; }
+
+	void insertItem(object User user, object TestPlan testPlan, object TestModel testElement);
+
+	void editItem(object User user, object TestItemBase item);
+
+	void removeItem(object User user, object TestStep step);
 
 }
 

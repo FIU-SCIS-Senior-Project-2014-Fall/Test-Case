@@ -9,9 +9,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class TestCase : TestItemInterface
+public class TestCase : TestItemBase
 {
 	public virtual List<TestStep> steps
+	{
+		get;
+		set;
+	}
+
+	public virtual string description
+	{
+		get;
+		set;
+	}
+
+	public virtual List<Attachment> attachments
+	{
+		get;
+		set;
+	}
+
+	public virtual List<SourceFile> link
+	{
+		get;
+		set;
+	}
+
+	public virtual List<Tag> tags
 	{
 		get;
 		set;

@@ -9,18 +9,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class TestSharedStep : TestItemBase, StepBase
+public class ConfigurationStore
 {
-	public virtual List<TestStep> steps
+	public virtual object List<Config> configurations
 	{
 		get;
 		set;
 	}
 
-	public virtual TestCase TestCase
+	public virtual DataStoreController DataStoreController
 	{
 		get;
 		set;
+	}
+
+	public virtual void getUserConfiguration(object User user)
+	{
+		throw new System.NotImplementedException();
+	}
+
+	public virtual void getTestPlanConfiguration(object TestPlan testPlan)
+	{
+		throw new System.NotImplementedException();
 	}
 
 }

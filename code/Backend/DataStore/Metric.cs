@@ -9,11 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public interface TestItemBase 
+public class Metric
 {
-	GUID id { get;set; }
-
-	string name { get;set; }
-
 }
 

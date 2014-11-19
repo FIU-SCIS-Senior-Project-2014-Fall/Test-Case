@@ -44,7 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Test.cs" />
+    <Compile Include="ChangeAnalyzer.cs" />
+    <Compile Include="GitRepositoryAdapter.cs" />
+    <Compile Include="RepositoryAdapter.cs" />
+    <Compile Include="RepositoryController.cs" />
+    <Compile Include="RepositoryFile.cs" />
+    <Compile Include="SourceFile.cs" />
+    <Compile Include="SvnRepositoryAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

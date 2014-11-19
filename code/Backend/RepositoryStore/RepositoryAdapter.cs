@@ -9,11 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public interface TestItemInterface 
+public interface RepositoryAdapter 
 {
-	GUID id { get;set; }
-
-	string name { get;set; }
-
 }
 

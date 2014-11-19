@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class TestStep : TestItemInterface
+public class TestStep : TestItemBase, StepBase
 {
 	public virtual TestCase TestCase
 	{

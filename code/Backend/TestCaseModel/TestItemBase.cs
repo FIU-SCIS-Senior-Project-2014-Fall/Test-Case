@@ -9,31 +9,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class TestSuite : TestItemBase
+public interface TestItemBase 
 {
-	public virtual list<TestCase> testCases
-	{
-		get;
-		set;
-	}
+	int id { get;set; }
 
-	public virtual string description
-	{
-		get;
-		set;
-	}
-
-	public virtual GUID parent
-	{
-		get;
-		set;
-	}
-
-	public virtual TestPlan TestPlan
-	{
-		get;
-		set;
-	}
+	string name { get;set; }
 
 }
 

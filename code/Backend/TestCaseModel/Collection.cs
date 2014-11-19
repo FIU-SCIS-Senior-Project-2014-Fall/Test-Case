@@ -9,7 +9,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class TfsDataStore : DataStoreAdapter
+public class Collection : TestItemBase
 {
+	public virtual int host
+	{
+		get;
+		set;
+	}
+
+	public virtual List<Project> projects
+	{
+		get;
+		set;
+	}
+
 }
 

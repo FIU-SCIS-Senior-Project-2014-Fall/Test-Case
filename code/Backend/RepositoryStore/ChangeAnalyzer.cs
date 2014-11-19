@@ -9,13 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public interface DataStoreAdapter 
+public class ChangeAnalyzer
 {
-	string host { get;set; }
-
-	string name { get;set; }
-
-	object authentication { get;set; }
-
 }
 
