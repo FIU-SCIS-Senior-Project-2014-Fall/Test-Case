@@ -11,9 +11,9 @@ using System.Text;
 
 public interface TestItemBase 
 {
-	int id { get;set; }
+	int Id { get;set; }
 
-	string name { get;set; }
+	string Name { get;set; }
 
 }
 

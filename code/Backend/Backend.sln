@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataStore", "DataStore\DataStore.csproj", "{1F43D531-BBA0-456D-B036-8178BD5E42EE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D276EA82-DEA1-431E-A042-A16F8277E0A7} = {D276EA82-DEA1-431E-A042-A16F8277E0A7}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryStore", "RepositoryStore\RepositoryStore.csproj", "{CA25DBFF-CEF1-4971-89D9-82A4EE46DB5B}"
 EndProject
@@ -14,6 +17,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCaseModel", "TestCaseModel\TestCaseModel.csproj", "{D276EA82-DEA1-431E-A042-A16F8277E0A7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceControl", "ServiceControl\ServiceControl.csproj", "{C7EC2B7A-A5E2-42AC-ACD5-89AC1B27D4C0}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1F43D531-BBA0-456D-B036-8178BD5E42EE} = {1F43D531-BBA0-456D-B036-8178BD5E42EE}
+		{D276EA82-DEA1-431E-A042-A16F8277E0A7} = {D276EA82-DEA1-431E-A042-A16F8277E0A7}
+	EndProjectSection
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "BackendModel", "BackendModel\BackendModel.modelproj", "{51AE43B4-4867-4A7E-8D21-B6A8A4EED7FD}"
 EndProject

@@ -11,7 +11,23 @@ using System.Text;
 
 public class TestSharedStep : TestItemBase, StepBase
 {
-	public virtual List<TestStep> steps
+    public int Id
+    {
+        get;
+        set;
+    }
+
+    public string Name
+    {
+        get;
+        set;
+    }
+    public string Result
+    {
+        get;
+        set;
+    }
+	public virtual List<TestStep> Steps
 	{
 		get;
 		set;

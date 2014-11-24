@@ -32,3 +32,15 @@ C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\bin\Antlr3.Runt
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\obj\Debug\TestFlow.csprojResolveAssemblyReference.cache
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\obj\Debug\WebService.dll
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\obj\Debug\WebService.pdb
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\bin\ServiceControl.dll
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\bin\TestCaseModel.dll
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\bin\DataStore.dll
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\bin\FileStore.dll
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\bin\RepositoryStore.dll
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\bin\Microsoft.TeamFoundation.WorkItemTracking.Client.DataStoreLoader.dll
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\bin\ServiceControl.pdb
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\bin\TestCaseModel.pdb
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\bin\DataStore.pdb
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\bin\FileStore.pdb
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\bin\RepositoryStore.pdb
+C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\WebService\bin\Microsoft.WITDataStore.dll

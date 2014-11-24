@@ -42,6 +42,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceFacade.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataStore\DataStore.csproj">
+      <Project>{1f43d531-bba0-456d-b036-8178bd5e42ee}</Project>
+      <Name>DataStore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestCaseModel\TestCaseModel.csproj">
+      <Project>{d276ea82-dea1-431e-a042-a16f8277e0a7}</Project>
+      <Name>TestCaseModel</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

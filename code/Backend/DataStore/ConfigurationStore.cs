@@ -11,24 +11,23 @@ using System.Text;
 
 public class ConfigurationStore
 {
-	public virtual object List<Config> configurations
+	private List<DataStoreAdapter> adapters
 	{
 		get;
 		set;
 	}
 
-	public virtual DataStoreController DataStoreController
+	public virtual List<DataStoreAdapter> getUserConfiguration()
 	{
-		get;
-		set;
+        TfsDataStore tfsStore = new TfsDataStore();
+        tfsStore.Name = "Test TFS Collection";
+        tfsStore.Host = new Uri("http://tc-dev.cis.fiu.edu:8080/tfs/DefaultCollection");
+        List<DataStoreAdapter> dList = new List<DataStoreAdapter>();
+        dList.Add(tfsStore);
+        return dList;
 	}
 
-	public virtual void getUserConfiguration(object User user)
-	{
-		throw new System.NotImplementedException();
-	}
-
-	public virtual void getTestPlanConfiguration(object TestPlan testPlan)
+	public virtual void getTestPlanConfiguration(TestPlan testPlan)
 	{
 		throw new System.NotImplementedException();
 	}

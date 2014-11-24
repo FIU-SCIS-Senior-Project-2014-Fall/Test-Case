@@ -7,16 +7,34 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
-
+[DataContract]
 public class Project : TestItemBase
 {
-	public virtual List<TestPlan> testPlans
+    [DataMember]
+    public int Id
+    {
+        get;
+        set;
+    }
+    [DataMember]
+    public string Name
+    {
+        get;
+        set;
+    }
+    [DataMember]
+    public string Store
+    {
+        get;
+        set;
+    }
+	public virtual List<TestPlan> TestPlans
 	{
 		get;
 		set;
 	}
-
 	public virtual Collection Collection
 	{
 		get;

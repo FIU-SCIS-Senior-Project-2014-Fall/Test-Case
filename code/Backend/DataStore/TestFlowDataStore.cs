@@ -7,24 +7,40 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 
 public class TestFlowDataStore : DataStoreAdapter
 {
-	public virtual void insertItem(object User user, object TestPlan testPlan, object TestModel testElement)
+    public string Name
+    {
+        get;
+        set;
+    }
+    public Uri Host
+    {
+        get;
+        set;
+    }
+
+	public virtual void insertItem(TestPlan testPlan, TestItemBase testElement)
 	{
 		throw new System.NotImplementedException();
 	}
 
-	public virtual void editItem(object User user, object TestItemBase item)
+	public virtual void editItem(TestItemBase item)
 	{
 		throw new System.NotImplementedException();
 	}
 
-	public virtual void removeItem(object User user, object TestStep step)
+	public virtual void removeItem(TestStep step)
 	{
 		throw new System.NotImplementedException();
 	}
 
+    public List<Project> getProjects()
+    {
+        throw new System.NotImplementedException();
+    }
 }
 

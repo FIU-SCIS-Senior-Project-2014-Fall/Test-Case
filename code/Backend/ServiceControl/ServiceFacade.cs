@@ -7,6 +7,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 
 public class ServiceFacade
@@ -17,18 +18,23 @@ public class ServiceFacade
 		set;
 	}
 
-	private User user
+    public ServiceFacade()
+    {
+        dataStore = new DataStoreController();
+    }
+
+	private IPrincipal user
 	{
 		get;
 		set;
 	}
 
-	public virtual void getProjects()
+	public List<Project> getProjects()
 	{
-		throw new System.NotImplementedException();
+        return dataStore.getProjects();
 	}
 
-	public virtual void getTestPlan(object int testPlanId)
+	public virtual void getTestPlan(int testPlanId)
 	{
 		throw new System.NotImplementedException();
 	}

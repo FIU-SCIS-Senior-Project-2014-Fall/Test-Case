@@ -11,31 +11,42 @@ using System.Text;
 
 public class TestCase : TestItemBase
 {
-	public virtual List<TestStep> steps
+    public int Id
+    {
+        get;
+        set;
+    }
+
+    public string Name
+    {
+        get;
+        set;
+    }
+	public virtual List<TestStep> Steps
 	{
 		get;
 		set;
 	}
 
-	public virtual string description
+	public virtual string Description
 	{
 		get;
 		set;
 	}
 
-	public virtual List<Attachment> attachments
+	public virtual List<Attachment> Attachments
 	{
 		get;
 		set;
 	}
 
-	public virtual List<SourceFile> link
+	public virtual List<RepositoryFile> Link
 	{
 		get;
 		set;
 	}
 
-	public virtual List<Tag> tags
+	public virtual List<Tag> Tags
 	{
 		get;
 		set;

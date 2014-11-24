@@ -11,19 +11,31 @@ using System.Text;
 
 public class TestSuite : TestItemBase
 {
-	public virtual List<TestCase> testCases
+    public int Id
+    {
+        get;
+        set;
+    }
+
+    public string Name
+    {
+        get;
+        set;
+    }
+
+	public virtual List<TestCase> TestCases
 	{
 		get;
 		set;
 	}
 
-	public virtual string description
+	public virtual string Description
 	{
 		get;
 		set;
 	}
 
-	public virtual int parent
+	public virtual int Parent
 	{
 		get;
 		set;

@@ -10,13 +10,13 @@
       </nestedChildShapes>
     </classShape>
     <classShape Id="47655d95-c5fc-4f65-a8fa-aeef8579ec0b" absoluteBounds="6, 1, 1.75, 1.508148109515508" hideQualifiedName="false" increaseHeight="0.18800345897674561" customColor="181, 193, 223">
-      <classMoniker Id="bee50dcf-494c-4456-bf5b-c231fd01258f" LastKnownName="DataStoreController1" />
+      <classMoniker Id="bee50dcf-494c-4456-bf5b-c231fd01258f" LastKnownName="DataStoreController" />
       <nestedChildShapes>
         <AttributeElementListCompartment Id="76e87ce3-8e5e-4484-bebf-54dd6da1f7e6" absoluteBounds="6.015, 1.5153356393178306, 1.7200000000000002, 0.36132811258236563" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
         <OperationElementListCompartment Id="b98cf721-5ded-40e2-a32d-b01d5b5b81d7" absoluteBounds="6.015, 1.8866637519001959, 1.7200000000000002, 0.52148435761531187" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(6 : 1.75407405475775); (3.375 : 1.75407405475775)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
+    <associationConnector edgePoints="[(6 : 1.75407405475775); (3.375 : 1.75407405475775)]" fixedFrom="NotFixed" fixedTo="NotFixed" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
       <associationMoniker Id="b55c8461-8d72-43a3-8889-64e646789b02" />
       <relativeChildShapes />
       <nodes>

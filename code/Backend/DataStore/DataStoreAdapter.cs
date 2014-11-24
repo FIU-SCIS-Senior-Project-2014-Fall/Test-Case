@@ -11,19 +11,17 @@ using System.Text;
 
 public interface DataStoreAdapter 
 {
-	string host { get;set; }
+	Uri Host { get;set; }
 
-	string name { get;set; }
+	string Name { get;set; }
 
-	ICredentials authentication { get;set; }
+	void insertItem(TestPlan testPlan, TestItemBase testElement);
 
-	DataStoreController DataStoreController { get;set; }
+	void editItem(TestItemBase item);
 
-	void insertItem(object User user, object TestPlan testPlan, object TestModel testElement);
+	void removeItem(TestStep step);
 
-	void editItem(object User user, object TestItemBase item);
-
-	void removeItem(object User user, object TestStep step);
+    List<Project> getProjects();
 
 }
 

@@ -11,7 +11,7 @@ using System.Text;
 
 public interface StepBase 
 {
-	string result { get;set; }
+	string Result { get;set; }
 
 }
 

@@ -11,13 +11,24 @@ using System.Text;
 
 public class Collection : TestItemBase
 {
-	public virtual int host
+    public int Id
+    {
+        get;
+        set;
+    }
+
+    public string Name
+    {
+        get;
+        set;
+    }
+	public virtual int Host
 	{
 		get;
 		set;
 	}
 
-	public virtual List<Project> projects
+	public virtual List<Project> Projects
 	{
 		get;
 		set;

@@ -57,6 +57,13 @@
       <SubType>Content</SubType>
       <DependentUpon>UMLClassDiagramDataStore.classdiagram</DependentUpon>
     </Content>
+    <Content Include="UMLClassDiagramFileStore.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="UMLClassDiagramFileStore.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>UMLClassDiagramFileStore.classdiagram</DependentUpon>
+    </Content>
     <Content Include="UMLClassDiagramRepository.classdiagram">
       <SubType>Content</SubType>
     </Content>

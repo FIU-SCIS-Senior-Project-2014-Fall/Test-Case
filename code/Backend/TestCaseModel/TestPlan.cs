@@ -11,7 +11,18 @@ using System.Text;
 
 public class TestPlan : TestItemBase
 {
-	public virtual List<TestSuite> suites
+    public int Id
+    {
+        get;
+        set;
+    }
+
+    public string Name
+    {
+        get;
+        set;
+    }
+	public virtual List<TestSuite> Suites
 	{
 		get;
 		set;

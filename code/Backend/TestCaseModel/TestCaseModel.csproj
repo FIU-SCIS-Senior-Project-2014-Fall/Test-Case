@@ -32,6 +32,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,6 +51,16 @@
     <Compile Include="TestSharedStep.cs" />
     <Compile Include="TestStep.cs" />
     <Compile Include="TestSuite.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FileStore\FileStore.csproj">
+      <Project>{45cab060-a850-4739-a7be-ad05a0a56a24}</Project>
+      <Name>FileStore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RepositoryStore\RepositoryStore.csproj">
+      <Project>{ca25dbff-cef1-4971-89d9-82a4ee46db5b}</Project>
+      <Name>RepositoryStore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

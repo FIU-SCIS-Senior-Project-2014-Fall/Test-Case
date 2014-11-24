@@ -11,7 +11,7 @@ using System.Text;
 
 public class FileStore
 {
-	public virtual string path
+	public virtual string Path
 	{
 		get;
 		set;

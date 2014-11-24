@@ -6,25 +6,45 @@
 //------------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 
 public class DataStoreController
 {
-	public virtual object List<DataStoreAdapter> dataStores
+	private List<DataStoreAdapter> dataStores
 	{
 		get;
 		set;
 	}
 
-	public virtual void insertItem(object User user, object TestPlan testPlan, object TestModel testElement)
+    public DataStoreController()
+    {
+        ConfigurationStore cStore = new ConfigurationStore();
+        dataStores = cStore.getUserConfiguration();
+    }
+
+	public virtual void insertItem(IPrincipal user, TestPlan testPlan, TestItemBase testElement)
 	{
 		throw new System.NotImplementedException();
 	}
 
-	public virtual void insertNewFile(object User user, object TestPlan testPlan, object FileInfo info)
+	public void insertNewFile(IPrincipal user, TestPlan testPlan, string file)
 	{
 		throw new System.NotImplementedException();
+	}
+
+	public List<Project> getProjects()
+	{
+        List<Project> projects = new List<Project>();
+        foreach (DataStoreAdapter dsa in dataStores)
+        {
+            List<Project> temp = dsa.getProjects();
+            projects = projects.Concat(temp).ToList();
+        }
+           
+        return projects;
 	}
 
 }
