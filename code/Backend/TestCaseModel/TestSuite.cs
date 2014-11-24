@@ -41,11 +41,11 @@ public class TestSuite : TestItemBase
 		set;
 	}
 
-	public virtual TestPlan TestPlan
-	{
-		get;
-		set;
-	}
+    public List<TestSuite> SubSuites
+    {
+        get;
+        set;
+    }
 
 }
 

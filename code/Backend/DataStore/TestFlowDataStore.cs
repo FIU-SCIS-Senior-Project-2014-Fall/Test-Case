@@ -42,5 +42,15 @@ public class TestFlowDataStore : DataStoreAdapter
     {
         throw new System.NotImplementedException();
     }
+
+    public List<TestPlan> getPlans(string projectName)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public TestPlan getPlan(string projectName, int id)
+    {
+        throw new System.NotImplementedException();
+    }
 }
 

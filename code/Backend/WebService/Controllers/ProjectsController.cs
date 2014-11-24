@@ -15,7 +15,7 @@ namespace WebService.Controllers
         {
             serviceFacade = new ServiceFacade();
         }
-        // GET: api/Project
+        // GET: api/Projects
         public IEnumerable<Project> Get()
         {
             return serviceFacade.getProjects();

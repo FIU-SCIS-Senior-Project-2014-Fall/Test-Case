@@ -47,5 +47,30 @@ public class DataStoreController
         return projects;
 	}
 
+    public List<TestPlan> getTestPlans(string projectName)
+    {
+        List<TestPlan> projects = new List<TestPlan>();
+        foreach (DataStoreAdapter dsa in dataStores)
+        {
+            List<TestPlan> temp = dsa.getPlans(projectName);
+            projects = projects.Concat(temp).ToList();
+        }
+
+        return projects;
+    }
+
+    public TestPlan getTestPlan(string projectName, int id)
+    {
+        TestPlan plan = null;
+        foreach (DataStoreAdapter dsa in dataStores)
+        {
+            plan = dsa.getPlan(projectName, id);
+            if (plan != null)
+                break;
+        }
+
+        return plan;
+    }
+
 }
 

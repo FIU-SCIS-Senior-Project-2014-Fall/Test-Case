@@ -7,7 +7,7 @@
             <h1>Choose Project</h1>
             <div class="list-group">
                 <a href="#" class="list-group-item" ng-repeat="project in projects">
-                    {{ project.Name }}
+                    <strong>{{ project.Name }}</strong> <span class="pull-right"><em>{{ project.Store }}</em></span>
                 </a>
             </div>
         </div>

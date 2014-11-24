@@ -23,5 +23,9 @@ public interface DataStoreAdapter
 
     List<Project> getProjects();
 
+    List<TestPlan> getPlans(string projectName);
+
+    TestPlan getPlan(string projectName, int id);
+
 }
 

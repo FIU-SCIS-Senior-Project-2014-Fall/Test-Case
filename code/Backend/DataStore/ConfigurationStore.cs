@@ -21,6 +21,7 @@ public class ConfigurationStore
 	{
         TfsDataStore tfsStore = new TfsDataStore();
         tfsStore.Name = "Test TFS Collection";
+        tfsStore.Host = new Uri("http://localhost:8080/tfs/DefaultCollection");
         tfsStore.Host = new Uri("http://tc-dev.cis.fiu.edu:8080/tfs/DefaultCollection");
         List<DataStoreAdapter> dList = new List<DataStoreAdapter>();
         dList.Add(tfsStore);

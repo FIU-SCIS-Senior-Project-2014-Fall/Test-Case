@@ -1,5 +1,4 @@
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\FileStore\bin\Debug\FileStore.dll
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\FileStore\bin\Debug\FileStore.pdb
-C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\FileStore\obj\Debug\FileStore.csprojResolveAssemblyReference.cache
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\FileStore\obj\Debug\FileStore.dll
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\FileStore\obj\Debug\FileStore.pdb
