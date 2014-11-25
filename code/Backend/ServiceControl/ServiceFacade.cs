@@ -47,5 +47,10 @@ public class ServiceFacade
     {
         return dataStore.getTestPlan(projectName, id);
     }
+
+    public void editTestItem(TestItemBase testItem)
+    {
+        dataStore.editTestItem(testItem);
+    }
 }
 

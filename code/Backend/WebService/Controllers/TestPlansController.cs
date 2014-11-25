@@ -40,8 +40,14 @@ namespace WebService.Controllers
         }
 
         // PUT: api/TestPlans/5
-        public void Put(int id, [FromBody]string value)
+        [Route("api/TestPlans/edit/{ProjectName}/{Id}")]
+        public void Put(string ProjectName, int Id, [FromBody]string value)
         {
+            TestPlan plan = new TestPlan();
+            plan.Id = Id;
+            plan.Name = value;
+            plan.Project = ProjectName;
+            serviceFacade.editTestItem(plan);
         }
 
         // DELETE: api/TestPlans/5

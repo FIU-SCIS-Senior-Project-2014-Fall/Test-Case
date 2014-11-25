@@ -35,6 +35,14 @@ public class DataStoreController
 		throw new System.NotImplementedException();
 	}
 
+    public void editTestItem(TestItemBase testItem)
+    {
+        foreach(DataStoreAdapter dsa in dataStores)
+        {
+            dsa.editItem(testItem);
+        }
+    }
+
 	public List<Project> getProjects()
 	{
         List<Project> projects = new List<Project>();

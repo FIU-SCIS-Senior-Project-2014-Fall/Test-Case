@@ -23,14 +23,21 @@
                 <ul class="nav-inline fadeInDown animated">
                     <li>
                         <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"> Test Plans <span class="caret"></span></button>
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Demo</a></li>
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="projectsDDM" data-toggle="dropdown"> Projects <span class="caret"></span></button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="projectsDDM">
+                                <li role="presentation" class="divider"></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1"><span class="glyphicon glyphicon-plus"></span> Add Test Manager Host</a></li>
                             </ul>
                         </div>
                     </li>
                     <li>
-                        <a class="btn btn-primary" href="#">Configure Hosts</a>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="testplansDDM" data-toggle="dropdown"> Test Plans <span class="caret"></span></button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="testplansDDM">
+                                <li role="presentation" class="divider"></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1"><span class="glyphicon glyphicon-plus"></span> Create New Test Plan</a></li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -90,6 +97,11 @@
     <script src="/Scripts/toastr.js"></script>
     <script src="/Scripts/Chart.min.js"></script>
     <!-- endNon-Angular Specific Dependencies -->
+
+    <!-- non-Angular Code -->
+    <script src="~/Scripts/Angular/Libs/ProjectManager.js"></script>
+    <script src="~/Scripts/Angular/Libs/TestFlowInit.js"></script>
+    <!-- endNon-Angular Code-->
 
     <!-- Angular Dependencies -->
     <script src="/Scripts/Angular/angular.min.js"></script>

@@ -59,7 +59,7 @@ body, .MainBody, html, .container-fluid {
   list-style-type: none;
 }
 /* line 52, ../../../sass/sass/main.scss */
-#top-bar .nav-inline li {
+#top-bar .nav-inline > li {
   display: inline;
   float: left;
   margin-right: 5px;

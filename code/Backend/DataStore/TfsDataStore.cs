@@ -41,7 +41,33 @@ public class TfsDataStore : DataStoreAdapter
 
     public virtual void editItem(TestItemBase item)
     {
-        throw new System.NotImplementedException();
+        if(item.GetType() == typeof(TestPlan))
+            editTestPlan((TestPlan) item);
+    }
+
+    private void editTestPlan(TestPlan plan)
+    {
+        var tpc = TfsTeamProjectCollectionFactory.GetTeamProjectCollection(Host);
+        //ICredentials crds = new NetworkCredential("TFS", "test123");
+        tpc.Credentials = credentials;
+
+        TfsTeamProjectCollection tfsCollection = new TfsTeamProjectCollection(Host, credentials);
+        ITestManagementService tms = tpc.GetService<ITestManagementService>();
+
+        // get the project and plan helper
+        ITestManagementTeamProject project = tms.GetTeamProject(plan.Project);
+        ITestPlanHelper planHelper = project.TestPlans;
+
+        // find the right plan
+        ITestPlan tfsPlan = planHelper.Find(plan.Id);
+
+        tfsPlan.Name = plan.Name;
+        tfsPlan.Save();
+    }
+
+    private void editTestSuite(TestSuite suite)
+    {
+
     }
 
     public virtual void removeItem(TestStep step)
@@ -55,13 +81,12 @@ public class TfsDataStore : DataStoreAdapter
     /// <returns>list of test plans under a given project</returns>
     public List<TestPlan> getPlans(string projectName)
     {
-        TeamFoundationServer tfs = new TeamFoundationServer(Host, new UICredentialsProvider());
-        // Or use this for entering credentials via code and avoiding UI prompt: tfs = new TeamFoundationServer(tfServerName, '''new NetworkCredential("User", "Password", "Domain");        
-        // Ensure the current user can authenticate with TFS
-        tfs.EnsureAuthenticated();
+        var tpc = TfsTeamProjectCollectionFactory.GetTeamProjectCollection(Host);
+        //ICredentials crds = new NetworkCredential("TFS", "test123");
+        tpc.Credentials = credentials;
 
         TfsTeamProjectCollection tfsCollection = new TfsTeamProjectCollection(Host, credentials);
-        ITestManagementService tms = tfs.GetService<ITestManagementService>();
+        ITestManagementService tms = tpc.GetService<ITestManagementService>();
 
         // setup project
         ITestManagementTeamProject project = tms.GetTeamProject(projectName);
@@ -90,6 +115,8 @@ public class TfsDataStore : DataStoreAdapter
         //ICredentials crds = new NetworkCredential("TFS", "test123");
         tpc.Credentials = credentials;
 
+        ITestManagementService testManagementService = tpc.GetService<ITestManagementService>();
+
         var workItemStore = new WorkItemStore(tpc);
         // returns list of tfs projects
         var tfsProjectList = (from Microsoft.TeamFoundation.WorkItemTracking.Client.Project pr in workItemStore.Projects select pr).ToList();
@@ -115,12 +142,12 @@ public class TfsDataStore : DataStoreAdapter
     /// <returns>Serializable test plan</returns>
     public TestPlan getPlan(string projectName, int id)
     {
-        TeamFoundationServer tfs = new TeamFoundationServer(Host, new UICredentialsProvider());
-        // Or use this for entering credentials via code and avoiding UI prompt: tfs = new TeamFoundationServer(tfServerName, '''new NetworkCredential("User", "Password", "Domain");        
-        // Ensure the current user can authenticate with TFS
-        tfs.EnsureAuthenticated();
+        var tpc = TfsTeamProjectCollectionFactory.GetTeamProjectCollection(Host);
+        //ICredentials crds = new NetworkCredential("TFS", "test123");
+        tpc.Credentials = credentials;
+
         TfsTeamProjectCollection tfsCollection = new TfsTeamProjectCollection(Host, credentials);
-        ITestManagementService tms = tfs.GetService<ITestManagementService>();
+        ITestManagementService tms = tpc.GetService<ITestManagementService>();
 
         // get the project and plan helper
         ITestManagementTeamProject project = tms.GetTeamProject(projectName);
