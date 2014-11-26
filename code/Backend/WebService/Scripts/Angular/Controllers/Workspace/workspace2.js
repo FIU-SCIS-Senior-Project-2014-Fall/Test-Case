@@ -9,18 +9,25 @@
  */
 angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, storage) {
 
-  	storage.bind($scope,'entries');
+    var noShow = "no-show";
+    storage.bind($scope, 'entries');
   	storage.bind($scope,'idStore');
 
-  	var testFlow = new TestFlow($scope, testManager.currentProject.Name, testManager.currentTestPlan.Id);
+    // test flow is already defined as global
+  	testFlow = new TestFlow($scope, testManager.currentProject.Name, testManager.currentTestPlan.Id);
   	testFlow.init();
 
 	$scope.clearStorage = function() {
-		storage.clearAll();
+	    storage.clearAll();
+	    localStorage.clear();
 		storage.bind($scope,'entries');
 		$scope.entries = [];
 		$scope.addSuite();
 	}
+
+	$scope.loading = noShow;
+	$scope.loaded = noShow;
+	$scope.cmd = "";
 
 	$scope.copySteps = function(index) {
 	    testFlow.copyChildren($scope.suite.children[index]);
@@ -152,42 +159,26 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		}
 	};
 
-	$scope.isSuiteToggle = function(index, parent) {
-		if(index < 0)
-			return;
-		var toggle = false;
-		if(typeof parent === 'undefined')
-			toggle = $scope.entries[index].toggle;
-		else
-			toggle = $scope.entries[parent].suites[index].toggle;
-
-		if(toggle)
-			return "down";
-		else
-			return "up";
+	$scope.isSuiteToggle = function(suite) {
+	    return testFlow.SuiteHelper.isSuiteToggle(suite);
 	};
 
-	$scope.toggleSuite = function(index, parent) {
-		if(index < 0)
-			return;
-
-		if(typeof parent === 'undefined')
-			$scope.entries[index].toggle = !$scope.entries[index].toggle;
-		else
-			$scope.entries[parent].suites[index].toggle = !$scope.entries[parent].suites[index].toggle;
+	$scope.toggleSuite = function(suite) {
+	    testFlow.SuiteHelper.toggleSuite(suite);
 	}
 
 	$scope.addNewCaseFromKeyPress = function(sibling) {
-		var id = addSubEntry(sibling);
+		var newCase = testFlow.CaseHelper.addCase("", $scope.suite, sibling)
 	  	setTimeout(function() {
-			$("#c" + id).focus();
+	  	    $("#c" + newCase.id).focus();
 		}, 300);
 	}
 
-	$scope.addNewStepFromKeyPress = function(sibling, index) {
-		var id = addSubEntry(sibling, index);
+	$scope.addNewStepFromKeyPress = function (sibling, index) {
+	    var parent = $scope.suite.children[index];
+	    var newStep = testFlow.CaseHelper.addStep("", parent, sibling);
 	  	setTimeout(function() {
-			$("#st" + id).focus();
+	  	    $("#st" + newStep.id).focus();
 		}, 300);
 	}
 
@@ -241,7 +232,7 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	};
 
 	$scope.reverseZindex = function(e) {
-		$(e).css({'z-index': zIndex--, 'position': 'relative'});
+		$(e).css({'z-index': testFlow.zIndex--, 'position': 'relative'});
 	}
 
 	$scope.addIf = function(add, ifNum, compNum) {
@@ -266,6 +257,40 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		$("#myModal").modal('show');
 	}
 
+	testManager.reloadWorkspaceDelegate = function (projectName, testPlanId) {
+	    $scope.loading = "";
+	    $scope.loaded = noShow;
+	    $scope.cmd = noShow;
+	    $(".loading h1").html("Loading Test Plan...");
+	    $.ajax({
+	        url: '/api/TestPlans/' + projectName + "/" + testPlanId,
+	        type: 'GET',
+	        dataType: 'json',
+	        success: function (data) {
+	            localStorage.setItem("entry:" + testFlow.projectName + ":" + testFlow.testPlanId, JSON.stringify($scope.entries));
+	            $scope.entries = JSON.parse(localStorage.getItem("entry:" + projectName + ":" + testPlanId));
+	            if ($scope.entries != null || !$.isArray($scope.entries))
+	                $scope.entries = [];
+	            testFlow.mergeTestPlan(data.Suites);
+	            testFlow.projectName = projectName;
+	            testFlow.testPlanId = testPlanId;
+	            $scope.$apply();
+	            $scope.loaded = "";
+	            $scope.loading = noShow;
+	            $scope.$apply();
+	        },
+	        error: function () {
+	            $("#myModal").find(".modal-title").html("Error Requesting Project Test Plan");
+	            $("#myModal").find(".modal-body").html(
+                    'An error occured when requesting the test plan from TestFlow.');
+	            $("#myModal").modal('show');
+	        }
+	    });
+	    
+	}
+
+
+    
 
   });
 
@@ -299,14 +324,14 @@ angular.module('initProjApp').directive("tfDraggable", function() {
 		element.bind("dragstart", function(e) {
 			var dragEle = $(element).closest(".data-drag");
 			dragEle.addClass("dragging");
-			dragParent = dragEle.attr("data-drag");
-	    	dragId = e.target.id;
+			testFlow.dragParent = dragEle.attr("data-drag");
+			testFlow.dragId = e.target.id;
 		});
 		
 		element.bind("dragend", function(e) {
 			$(element).closest(".drag-container").removeClass("dragging");
 			$(".droppable").removeClass("drag-hover");
-	    	dragId = -1;
+			testFlow.dragId = -1;
 		});
 		return false;
 	};
@@ -315,26 +340,26 @@ angular.module('initProjApp').directive("tfDraggable", function() {
 angular.module('initProjApp').directive("tfDrop", function() {
 	return function(scope, element, attributes) {
 		element.bind("dragover", function(e) {
-			if(dragParent == element.attr("data-drag")) {
+		    if (testFlow.dragParent == element.attr("data-drag")) {
 				ignoreDrag(e);
 				$(this).addClass("drag-hover");
 			}
 		});
 		element.bind("dragleave", function(e) {
-			if(dragParent == element.attr("data-drag")) {
+		    if (testFlow.dragParent == element.attr("data-drag")) {
 				ignoreDrag(e);
 				$(this).removeClass("drag-hover");
 			}
 		});
 		element.bind("drop", function(e) {
-			if(dragParent == element.attr("data-drag")) {
+		    if (testFlow.dragParent == element.attr("data-drag")) {
 				ignoreDrag(e);
-				if($("#" + dragId).hasClass("test-suite"))
-					scope.changeSuiteOrder(dragId, attributes.tfDrop);
-				else if($("#" + dragId).hasClass("test-case"))
-					scope.changeCaseOrder(dragId, attributes.tfDrop);
-				else if($("#" + dragId).hasClass("test-step"))
-					scope.changeStepOrder(dragId, attributes.tfDrop, $("#" + dragId).attr("parent"));
+				if ($("#" + testFlow.dragId).hasClass("test-suite"))
+				    scope.changeSuiteOrder(testFlow.dragId, attributes.tfDrop);
+				else if ($("#" + testFlow.dragId).hasClass("test-case"))
+				    scope.changeCaseOrder(testFlow.dragId, attributes.tfDrop);
+				else if ($("#" + testFlow.dragId).hasClass("test-step"))
+				    scope.changeStepOrder(testFlow.dragId, attributes.tfDrop, $("#" + testFlow.dragId).attr("parent"));
 				scope.$apply();
 			}
 		});
@@ -348,7 +373,7 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 	return function(scope, element, attributes) {
 		var className = attributes.tfProcesskey;
 	  	element.bind("keydown", function(e) {
-	  		keys[e.which] = true; // add key to current press combo
+	  	    testFlow.keys[e.which] = true; // add key to current press combo
 	  		if(e.which == 13) {
 	  			e.preventDefault();
 	  			if($(element).attr("e-type") == "suite" && $(element).val().length > 0)
@@ -360,7 +385,7 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 	  			}
 		  		scope.$apply();
 	  		}
-	  		else if(keys[9] && keys[16]) {
+	  		else if (testFlow.keys[9] && testFlow.keys[16]) {
 	  			e.preventDefault();
 	  			if($(element).attr("e-type") == "step") {
 	  				scope.addNewCaseFromKeyPress(Number($(element).attr("entry")) + 1);
@@ -368,7 +393,7 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 					scope.suite.children[Number($(element).attr("entry")) + 1].name = $(element).val();
 					scope.$apply();
 	  			}
-	  			keys = {};
+	  			testFlow.keys = {};
 	  		} else if(e.which == 9) {
 	  			e.preventDefault();
 	  			if($(element).attr("e-type") == "case" && $(element).attr("entry") > 0) {
@@ -388,12 +413,12 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 		  			else
 		  				$(".edit-title").eq(0).focus();
 		  		}
-		  		keys = {};
+	  			testFlow.keys = {};
 	  		}
 	  	});
 
 		element.bind("keyup", function() {
-			keys = {};
+		    testFlow.keys = {};
 		});
 	    
 	};

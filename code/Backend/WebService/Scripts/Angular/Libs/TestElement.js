@@ -38,7 +38,7 @@ function TestFlow(scope, projectName, testPlanId) {
 	    // grab the idStore incrementor
         // this is only used when the item is only stored locally
 	    if (!_this.scope.idStore || _this.scope.idStore <= 0)
-	        scope.idStore = 1;
+	        scope.idStore = 99999;
 
         // scope items for using the rich text interface
 	    _this.scope.disabled = false;
@@ -125,21 +125,45 @@ function TestFlow(scope, projectName, testPlanId) {
 	        return "active";
 	};
 
-    // adds a suite to the current test plan, if parent is not null will add suite as a subsuite to the suite given
-	this.SuiteHelper.addSuite = function(name, parent) {
-	    if(typeof parent === "undefined")
-	        _this.scope.entries.push(_this.SuiteHelper.createSuite(name));
+	this.SuiteHelper.isSuiteToggle = function (suite) {
+	    if (suite && typeof suite != "undefined" && suite.toggle)
+	        return "down";
 	    else
-	        parent.suites.push(_this.SuiteHelper.createSuite(name));
+	        return "up";
+	};
+
+	this.SuiteHelper.toggleSuite = function (suite) {
+	    if (suite)
+	        suite.toggle = !suite.toggle;
+	}
+
+    // adds a suite to the current test plan, if parent is not null will add suite as a subsuite to the suite given
+	this.SuiteHelper.addSuite = function (name, parent) {
+	    var newSuite = _this.SuiteHelper.createSuite(name);
+	    if(typeof parent === "undefined")
+	        _this.scope.entries.push(newSuite);
+	    else
+	        parent.suites.push(newSuite);
+	    return newSuite;
 	};
 
     // test case methods
-	this.CaseHelper.addCase = function(name, suite) {
-	    suite.children.push(_this.CaseHelper.createCase(name));
+	this.CaseHelper.addCase = function (name, suite, index) {
+	    var newCase = _this.CaseHelper.createCase(name);
+	    if (index === "undefined")
+	        suite.children.push(newCase);
+	    else
+	        suite.children.splice(index, 0, newCase);
+	    return newCase;
 	};
 
-	this.CaseHelper.addStep = function (name, parent) {
-	    testCase.children.push(_this.StepHelper.createStep(name));
+	this.CaseHelper.addStep = function (name, parent, index) {
+	    var newStep = _this.StepHelper.createStep(name);
+	    if (index === "undefined")
+	        parent.children.push(newStep);
+	    else
+	        parent.children.splice(index, 0, newStep);
+	    return newStep;
 	}
 
     // test case toggles
@@ -179,7 +203,7 @@ function TestFlow(scope, projectName, testPlanId) {
 	}
 
 	_this.CaseHelper.toggleDetailsButton = function (testCase) {
-	    if (_testCase.toggleDetails)
+	    if (testCase.toggleDetails)
 	        return "glyphicon-chevron-up";
 	    else
 	        return "glyphicon-chevron-down";
@@ -238,6 +262,28 @@ function TestFlow(scope, projectName, testPlanId) {
     //********************************************************************
     // End entity helper objects
 
+    this.mergeTestPlan = function (data) {
+        if (data.length <= 0)
+            return;
+        $.each(data, function (index, value) {
+            var hasMatching = false;
+            if(scope.entries.length > 0)
+                $.each(scope.entries, function (sIndex, sValue) {
+                    if (sValue.id === value.Id) {
+                        if (sValue.name != value.Name)
+                            sValue.attributes.changed = true;
+                        hasMatching = true;
+                        return false; //break
+                    }
+                });
+            if (!hasMatching) {
+                var newSuite = _this.SuiteHelper.addSuite(value.Name);
+                newSuite.id = value.Id;
+                newSuite.summary = value.Description;
+            }
+        });
+        _this.SuiteHelper.makeActive(0);
+    }
 
     
     // Dialogs
