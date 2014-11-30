@@ -27,5 +27,6 @@ namespace DataStore.EntityData
     
         public virtual ICollection<TF_Projects> TF_Projects { get; set; }
         public virtual ICollection<TF_User_Permissions> TF_User_Permissions { get; set; }
+        public virtual TF_Collection_Types TF_Collection_Types { get; set; }
     }
 }

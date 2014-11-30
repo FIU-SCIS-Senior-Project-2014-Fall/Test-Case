@@ -4,7 +4,7 @@
     <Key>
       <PropertyRef Name="Metrics_Id" />
     </Key>
-    <Property Name="Metrics_Id" Type="int" Nullable="false" />
+    <Property Name="Metrics_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TestCase_Id" Type="int" Nullable="false" />
     <Property Name="Metrics_Desc" Type="text" Nullable="false" />
     <Property Name="Failed" Type="int" Nullable="false" />
@@ -31,23 +31,16 @@
     <Key>
       <PropertyRef Name="External_Id" />
     </Key>
-    <Property Name="External_Id" Type="int" Nullable="false" />
+    <Property Name="External_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Type" Type="int" Nullable="false" />
     <Property Name="Internal_Id" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="TF_ItemType">
-    <Key>
-      <PropertyRef Name="Type_Id" />
-    </Key>
-    <Property Name="Type_Id" Type="int" Nullable="false" />
-    <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
   </EntityType>
   <EntityType Name="TF_Projects">
     <Key>
       <PropertyRef Name="Project_Id" />
     </Key>
-    <Property Name="Project_Id" Type="int" Nullable="false" />
+    <Property Name="Project_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="Collection_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -55,7 +48,7 @@
     <Key>
       <PropertyRef Name="Step_Id" />
     </Key>
-    <Property Name="Step_Id" Type="int" Nullable="false" />
+    <Property Name="Step_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="text" Nullable="false" />
     <Property Name="Results" Type="text" Nullable="false" />
     <Property Name="Parent" Type="int" Nullable="false" />
@@ -69,7 +62,7 @@
     <Key>
       <PropertyRef Name="Suite_Id" />
     </Key>
-    <Property Name="Suite_Id" Type="int" Nullable="false" />
+    <Property Name="Suite_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="Description" Type="text" />
     <Property Name="CreatedBy" Type="int" Nullable="false" />
@@ -82,7 +75,7 @@
     <Key>
       <PropertyRef Name="TestCase_Id" />
     </Key>
-    <Property Name="TestCase_Id" Type="int" Nullable="false" />
+    <Property Name="TestCase_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Suite_Id" Type="int" Nullable="false" />
     <Property Name="Name" Type="text" Nullable="false" />
     <Property Name="Description" Type="text" />
@@ -95,7 +88,7 @@
     <Key>
       <PropertyRef Name="TestPlan_Id" />
     </Key>
-    <Property Name="TestPlan_Id" Type="int" Nullable="false" />
+    <Property Name="TestPlan_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="Project_Id" Type="int" Nullable="false" />
   </EntityType>
@@ -126,15 +119,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TF_ExternalIds_TF_ItemType">
-    <End Role="TF_ItemType" Type="Self.TF_ItemType" Multiplicity="1" />
-    <End Role="TF_ExternalIds" Type="Self.TF_ExternalIds" Multiplicity="*" />
+  <Association Name="FK_TF_Collections_TF_Collection_Types">
+    <End Role="TF_Collection_Types" Type="Self.TF_Collection_Types" Multiplicity="1" />
+    <End Role="TF_Collections" Type="Self.TF_Collections" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="TF_ItemType">
+      <Principal Role="TF_Collection_Types">
         <PropertyRef Name="Type_Id" />
       </Principal>
-      <Dependent Role="TF_ExternalIds">
-        <PropertyRef Name="Type" />
+      <Dependent Role="TF_Collections">
+        <PropertyRef Name="Type_Id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -227,7 +220,6 @@
     <EntitySet Name="TF_Collection_Types" EntityType="Self.TF_Collection_Types" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TF_Collections" EntityType="Self.TF_Collections" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TF_ExternalIds" EntityType="Self.TF_ExternalIds" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TF_ItemType" EntityType="Self.TF_ItemType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TF_Projects" EntityType="Self.TF_Projects" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TF_Step" EntityType="Self.TF_Step" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TF_Suites" EntityType="Self.TF_Suites" Schema="dbo" store:Type="Tables" />
@@ -239,9 +231,9 @@
       <End Role="TF_TestCases" EntitySet="TF_TestCases" />
       <End Role="TF_Case_Metrics" EntitySet="TF_Case_Metrics" />
     </AssociationSet>
-    <AssociationSet Name="FK_TF_ExternalIds_TF_ItemType" Association="Self.FK_TF_ExternalIds_TF_ItemType">
-      <End Role="TF_ItemType" EntitySet="TF_ItemType" />
-      <End Role="TF_ExternalIds" EntitySet="TF_ExternalIds" />
+    <AssociationSet Name="FK_TF_Collections_TF_Collection_Types" Association="Self.FK_TF_Collections_TF_Collection_Types">
+      <End Role="TF_Collection_Types" EntitySet="TF_Collection_Types" />
+      <End Role="TF_Collections" EntitySet="TF_Collections" />
     </AssociationSet>
     <AssociationSet Name="FK_TF_Projects_TF_Collections" Association="Self.FK_TF_Projects_TF_Collections">
       <End Role="TF_Collections" EntitySet="TF_Collections" />

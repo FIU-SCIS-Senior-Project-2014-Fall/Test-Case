@@ -14,7 +14,14 @@ namespace DataStore.EntityData
     
     public partial class TF_Collection_Types
     {
+        public TF_Collection_Types()
+        {
+            this.TF_Collections = new HashSet<TF_Collections>();
+        }
+    
         public int Type_Id { get; set; }
         public string Name { get; set; }
+    
+        public virtual ICollection<TF_Collections> TF_Collections { get; set; }
     }
 }

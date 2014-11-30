@@ -46,14 +46,15 @@ public class DataStoreController
 
 	public List<Project> getProjects()
 	{
-        List<Project> projects = new List<Project>();
+        // ensure the model holds all external projects accessible
+        // and these projects are up to date.
         foreach (DataStoreAdapter dsa in dataStores.adapters)
         {
             List<Project> temp = dsa.getProjects();
-            projects = projects.Concat(temp).ToList();
+            dataStores.tfStore.SyncProjects(temp, dsa.Id);
         }
-           
-        return projects;
+
+        return dataStores.tfStore.getProjects();
 	}
 
     public List<TestPlan> getTestPlans(string projectName)

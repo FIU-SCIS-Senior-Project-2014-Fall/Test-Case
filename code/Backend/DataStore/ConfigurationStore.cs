@@ -48,6 +48,7 @@ public class ConfigurationStore
                 TfsDataStore tfsStore = new TfsDataStore();
                 tfsStore.Name = c.Name;
                 tfsStore.Host = new Uri(c.Host);
+                tfsStore.Id = c.Collection_Id;
                 dList.Add(tfsStore);
             }
         }

@@ -18,6 +18,7 @@
     </Key>
     <Property Name="Type_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="TF_Collections" Relationship="testflowModel.FK_TF_Collections_TF_Collection_Types" FromRole="TF_Collection_Types" ToRole="TF_Collections" />
   </EntityType>
   <EntityType Name="TF_Collections">
     <Key>
@@ -29,6 +30,7 @@
     <Property Name="Type_Id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="TF_Projects" Relationship="Self.FK_TF_Projects_TF_Collections" FromRole="TF_Collections" ToRole="TF_Projects" />
     <NavigationProperty Name="TF_User_Permissions" Relationship="Self.FK_TF_User_Permissions_TF_Collections" FromRole="TF_Collections" ToRole="TF_User_Permissions" />
+    <NavigationProperty Name="TF_Collection_Types" Relationship="testflowModel.FK_TF_Collections_TF_Collection_Types" FromRole="TF_Collections" ToRole="TF_Collection_Types" />
   </EntityType>
   <EntityType Name="TF_ExternalIds">
     <Key>
@@ -38,15 +40,6 @@
     <Property Name="Id" Type="Int32" Nullable="false" />
     <Property Name="Type" Type="Int32" Nullable="false" />
     <Property Name="Internal_Id" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="TF_ItemType" Relationship="Self.FK_TF_ExternalIds_TF_ItemType" FromRole="TF_ExternalIds" ToRole="TF_ItemType" />
-  </EntityType>
-  <EntityType Name="TF_ItemType">
-    <Key>
-      <PropertyRef Name="Type_Id" />
-    </Key>
-    <Property Name="Type_Id" Type="Int32" Nullable="false" />
-    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-    <NavigationProperty Name="TF_ExternalIds" Relationship="Self.FK_TF_ExternalIds_TF_ItemType" FromRole="TF_ItemType" ToRole="TF_ExternalIds" />
   </EntityType>
   <EntityType Name="TF_Projects">
     <Key>
@@ -168,18 +161,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TF_ExternalIds_TF_ItemType">
-    <End Role="TF_ItemType" Type="Self.TF_ItemType" Multiplicity="1" />
-    <End Role="TF_ExternalIds" Type="Self.TF_ExternalIds" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TF_ItemType">
-        <PropertyRef Name="Type_Id" />
-      </Principal>
-      <Dependent Role="TF_ExternalIds">
-        <PropertyRef Name="Type" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_TF_TestPlan_TF_Projects">
     <End Role="TF_Projects" Type="Self.TF_Projects" Multiplicity="1" />
     <End Role="TF_TestPlan" Type="Self.TF_TestPlan" Multiplicity="*" />
@@ -245,7 +226,6 @@
     <EntitySet Name="TF_Collection_Types" EntityType="Self.TF_Collection_Types" />
     <EntitySet Name="TF_Collections" EntityType="Self.TF_Collections" />
     <EntitySet Name="TF_ExternalIds" EntityType="Self.TF_ExternalIds" />
-    <EntitySet Name="TF_ItemType" EntityType="Self.TF_ItemType" />
     <EntitySet Name="TF_Projects" EntityType="Self.TF_Projects" />
     <EntitySet Name="TF_Step" EntityType="Self.TF_Step" />
     <EntitySet Name="TF_Suites" EntityType="Self.TF_Suites" />
@@ -264,10 +244,6 @@
     <AssociationSet Name="FK_TF_User_Permissions_TF_Collections" Association="Self.FK_TF_User_Permissions_TF_Collections">
       <End Role="TF_Collections" EntitySet="TF_Collections" />
       <End Role="TF_User_Permissions" EntitySet="TF_User_Permissions" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TF_ExternalIds_TF_ItemType" Association="Self.FK_TF_ExternalIds_TF_ItemType">
-      <End Role="TF_ItemType" EntitySet="TF_ItemType" />
-      <End Role="TF_ExternalIds" EntitySet="TF_ExternalIds" />
     </AssociationSet>
     <AssociationSet Name="FK_TF_TestPlan_TF_Projects" Association="Self.FK_TF_TestPlan_TF_Projects">
       <End Role="TF_Projects" EntitySet="TF_Projects" />
@@ -289,5 +265,21 @@
       <End Role="TF_Suites" EntitySet="TF_Suites" />
       <End Role="TF_TestCases" EntitySet="TF_TestCases" />
     </AssociationSet>
+    <AssociationSet Name="FK_TF_Collections_TF_Collection_Types" Association="testflowModel.FK_TF_Collections_TF_Collection_Types">
+      <End Role="TF_Collection_Types" EntitySet="TF_Collection_Types" />
+      <End Role="TF_Collections" EntitySet="TF_Collections" />
+    </AssociationSet>
   </EntityContainer>
+  <Association Name="FK_TF_Collections_TF_Collection_Types">
+    <End Type="testflowModel.TF_Collection_Types" Role="TF_Collection_Types" Multiplicity="1" />
+    <End Type="testflowModel.TF_Collections" Role="TF_Collections" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TF_Collection_Types">
+        <PropertyRef Name="Type_Id" />
+      </Principal>
+      <Dependent Role="TF_Collections">
+        <PropertyRef Name="Type_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

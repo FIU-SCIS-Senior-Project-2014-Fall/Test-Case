@@ -18,7 +18,5 @@ namespace DataStore.EntityData
         public int Id { get; set; }
         public int Type { get; set; }
         public int Internal_Id { get; set; }
-    
-        public virtual TF_ItemType TF_ItemType { get; set; }
     }
 }

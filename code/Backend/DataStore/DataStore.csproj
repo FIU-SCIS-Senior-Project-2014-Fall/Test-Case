@@ -108,9 +108,6 @@
     <Compile Include="EntityData\TF_ExternalIds.cs">
       <DependentUpon>TestFlowModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityData\TF_ItemType.cs">
-      <DependentUpon>TestFlowModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="EntityData\TF_Projects.cs">
       <DependentUpon>TestFlowModel.tt</DependentUpon>
     </Compile>

@@ -11,6 +11,7 @@ using System.Text;
 
 public interface DataStoreAdapter 
 {
+    int Id { get; set; }
 	Uri Host { get;set; }
 
 	string Name { get;set; }

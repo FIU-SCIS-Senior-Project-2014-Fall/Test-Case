@@ -29,7 +29,6 @@ namespace DataStore.EntityData
         public virtual DbSet<TF_Collection_Types> TF_Collection_Types { get; set; }
         public virtual DbSet<TF_Collections> TF_Collections { get; set; }
         public virtual DbSet<TF_ExternalIds> TF_ExternalIds { get; set; }
-        public virtual DbSet<TF_ItemType> TF_ItemType { get; set; }
         public virtual DbSet<TF_Projects> TF_Projects { get; set; }
         public virtual DbSet<TF_Step> TF_Step { get; set; }
         public virtual DbSet<TF_Suites> TF_Suites { get; set; }

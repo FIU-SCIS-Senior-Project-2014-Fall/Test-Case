@@ -41,14 +41,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TF_ItemType">
-      <EntityTypeMapping TypeName="testflowModel.TF_ItemType">
-        <MappingFragment StoreEntitySet="TF_ItemType">
-          <ScalarProperty Name="Type_Id" ColumnName="Type_Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TF_Projects">
       <EntityTypeMapping TypeName="testflowModel.TF_Projects">
         <MappingFragment StoreEntitySet="TF_Projects">

@@ -13,6 +13,11 @@ using System.Text;
 
 public class TestFlowDataStore : DataStoreAdapter
 {
+    public int Id
+    {
+        get;
+        set;
+    }
     public string Name
     {
         get;
@@ -103,6 +108,69 @@ public class TestFlowDataStore : DataStoreAdapter
     }
 
     // unique to this adapter
+    public void SyncProjects(List<Project> externalProjects, int collectionId)
+    {
+        using(var context = new testflowEntities())
+        {
+            int projItemType = Convert.ToInt32(ItemTypes.Project);
+            
+            // get all projects and external ids that relate to this collection
+            var projects = from e in context.TF_ExternalIds 
+                           join p in context.TF_Projects on e.Internal_Id equals p.Project_Id 
+                           where e.Type == projItemType && p.Collection_Id == collectionId
+                           select new { Project = p, ExternalId = e};
+
+            // N^2 but not expecting many projects per collection
+            foreach(Project p in externalProjects)
+            {
+                bool exist = false;
+                foreach(var ip in projects)
+                {
+                    if(ip.ExternalId.Id == p.Id)
+                    {
+                        exist = true;
+                        if(!ip.Project.Name.Equals(p.Name))
+                        {
+                            ip.Project.Name = p.Name;  // only occasion where data flows in reverse besides data that doesn't exist
+                        }
+                    }
+                }
+
+                if(!exist)
+                {
+                    TF_Projects proj = new TF_Projects();
+                    proj.Name = p.Name;
+                    proj.Collection_Id = collectionId;
+                    context.TF_Projects.Add(proj);
+                    try
+                    {
+                        context.SaveChanges();
+                        TF_ExternalIds externId = new TF_ExternalIds();
+                        externId.Internal_Id = proj.Project_Id;
+                        externId.Id = p.Id;
+                        externId.Type = projItemType;
+                        context.TF_ExternalIds.Add(externId);
+                        context.SaveChanges();
+                    }
+                    catch(Exception e)
+                    {
+
+                    }
+                    
+                    
+                }
+            }
+            try
+            {
+                context.SaveChanges();
+            }
+            catch(Exception e)
+            {
+
+            }
+        }
+        
+    }
     public void CreateProject(Project project)
     {
 
