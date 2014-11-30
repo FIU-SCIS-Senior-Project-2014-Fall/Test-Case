@@ -28,7 +28,7 @@ namespace TFSTest
 
                 //var tfsManager = new TfsManager(Uri, Collection, Project, crds);
 
-                ServiceFacade sf = new ServiceFacade();
+                ServiceFacade sf = new ServiceFacade(User);
 
                 var results = sf.getProjects();
 

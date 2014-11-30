@@ -58,6 +58,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Http, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.2\lib\net45\System.Web.Http.dll</HintPath>
@@ -79,6 +81,57 @@
     <Compile Include="ConfigurationStore.cs" />
     <Compile Include="DataStoreAdapter.cs" />
     <Compile Include="DataStoreController.cs" />
+    <Compile Include="EntityData\TestFlowModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestFlowModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityData\TestFlowModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityData\TestFlowModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TestFlowModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EntityData\TF_Case_Metrics.cs">
+      <DependentUpon>TestFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityData\TF_Collections.cs">
+      <DependentUpon>TestFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityData\TF_Collection_Types.cs">
+      <DependentUpon>TestFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityData\TF_ExternalIds.cs">
+      <DependentUpon>TestFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityData\TF_ItemType.cs">
+      <DependentUpon>TestFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityData\TF_Projects.cs">
+      <DependentUpon>TestFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityData\TF_Step.cs">
+      <DependentUpon>TestFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityData\TF_Suites.cs">
+      <DependentUpon>TestFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityData\TF_TestCases.cs">
+      <DependentUpon>TestFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityData\TF_TestPlan.cs">
+      <DependentUpon>TestFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityData\TF_User.cs">
+      <DependentUpon>TestFlowModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityData\TF_User_Permissions.cs">
+      <DependentUpon>TestFlowModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Metric.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestFlowDataStore.cs" />
@@ -86,6 +139,23 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EntityDeploy Include="EntityData\TestFlowModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TestFlowModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EntityData\TestFlowModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TestFlowModel.edmx</DependentUpon>
+      <LastGenOutput>TestFlowModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="EntityData\TestFlowModel.edmx.diagram">
+      <DependentUpon>TestFlowModel.edmx</DependentUpon>
+    </None>
+    <None Include="EntityData\TestFlowModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TestFlowModel.edmx</DependentUpon>
+      <LastGenOutput>TestFlowModel.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +163,9 @@
       <Project>{d276ea82-dea1-431e-a042-a16f8277e0a7}</Project>
       <Name>TestCaseModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

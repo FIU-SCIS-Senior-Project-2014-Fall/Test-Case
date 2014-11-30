@@ -18,9 +18,9 @@ public class ServiceFacade
 		set;
 	}
 
-    public ServiceFacade()
+    public ServiceFacade(IPrincipal user)
     {
-        dataStore = new DataStoreController();
+        dataStore = new DataStoreController(user);
     }
 
 	private IPrincipal user
@@ -51,6 +51,28 @@ public class ServiceFacade
     public void editTestItem(TestItemBase testItem)
     {
         dataStore.editTestItem(testItem);
+    }
+
+    // collection management metods
+
+    public void EditCollection(Collection collection)
+    {
+        dataStore.EditCollection(collection);
+    }
+
+    public Collection GetCollection(int id)
+    {
+        return dataStore.GetCollection(id);
+    }
+
+    public List<Collection> GetCollections()
+    {
+        return dataStore.GetCollections();
+    }
+
+    public void CreateCollection(Collection collection, int type)
+    {
+        dataStore.CreateCollection(collection, type);
     }
 }
 

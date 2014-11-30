@@ -1,4 +1,4 @@
-﻿@model TestFlow.Models.TF_Collections
+﻿@model Collection
 
 @{
     ViewBag.Title = "Details";
@@ -27,16 +27,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Type_Id)
+            @Html.DisplayNameFor(model => model.Type)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Type_Id)
+            @Html.DisplayFor(model => model.Type)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Collection_Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

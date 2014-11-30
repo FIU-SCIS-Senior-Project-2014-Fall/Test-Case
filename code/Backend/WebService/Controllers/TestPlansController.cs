@@ -13,7 +13,7 @@ namespace TestFlow.Controllers
 
         public TestPlansController()
         {
-            serviceFacade = new ServiceFacade();
+            serviceFacade = new ServiceFacade(User);
         }
         // GET: api/TestPlans/projectName/testPlanId
         [Route("api/TestPlans/{ProjectName}/{Id}")]

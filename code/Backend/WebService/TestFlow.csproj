@@ -131,6 +131,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="DAL\" />
+    <Folder Include="Models\" />
     <Folder Include="Views\Hosts\" />
     <Folder Include="Views\Logout\" />
   </ItemGroup>
@@ -176,57 +177,6 @@
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TestFlowModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TestFlowModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TestFlowModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TestFlowModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TestFlowModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TestFlowModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TF_Case_Metrics.cs">
-      <DependentUpon>TestFlowModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TF_Collections.cs">
-      <DependentUpon>TestFlowModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TF_Collection_Types.cs">
-      <DependentUpon>TestFlowModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TF_ExternalIds.cs">
-      <DependentUpon>TestFlowModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TF_ItemType.cs">
-      <DependentUpon>TestFlowModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TF_Projects.cs">
-      <DependentUpon>TestFlowModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TF_Step.cs">
-      <DependentUpon>TestFlowModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TF_Suites.cs">
-      <DependentUpon>TestFlowModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TF_TestCases.cs">
-      <DependentUpon>TestFlowModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TF_TestPlan.cs">
-      <DependentUpon>TestFlowModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TF_User.cs">
-      <DependentUpon>TestFlowModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\TF_User_Permissions.cs">
-      <DependentUpon>TestFlowModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -295,23 +245,6 @@
     <Content Include="Scripts\Angular\angular-sanitize.min.js.map" />
     <Content Include="Scripts\Angular\angular-touch.min.js.map" />
     <Content Include="Scripts\jquery.min.map" />
-    <EntityDeploy Include="Models\TestFlowModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TestFlowModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\TestFlowModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TestFlowModel.edmx</DependentUpon>
-      <LastGenOutput>TestFlowModel.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\TestFlowModel.edmx.diagram">
-      <DependentUpon>TestFlowModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\TestFlowModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>TestFlowModel.edmx</DependentUpon>
-      <LastGenOutput>TestFlowModel.cs</LastGenOutput>
-    </Content>
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

@@ -13,7 +13,7 @@ namespace TestFlow.Controllers
 
         public ProjectsController()
         {
-            serviceFacade = new ServiceFacade();
+            serviceFacade = new ServiceFacade(User);
         }
         // GET: api/Projects
         public IEnumerable<Project> Get()

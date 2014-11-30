@@ -14,10 +14,6 @@ C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\ServiceControl\bin\Debug\R
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\ServiceControl\bin\Debug\Microsoft.TeamFoundation.WorkItemTracking.Client.DataStoreLoader.dll
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\ServiceControl\bin\Debug\Newtonsoft.Json.dll
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\ServiceControl\bin\Debug\Microsoft.WITDataStore.dll
-G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\ServiceControl\bin\Debug\NativeBinaries\amd64\git2-3f8d005.dll
-G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\ServiceControl\bin\Debug\NativeBinaries\amd64\git2-3f8d005.pdb
-G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\ServiceControl\bin\Debug\NativeBinaries\x86\git2-3f8d005.dll
-G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\ServiceControl\bin\Debug\NativeBinaries\x86\git2-3f8d005.pdb
 G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\ServiceControl\bin\Debug\ServiceControl.dll
 G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\ServiceControl\bin\Debug\ServiceControl.pdb
 G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\ServiceControl\bin\Debug\DataStore.dll
@@ -34,3 +30,5 @@ G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\ServiceControl\bin\Debug\Mic
 G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\ServiceControl\obj\Debug\ServiceControl.csprojResolveAssemblyReference.cache
 G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\ServiceControl\obj\Debug\ServiceControl.dll
 G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\ServiceControl\obj\Debug\ServiceControl.pdb
+G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\ServiceControl\bin\Debug\EntityFramework.dll
+G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\ServiceControl\bin\Debug\EntityFramework.xml

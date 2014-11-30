@@ -1,4 +1,4 @@
-﻿@model TestFlow.Models.TF_Collections
+﻿@model Collection
 
 @{
     ViewBag.Title = "Edit";
@@ -14,7 +14,7 @@
         <h4>TF_Collections</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Collection_Id)
+        @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -33,10 +33,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Type_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Type_Id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Type_Id, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
             </div>
         </div>
 

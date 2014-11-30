@@ -13,17 +13,18 @@ using System.Text;
 
 public class DataStoreController
 {
-	private List<DataStoreAdapter> dataStores
+	private UserCollections dataStores
 	{
 		get;
 		set;
 	}
 
-    public DataStoreController()
+    public DataStoreController(IPrincipal user)
     {
         ConfigurationStore cStore = new ConfigurationStore();
-        dataStores = cStore.getUserConfiguration();
+        dataStores = cStore.getUserConfiguration(user);
     }
+
 
 	public virtual void insertItem(IPrincipal user, TestPlan testPlan, TestItemBase testElement)
 	{
@@ -37,7 +38,7 @@ public class DataStoreController
 
     public void editTestItem(TestItemBase testItem)
     {
-        foreach(DataStoreAdapter dsa in dataStores)
+        foreach(DataStoreAdapter dsa in dataStores.adapters)
         {
             dsa.editItem(testItem);
         }
@@ -46,7 +47,7 @@ public class DataStoreController
 	public List<Project> getProjects()
 	{
         List<Project> projects = new List<Project>();
-        foreach (DataStoreAdapter dsa in dataStores)
+        foreach (DataStoreAdapter dsa in dataStores.adapters)
         {
             List<Project> temp = dsa.getProjects();
             projects = projects.Concat(temp).ToList();
@@ -58,7 +59,7 @@ public class DataStoreController
     public List<TestPlan> getTestPlans(string projectName)
     {
         List<TestPlan> projects = new List<TestPlan>();
-        foreach (DataStoreAdapter dsa in dataStores)
+        foreach (DataStoreAdapter dsa in dataStores.adapters)
         {
             List<TestPlan> temp = dsa.getPlans(projectName);
             projects = projects.Concat(temp).ToList();
@@ -70,7 +71,7 @@ public class DataStoreController
     public TestPlan getTestPlan(string projectName, int id)
     {
         TestPlan plan = null;
-        foreach (DataStoreAdapter dsa in dataStores)
+        foreach (DataStoreAdapter dsa in dataStores.adapters)
         {
             plan = dsa.getPlan(projectName, id);
             if (plan != null)
@@ -78,6 +79,27 @@ public class DataStoreController
         }
 
         return plan;
+    }
+
+    // Collections stuff
+    public void EditCollection(Collection collection)
+    {
+        dataStores.tfStore.EditCollection(collection);
+    }
+
+    public Collection GetCollection(int id)
+    {
+        return dataStores.tfStore.GetCollection(id);
+    }
+
+    public List<Collection> GetCollections()
+    {
+        return dataStores.tfStore.GetCollections();
+    }
+
+    public void CreateCollection(Collection collection, int type)
+    {
+        dataStores.tfStore.CreateCollection(collection, type);
     }
 
 }

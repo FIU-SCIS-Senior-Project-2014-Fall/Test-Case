@@ -1,4 +1,4 @@
-﻿@model TestFlow.Models.TF_Collections
+﻿@model Collection
 
 @{
     ViewBag.Title = "Create";
@@ -31,10 +31,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Type_Id, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Type_Id, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Type_Id, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Type, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Type, "", new { @class = "text-danger" })
             </div>
         </div>
 

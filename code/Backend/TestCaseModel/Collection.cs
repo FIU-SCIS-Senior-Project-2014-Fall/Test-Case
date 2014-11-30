@@ -22,11 +22,17 @@ public class Collection : TestItemBase
         get;
         set;
     }
-	public virtual int Host
+	public string Host
 	{
 		get;
 		set;
 	}
+
+    public int Type
+    {
+        get;
+        set;
+    }
 
 	public virtual List<Project> Projects
 	{

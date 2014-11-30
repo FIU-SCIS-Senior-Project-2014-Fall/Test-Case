@@ -6,28 +6,27 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using TestFlow.Models;
 
 namespace TestFlow.Controllers
 {
     public class CollectionsController : Controller
     {
-        private testflowEntities db = new testflowEntities();
-
         // GET: Collections
         public ActionResult Index()
         {
-            return View(db.TF_Collections.ToList());
+            ServiceFacade serviceFacade = new ServiceFacade(User);
+            return View(serviceFacade.GetCollections());
         }
 
         // GET: Collections/Details/5
         public ActionResult Details(int? id)
         {
+            ServiceFacade serviceFacade = new ServiceFacade(User);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TF_Collections tF_Collections = db.TF_Collections.Find(id);
+            Collection tF_Collections = serviceFacade.GetCollection(id.Value);
             if (tF_Collections == null)
             {
                 return HttpNotFound();
@@ -46,31 +45,32 @@ namespace TestFlow.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Collection_Id,Name,Host,Type_Id")] TF_Collections tF_Collections)
+        public ActionResult Create([Bind(Include = "Id,Name,Host,Type")] Collection collection)
         {
+            ServiceFacade serviceFacade = new ServiceFacade(User);
             if (ModelState.IsValid)
             {
-                db.TF_Collections.Add(tF_Collections);
-                db.SaveChanges();
+                serviceFacade.CreateCollection(collection, collection.Type);
                 return RedirectToAction("Index");
             }
 
-            return View(tF_Collections);
+            return View(collection);
         }
 
         // GET: Collections/Edit/5
         public ActionResult Edit(int? id)
         {
+            ServiceFacade serviceFacade = new ServiceFacade(User);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TF_Collections tF_Collections = db.TF_Collections.Find(id);
-            if (tF_Collections == null)
+            Collection collection = serviceFacade.GetCollection(id.Value);
+            if (collection == null)
             {
                 return HttpNotFound();
             }
-            return View(tF_Collections);
+            return View(collection);
         }
 
         // POST: Collections/Edit/5
@@ -78,21 +78,21 @@ namespace TestFlow.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Collection_Id,Name,Host,Type_Id")] TF_Collections tF_Collections)
+        public ActionResult Edit([Bind(Include = "Id,Name,Host,Type")] Collection collection)
         {
+            ServiceFacade serviceFacade = new ServiceFacade(User);
             if (ModelState.IsValid)
             {
-                db.Entry(tF_Collections).State = EntityState.Modified;
-                db.SaveChanges();
+                serviceFacade.EditCollection(collection);
                 return RedirectToAction("Index");
             }
-            return View(tF_Collections);
+            return View(collection);
         }
 
         // GET: Collections/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            /*if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
@@ -101,7 +101,9 @@ namespace TestFlow.Controllers
             {
                 return HttpNotFound();
             }
-            return View(tF_Collections);
+             * */
+            return HttpNotFound();
+            //return View(tF_Collections);
         }
 
         // POST: Collections/Delete/5
@@ -109,19 +111,8 @@ namespace TestFlow.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            TF_Collections tF_Collections = db.TF_Collections.Find(id);
-            db.TF_Collections.Remove(tF_Collections);
-            db.SaveChanges();
+            
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

@@ -26,10 +26,6 @@ C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\DataStore\bin\Debug\Micros
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\DataStore\bin\Debug\vTeam.TfsApi.dll
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\DataStore\bin\Debug\vTeam.TfsApi.pdb
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\DataStore\bin\Debug\Microsoft.WITDataStore.dll
-G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\DataStore\bin\Debug\NativeBinaries\amd64\git2-3f8d005.dll
-G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\DataStore\bin\Debug\NativeBinaries\amd64\git2-3f8d005.pdb
-G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\DataStore\bin\Debug\NativeBinaries\x86\git2-3f8d005.dll
-G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\DataStore\bin\Debug\NativeBinaries\x86\git2-3f8d005.pdb
 G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\DataStore\bin\Debug\DataStore.dll.config
 G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\DataStore\bin\Debug\DataStore.dll
 G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\DataStore\bin\Debug\DataStore.pdb
