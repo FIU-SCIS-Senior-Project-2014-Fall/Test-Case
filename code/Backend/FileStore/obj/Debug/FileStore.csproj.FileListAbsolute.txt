@@ -2,3 +2,8 @@ C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\FileStore\bin\Debug\FileSt
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\FileStore\bin\Debug\FileStore.pdb
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\FileStore\obj\Debug\FileStore.dll
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\FileStore\obj\Debug\FileStore.pdb
+G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\FileStore\bin\Debug\FileStore.dll
+G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\FileStore\bin\Debug\FileStore.pdb
+G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\FileStore\obj\Debug\FileStore.csprojResolveAssemblyReference.cache
+G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\FileStore\obj\Debug\FileStore.dll
+G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\FileStore\obj\Debug\FileStore.pdb

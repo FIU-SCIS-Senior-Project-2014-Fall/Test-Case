@@ -1,6 +1,6 @@
 using System;
 
-namespace WebService.Areas.HelpPage.ModelDescriptions
+namespace TestFlow.Areas.HelpPage.ModelDescriptions
 {
     public class ParameterAnnotation
     {

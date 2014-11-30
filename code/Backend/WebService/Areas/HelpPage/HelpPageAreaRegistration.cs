@@ -1,7 +1,7 @@
 using System.Web.Http;
 using System.Web.Mvc;
 
-namespace WebService.Areas.HelpPage
+namespace TestFlow.Areas.HelpPage
 {
     public class HelpPageAreaRegistration : AreaRegistration
     {

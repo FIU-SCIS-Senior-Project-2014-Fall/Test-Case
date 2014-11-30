@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace WebService
+namespace TestFlow
 {
     public class BundleConfig
     {

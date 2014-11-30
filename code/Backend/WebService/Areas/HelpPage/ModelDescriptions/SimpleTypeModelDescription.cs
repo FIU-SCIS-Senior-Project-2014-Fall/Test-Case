@@ -1,4 +1,4 @@
-namespace WebService.Areas.HelpPage.ModelDescriptions
+namespace TestFlow.Areas.HelpPage.ModelDescriptions
 {
     public class SimpleTypeModelDescription : ModelDescription
     {

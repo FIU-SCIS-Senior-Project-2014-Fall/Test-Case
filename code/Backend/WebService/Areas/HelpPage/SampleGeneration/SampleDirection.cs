@@ -1,4 +1,4 @@
-namespace WebService.Areas.HelpPage
+namespace TestFlow.Areas.HelpPage
 {
     /// <summary>
     /// Indicates whether the sample is used for request or response

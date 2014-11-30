@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using WebService.Areas.HelpPage.ModelDescriptions;
-using WebService.Areas.HelpPage.Models;
+using TestFlow.Areas.HelpPage.ModelDescriptions;
+using TestFlow.Areas.HelpPage.Models;
 
-namespace WebService.Areas.HelpPage.Controllers
+namespace TestFlow.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

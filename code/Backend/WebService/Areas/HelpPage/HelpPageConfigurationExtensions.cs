@@ -11,10 +11,10 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using WebService.Areas.HelpPage.ModelDescriptions;
-using WebService.Areas.HelpPage.Models;
+using TestFlow.Areas.HelpPage.ModelDescriptions;
+using TestFlow.Areas.HelpPage.Models;
 
-namespace WebService.Areas.HelpPage
+namespace TestFlow.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {
