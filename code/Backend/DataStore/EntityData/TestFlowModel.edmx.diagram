@@ -25,7 +25,6 @@
         <AssociationConnector Association="testflowModel.FK_TF_Suites_TF_TestPlan" ManuallyRouted="false" />
         <AssociationConnector Association="testflowModel.FK_TF_TestCases_TF_Suites" ManuallyRouted="false" />
         <AssociationConnector Association="testflowModel.FK_TF_Collections_TF_Collection_Types" />
-        <AssociationConnector Association="testflowModel.FK_TF_Suites_TF_Suites1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

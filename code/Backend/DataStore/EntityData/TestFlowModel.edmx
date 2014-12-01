@@ -173,18 +173,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_TF_Suites_TF_Suites1">
-          <End Role="TF_Suites" Type="Self.TF_Suites" Multiplicity="1" />
-          <End Role="TF_Suites1" Type="Self.TF_Suites" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TF_Suites">
-              <PropertyRef Name="Suite_Id" />
-            </Principal>
-            <Dependent Role="TF_Suites1">
-              <PropertyRef Name="Parent" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_TF_Suites_TF_TestPlan">
           <End Role="TF_TestPlan" Type="Self.TF_TestPlan" Multiplicity="1" />
           <End Role="TF_Suites" Type="Self.TF_Suites" Multiplicity="*" />
@@ -264,10 +252,6 @@
           <AssociationSet Name="FK_TF_Step_TF_TestCases" Association="Self.FK_TF_Step_TF_TestCases">
             <End Role="TF_TestCases" EntitySet="TF_TestCases" />
             <End Role="TF_Step" EntitySet="TF_Step" />
-          </AssociationSet>
-          <AssociationSet Name="FK_TF_Suites_TF_Suites1" Association="Self.FK_TF_Suites_TF_Suites1">
-            <End Role="TF_Suites" EntitySet="TF_Suites" />
-            <End Role="TF_Suites1" EntitySet="TF_Suites" />
           </AssociationSet>
           <AssociationSet Name="FK_TF_Suites_TF_TestPlan" Association="Self.FK_TF_Suites_TF_TestPlan">
             <End Role="TF_TestPlan" EntitySet="TF_TestPlan" />
@@ -373,9 +357,7 @@
           <NavigationProperty Name="TF_TestPlan" Relationship="Self.FK_TF_Suites_TF_TestPlan" FromRole="TF_Suites" ToRole="TF_TestPlan" />
           <NavigationProperty Name="TF_TestCases" Relationship="Self.FK_TF_TestCases_TF_Suites" FromRole="TF_Suites" ToRole="TF_TestCases" />
           <Property Name="Parent" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="TF_Suites1" Relationship="testflowModel.FK_TF_Suites_TF_Suites1" FromRole="TF_Suites" ToRole="TF_Suites1" />
-          <NavigationProperty Name="TF_Suites2" Relationship="testflowModel.FK_TF_Suites_TF_Suites1" FromRole="TF_Suites1" ToRole="TF_Suites" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="TF_TestCases">
           <Key>
             <PropertyRef Name="TestCase_Id" />
@@ -562,10 +544,6 @@
             <End Role="TF_Collection_Types" EntitySet="TF_Collection_Types" />
             <End Role="TF_Collections" EntitySet="TF_Collections" />
           </AssociationSet>
-          <AssociationSet Name="FK_TF_Suites_TF_Suites1" Association="testflowModel.FK_TF_Suites_TF_Suites1">
-            <End Role="TF_Suites" EntitySet="TF_Suites" />
-            <End Role="TF_Suites1" EntitySet="TF_Suites" />
-          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_TF_Collections_TF_Collection_Types">
           <End Type="testflowModel.TF_Collection_Types" Role="TF_Collection_Types" Multiplicity="1" />
@@ -576,18 +554,6 @@
             </Principal>
             <Dependent Role="TF_Collections">
               <PropertyRef Name="Type_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_TF_Suites_TF_Suites1">
-          <End Type="testflowModel.TF_Suites" Role="TF_Suites" Multiplicity="1" />
-          <End Type="testflowModel.TF_Suites" Role="TF_Suites1" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TF_Suites">
-              <PropertyRef Name="Suite_Id" />
-            </Principal>
-            <Dependent Role="TF_Suites1">
-              <PropertyRef Name="Parent" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

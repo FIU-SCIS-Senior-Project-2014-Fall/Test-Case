@@ -166,7 +166,7 @@ public class TestFlowDataStore
         using(var context = new testflowEntities())
         {
             TestPlan testPlan = new TestPlan();
-            var dbTestPlan = (from tp in context.TF_TestPlan where tp.TestPlan_Id == planId select tp).FirstOrDefault();
+            var dbTestPlan = context.TF_TestPlan.Find(planId);
             var dbSuites = from ts in context.TF_Suites where ts.TestPlan_Id == dbTestPlan.TestPlan_Id select ts;
 
             // format
@@ -174,24 +174,24 @@ public class TestFlowDataStore
             testPlan.Name = dbTestPlan.Name;
             testPlan.Project = new Project();
             testPlan.Project.Id = projectId;
-            testPlan.Suites = new List<TestSuite>();
-
-            foreach(TF_Suites ts in dbSuites)
-            {
-                TestSuite testSuite = new TestSuite();
-                testSuite.Id = ts.Suite_Id;
-                testSuite.Name = ts.Name;
-                testSuite.Parent = ts.Parent;
-                var dbSubSuites = from s in context.TF_Suites where s.Parent == testSuite.Id select s;
-                testSuite.SubSuites = createSuiteList(dbSubSuites);
-            }
+            testPlan.Suites = createSuiteList(dbSuites, context);
 
             return testPlan;
         }
         
     }
 
-    private List<TestSuite> createSuiteList(IQueryable<TF_Suites> suites)
+    public int getExternalId(int internalId, int type)
+    {
+        using(var context = new testflowEntities())
+        {
+            return (from eId in context.TF_ExternalIds 
+                    where eId.Internal_Id == internalId && eId.Type == type 
+                    select eId.Id).FirstOrDefault();
+        }
+    }
+
+    private List<TestSuite> createSuiteList(IQueryable<TF_Suites> suites, testflowEntities context)
     {
         List<TestSuite> suiteList = new List<TestSuite>();
 
@@ -201,11 +201,8 @@ public class TestFlowDataStore
             testSuite.Id = ts.Suite_Id;
             testSuite.Name = ts.Name;
             testSuite.Parent = ts.Parent;
-            using (var context = new testflowEntities())
-            {
-                var dbSuites = from s in context.TF_Suites where s.Parent == testSuite.Id select s;
-                testSuite.SubSuites = createSuiteList(dbSuites);
-            }
+            var dbSuites = from s in context.TF_Suites where s.Parent == testSuite.Id select s;
+            testSuite.SubSuites = createSuiteList(dbSuites, context);
             suiteList.Add(testSuite);
         }
 
@@ -213,6 +210,66 @@ public class TestFlowDataStore
     }
 
     // unique to this adapter
+
+    public void SyncPlan(TestPlan plan, int testPlanId)
+    {
+        int suiteItemType = Convert.ToInt32(ItemTypes.Suite);
+
+        using(var context = new testflowEntities())
+        {
+            MergeExternalSuites(plan.Suites, 0, testPlanId,  context);
+        }
+    }
+
+    private void MergeExternalSuites(List<TestSuite> suites, int parentId, int testPlanId, testflowEntities context)
+    {
+        int suiteItemType = Convert.ToInt32(ItemTypes.Suite);
+        foreach (TestSuite ts in suites)
+        {
+            var suite = (from s in context.TF_Suites
+                         join e in context.TF_ExternalIds on s.Suite_Id equals e.Internal_Id
+                         where e.External_Id == ts.Id
+                         select s).FirstOrDefault();
+            if (suite == null)
+            {
+                TF_Suites dbSuite = new TF_Suites();
+                dbSuite.Name = ts.Name;
+                dbSuite.CreatedBy = User.User_Id;
+                dbSuite.Created = DateTime.Now;
+                dbSuite.LastModifiedBy = User.User_Id;
+                dbSuite.Modified = DateTime.Now;
+                dbSuite.Parent = parentId;
+                dbSuite.TestPlan_Id = testPlanId;
+                context.TF_Suites.Add(dbSuite);
+                try
+                {
+                    context.SaveChanges();
+                    bindExternalId(dbSuite.Suite_Id, ts.Id, suiteItemType);
+                }
+                catch(Exception e)
+                {
+                    return;
+                }
+                if(ts.SubSuites != null)
+                    MergeExternalSuites(ts.SubSuites, dbSuite.Suite_Id, testPlanId, context);
+
+            }
+            else
+            {
+                if (!suite.Name.Equals(ts.Name))
+                    suite.Name = ts.Name;
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch(Exception e)
+                {
+
+                }
+            }
+        }
+    }
+
     public void SyncPlans(List<TestPlan> externalPlans, int projectId)
     {
         using (var context = new testflowEntities())

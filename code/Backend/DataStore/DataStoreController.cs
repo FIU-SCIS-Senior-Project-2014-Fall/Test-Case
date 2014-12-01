@@ -78,15 +78,19 @@ public class DataStoreController
     {
         TestPlan plan = null;
         string projectName = dataStores.tfStore.getProjectName(projectId);
-        /*foreach (DataStoreAdapter dsa in dataStores.adapters)
+        Collection collection = dataStores.tfStore.getCollectionFromProject(projectId);
+        int externalId = dataStores.tfStore.getExternalId(id, Convert.ToInt32(ItemTypes.TestPlan));
+        foreach (DataStoreAdapter dsa in dataStores.adapters)
         {
-            plan = dsa.getPlan(projectName, id);
+            if (dsa.Id == collection.Id)
+                plan = dsa.getPlan(projectName, externalId);
             if (plan != null)
                 break;
-        }*/
-        plan = dataStores.tfStore.getPlan(projectId, id);
+        }
 
-        return plan;
+        dataStores.tfStore.SyncPlan(plan, id);
+
+        return dataStores.tfStore.getPlan(projectId, id);
     }
 
     public void createTestPlan(int projectId, string name)
