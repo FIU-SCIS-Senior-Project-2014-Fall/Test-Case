@@ -23,14 +23,21 @@
                 <ul class="nav-inline fadeInDown animated">
                     <li>
                         <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"> Test Plans <span class="caret"></span></button>
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Demo</a></li>
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="projectsDDM" data-toggle="dropdown"> Projects <span class="caret"></span></button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="projectsDDM">
+                                <li role="presentation" class="divider"></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1"><span class="glyphicon glyphicon-plus"></span> Add Test Manager Host</a></li>
                             </ul>
                         </div>
                     </li>
                     <li>
-                        <a class="btn btn-primary" href="#">Configure Hosts</a>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="testplansDDM" data-toggle="dropdown"> Test Plans <span class="caret"></span></button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="testplansDDM">
+                                <li role="presentation" class="divider"></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" id="createTestPlan"><span class="glyphicon glyphicon-plus"></span> Create New Test Plan</a></li>
+                            </ul>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -50,6 +57,23 @@
 
     </div>
 
+    <div class="loader">
+        <div class="cont">
+            <div class="graphics">
+                <div id="sphere-wrapper">
+                    <div class="sphere s-gold"></div>
+                    <div class="sphere s-5"></div>
+                    <div class="sphere s-4"></div>
+                    <div class="sphere s-3"></div>
+                    <div class="sphere s-2"></div>
+                    <div class="sphere s-1"></div>
+                </div>
+            </div>
+            <div class="msg">
+                <h1>Loading...</h1>
+            </div>
+        </div>
+    </div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -67,7 +91,7 @@
             </div>
         </div>
     </div>
-
+    
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -91,6 +115,14 @@
     <script src="/Scripts/Chart.min.js"></script>
     <!-- endNon-Angular Specific Dependencies -->
 
+    <!-- non-Angular Code -->
+    <script src="~/Scripts/Angular/Libs/ProjectManager.js"></script>
+    <script src="~/Scripts/Angular/Libs/TestFlowInit.js"></script>
+    <script src="~/Scripts/Angular/Libs/TestElement.js"></script>
+    <script src="~/Scripts/Angular/Libs/TestElementCopyPaste.js"></script>
+    <script src="~/Scripts/Angular/Libs/TestFlowMetrics.js"></script>
+    <!-- endNon-Angular Code-->
+
     <!-- Angular Dependencies -->
     <script src="/Scripts/Angular/angular.min.js"></script>
     <script src="/Scripts/Angular/angular-resource.min.js"></script>
@@ -106,7 +138,7 @@
 
     <!-- Controllers -->
     <script src="/Scripts/Angular/Controllers/app.js"></script>
-    <script src="/Scripts/Angular/Controllers/Workspace/workspace.js"></script>
+    <script src="/Scripts/Angular/Controllers/Workspace/workspace2.js"></script>
     <script src="/Scripts/Angular/Controllers/Projects/projects.js"></script>
     <!--
     <script src="/scripts/controllers/alternative.js"></script>

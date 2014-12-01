@@ -22,8 +22,8 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-          templateUrl: '/AngularViews/Projects/projects.html',
-        controller: 'ProjectsCtrl'
+          templateUrl: '/AngularViews/Workspace/workspace.html',
+        controller: 'WorkspaceCtrl'
       })
     .when('/workspace', {
         templateUrl: '/AngularViews/Workspace/workspace.html',
