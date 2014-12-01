@@ -28,5 +28,7 @@ public interface DataStoreAdapter
 
     TestPlan getPlan(string projectName, int id);
 
+    int CreateTestPlan(string projectName, string name);
+
 }
 

@@ -89,6 +89,20 @@ public class DataStoreController
         return plan;
     }
 
+    public void createTestPlan(int projectId, string name)
+    {
+        int id = dataStores.tfStore.CreateTestPlan(name, projectId);
+        int externalId = -1;
+        string projectName = dataStores.tfStore.getProjectName(projectId);
+        Collection collection = dataStores.tfStore.getCollectionFromProject(projectId);
+        foreach (DataStoreAdapter dsa in dataStores.adapters)
+        {
+            if (dsa.Id == collection.Id)
+                externalId = dsa.CreateTestPlan(projectName, name);
+        }
+        dataStores.tfStore.bindExternalId(id, externalId, Convert.ToInt32(ItemTypes.TestPlan));
+    }
+
     // Collections stuff
     public void EditCollection(Collection collection)
     {

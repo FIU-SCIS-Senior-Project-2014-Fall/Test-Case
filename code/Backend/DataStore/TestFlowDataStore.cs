@@ -105,7 +105,17 @@ public class TestFlowDataStore
         } 
     }
 
-    public void CreateTestPlan(string name, int projectId)
+    public void CreateSuite(string name, string description, int testPlanId, int parent)
+    {
+
+    }
+
+    public void EditSuite(string name, string description, int suiteId, int parent)
+    {
+
+    }
+
+    public int CreateTestPlan(string name, int projectId)
     {
         using (var context = new testflowEntities())
         {
@@ -113,21 +123,10 @@ public class TestFlowDataStore
             testPlan.Name = name;
             testPlan.Project_Id = projectId;
             context.SaveChanges();
+            return testPlan.TestPlan_Id;
         }
     }
 
-    public void CreateTestPlan(string name, int projectId, int externalId)
-    {
-        using (var context = new testflowEntities())
-        {
-            TF_TestPlan testPlan = new TF_TestPlan();
-            testPlan.Name = name;
-            testPlan.Project_Id = projectId;
-            context.SaveChanges();
-
-            bindExternalId(testPlan.TestPlan_Id, externalId, Convert.ToInt32(ItemTypes.TestPlan));
-        }
-    }
 
     public void EditTestPlan(string name, int testPlanId)
     {
@@ -431,6 +430,19 @@ public class TestFlowDataStore
                 }
                 
             }
+        }
+    }
+
+    public Collection getCollectionFromProject(int projectId)
+    {
+        using (var context = new testflowEntities())
+        {
+            int colId = (from p in context.TF_Projects where p.Project_Id == projectId select p.Collection_Id).FirstOrDefault();
+            TF_Collections dbCollection = context.TF_Collections.Find(colId);
+            Collection collection = new Collection();
+            collection.Id = dbCollection.Collection_Id;
+            collection.Name = dbCollection.Name;
+            return collection;
         }
     }
 }

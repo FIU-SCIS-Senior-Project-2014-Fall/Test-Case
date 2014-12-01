@@ -614,6 +614,36 @@ body, .MainBody, html, .container-fluid {
     to {bottom:-60%;}
 }
 
+.loader {
+    position:absolute;
+    height:100%;
+    width:100%;
+    background-color:#cccccc;
+    top:53px;
+}
+
+.loader .cont {
+    width:900px;
+    margin:0px auto;
+}
+
+.loader .msg h1 {
+    margin-top:75px;
+    text-align:center;
+}
+
+.loader .graphics {
+    opacity:0;
+    -webkit-transition: ease-out .25s;
+    -moz-transition: ease-out .25s;
+    -o-transition: ease-out .25s;
+    transition: ease-out .25s;
+}
+
+.loader .gfxgogo {
+    opacity:1;
+}
+
 .loading {
     height:300px;
 }

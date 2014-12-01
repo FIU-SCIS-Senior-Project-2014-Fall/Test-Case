@@ -70,6 +70,27 @@ public class TfsDataStore : DataStoreAdapter
         tfsPlan.Save();
     }
 
+    public int CreateTestPlan(string projectName, string name)
+    {
+        var tpc = TfsTeamProjectCollectionFactory.GetTeamProjectCollection(Host);
+        //ICredentials crds = new NetworkCredential("TFS", "test123");
+        tpc.Credentials = credentials;
+
+        TfsTeamProjectCollection tfsCollection = new TfsTeamProjectCollection(Host, credentials);
+        ITestManagementService tms = tpc.GetService<ITestManagementService>();
+
+        // get the project and plan helper
+        ITestManagementTeamProject project = tms.GetTeamProject(projectName);
+        ITestPlanHelper planHelper = project.TestPlans;
+
+        ITestPlan testPlan = planHelper.Create();
+        testPlan.Name = name;
+
+        testPlan.Save();
+
+        return testPlan.Id;
+    }
+
     private void editTestSuite(TestSuite suite)
     {
 

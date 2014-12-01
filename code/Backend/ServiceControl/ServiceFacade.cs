@@ -53,6 +53,11 @@ public class ServiceFacade
         dataStore.editTestItem(testItem);
     }
 
+    public void createTestPlan(int projectId, string name)
+    {
+        dataStore.createTestPlan(projectId, name);
+    }
+
     // collection management metods
 
     public void EditCollection(Collection collection)

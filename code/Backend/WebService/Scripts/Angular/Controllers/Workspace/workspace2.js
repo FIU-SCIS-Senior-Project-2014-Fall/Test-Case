@@ -9,7 +9,6 @@
  */
 angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, storage) {
 
-    var noShow = "no-show";
     storage.bind($scope, 'entries');
   	storage.bind($scope,'idStore');
 
@@ -24,10 +23,6 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		$scope.entries = [];
 		$scope.addSuite();
 	}
-
-	$scope.loading = noShow;
-	$scope.loaded = noShow;
-	$scope.cmd = "";
 
 	$scope.copySteps = function(index) {
 	    testFlow.copyChildren($scope.suite.children[index]);
@@ -258,15 +253,12 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	}
 
 	testManager.reloadWorkspaceDelegate = function (projectId, testPlanId) {
-	    $scope.loading = "";
-	    $scope.loaded = noShow;
-	    $scope.cmd = noShow;
-	    $(".loading h1").html("Loading Test Plan...");
 	    $.ajax({
 	        url: '/api/TestPlans/' + projectId + "/" + testPlanId,
 	        type: 'GET',
 	        dataType: 'json',
 	        success: function (data) {
+	            $scope.testPlan = data.Name;
 	            localStorage.setItem("entry:" + testFlow.projectId + ":" + testFlow.testPlanId, JSON.stringify($scope.entries));
 	            $scope.entries = JSON.parse(localStorage.getItem("entry:" + projectId + ":" + testPlanId));
 	            if ($scope.entries != null || !$.isArray($scope.entries))
@@ -275,9 +267,8 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	            testFlow.projectId = projectId;
 	            testFlow.testPlanId = testPlanId;
 	            $scope.$apply();
-	            $scope.loaded = "";
-	            $scope.loading = noShow;
 	            $scope.$apply();
+	            testManager.loader("", false, false);
 	        },
 	        error: function () {
 	            $("#myModal").find(".modal-title").html("Error Requesting Project Test Plan");

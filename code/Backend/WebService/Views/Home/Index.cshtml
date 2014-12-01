@@ -35,7 +35,7 @@
                             <button class="btn btn-primary dropdown-toggle" type="button" id="testplansDDM" data-toggle="dropdown"> Test Plans <span class="caret"></span></button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="testplansDDM">
                                 <li role="presentation" class="divider"></li>
-                                <li role="presentation"><a role="menuitem" tabindex="-1"><span class="glyphicon glyphicon-plus"></span> Create New Test Plan</a></li>
+                                <li role="presentation"><a role="menuitem" tabindex="-1" id="createTestPlan"><span class="glyphicon glyphicon-plus"></span> Create New Test Plan</a></li>
                             </ul>
                         </div>
                     </li>
@@ -57,6 +57,23 @@
 
     </div>
 
+    <div class="loader">
+        <div class="cont">
+            <div class="graphics">
+                <div id="sphere-wrapper">
+                    <div class="sphere s-gold"></div>
+                    <div class="sphere s-5"></div>
+                    <div class="sphere s-4"></div>
+                    <div class="sphere s-3"></div>
+                    <div class="sphere s-2"></div>
+                    <div class="sphere s-1"></div>
+                </div>
+            </div>
+            <div class="msg">
+                <h1>Loading...</h1>
+            </div>
+        </div>
+    </div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -74,7 +91,7 @@
             </div>
         </div>
     </div>
-
+    
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
