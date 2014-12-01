@@ -1,5 +1,5 @@
 // test flow managers a project's test plan in the UI
-function TestFlow(scope, projectName, testPlanId) {
+function TestFlow(scope, projectId, testPlanId) {
     var _this = this;                               // this instance because bind may go too deep.
 	this.scope = scope;
 	this.idStore = 0;
@@ -7,7 +7,7 @@ function TestFlow(scope, projectName, testPlanId) {
 	this.copyBuffer = "";
 	this.active = 0;
 	this.suite = -1;
-	this.projectName = projectName;
+	this.projectId = projectId;
 	this.testPlanId = testPlanId;
 	this.keys = {};
 	this.dragId = -1;

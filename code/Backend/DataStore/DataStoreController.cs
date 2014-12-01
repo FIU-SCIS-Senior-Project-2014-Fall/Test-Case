@@ -57,27 +57,34 @@ public class DataStoreController
         return dataStores.tfStore.getProjects();
 	}
 
-    public List<TestPlan> getTestPlans(string projectName)
+    public List<TestPlan> getTestPlans(int projectId)
     {
-        List<TestPlan> projects = new List<TestPlan>();
-        foreach (DataStoreAdapter dsa in dataStores.adapters)
+        string projectName = dataStores.tfStore.getProjectName(projectId);
+        if (projectName != null)
         {
-            List<TestPlan> temp = dsa.getPlans(projectName);
-            projects = projects.Concat(temp).ToList();
-        }
+            List<TestPlan> projects = new List<TestPlan>();
+            foreach (DataStoreAdapter dsa in dataStores.adapters)
+            {
+                dataStores.tfStore.SyncPlans(dsa.getPlans(projectName), projectId);
+            }
 
-        return projects;
+            return dataStores.tfStore.getPlans(projectId);
+        }
+        else
+            return null;
     }
 
-    public TestPlan getTestPlan(string projectName, int id)
+    public TestPlan getTestPlan(int projectId, int id)
     {
         TestPlan plan = null;
-        foreach (DataStoreAdapter dsa in dataStores.adapters)
+        string projectName = dataStores.tfStore.getProjectName(projectId);
+        /*foreach (DataStoreAdapter dsa in dataStores.adapters)
         {
             plan = dsa.getPlan(projectName, id);
             if (plan != null)
                 break;
-        }
+        }*/
+        plan = dataStores.tfStore.getPlan(projectId, id);
 
         return plan;
     }

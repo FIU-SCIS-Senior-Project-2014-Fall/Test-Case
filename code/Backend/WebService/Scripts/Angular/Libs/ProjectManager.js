@@ -41,9 +41,9 @@ function ProjectManager() {
     }
 
     // sets the testplans form a given project in the drop down
-    this.getTestPlanList = function(projectName) {
+    this.getTestPlanList = function(projectId) {
         $.ajax({
-            url: '/api/TestPlans/' + projectName,
+            url: '/api/TestPlans/' + projectId,
             type: 'GET',
             dataType: 'json',
             success: function (data) {
@@ -78,7 +78,7 @@ function ProjectManager() {
         instance.currentProject = project;
         $(element).parents().find(".active").removeClass("active");
         $(element).addClass("active");
-        instance.getTestPlanList(project.Name);
+        instance.getTestPlanList(project.Id);
     }
 
     // selection of a test plan
@@ -86,9 +86,9 @@ function ProjectManager() {
         instance.currentTestPlan = testPlan;
         $(element).parents().find(".active").removeClass("active");
         $(element).addClass("active");
-        instance.reloadWorkspaceDelegate(instance.currentProject.Name, instance.currentTestPlan.Id);
+        instance.reloadWorkspaceDelegate(instance.currentProject.Id, instance.currentTestPlan.Id);
     }
 
     // delegate which should be assigned a function from the controller to be find on test plan changes.
-    this.reloadWorkspaceDelegate = function (projectName, testPlanId) { };
+    this.reloadWorkspaceDelegate = function (projectId, testPlanId) { };
 };

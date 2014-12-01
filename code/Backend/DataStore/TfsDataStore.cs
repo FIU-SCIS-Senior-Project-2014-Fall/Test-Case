@@ -60,7 +60,7 @@ public class TfsDataStore : DataStoreAdapter
         ITestManagementService tms = tpc.GetService<ITestManagementService>();
 
         // get the project and plan helper
-        ITestManagementTeamProject project = tms.GetTeamProject(plan.Project);
+        ITestManagementTeamProject project = tms.GetTeamProject(plan.Project.Name);
         ITestPlanHelper planHelper = project.TestPlans;
 
         // find the right plan
@@ -104,7 +104,6 @@ public class TfsDataStore : DataStoreAdapter
             TestPlan tp = new TestPlan();
             tp.Id = p.Id;
             tp.Name = p.Name;
-            tp.Project = projectName;
             planList.Add(tp);
         }
 
@@ -165,7 +164,8 @@ public class TfsDataStore : DataStoreAdapter
         TestPlan plan = new TestPlan();
         plan.Name = tfsPlan.Name;
         plan.Id = tfsPlan.Id;
-        plan.Project = projectName;
+        plan.Project = new Project();
+        plan.Project.Name = projectName;
 
         // get the suites
         plan.Suites = getSuites(tfsPlan.RootSuite.SubSuites, -1);

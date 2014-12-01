@@ -68,6 +68,7 @@
     <EntitySetMapping Name="TF_Suites">
       <EntityTypeMapping TypeName="testflowModel.TF_Suites">
         <MappingFragment StoreEntitySet="TF_Suites">
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
           <ScalarProperty Name="Suite_Id" ColumnName="Suite_Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Description" ColumnName="Description" />

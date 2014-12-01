@@ -17,6 +17,7 @@ namespace DataStore.EntityData
         public TF_Suites()
         {
             this.TF_TestCases = new HashSet<TF_TestCases>();
+            this.TF_Suites1 = new HashSet<TF_Suites>();
         }
     
         public int Suite_Id { get; set; }
@@ -27,8 +28,11 @@ namespace DataStore.EntityData
         public System.DateTime Created { get; set; }
         public System.DateTime Modified { get; set; }
         public int TestPlan_Id { get; set; }
+        public int Parent { get; set; }
     
         public virtual TF_TestPlan TF_TestPlan { get; set; }
         public virtual ICollection<TF_TestCases> TF_TestCases { get; set; }
+        public virtual ICollection<TF_Suites> TF_Suites1 { get; set; }
+        public virtual TF_Suites TF_Suites2 { get; set; }
     }
 }

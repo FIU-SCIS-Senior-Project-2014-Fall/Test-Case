@@ -16,17 +16,17 @@ namespace TestFlow.Controllers
             serviceFacade = new ServiceFacade(User);
         }
         // GET: api/TestPlans/projectName/testPlanId
-        [Route("api/TestPlans/{ProjectName}/{Id}")]
-        public TestPlan Get(string ProjectName, int Id)
+        [Route("api/TestPlans/{ProjectId}/{Id}")]
+        public TestPlan Get(int ProjectId, int Id)
         {
-            return serviceFacade.getTestPlan(ProjectName, Id);
+            return serviceFacade.getTestPlan(ProjectId, Id);
         }
 
         // GET: api/TestPlans/projectName
-        [Route("api/TestPlans/{ProjectName}")]
-        public IEnumerable<TestPlan> Get(string ProjectName)
+        [Route("api/TestPlans/{ProjectId}")]
+        public IEnumerable<TestPlan> Get(int ProjectId)
         {
-            return serviceFacade.getTestPlans(ProjectName);
+            return serviceFacade.getTestPlans(ProjectId);
         }
 
         public string Get()
@@ -40,13 +40,14 @@ namespace TestFlow.Controllers
         }
 
         // PUT: api/TestPlans/5
-        [Route("api/TestPlans/edit/{ProjectName}/{Id}")]
-        public void Put(string ProjectName, int Id, [FromBody]string value)
+        [Route("api/TestPlans/edit/{ProjectId}/{Id}")]
+        public void Put(int ProjectId, int Id, [FromBody]string value)
         {
             TestPlan plan = new TestPlan();
             plan.Id = Id;
             plan.Name = value;
-            plan.Project = ProjectName;
+            plan.Project = new Project();
+            plan.Project.Id = ProjectId;
             serviceFacade.editTestItem(plan);
         }
 

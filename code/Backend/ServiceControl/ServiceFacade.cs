@@ -39,13 +39,13 @@ public class ServiceFacade
 		throw new System.NotImplementedException();
 	}
 
-    public List<TestPlan> getTestPlans(string projectName)
+    public List<TestPlan> getTestPlans(int projectId)
     {
-        return dataStore.getTestPlans(projectName);
+        return dataStore.getTestPlans(projectId);
     }
-    public TestPlan getTestPlan(string projectName, int id)
+    public TestPlan getTestPlan(int projectId, int id)
     {
-        return dataStore.getTestPlan(projectName, id);
+        return dataStore.getTestPlan(projectId, id);
     }
 
     public void editTestItem(TestItemBase testItem)

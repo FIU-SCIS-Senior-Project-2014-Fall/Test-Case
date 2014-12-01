@@ -28,7 +28,7 @@ public class TestPlan : TestItemBase
 		set;
 	}
 
-	public string Project
+	public Project Project
 	{
 		get;
 		set;

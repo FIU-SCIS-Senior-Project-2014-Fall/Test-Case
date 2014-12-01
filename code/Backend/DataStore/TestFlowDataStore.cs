@@ -11,7 +11,7 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 
-public class TestFlowDataStore : DataStoreAdapter
+public class TestFlowDataStore
 {
     public int Id
     {
@@ -97,17 +97,171 @@ public class TestFlowDataStore : DataStoreAdapter
         
     }
 
-    public List<TestPlan> getPlans(string projectName)
+    public string getProjectName(int projectId)
     {
-        throw new System.NotImplementedException();
+        using(var context = new testflowEntities())
+        {
+            return (from p in context.TF_Projects where p.Project_Id == projectId select p.Name).FirstOrDefault();
+        } 
     }
 
-    public TestPlan getPlan(string projectName, int id)
+    public void CreateTestPlan(string name, int projectId)
     {
-        throw new System.NotImplementedException();
+        using (var context = new testflowEntities())
+        {
+            TF_TestPlan testPlan = new TF_TestPlan();
+            testPlan.Name = name;
+            testPlan.Project_Id = projectId;
+            context.SaveChanges();
+        }
+    }
+
+    public void CreateTestPlan(string name, int projectId, int externalId)
+    {
+        using (var context = new testflowEntities())
+        {
+            TF_TestPlan testPlan = new TF_TestPlan();
+            testPlan.Name = name;
+            testPlan.Project_Id = projectId;
+            context.SaveChanges();
+
+            bindExternalId(testPlan.TestPlan_Id, externalId, Convert.ToInt32(ItemTypes.TestPlan));
+        }
+    }
+
+    public void EditTestPlan(string name, int testPlanId)
+    {
+        using(var context = new testflowEntities())
+        {
+            var testPlan = context.TF_TestPlan.Find(testPlanId);
+            testPlan.Name = name;
+            context.SaveChanges();
+        }
+    }
+
+    public List<TestPlan> getPlans(int projectId)
+    {
+        using (var context = new testflowEntities())
+        {
+            var dbTestPlan = from tp in context.TF_TestPlan
+                             where tp.Project_Id == projectId
+                             select tp;
+
+            List<TestPlan> plans = new List<TestPlan>();
+            foreach(TF_TestPlan tp in dbTestPlan)
+            {
+                TestPlan testPlan = new TestPlan();
+                testPlan.Name = tp.Name;
+                testPlan.Id = tp.TestPlan_Id;
+                testPlan.Project = new Project();
+                testPlan.Project.Id = tp.Project_Id;
+                plans.Add(testPlan);
+            }
+
+            return plans;
+        }
+    }
+
+    public TestPlan getPlan(int projectId, int planId)
+    {
+        using(var context = new testflowEntities())
+        {
+            TestPlan testPlan = new TestPlan();
+            var dbTestPlan = (from tp in context.TF_TestPlan where tp.TestPlan_Id == planId select tp).FirstOrDefault();
+            var dbSuites = from ts in context.TF_Suites where ts.TestPlan_Id == dbTestPlan.TestPlan_Id select ts;
+
+            // format
+            testPlan.Id = dbTestPlan.TestPlan_Id;
+            testPlan.Name = dbTestPlan.Name;
+            testPlan.Project = new Project();
+            testPlan.Project.Id = projectId;
+            testPlan.Suites = new List<TestSuite>();
+
+            foreach(TF_Suites ts in dbSuites)
+            {
+                TestSuite testSuite = new TestSuite();
+                testSuite.Id = ts.Suite_Id;
+                testSuite.Name = ts.Name;
+                testSuite.Parent = ts.Parent;
+                var dbSubSuites = from s in context.TF_Suites where s.Parent == testSuite.Id select s;
+                testSuite.SubSuites = createSuiteList(dbSubSuites);
+            }
+
+            return testPlan;
+        }
+        
+    }
+
+    private List<TestSuite> createSuiteList(IQueryable<TF_Suites> suites)
+    {
+        List<TestSuite> suiteList = new List<TestSuite>();
+
+        foreach (TF_Suites ts in suites)
+        {
+            TestSuite testSuite = new TestSuite();
+            testSuite.Id = ts.Suite_Id;
+            testSuite.Name = ts.Name;
+            testSuite.Parent = ts.Parent;
+            using (var context = new testflowEntities())
+            {
+                var dbSuites = from s in context.TF_Suites where s.Parent == testSuite.Id select s;
+                testSuite.SubSuites = createSuiteList(dbSuites);
+            }
+            suiteList.Add(testSuite);
+        }
+
+        return suiteList;
     }
 
     // unique to this adapter
+    public void SyncPlans(List<TestPlan> externalPlans, int projectId)
+    {
+        using (var context = new testflowEntities())
+        {
+            int planItemType = Convert.ToInt32(ItemTypes.TestPlan);
+            var dbTestPlan = from tp in context.TF_TestPlan
+                             join ip in context.TF_ExternalIds on tp.TestPlan_Id equals ip.Internal_Id
+                             where tp.Project_Id == projectId && ip.Type == planItemType
+                             select new { TestPlan = tp, ExternalId = ip };
+
+            // N^2 but not expecting too many test plans.
+            foreach(TestPlan tp in externalPlans)
+            {
+                bool exist = false;
+                foreach (var ip in dbTestPlan)
+                {
+                    if (ip.ExternalId.Id == tp.Id)
+                    {
+                        exist = true;
+                    }
+                }
+
+                if (!exist)
+                {
+                    TF_TestPlan testPlan = new TF_TestPlan();
+                    testPlan.Name = tp.Name;
+                    testPlan.Project_Id = projectId;
+                    context.TF_TestPlan.Add(testPlan);
+                    try
+                    {
+                        context.SaveChanges();
+                        bindExternalId(testPlan.TestPlan_Id, tp.Id, planItemType);
+                    }
+                    catch (Exception e)
+                    {
+
+                    }
+
+
+                }
+            }
+        }
+    }
+    /// <summary>
+    /// Syncronizes the projects from adapters and local entity framework.
+    /// </summary>
+    /// <param name="externalProjects">external projects</param>
+    /// <param name="collectionId">local collection ID where projects are from</param>
     public void SyncProjects(List<Project> externalProjects, int collectionId)
     {
         using(var context = new testflowEntities())
@@ -145,12 +299,7 @@ public class TestFlowDataStore : DataStoreAdapter
                     try
                     {
                         context.SaveChanges();
-                        TF_ExternalIds externId = new TF_ExternalIds();
-                        externId.Internal_Id = proj.Project_Id;
-                        externId.Id = p.Id;
-                        externId.Type = projItemType;
-                        context.TF_ExternalIds.Add(externId);
-                        context.SaveChanges();
+                        bindExternalId(proj.Project_Id, p.Id, projItemType);
                     }
                     catch(Exception e)
                     {
@@ -171,10 +320,21 @@ public class TestFlowDataStore : DataStoreAdapter
         }
         
     }
-    public void CreateProject(Project project)
-    {
 
+    public void bindExternalId(int internalId, int externalId, int type)
+    {
+        using (var context = new testflowEntities())
+        {
+            TF_ExternalIds externId = new TF_ExternalIds();
+            externId.Internal_Id = internalId;
+            externId.Id = externalId;
+            externId.Type = type;
+            context.TF_ExternalIds.Add(externId);
+            context.SaveChanges();
+        }
     }
+
+   
     public void CreateCollection(Collection collection, int type)
     {
         TF_Collections dbCollection = new TF_Collections();
@@ -279,6 +439,7 @@ public enum ItemTypes
 {
     Collection,
     Project,
+    TestPlan,
     Suite,
     TestCase,
     Step

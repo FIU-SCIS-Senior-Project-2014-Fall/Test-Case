@@ -257,22 +257,22 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		$("#myModal").modal('show');
 	}
 
-	testManager.reloadWorkspaceDelegate = function (projectName, testPlanId) {
+	testManager.reloadWorkspaceDelegate = function (projectId, testPlanId) {
 	    $scope.loading = "";
 	    $scope.loaded = noShow;
 	    $scope.cmd = noShow;
 	    $(".loading h1").html("Loading Test Plan...");
 	    $.ajax({
-	        url: '/api/TestPlans/' + projectName + "/" + testPlanId,
+	        url: '/api/TestPlans/' + projectId + "/" + testPlanId,
 	        type: 'GET',
 	        dataType: 'json',
 	        success: function (data) {
-	            localStorage.setItem("entry:" + testFlow.projectName + ":" + testFlow.testPlanId, JSON.stringify($scope.entries));
-	            $scope.entries = JSON.parse(localStorage.getItem("entry:" + projectName + ":" + testPlanId));
+	            localStorage.setItem("entry:" + testFlow.projectId + ":" + testFlow.testPlanId, JSON.stringify($scope.entries));
+	            $scope.entries = JSON.parse(localStorage.getItem("entry:" + projectId + ":" + testPlanId));
 	            if ($scope.entries != null || !$.isArray($scope.entries))
 	                $scope.entries = [];
 	            testFlow.mergeTestPlan(data.Suites);
-	            testFlow.projectName = projectName;
+	            testFlow.projectId = projectId;
 	            testFlow.testPlanId = testPlanId;
 	            $scope.$apply();
 	            $scope.loaded = "";

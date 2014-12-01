@@ -30,12 +30,7 @@ public class Project : TestItemBase
         get;
         set;
     }
-	public virtual List<TestPlan> TestPlans
-	{
-		get;
-		set;
-	}
-	public virtual Collection Collection
+	public int CollectionId
 	{
 		get;
 		set;
