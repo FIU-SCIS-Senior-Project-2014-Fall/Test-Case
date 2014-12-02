@@ -281,9 +281,9 @@
     <Content Include="Views\Collections\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ServiceControl\ServiceControl.csproj">
+    <ProjectReference Include="..\ServiceControl\TestFlowManager.csproj">
       <Project>{c7ec2b7a-a5e2-42ac-acd5-89ac1b27d4c0}</Project>
-      <Name>ServiceControl</Name>
+      <Name>TestFlowManager</Name>
     </ProjectReference>
     <ProjectReference Include="..\TestCaseModel\TestCaseModel.csproj">
       <Project>{d276ea82-dea1-431e-a042-a16f8277e0a7}</Project>

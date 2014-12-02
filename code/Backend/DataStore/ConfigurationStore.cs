@@ -13,7 +13,7 @@ using System.Text;
 
 public struct UserCollections
 {
-    public List<DataStoreAdapter> adapters;
+    public List<IDataStoreAdapter> adapters;
     public TestFlowDataStore tfStore;
 }
 /// <summary>
@@ -29,7 +29,7 @@ public class ConfigurationStore
         Configuration.tfStore.Name = "Test Flow Collection";
 
         // create adapter list
-        List<DataStoreAdapter> dList = new List<DataStoreAdapter>();
+        List<IDataStoreAdapter> dList = new List<IDataStoreAdapter>();
 
         // get the users adapters
         using (var context = new testflowEntities())
@@ -45,7 +45,7 @@ public class ConfigurationStore
             // format
             foreach(TF_Collections c in collections)
             {
-                TfsDataStore tfsStore = new TfsDataStore();
+                TfsManager tfsStore = new TfsManager();
                 tfsStore.Name = c.Name;
                 tfsStore.Host = new Uri(c.Host);
                 tfsStore.Id = c.Collection_Id;

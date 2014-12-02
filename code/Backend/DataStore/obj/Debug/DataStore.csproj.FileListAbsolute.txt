@@ -18,10 +18,8 @@ C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\DataStore\obj\Debug\DataSt
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\DataStore\obj\Debug\DataStore.pdb
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\DataStore\bin\Debug\TestCaseModel.dll
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\DataStore\bin\Debug\FileStore.dll
-C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\DataStore\bin\Debug\RepositoryStore.dll
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\DataStore\bin\Debug\TestCaseModel.pdb
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\DataStore\bin\Debug\FileStore.pdb
-C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\DataStore\bin\Debug\RepositoryStore.pdb
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\DataStore\bin\Debug\Microsoft.TeamFoundation.WorkItemTracking.Client.DataStoreLoader.dll
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\DataStore\bin\Debug\vTeam.TfsApi.dll
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\DataStore\bin\Debug\vTeam.TfsApi.pdb

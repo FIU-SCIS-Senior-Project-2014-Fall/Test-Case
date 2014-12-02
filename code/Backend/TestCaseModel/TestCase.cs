@@ -40,12 +40,6 @@ public class TestCase : TestItemBase
 		set;
 	}
 
-	public virtual List<RepositoryFile> Link
-	{
-		get;
-		set;
-	}
-
 	public virtual List<Tag> Tags
 	{
 		get;

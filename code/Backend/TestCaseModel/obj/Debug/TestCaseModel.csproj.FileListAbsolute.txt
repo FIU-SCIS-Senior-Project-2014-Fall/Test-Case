@@ -1,14 +1,8 @@
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TestCaseModel\obj\Debug\TestCaseModel.csprojResolveAssemblyReference.cache
-C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TestCaseModel\bin\Debug\NativeBinaries\amd64\git2-3f8d005.dll
-C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TestCaseModel\bin\Debug\NativeBinaries\amd64\git2-3f8d005.pdb
-C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TestCaseModel\bin\Debug\NativeBinaries\x86\git2-3f8d005.dll
-C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TestCaseModel\bin\Debug\NativeBinaries\x86\git2-3f8d005.pdb
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TestCaseModel\bin\Debug\TestCaseModel.dll
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TestCaseModel\bin\Debug\TestCaseModel.pdb
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TestCaseModel\bin\Debug\FileStore.dll
-C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TestCaseModel\bin\Debug\RepositoryStore.dll
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TestCaseModel\bin\Debug\FileStore.pdb
-C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TestCaseModel\bin\Debug\RepositoryStore.pdb
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TestCaseModel\obj\Debug\TestCaseModel.dll
 C:\Users\jack\Documents\GitHub\Test-Case\code\Backend\TestCaseModel\obj\Debug\TestCaseModel.pdb
 G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\TestCaseModel\bin\Debug\NativeBinaries\amd64\git2-3f8d005.dll

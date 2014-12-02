@@ -14,14 +14,14 @@ namespace TestFlow.Controllers
         // GET: Collections
         public ActionResult Index()
         {
-            ServiceFacade serviceFacade = new ServiceFacade(User);
+            TestFlowManager serviceFacade = new TestFlowManager(User);
             return View(serviceFacade.GetCollections());
         }
 
         // GET: Collections/Details/5
         public ActionResult Details(int? id)
         {
-            ServiceFacade serviceFacade = new ServiceFacade(User);
+            TestFlowManager serviceFacade = new TestFlowManager(User);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -47,7 +47,7 @@ namespace TestFlow.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Host,Type")] Collection collection)
         {
-            ServiceFacade serviceFacade = new ServiceFacade(User);
+            TestFlowManager serviceFacade = new TestFlowManager(User);
             if (ModelState.IsValid)
             {
                 serviceFacade.CreateCollection(collection, collection.Type);
@@ -60,7 +60,7 @@ namespace TestFlow.Controllers
         // GET: Collections/Edit/5
         public ActionResult Edit(int? id)
         {
-            ServiceFacade serviceFacade = new ServiceFacade(User);
+            TestFlowManager serviceFacade = new TestFlowManager(User);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -80,7 +80,7 @@ namespace TestFlow.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Host,Type")] Collection collection)
         {
-            ServiceFacade serviceFacade = new ServiceFacade(User);
+            TestFlowManager serviceFacade = new TestFlowManager(User);
             if (ModelState.IsValid)
             {
                 serviceFacade.EditCollection(collection);

@@ -9,11 +9,11 @@ namespace TestFlow.Controllers
 {
     public class ProjectsController : ApiController
     {
-        private ServiceFacade serviceFacade;
+        private TestFlowManager serviceFacade;
 
         public ProjectsController()
         {
-            serviceFacade = new ServiceFacade(User);
+            serviceFacade = new TestFlowManager(User);
         }
         // GET: api/Projects
         public IEnumerable<Project> Get()

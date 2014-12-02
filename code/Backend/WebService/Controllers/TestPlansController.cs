@@ -9,11 +9,11 @@ namespace TestFlow.Controllers
 {
     public class TestPlansController : ApiController
     {
-        private ServiceFacade serviceFacade;
+        private TestFlowManager serviceFacade;
 
         public TestPlansController()
         {
-            serviceFacade = new ServiceFacade(User);
+            serviceFacade = new TestFlowManager(User);
         }
         // GET: api/TestPlans/projectName/testPlanId
         [Route("api/TestPlans/{ProjectId}/{Id}")]

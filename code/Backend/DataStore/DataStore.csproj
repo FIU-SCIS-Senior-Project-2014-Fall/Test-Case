@@ -78,9 +78,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adapters\Composites\IProjectHelper.cs" />
+    <Compile Include="Adapters\Composites\IStepHelper.cs" />
+    <Compile Include="Adapters\Composites\ISuiteHelper.cs" />
+    <Compile Include="Adapters\Composites\ITestCaseHelper.cs" />
+    <Compile Include="Adapters\Composites\ITestItemComposite.cs" />
+    <Compile Include="Adapters\Composites\ITestPlanHelper.cs" />
+    <Compile Include="Adapters\TestFlow\Composites\TestFlowCompositeBase.cs" />
+    <Compile Include="Adapters\TestFlow\Composites\TestFlowProjectHelper.cs" />
+    <Compile Include="Adapters\TestFlow\Composites\TestFlowStepHelper.cs" />
+    <Compile Include="Adapters\TestFlow\Composites\TestFlowSuiteHelper.cs" />
+    <Compile Include="Adapters\TestFlow\Composites\TestFlowTestCaseHelper.cs" />
+    <Compile Include="Adapters\TestFlow\Composites\TestFlowTestPlanHelper.cs" />
+    <Compile Include="Adapters\Tfs\Composites\TfsCompositeBase.cs" />
+    <Compile Include="Adapters\Tfs\Composites\TfsStepHelper.cs" />
+    <Compile Include="Adapters\Tfs\Composites\TfsTestCaseHelper.cs" />
+    <Compile Include="Adapters\Tfs\Composites\TfsSuiteHelper.cs" />
+    <Compile Include="Adapters\Tfs\Composites\TfsTestPlanHelper.cs" />
+    <Compile Include="Adapters\Tfs\Composites\TfsProjectHelper.cs" />
     <Compile Include="ConfigurationStore.cs" />
-    <Compile Include="DataStoreAdapter.cs" />
-    <Compile Include="DataStoreController.cs" />
+    <Compile Include="Adapters\IDataStoreAdapter.cs" />
+    <Compile Include="DataManagerFacade.cs" />
     <Compile Include="EntityData\TestFlowModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -131,8 +149,9 @@
     </Compile>
     <Compile Include="Metric.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestFlowDataStore.cs" />
-    <Compile Include="TfsDataStore.cs" />
+    <Compile Include="SyncStores\SyncManager.cs" />
+    <Compile Include="Adapters\TestFlow\TestFlowManager.cs" />
+    <Compile Include="Adapters\Tfs\TfsManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -163,6 +182,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TestFlowStore\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
