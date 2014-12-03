@@ -96,6 +96,7 @@
     <Compile Include="Adapters\Tfs\Composites\TfsSuiteHelper.cs" />
     <Compile Include="Adapters\Tfs\Composites\TfsTestPlanHelper.cs" />
     <Compile Include="Adapters\Tfs\Composites\TfsProjectHelper.cs" />
+    <Compile Include="CollectionHelper.cs" />
     <Compile Include="ConfigurationStore.cs" />
     <Compile Include="Adapters\IDataStoreAdapter.cs" />
     <Compile Include="DataManagerFacade.cs" />
@@ -121,9 +122,6 @@
       <DependentUpon>TestFlowModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityData\TF_Collection_Types.cs">
-      <DependentUpon>TestFlowModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityData\TF_ExternalIds.cs">
       <DependentUpon>TestFlowModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityData\TF_Projects.cs">
@@ -152,6 +150,7 @@
     <Compile Include="SyncStores\SyncManager.cs" />
     <Compile Include="Adapters\TestFlow\TestFlowManager.cs" />
     <Compile Include="Adapters\Tfs\TfsManager.cs" />
+    <Compile Include="SyncStores\TestFlowManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -159,6 +158,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>TestFlowModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="ClassDiagramDataStore.cd" />
     <None Include="EntityData\TestFlowModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>TestFlowModel.edmx</DependentUpon>

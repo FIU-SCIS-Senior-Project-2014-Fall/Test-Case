@@ -43,20 +43,23 @@
     <Compile Include="Collection.cs" />
     <Compile Include="Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StepBase.cs" />
+    <Compile Include="IStepBase.cs" />
     <Compile Include="Tag.cs" />
     <Compile Include="TestCase.cs" />
-    <Compile Include="TestItemBase.cs" />
+    <Compile Include="ITestItemBase.cs" />
     <Compile Include="TestPlan.cs" />
-    <Compile Include="TestSharedStep.cs" />
     <Compile Include="TestStep.cs" />
     <Compile Include="TestSuite.cs" />
+    <Compile Include="IUserInformation.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FileStore\FileStore.csproj">
       <Project>{45cab060-a850-4739-a7be-ad05a0a56a24}</Project>
       <Name>FileStore</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,4 +1,5 @@
-﻿using Microsoft.TeamFoundation.Client;
+﻿using DataStore.Adapters.Tfs.Composites;
+using Microsoft.TeamFoundation.Client;
 using Microsoft.TeamFoundation.TestManagement.Client;
 using Microsoft.TeamFoundation.WorkItemTracking.Client;
 //------------------------------------------------------------------------------
@@ -14,233 +15,125 @@ using System.Net;
 using System.Security.Principal;
 using System.Text;
 
-public class TfsManager : IDataStoreAdapter
+namespace DataStore.Adapters.Tfs
 {
-    private ICredentials credentials;
-
-    public int Id
+    public class TfsManager : IDataStoreAdapter
     {
-        get;
-        set;
-    }
-    public string Name
-    {
-        get;
-        set;
-    }
-    public Uri Host
-    {
-        get;
-        set;
-    }
+        private ICredentials credentials;
+        private ITestManagementService testManagementService;
 
-    public TfsManager()
-    {
-        credentials = new NetworkCredential("TFS", "test123"); //CredentialCache.DefaultNetworkCredentials;
-    }
+        private TfsProjectHelper projectsHelper;
+        private TfsTestPlanHelper testPlanHelper;
+        private TfsSuiteHelper suiteHelper;
+        private TfsTestCaseHelper testCaseHelper;
+        private TfsStepHelper stepHelper;
 
-    public virtual void insertItem(TestPlan testPlan, TestItemBase testElement)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public virtual void editItem(TestItemBase item)
-    {
-        if(item.GetType() == typeof(TestPlan))
-            editTestPlan((TestPlan) item);
-    }
-
-    private void editTestPlan(TestPlan plan)
-    {
-        var tpc = TfsTeamProjectCollectionFactory.GetTeamProjectCollection(Host);
-        //ICredentials crds = new NetworkCredential("TFS", "test123");
-        tpc.Credentials = credentials;
-
-        TfsTeamProjectCollection tfsCollection = new TfsTeamProjectCollection(Host, credentials);
-        ITestManagementService tms = tpc.GetService<ITestManagementService>();
-
-        // get the project and plan helper
-        ITestManagementTeamProject project = tms.GetTeamProject(plan.Project.Name);
-        ITestPlanHelper planHelper = project.TestPlans;
-
-        // find the right plan
-        ITestPlan tfsPlan = planHelper.Find(plan.Id);
-
-        tfsPlan.Name = plan.Name;
-        tfsPlan.Save();
-    }
-
-    public int CreateTestPlan(string projectName, string name)
-    {
-        var tpc = TfsTeamProjectCollectionFactory.GetTeamProjectCollection(Host);
-        //ICredentials crds = new NetworkCredential("TFS", "test123");
-        tpc.Credentials = credentials;
-
-        TfsTeamProjectCollection tfsCollection = new TfsTeamProjectCollection(Host, credentials);
-        ITestManagementService tms = tpc.GetService<ITestManagementService>();
-
-        // get the project and plan helper
-        ITestManagementTeamProject project = tms.GetTeamProject(projectName);
-        ITestPlanHelper planHelper = project.TestPlans;
-
-        ITestPlan testPlan = planHelper.Create();
-        testPlan.Name = name;
-
-        testPlan.Save();
-
-        return testPlan.Id;
-    }
-
-    private void editTestSuite(TestSuite suite)
-    {
-
-    }
-
-    public virtual void removeItem(TestStep step)
-    {
-        throw new System.NotImplementedException();
-    }
-    /// <summary>
-    /// Retrieves all of the test plans under a given project
-    /// </summary>
-    /// <param name="projectName">Project name</param>
-    /// <returns>list of test plans under a given project</returns>
-    public List<TestPlan> getPlans(string projectName)
-    {
-        var tpc = TfsTeamProjectCollectionFactory.GetTeamProjectCollection(Host);
-        //ICredentials crds = new NetworkCredential("TFS", "test123");
-        tpc.Credentials = credentials;
-
-        TfsTeamProjectCollection tfsCollection = new TfsTeamProjectCollection(Host, credentials);
-        ITestManagementService tms = tpc.GetService<ITestManagementService>();
-
-        // setup project
-        ITestManagementTeamProject project = tms.GetTeamProject(projectName);
-        ITestPlanHelper planHelper = project.TestPlans;
-
-        // query and import all test plans found
-        List<TestPlan> planList = new List<TestPlan>();
-        foreach (ITestPlan p in planHelper.Query("Select * From TestPlan"))
+        public DataStore.Adapters.Composites.IProjectHelper Projects
         {
-            TestPlan tp = new TestPlan();
-            tp.Id = p.Id;
-            tp.Name = p.Name;
-            planList.Add(tp);
+            get { return projectsHelper; }
         }
 
-        return planList;
-    }
-    /// <summary>
-    /// Retrieves all of the projects avaliable to this user for a given TFS Collection
-    /// </summary>
-    /// <returns>List of serializable projects</returns>
-    public List<Project> getProjects()
-    {
-        var tpc = TfsTeamProjectCollectionFactory.GetTeamProjectCollection(Host);
-        //ICredentials crds = new NetworkCredential("TFS", "test123");
-        tpc.Credentials = credentials;
-
-        ITestManagementService testManagementService = tpc.GetService<ITestManagementService>();
-
-        var workItemStore = new WorkItemStore(tpc);
-        // returns list of tfs projects
-        var tfsProjectList = (from Microsoft.TeamFoundation.WorkItemTracking.Client.Project pr in workItemStore.Projects select pr).ToList();
-
-        // convert list into test flow project list
-        List<Project> projectList = new List<Project>();
-        foreach (Microsoft.TeamFoundation.WorkItemTracking.Client.Project tfsProj in tfsProjectList)
+        public DataStore.Adapters.Composites.ITestPlanHelper TestPlans
         {
-            Project proj = new Project();
-            proj.Name = tfsProj.Name;
-            proj.Id = tfsProj.Id;
-            proj.Store = Name;
-            projectList.Add(proj);
+            get { return testPlanHelper; }
         }
 
-        return projectList;
-    }
-    /// <summary>
-    /// Retrieves a test plan and all of its suites
-    /// </summary>
-    /// <param name="projectName">Project name the test plan resides in</param>
-    /// <param name="id">Id of the desired test plan</param>
-    /// <returns>Serializable test plan</returns>
-    public TestPlan getPlan(string projectName, int id)
-    {
-        var tpc = TfsTeamProjectCollectionFactory.GetTeamProjectCollection(Host);
-        //ICredentials crds = new NetworkCredential("TFS", "test123");
-        tpc.Credentials = credentials;
-
-        TfsTeamProjectCollection tfsCollection = new TfsTeamProjectCollection(Host, credentials);
-        ITestManagementService tms = tpc.GetService<ITestManagementService>();
-
-        // get the project and plan helper
-        ITestManagementTeamProject project = tms.GetTeamProject(projectName);
-        ITestPlanHelper planHelper = project.TestPlans;
-
-        // find the right plan
-        ITestPlan tfsPlan = planHelper.Find(id);
-
-        // import to our test model
-        TestPlan plan = new TestPlan();
-        plan.Name = tfsPlan.Name;
-        plan.Id = tfsPlan.Id;
-        plan.Project = new Project();
-        plan.Project.Name = projectName;
-
-        // get the suites
-        plan.Suites = getSuites(tfsPlan.RootSuite.SubSuites, -1);
-
-        return plan;
-    }
-    /// <summary>
-    /// Retrieves all child suites form a given suite collection
-    /// </summary>
-    /// <param name="parentSuite">the parent suite</param>
-    /// <param name="parentId">the parents id</param>
-    /// <returns>all sub suites down 1 level.</returns>
-    private List<TestSuite> getSuites(ITestSuiteCollection parentSuite, int parentId)
-    {
-        List<TestSuite> suites = new List<TestSuite>();
-        // iterate over the TFS Suite Sub Suite colleciton
-        foreach (IStaticTestSuite tfsSuite in parentSuite)
+        public DataStore.Adapters.Composites.ISuiteHelper Suites
         {
-            // import into our test model
-            TestSuite suite = new TestSuite();
-            suite.Name = tfsSuite.Title;
-            suite.Id = tfsSuite.Id;
-            suite.Description = tfsSuite.Description;
-            suite.Parent = parentId;
-            // recursively get children
-            if (tfsSuite.SubSuites.Count > 0)
-                suite.SubSuites = getSuites(tfsSuite.SubSuites, suite.Id);
-            suites.Add(suite);
+            get { return suiteHelper; }
         }
-        return suites;
-    }
 
-    public DataStore.Adapters.Composites.IProjectHelper Projects
-    {
-        get { throw new NotImplementedException(); }
-    }
+        public DataStore.Adapters.Composites.ITestCaseHelper TestCases
+        {
+            get { return testCaseHelper; }
+        }
 
-    public DataStore.Adapters.Composites.ITestPlanHelper TestPlans
-    {
-        get { throw new NotImplementedException(); }
-    }
+        public DataStore.Adapters.Composites.IStepHelper Steps
+        {
+            get { return stepHelper; }
+        }
 
-    public DataStore.Adapters.Composites.ISuiteHelper Suites
-    {
-        get { throw new NotImplementedException(); }
-    }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public Uri Host { get; set; }
 
-    public DataStore.Adapters.Composites.ITestCaseHelper TestCases
-    {
-        get { throw new NotImplementedException(); }
-    }
+        internal DataStore.Adapters.Tfs.Composites.TfsStepHelper TfsStepHelper
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
 
-    public DataStore.Adapters.Composites.IStepHelper Steps
-    {
-        get { throw new NotImplementedException(); }
+        internal DataStore.Adapters.Tfs.Composites.TfsSuiteHelper TfsSuiteHelper
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
+        internal DataStore.Adapters.Tfs.Composites.TfsTestCaseHelper TfsTestCaseHelper
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
+        internal DataStore.Adapters.Tfs.Composites.TfsTestPlanHelper TfsTestPlanHelper
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
+        internal DataStore.Adapters.Tfs.Composites.TfsProjectHelper TfsProjectHelper
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+
+        public TfsManager(string projectName)
+        {
+            credentials = new NetworkCredential("TFS", "test123"); //CredentialCache.DefaultNetworkCredentials only works using digest;
+
+            var tpc = TfsTeamProjectCollectionFactory.GetTeamProjectCollection(Host);
+            //ICredentials crds = new NetworkCredential("TFS", "test123");
+            tpc.Credentials = credentials;
+
+            TfsTeamProjectCollection tfsCollection = new TfsTeamProjectCollection(Host, credentials);
+            testManagementService = tpc.GetService<ITestManagementService>();
+
+            projectsHelper = new TfsProjectHelper(testManagementService, tpc);
+
+            testPlanHelper = new TfsTestPlanHelper(testManagementService);
+            testPlanHelper.ProjectName = projectName;
+
+            suiteHelper = new TfsSuiteHelper(testManagementService);
+
+            testCaseHelper = new TfsTestCaseHelper(testManagementService);
+
+            stepHelper = new TfsStepHelper(testManagementService);
+
+        }
     }
 }

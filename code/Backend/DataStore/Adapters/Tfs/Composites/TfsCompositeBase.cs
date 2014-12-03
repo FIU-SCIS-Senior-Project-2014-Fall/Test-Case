@@ -12,9 +12,9 @@ namespace DataStore.Adapters.Tfs.Composites
     /// <summary>
     /// Base composite class for TFS extened composites, provides TFS service accessiblity.
     /// </summary>
-    class TfsCompositeBase
+    public class TfsCompositeBase
     {
-        private ITestManagementService testManagementService;
+        protected ITestManagementService testManagementService;
 
         /// <summary>
         /// Base constructor for the TFS Composite extended classes, initializes the Management Service for TFS

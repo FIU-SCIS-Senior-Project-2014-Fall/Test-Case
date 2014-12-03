@@ -13,9 +13,9 @@ namespace DataStore.Adapters.TestFlow.Composites
     /// <summary>
     /// Base composite class for Test Flow composite extended classes.
     /// </summary>
-    class TestFlowCompositeBase
+    public class TestFlowCompositeBase
     {
-        private testflowEntities context;
+        protected testflowEntities context;
 
         /// <summary>
         /// Base constructor for the Test Flow composite classes, initilizes the database context

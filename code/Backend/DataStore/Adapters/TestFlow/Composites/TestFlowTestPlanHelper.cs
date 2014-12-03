@@ -13,24 +13,78 @@ namespace DataStore.Adapters.TestFlow.Composites
         public TestFlowTestPlanHelper(testflowEntities context)
             : base(context)
         { }
+
+        public DataStore.Adapters.TestFlow.TestFlowManager TestFlowManager
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+            }
+        }
+    
         public int Create(TestPlan item)
         {
-            throw new NotImplementedException();
+            TF_TestPlan dbPlan = new TF_TestPlan();
+            dbPlan.Name = item.Name;
+            dbPlan.Project_Id = item.Project.Id;
+            this.context.TF_TestPlan.Add(dbPlan);
+            try
+            {
+                this.context.SaveChanges();
+                return dbPlan.TestPlan_Id;
+            }
+            catch(Exception e)
+            {
+                return -1;
+            }
         }
 
         public bool Edit(TestPlan item)
         {
-            throw new NotImplementedException();
+            TF_TestPlan dbPlan = this.context.TF_TestPlan.Find(item.Id);
+            dbPlan.Name = item.Name;
+            try
+            {
+                this.context.SaveChanges();
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
         }
 
         public TestPlan Get(int id)
         {
-            throw new NotImplementedException();
+            return fillPlan(this.context.TF_TestPlan.Find(id));
         }
 
         public List<TestPlan> GetFromParent(int parentId)
         {
-            throw new NotImplementedException();
+            var dbProject = this.context.TF_Projects.Find(parentId);
+            List<TestPlan> testPlans = new List<TestPlan>();
+
+            foreach (TF_TestPlan tp in dbProject.TF_TestPlan)
+            {
+                testPlans.Add(fillPlan(tp));
+            }
+
+            return testPlans;
+        }
+
+        private TestPlan fillPlan(TF_TestPlan dbPlan)
+        {
+            TestPlan testPlan = new TestPlan();
+            testPlan.Id = dbPlan.TestPlan_Id;
+            testPlan.Name = dbPlan.Name;
+            testPlan.Project = new Project();
+            testPlan.Project.Id = dbPlan.TF_Projects.Project_Id;
+            testPlan.Project.Name = dbPlan.TF_Projects.Name;
+            testPlan.Project.CollectionId = dbPlan.TF_Projects.Collection_Id;
+            return testPlan;
         }
     }
 }

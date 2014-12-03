@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="testflowModel.TF_Case_Metrics" Width="1.5" PointX="12" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="testflowModel.TF_Collection_Types" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="testflowModel.TF_Collections" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="testflowModel.TF_ExternalIds" Width="1.5" PointX="8" PointY="7.875" IsExpanded="true" />
         <EntityTypeShape EntityType="testflowModel.TF_Projects" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="testflowModel.TF_Step" Width="1.5" PointX="12" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="testflowModel.TF_Suites" Width="1.5" PointX="7.5" PointY="3" IsExpanded="true" />

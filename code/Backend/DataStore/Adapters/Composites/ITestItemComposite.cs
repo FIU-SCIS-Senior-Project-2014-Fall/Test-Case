@@ -12,6 +12,7 @@ namespace DataStore.Adapters.Composites
     /// <typeparam name="T"></typeparam>
     public interface ITestItemComposite<T>
     {
+    
         int Create(T item);
 
         bool Edit(T item);

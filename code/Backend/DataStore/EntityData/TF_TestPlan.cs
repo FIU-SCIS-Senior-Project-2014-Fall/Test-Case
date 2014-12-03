@@ -22,6 +22,7 @@ namespace DataStore.EntityData
         public int TestPlan_Id { get; set; }
         public string Name { get; set; }
         public int Project_Id { get; set; }
+        public int External_Id { get; set; }
     
         public virtual TF_Projects TF_Projects { get; set; }
         public virtual ICollection<TF_Suites> TF_Suites { get; set; }

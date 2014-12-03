@@ -31,19 +31,10 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TF_ExternalIds">
-      <EntityTypeMapping TypeName="testflowModel.TF_ExternalIds">
-        <MappingFragment StoreEntitySet="TF_ExternalIds">
-          <ScalarProperty Name="External_Id" ColumnName="External_Id" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="Internal_Id" ColumnName="Internal_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TF_Projects">
       <EntityTypeMapping TypeName="testflowModel.TF_Projects">
         <MappingFragment StoreEntitySet="TF_Projects">
+          <ScalarProperty Name="External_Id" ColumnName="External_Id" />
           <ScalarProperty Name="Project_Id" ColumnName="Project_Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Collection_Id" ColumnName="Collection_Id" />
@@ -53,6 +44,7 @@
     <EntitySetMapping Name="TF_Step">
       <EntityTypeMapping TypeName="testflowModel.TF_Step">
         <MappingFragment StoreEntitySet="TF_Step">
+          <ScalarProperty Name="External_Id" ColumnName="External_Id" />
           <ScalarProperty Name="Step_Id" ColumnName="Step_Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Results" ColumnName="Results" />
@@ -68,6 +60,7 @@
     <EntitySetMapping Name="TF_Suites">
       <EntityTypeMapping TypeName="testflowModel.TF_Suites">
         <MappingFragment StoreEntitySet="TF_Suites">
+          <ScalarProperty Name="External_Id" ColumnName="External_Id" />
           <ScalarProperty Name="Parent" ColumnName="Parent" />
           <ScalarProperty Name="Suite_Id" ColumnName="Suite_Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -83,6 +76,7 @@
     <EntitySetMapping Name="TF_TestCases">
       <EntityTypeMapping TypeName="testflowModel.TF_TestCases">
         <MappingFragment StoreEntitySet="TF_TestCases">
+          <ScalarProperty Name="External_Id" ColumnName="External_Id" />
           <ScalarProperty Name="TestCase_Id" ColumnName="TestCase_Id" />
           <ScalarProperty Name="Suite_Id" ColumnName="Suite_Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
@@ -97,6 +91,7 @@
     <EntitySetMapping Name="TF_TestPlan">
       <EntityTypeMapping TypeName="testflowModel.TF_TestPlan">
         <MappingFragment StoreEntitySet="TF_TestPlan">
+          <ScalarProperty Name="External_Id" ColumnName="External_Id" />
           <ScalarProperty Name="TestPlan_Id" ColumnName="TestPlan_Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Project_Id" ColumnName="Project_Id" />

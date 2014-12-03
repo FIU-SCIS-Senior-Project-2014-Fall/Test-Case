@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace DataStore.Adapters.Tfs.Composites
 {
-    class TfsTestCaseHelper : TfsCompositeBase, DataStore.Adapters.Composites.ITestCaseHelper
+    public class TfsTestCaseHelper : TfsCompositeBase, DataStore.Adapters.Composites.ITestCaseHelper
     {
         public TfsTestCaseHelper(ITestManagementService testManagementService)
             : base(testManagementService)
         { }
+    
         public int Create(TestCase item)
         {
             throw new NotImplementedException();

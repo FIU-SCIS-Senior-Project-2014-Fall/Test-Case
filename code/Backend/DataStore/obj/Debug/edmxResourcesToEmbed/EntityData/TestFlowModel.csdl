@@ -32,15 +32,6 @@
     <NavigationProperty Name="TF_User_Permissions" Relationship="Self.FK_TF_User_Permissions_TF_Collections" FromRole="TF_Collections" ToRole="TF_User_Permissions" />
     <NavigationProperty Name="TF_Collection_Types" Relationship="testflowModel.FK_TF_Collections_TF_Collection_Types" FromRole="TF_Collections" ToRole="TF_Collection_Types" />
   </EntityType>
-  <EntityType Name="TF_ExternalIds">
-    <Key>
-      <PropertyRef Name="External_Id" />
-    </Key>
-    <Property Name="External_Id" Type="Int32" Nullable="false" />
-    <Property Name="Id" Type="Int32" Nullable="false" />
-    <Property Name="Type" Type="Int32" Nullable="false" />
-    <Property Name="Internal_Id" Type="Int32" Nullable="false" />
-  </EntityType>
   <EntityType Name="TF_Projects">
     <Key>
       <PropertyRef Name="Project_Id" />
@@ -50,6 +41,7 @@
     <Property Name="Collection_Id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="TF_Collections" Relationship="Self.FK_TF_Projects_TF_Collections" FromRole="TF_Projects" ToRole="TF_Collections" />
     <NavigationProperty Name="TF_TestPlan" Relationship="Self.FK_TF_TestPlan_TF_Projects" FromRole="TF_Projects" ToRole="TF_TestPlan" />
+    <Property Name="External_Id" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="TF_Step">
     <Key>
@@ -67,6 +59,7 @@
     <NavigationProperty Name="TF_Step1" Relationship="Self.FK_TF_Step_TF_Step" FromRole="TF_Step" ToRole="TF_Step1" />
     <NavigationProperty Name="TF_Step2" Relationship="Self.FK_TF_Step_TF_Step" FromRole="TF_Step1" ToRole="TF_Step" />
     <NavigationProperty Name="TF_TestCases" Relationship="Self.FK_TF_Step_TF_TestCases" FromRole="TF_Step" ToRole="TF_TestCases" />
+    <Property Name="External_Id" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="TF_Suites">
     <Key>
@@ -83,6 +76,7 @@
     <NavigationProperty Name="TF_TestPlan" Relationship="Self.FK_TF_Suites_TF_TestPlan" FromRole="TF_Suites" ToRole="TF_TestPlan" />
     <NavigationProperty Name="TF_TestCases" Relationship="Self.FK_TF_TestCases_TF_Suites" FromRole="TF_Suites" ToRole="TF_TestCases" />
     <Property Name="Parent" Type="Int32" Nullable="false" />
+    <Property Name="External_Id" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="TF_TestCases">
     <Key>
@@ -99,6 +93,7 @@
     <NavigationProperty Name="TF_Case_Metrics" Relationship="Self.FK_TF_Case_Metrics_TF_TestCases" FromRole="TF_TestCases" ToRole="TF_Case_Metrics" />
     <NavigationProperty Name="TF_Step" Relationship="Self.FK_TF_Step_TF_TestCases" FromRole="TF_TestCases" ToRole="TF_Step" />
     <NavigationProperty Name="TF_Suites" Relationship="Self.FK_TF_TestCases_TF_Suites" FromRole="TF_TestCases" ToRole="TF_Suites" />
+    <Property Name="External_Id" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="TF_TestPlan">
     <Key>
@@ -109,6 +104,7 @@
     <Property Name="Project_Id" Type="Int32" Nullable="false" />
     <NavigationProperty Name="TF_Projects" Relationship="Self.FK_TF_TestPlan_TF_Projects" FromRole="TF_TestPlan" ToRole="TF_Projects" />
     <NavigationProperty Name="TF_Suites" Relationship="Self.FK_TF_Suites_TF_TestPlan" FromRole="TF_TestPlan" ToRole="TF_Suites" />
+    <Property Name="External_Id" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="TF_User">
     <Key>
@@ -226,7 +222,6 @@
     <EntitySet Name="TF_Case_Metrics" EntityType="Self.TF_Case_Metrics" />
     <EntitySet Name="TF_Collection_Types" EntityType="Self.TF_Collection_Types" />
     <EntitySet Name="TF_Collections" EntityType="Self.TF_Collections" />
-    <EntitySet Name="TF_ExternalIds" EntityType="Self.TF_ExternalIds" />
     <EntitySet Name="TF_Projects" EntityType="Self.TF_Projects" />
     <EntitySet Name="TF_Step" EntityType="Self.TF_Step" />
     <EntitySet Name="TF_Suites" EntityType="Self.TF_Suites" />

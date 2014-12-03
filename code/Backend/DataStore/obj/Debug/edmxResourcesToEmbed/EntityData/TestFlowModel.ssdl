@@ -27,15 +27,6 @@
     <Property Name="Host" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="Type_Id" Type="int" Nullable="false" />
   </EntityType>
-  <EntityType Name="TF_ExternalIds">
-    <Key>
-      <PropertyRef Name="External_Id" />
-    </Key>
-    <Property Name="External_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="Type" Type="int" Nullable="false" />
-    <Property Name="Internal_Id" Type="int" Nullable="false" />
-  </EntityType>
   <EntityType Name="TF_Projects">
     <Key>
       <PropertyRef Name="Project_Id" />
@@ -43,6 +34,7 @@
     <Property Name="Project_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="Collection_Id" Type="int" Nullable="false" />
+    <Property Name="External_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TF_Step">
     <Key>
@@ -57,6 +49,7 @@
     <Property Name="LastModifiedBy" Type="int" Nullable="false" />
     <Property Name="Created" Type="datetime" Nullable="false" />
     <Property Name="Modified" Type="datetime" Nullable="false" />
+    <Property Name="External_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TF_Suites">
     <Key>
@@ -71,6 +64,7 @@
     <Property Name="Modified" Type="datetime" Nullable="false" />
     <Property Name="TestPlan_Id" Type="int" Nullable="false" />
     <Property Name="Parent" Type="int" Nullable="false" />
+    <Property Name="External_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TF_TestCases">
     <Key>
@@ -84,6 +78,7 @@
     <Property Name="LastModifiedBy" Type="int" Nullable="false" />
     <Property Name="Created" Type="datetime" Nullable="false" />
     <Property Name="Modified" Type="datetime" Nullable="false" />
+    <Property Name="External_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TF_TestPlan">
     <Key>
@@ -92,6 +87,7 @@
     <Property Name="TestPlan_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="Project_Id" Type="int" Nullable="false" />
+    <Property Name="External_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TF_User">
     <Key>
@@ -220,7 +216,6 @@
     <EntitySet Name="TF_Case_Metrics" EntityType="Self.TF_Case_Metrics" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TF_Collection_Types" EntityType="Self.TF_Collection_Types" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TF_Collections" EntityType="Self.TF_Collections" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TF_ExternalIds" EntityType="Self.TF_ExternalIds" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TF_Projects" EntityType="Self.TF_Projects" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TF_Step" EntityType="Self.TF_Step" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TF_Suites" EntityType="Self.TF_Suites" Schema="dbo" store:Type="Tables" />
