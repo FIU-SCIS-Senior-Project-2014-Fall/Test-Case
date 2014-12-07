@@ -30,6 +30,7 @@ namespace DataStore.Adapters.TestFlow.Composites
             TF_Projects proj = new TF_Projects();
             proj.Name = item.Name;
             proj.Collection_Id = item.CollectionId;
+            proj.External_Id = item.ExternalId;
 
             this.context.TF_Projects.Add(proj);
 
@@ -101,6 +102,7 @@ namespace DataStore.Adapters.TestFlow.Composites
             project.Id = dbProject.Project_Id;
             project.Name = dbProject.Name;
             project.CollectionId = dbProject.Collection_Id;
+            project.ExternalId = dbProject.External_Id;
             return project;
         }
     }

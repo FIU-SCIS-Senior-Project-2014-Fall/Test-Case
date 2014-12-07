@@ -257,33 +257,70 @@ function TestFlow(scope, projectId, testPlanId) {
 			    this.type = _this.BaseHelper.Attributes.types[0];
 			}
 		};
-	};
+    };
+
+    this.changed = function (obj) {
+        obj.attributes.changed = true;
+    }
 
     //********************************************************************
     // End entity helper objects
 
+    this.sync = function () {
+        if (_this.syncSuite())
+            console.log("it worked");
+        else
+            console.log("did didn't work");
+    }
+
+    this.syncSuite = function () {
+        $.post('/api/Suites/create/' + _this.projectId + "/" + _this.testPlanId, "=" + JSON.stringify( _this.scope.suite ), function (data) {
+            if (data > 0) {
+                _this.scope.suite.id = data;
+                return true;
+            }
+            else
+                return false;
+        }).fail(function () {
+            return false;
+        });
+    }
+
     this.mergeTestPlan = function (data) {
-        if (data.length <= 0)
+        _this.REC_mergeTestPlan(_this.scope.entries, data);
+        _this.scope.$apply();
+    };
+
+    this.REC_mergeTestPlan = function (destination, source, parent) {
+        if (!source || source.length <= 0)
             return;
-        $.each(data, function (index, value) {
+        $.each(source, function (index, srcSuite) {
             var hasMatching = false;
-            if(scope.entries.length > 0)
-                $.each(scope.entries, function (sIndex, sValue) {
-                    if (sValue.id === value.Id) {
-                        if (sValue.name != value.Name)
-                            sValue.attributes.changed = true;
+            if (destination && destination.length > 0)
+                $.each(destination, function (destIndex, destSuite) {
+                    if (destSuite.id == srcSuite.Id) {
+                        destSuite.attributes.new = false;
+                        if (destSuite.name != srcSuite.Name)
+                            destSuite.attributes.changed = true;
                         hasMatching = true;
-                        return false; //break
+
+                        _this.REC_mergeTestPlan(destSuite.suites, srcSuite.SubSuites, destSuite);
                     }
                 });
             if (!hasMatching) {
-                var newSuite = _this.SuiteHelper.addSuite(value.Name);
-                newSuite.id = value.Id;
-                newSuite.summary = value.Description;
+                var newSuite;
+                if (typeof parent != "undefined")
+                    newSuite = _this.SuiteHelper.addSuite(srcSuite.Name, parent);
+                else
+                    newSuite = _this.SuiteHelper.addSuite(srcSuite.Name);
+                newSuite.id = srcSuite.Id;
+                newSuite.summary = srcSuite.Description;
+                newSuite.attributes.new = false
+
+                _this.REC_mergeTestPlan(null, srcSuite.SubSuites, newSuite);
             }
         });
-        _this.SuiteHelper.makeActive(0);
-    }
+    };
 
     
     // Dialogs

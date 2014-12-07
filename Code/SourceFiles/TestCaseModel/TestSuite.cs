@@ -77,5 +77,11 @@ public class TestSuite : IUserInformation
         get;
         set;
     }
+
+    public int ParentExternalId
+    {
+        get;
+        set;
+    }
 }
 

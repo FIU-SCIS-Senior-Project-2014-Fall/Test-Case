@@ -468,12 +468,20 @@ body, .MainBody, html, .container-fluid {
 
 /* line 417, ../../../sass/sass/main.scss */
 .green {
-  color: #5CB85C;
+  color: #5CB85C !important;
+}
+
+.yellow {
+  color: #eea236 !important;
+}
+
+.blue {
+  color: #269abc !important;
 }
 
 /* line 421, ../../../sass/sass/main.scss */
 .red {
-  color: #D9534F;
+  color: #D9534F !important;
 }
 
 /* TextAngular */

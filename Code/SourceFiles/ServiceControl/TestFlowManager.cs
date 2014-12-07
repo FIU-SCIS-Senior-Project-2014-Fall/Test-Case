@@ -41,7 +41,7 @@ public class TestFlowManager
     public TestFlowManager(IPrincipal user, int projectId, int testPlanId, int testCaseId)
     {
         User = user;
-        dataManager = new DataManagerFacade(user, projectId, TestPlanId, testCaseId);
+        dataManager = new DataManagerFacade(user, projectId, testPlanId, testCaseId);
     }
 
 	

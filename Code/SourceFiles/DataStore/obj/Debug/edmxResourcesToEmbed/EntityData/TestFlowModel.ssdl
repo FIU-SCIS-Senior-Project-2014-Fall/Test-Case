@@ -34,6 +34,7 @@
     <Property Name="Project_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
     <Property Name="Collection_Id" Type="int" Nullable="false" />
+    <Property Name="External_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TF_Step">
     <Key>
@@ -48,6 +49,8 @@
     <Property Name="LastModifiedBy" Type="int" Nullable="false" />
     <Property Name="Created" Type="datetime" Nullable="false" />
     <Property Name="Modified" Type="datetime" Nullable="false" />
+    <Property Name="External_Id" Type="int" Nullable="false" />
+    <Property Name="Parent_External_Id" Type="int" />
   </EntityType>
   <EntityType Name="TF_Suites">
     <Key>
@@ -62,6 +65,8 @@
     <Property Name="Modified" Type="datetime" Nullable="false" />
     <Property Name="TestPlan_Id" Type="int" Nullable="false" />
     <Property Name="Parent" Type="int" Nullable="false" />
+    <Property Name="External_Id" Type="int" Nullable="false" />
+    <Property Name="Parent_External_Id" Type="int" />
   </EntityType>
   <EntityType Name="TF_TestCases">
     <Key>
@@ -75,6 +80,7 @@
     <Property Name="LastModifiedBy" Type="int" Nullable="false" />
     <Property Name="Created" Type="datetime" Nullable="false" />
     <Property Name="Modified" Type="datetime" Nullable="false" />
+    <Property Name="External_Id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="TF_TestPlan">
     <Key>
@@ -160,18 +166,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TF_Suites_TF_TestPlan">
-    <End Role="TF_TestPlan" Type="Self.TF_TestPlan" Multiplicity="1" />
-    <End Role="TF_Suites" Type="Self.TF_Suites" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TF_TestPlan">
-        <PropertyRef Name="TestPlan_Id" />
-      </Principal>
-      <Dependent Role="TF_Suites">
-        <PropertyRef Name="TestPlan_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_TF_TestCases_TF_Suites">
     <End Role="TF_Suites" Type="Self.TF_Suites" Multiplicity="1" />
     <End Role="TF_TestCases" Type="Self.TF_TestCases" Multiplicity="*" />
@@ -238,10 +232,6 @@
     <AssociationSet Name="FK_TF_Step_TF_TestCases" Association="Self.FK_TF_Step_TF_TestCases">
       <End Role="TF_TestCases" EntitySet="TF_TestCases" />
       <End Role="TF_Step" EntitySet="TF_Step" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TF_Suites_TF_TestPlan" Association="Self.FK_TF_Suites_TF_TestPlan">
-      <End Role="TF_TestPlan" EntitySet="TF_TestPlan" />
-      <End Role="TF_Suites" EntitySet="TF_Suites" />
     </AssociationSet>
     <AssociationSet Name="FK_TF_TestCases_TF_Suites" Association="Self.FK_TF_TestCases_TF_Suites">
       <End Role="TF_Suites" EntitySet="TF_Suites" />

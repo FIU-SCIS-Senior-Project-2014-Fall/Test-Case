@@ -71,5 +71,11 @@ public class TestStep : IStepBase
         get;
         set;
     }
+
+    public int ParentExternalId
+    {
+        get;
+        set;
+    }
 }
 

@@ -15,14 +15,15 @@ namespace TestFlow.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        [Route("api/TestCase/{ProjectName}/{TestPlanId}/{TestCaseId}")]
-        public string Get(string ProjectName, int TestPlanId, int TestCaseId)
+        [Route("api/TestCases/{ProjectId}/{TestPlanId}/{TestCaseId}")]
+        public string Get(string ProjectId, int TestPlanId, int TestCaseId)
         {
             return CredentialCache.DefaultNetworkCredentials.UserName;
         }
 
         // POST: api/TestCase
-        public void Post([FromBody]string value)
+        [Route("api/TestCases/{ProjectName}/{TestPlanId}/{TestCaseId}")]
+        public void Post(string ProjectName, int TestPlanId, int TestCaseId,[FromBody]string value)
         {
         }
 

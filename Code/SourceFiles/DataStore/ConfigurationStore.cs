@@ -42,14 +42,21 @@ public class ConfigurationStore
                 collection = (from c in context.TF_Collections
                               where permissions.Contains(c.Collection_Id)
                               select c).FirstOrDefault();
+                // user either doesn't have any collections or permissions so do not give access to data.
+                if (collection == null)
+                    return new UserCollections();
+
                 project = (from p in context.TF_Projects 
                                    where p.Collection_Id == collection.Collection_Id
                                    select p).FirstOrDefault();
             }
 
-            // user either doesn't have any collections or permissions so do not give access to data.
-            if (collection == null)
-                return new UserCollections();
+            if (testPlanId > 0)
+            {
+                testPlanId = (from tp in context.TF_TestPlan
+                              where tp.TestPlan_Id == testPlanId
+                              select tp.External_Id).FirstOrDefault();
+            }
 
             // this supports other future adapters
             switch(collection.Type_Id)

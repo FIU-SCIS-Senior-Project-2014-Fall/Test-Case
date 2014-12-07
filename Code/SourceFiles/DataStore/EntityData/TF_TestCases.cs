@@ -27,6 +27,7 @@ namespace DataStore.EntityData
         public int LastModifiedBy { get; set; }
         public System.DateTime Created { get; set; }
         public System.DateTime Modified { get; set; }
+        public int External_Id { get; set; }
     
         public virtual TF_Case_Metrics TF_Case_Metrics { get; set; }
         public virtual ICollection<TF_Step> TF_Step { get; set; }

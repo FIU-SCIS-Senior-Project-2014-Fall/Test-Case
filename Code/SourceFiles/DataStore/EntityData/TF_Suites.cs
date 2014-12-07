@@ -28,6 +28,8 @@ namespace DataStore.EntityData
         public System.DateTime Modified { get; set; }
         public int TestPlan_Id { get; set; }
         public int Parent { get; set; }
+        public int External_Id { get; set; }
+        public Nullable<int> Parent_External_Id { get; set; }
     
         public virtual TF_TestPlan TF_TestPlan { get; set; }
         public virtual ICollection<TF_TestCases> TF_TestCases { get; set; }

@@ -252,23 +252,55 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		$("#myModal").modal('show');
 	}
 
-	testManager.reloadWorkspaceDelegate = function (projectId, testPlanId) {
+	$scope.changeSuite = function (suiteId) {
+
+	}
+
+	$scope.sync = function () {
+	    testFlow.sync();
+	}
+
+	$scope.changed = function (obj) {
+	    testFlow.changed(obj);
+	}
+
+	testManager.reloadWorkspaceDelegate = function (projectId, testPlanId, testPlanName) {
 	    $.ajax({
-	        url: '/api/TestPlans/' + projectId + "/" + testPlanId,
+	        url: '/api/Suites/' + projectId + "/" + testPlanId,
 	        type: 'GET',
 	        dataType: 'json',
 	        success: function (data) {
-	            $scope.testPlan = data.Name;
-	            localStorage.setItem("entry:" + testFlow.projectId + ":" + testFlow.testPlanId, JSON.stringify($scope.entries));
-	            $scope.entries = JSON.parse(localStorage.getItem("entry:" + projectId + ":" + testPlanId));
-	            if ($scope.entries != null || !$.isArray($scope.entries))
-	                $scope.entries = [];
-	            testFlow.mergeTestPlan(data.Suites);
+                // set plan name
+	            $scope.testPlan = testPlanName;
+	            var lastProject = localStorage.getItem("project"); // get last project and testplan
+	            var lastPlan = localStorage.getItem("testplan");
+
+                // don't do anything if they are the same.
+	            if ((lastPlan && lastProject) || (projectId != lastProject && testPlanId != lastPlan)) {
+	                localStorage.setItem("entry:" + lastProject + ":" + lastPlan, JSON.stringify($scope.entries));
+	                $scope.entries = JSON.parse(localStorage.getItem("entry:" + projectId + ":" + testPlanId));
+	                if ($scope.entries == null || !$.isArray($scope.entries))
+	                    $scope.entries = [];
+	            }
+
+                // merge the data into plan
+	            testFlow.mergeTestPlan(data);
+
+                // set as current
 	            testFlow.projectId = projectId;
 	            testFlow.testPlanId = testPlanId;
 	            $scope.$apply();
-	            $scope.$apply();
+
+                // store current
+	            localStorage.setItem("testplan", testPlanId);
+	            localStorage.setItem("project", projectId);
+
+                // blank out the loader
 	            testManager.loader("", false, false);
+
+                // make the suite active
+	            $scope.makeActive(0);
+	            $scope.$apply();
 	        },
 	        error: function () {
 	            $("#myModal").find(".modal-title").html("Error Requesting Project Test Plan");

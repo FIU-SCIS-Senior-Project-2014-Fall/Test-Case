@@ -28,6 +28,8 @@ namespace DataStore.EntityData
         public int LastModifiedBy { get; set; }
         public System.DateTime Created { get; set; }
         public System.DateTime Modified { get; set; }
+        public int External_Id { get; set; }
+        public Nullable<int> Parent_External_Id { get; set; }
     
         public virtual ICollection<TF_Step> TF_Step1 { get; set; }
         public virtual TF_Step TF_Step2 { get; set; }

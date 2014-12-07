@@ -36,18 +36,6 @@ public class DataManagerFacade
     // Projects Stuff
     //*****************************************************************************
 
-    public void CreateProject(Project project)
-    {
-        project.ExternalId = dataStores.collection.Projects.Create(project);
-        dataStores.tfStore.Projects.Create(project);
-    }
-
-    public void EditProject(Project project)
-    {
-        if (dataStores.collection.Projects.Edit(project))
-            dataStores.tfStore.Projects.Edit(project);
-    }
-
     public Project GetProject(int id)
     {
         return dataStores.tfStore.Projects.Get(id);
@@ -86,7 +74,9 @@ public class DataManagerFacade
 
     public List<TestPlan> GetTestPlans(int projectId)
     {
-        //call sync
+        List<TestPlan> externalPlans = dataStores.collection.TestPlans.GetFromParent(projectId); // this id doesn't matter because project is being set elsewhere
+        List<TestPlan> internalPlans = dataStores.tfStore.TestPlans.GetFromParent(projectId);
+        SyncManager.SyncTestPlans(internalPlans, externalPlans, dataStores.tfStore, projectId);
         return dataStores.tfStore.TestPlans.GetFromParent(projectId);
     }
 
@@ -113,10 +103,13 @@ public class DataManagerFacade
         return dataStores.tfStore.Suites.Get(id);
     }
 
-    public List<TestSuite> GetSuites(int projectId)
+    public List<TestSuite> GetSuites(int testPlanId)
     {
-        //call sync
-        return dataStores.tfStore.Suites.GetFromParent(projectId);
+        TestPlan testPlan = GetTestPlan(testPlanId);
+        List<TestSuite> externalSuites = dataStores.collection.Suites.GetFromParent(testPlan.ExternalId);
+        List<TestSuite> internalSuites = dataStores.tfStore.Suites.GetFromParent(testPlanId);
+        SyncManager.SyncSuites(internalSuites, externalSuites, dataStores.tfStore, testPlanId);
+        return dataStores.tfStore.Suites.GetFromParent(testPlanId);
     }
 
     //*****************************************************************************

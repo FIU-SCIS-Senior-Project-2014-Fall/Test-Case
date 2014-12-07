@@ -20,24 +20,31 @@ namespace DataStore.Adapters.Tfs.Composites
     
         public int Create(TestSuite item)
         {
-            IStaticTestSuite suite = null;
+            try
+            {
+                IStaticTestSuite suite = null;
 
-            IStaticTestSuite newSuite = this.testManagementProject.TestSuites.CreateStatic();
+                IStaticTestSuite newSuite = this.testManagementProject.TestSuites.CreateStatic();
 
-            newSuite.Title = item.Name;
-            newSuite.Description = item.Description;
+                newSuite.Title = item.Name;
+                newSuite.Description = item.Description;
 
-            if (item.Parent > 0)
-                suite = FindSuite(testPlan.RootSuite.Entries, item.Parent);
+                if (item.Parent > 0)
+                    suite = FindSuite(testPlan.RootSuite.Entries, item.Parent);
 
-            if (suite != null)
-                suite.Entries.Add(newSuite);
-            else
-                testPlan.RootSuite.Entries.Add(newSuite);
+                if (suite != null)
+                    suite.Entries.Add(newSuite);
+                else
+                    testPlan.RootSuite.Entries.Add(newSuite);
 
-            testPlan.Save();
+                testPlan.Save();
 
-            return newSuite.Id;
+                return newSuite.Id;
+            }
+            catch(Exception e)
+            {
+                return -1;
+            }
         }
 
         public bool Edit(TestSuite item)
@@ -89,7 +96,7 @@ namespace DataStore.Adapters.Tfs.Composites
         /// <param name="parentSuite">the parent suite</param>
         /// <param name="parentId">the parents id</param>
         /// <returns>all sub suites down 1 level.</returns>
-        private List<TestSuite> getSuites(ITestSuiteEntryCollection parentSuite)
+        private List<TestSuite> getSuites(ITestSuiteEntryCollection parentSuite, int parent = 0)
         {
             List<TestSuite> suites = new List<TestSuite>();
             // iterate over the TFS Suite Sub Suite colleciton
@@ -103,10 +110,10 @@ namespace DataStore.Adapters.Tfs.Composites
                 suite.Name = tfsSuite.Title;
                 suite.ExternalId = tfsSuite.Id;
                 suite.Description = tfsSuite.Description;
-                suite.Parent = tfsSuite.Parent.Id;
+                suite.ParentExternalId = parent;
                 // recursively get children
                 if (tfsSuite.Entries.Count > 0)
-                    suite.SubSuites = getSuites(tfsSuite.Entries);
+                    suite.SubSuites = getSuites(tfsSuite.Entries, suite.ExternalId);
                 suites.Add(suite);
             }
             return suites;

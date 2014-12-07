@@ -74,6 +74,7 @@ namespace DataStore.Adapters.TestFlow.Composites
             testPlan.Project.Id = dbPlan.TF_Projects.Project_Id;
             testPlan.Project.Name = dbPlan.TF_Projects.Name;
             testPlan.Project.CollectionId = dbPlan.TF_Projects.Collection_Id;
+            testPlan.ExternalId = dbPlan.External_Id;
             return testPlan;
         }
     }

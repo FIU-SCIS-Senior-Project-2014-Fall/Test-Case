@@ -29,12 +29,20 @@ namespace DataStore.Adapters.TestFlow.Composites
         {
             TF_Suites dbSuite = new TF_Suites();
             dbSuite.Name = item.Name;
+            if (item.ParentExternalId > 0)
+            {
+                item.Parent = (from s in this.context.TF_Suites
+                               where s.External_Id == item.ParentExternalId
+                               select s.Suite_Id).FirstOrDefault();
+            }
             dbSuite.Parent = item.Parent;
             dbSuite.Modified = item.Modified;
             dbSuite.TestPlan_Id = item.TestPlan;
             dbSuite.LastModifiedBy = item.LastModifiedBy;
             dbSuite.Created = item.Created;
             dbSuite.CreatedBy = item.CreatedBy;
+            dbSuite.External_Id = item.ExternalId;
+            dbSuite.Parent_External_Id = item.ParentExternalId;
 
             this.context.TF_Suites.Add(dbSuite);
 
@@ -81,8 +89,10 @@ namespace DataStore.Adapters.TestFlow.Composites
         public List<TestSuite> GetFromParent(int testPlanId)
         {
             List<TestSuite> suites = new List<TestSuite>();
-            var dbPlan = this.context.TF_TestPlan.Find(testPlanId);
-            foreach(TF_Suites s in dbPlan.TF_Suites)
+            var dbSuites = from s in this.context.TF_Suites
+                         where s.TestPlan_Id == testPlanId && s.Parent == 0
+                         select s;
+            foreach (TF_Suites s in dbSuites)
             {
                 suites.Add(fillSuite(s));
             }
@@ -94,12 +104,15 @@ namespace DataStore.Adapters.TestFlow.Composites
         {
             TestSuite suite = new TestSuite();
             suite.Id = dbSuite.Suite_Id;
+            suite.Name = dbSuite.Name;
             suite.Description = dbSuite.Description;
             suite.Created = dbSuite.Created;
             suite.CreatedBy = dbSuite.CreatedBy;
             suite.Modified = dbSuite.Modified;
             suite.LastModifiedBy = dbSuite.LastModifiedBy;
+            suite.ExternalId = dbSuite.External_Id;
             suite.Parent = dbSuite.Parent;
+            suite.ParentExternalId = Convert.ToInt32(dbSuite.Parent_External_Id);
             suite.TestPlan = dbSuite.TestPlan_Id;
             suite.SubSuites = REC_getSuitesFromParent(suite.Id);
             return suite;
