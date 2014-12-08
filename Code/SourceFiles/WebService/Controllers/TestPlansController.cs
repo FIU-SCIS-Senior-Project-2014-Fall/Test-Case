@@ -31,11 +31,6 @@ namespace TestFlow.Controllers
             return serviceFacade.GetTestPlans(ProjectId);
         }
 
-        public string Get()
-        {
-            return "Please provide a project or project and test plan id";
-        }
-
         // POST: api/TestPlans/14
         [Route("api/TestPlans/create/{ProjectId}")]
         public void Post(int ProjectId, [FromBody]string value)

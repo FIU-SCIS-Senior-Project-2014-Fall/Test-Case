@@ -468,12 +468,20 @@ body, .MainBody, html, .container-fluid {
 
 /* line 417, ../../../sass/sass/main.scss */
 .green {
-  color: #5CB85C;
+  color: #5CB85C !important;
+}
+
+.yellow {
+  color: #eea236 !important;
+}
+
+.blue {
+  color: #269abc !important;
 }
 
 /* line 421, ../../../sass/sass/main.scss */
 .red {
-  color: #D9534F;
+  color: #D9534F !important;
 }
 
 /* TextAngular */
@@ -720,4 +728,25 @@ body, .MainBody, html, .container-fluid {
     background: #D9531E;
     box-shadow: 0 0 20px #D9531E;
     -webkit-animation: none;
+}
+
+.test-step div, .test-step span, .test-step input {
+    z-index:99 !important;
+    position:relative;
+}
+
+.test-step:hover {
+    z-index:999 !important;
+}
+
+.tooltip {
+    z-index:9999 !important;
+    position:absolute !important;
+    opacity:0.99
+}
+
+.test-step {
+    opacity:0.99;
+    display:block;
+    z-index:99;
 }

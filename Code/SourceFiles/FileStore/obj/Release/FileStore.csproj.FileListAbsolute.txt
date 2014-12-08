@@ -8,3 +8,8 @@ G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\FileStore\bin\Release\FileSt
 G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\FileStore\obj\Release\FileStore.csprojResolveAssemblyReference.cache
 G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\FileStore\obj\Release\FileStore.dll
 G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\FileStore\obj\Release\FileStore.pdb
+G:\udocdownloads\docs\GitHub\Test-Case\Code\SourceFiles\FileStore\bin\Release\FileStore.dll
+G:\udocdownloads\docs\GitHub\Test-Case\Code\SourceFiles\FileStore\bin\Release\FileStore.pdb
+G:\udocdownloads\docs\GitHub\Test-Case\Code\SourceFiles\FileStore\obj\Release\FileStore.csprojResolveAssemblyReference.cache
+G:\udocdownloads\docs\GitHub\Test-Case\Code\SourceFiles\FileStore\obj\Release\FileStore.dll
+G:\udocdownloads\docs\GitHub\Test-Case\Code\SourceFiles\FileStore\obj\Release\FileStore.pdb

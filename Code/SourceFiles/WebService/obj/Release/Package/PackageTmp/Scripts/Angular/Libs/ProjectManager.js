@@ -14,6 +14,8 @@ function ProjectManager() {
             type: 'GET',
             dataType: 'json',
             success: function (data) {
+                if (!data || data.length <= 0)
+                    window.location = "/Collections";
                 instance.registerProjects(data);
                 instance.loader("Choose a project.", false, true);
             },
@@ -91,7 +93,7 @@ function ProjectManager() {
         instance.currentTestPlan = testPlan;
         $(element).parents().find(".active").removeClass("active");
         $(element).addClass("active");
-        instance.reloadWorkspaceDelegate(instance.currentProject.Id, instance.currentTestPlan.Id);
+        instance.reloadWorkspaceDelegate(instance.currentProject.Id, instance.currentTestPlan.Id, testPlan.Name);
     }
 
     // create new test plan
@@ -123,5 +125,5 @@ function ProjectManager() {
     }
 
     // delegate which should be assigned a function from the controller to be find on test plan changes.
-    this.reloadWorkspaceDelegate = function (projectId, testPlanId) { };
+    this.reloadWorkspaceDelegate = function (projectId, testPlanId, testPlanName) { };
 };

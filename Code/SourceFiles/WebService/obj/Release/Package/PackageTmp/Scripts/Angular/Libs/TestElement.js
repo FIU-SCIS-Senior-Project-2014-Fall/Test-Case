@@ -15,6 +15,7 @@ function TestFlow(scope, projectId, testPlanId) {
 	this.zIndex = 5000;
 	this.modalId = "#myModal";
 	this.timeOut = 0;
+	this.processing = 0;
 
 	this.resourceText = {
 	    "cpyChd": "Copy Children",
@@ -171,7 +172,9 @@ function TestFlow(scope, projectId, testPlanId) {
 	    if (typeof force === "undefined") {
 	        testCase.toggle = !testCase.toggle; // flip the bool
 	        if (testCase.toggle && testCase.children.length <= 0) // add a step if one doesn't exist and we are opening the case
-	            addSubEntry(0, index);
+	        {
+	            testCase.children.push(_this.StepHelper.createStep(""));
+	        }
 	    }
 	    else
 	        testCase.toggle = true;
@@ -257,32 +260,257 @@ function TestFlow(scope, projectId, testPlanId) {
 			    this.type = _this.BaseHelper.Attributes.types[0];
 			}
 		};
-	};
+    };
+
+    this.changed = function (obj) {
+        obj.attributes.changed = true;
+    }
 
     //********************************************************************
     // End entity helper objects
 
+    this.sync = function () {
+        testManager.loader("Syncing Test Suite '" + _this.scope.suite.name + "'...", true, true);
+        _this.syncSuite()
+    }
+
+    this.syncSuite = function () {
+        if (_this.scope.suite.attributes.new) {
+            _this.processing++;
+            $.post('/api/Suites/create/' + _this.projectId + "/" + _this.testPlanId, "=" + JSON.stringify(_this.scope.suite), function (data) {
+                _this.processing--;
+                if (data > 0) {
+                    _this.scope.suite.id = data;
+                    _this.scope.suite.attributes.new = false;
+                    _this.scope.suite.attributes.changed = false;
+                    _this.syncTestCases();
+                    _this.processing--;
+                }
+                else
+                    return false;
+            }).fail(function () {
+                _this.processing--;
+                return false;
+            });
+        } else if(_this.scope.suite.attributes.changed) {
+            var data = "=" + JSON.stringify(_this.scope.suite);
+            _this.processing++;
+            $.ajax({
+                url: '/api/Suites/edit/' + _this.projectId + "/" + _this.testPlanId ,
+                type: 'PUT',
+                data: data,
+                success: function (data) {
+                    _this.syncTestCases();
+                    if(data > 0)
+                        _this.scope.suite.attributes.changed = false;
+                    _this.processing--;
+                },
+                error: function () {
+                    _this.processing--;
+                }
+            });
+        } else {
+            _this.syncTestCases();
+        }
+    }
+
+    this.syncTestCases = function () {
+        $.each(_this.scope.suite.children, function (index, testCase) {
+            _this.syncTestCase(testCase);
+        });
+
+        $.each(_this.scope.suite.children, function (index, testCase) {
+            $.each(testCase.children, function (sIndex, step) {
+                step.parent = testCase.id;
+                _this.syncStep(step);
+            });
+        });
+
+        this.mergeCheckFinished();
+    }
+
+    this.syncTestCase = function (testCase) {
+        testCase.suite = _this.scope.suite.id;
+        var data = "=" + JSON.stringify(testCase);
+        if (testCase.attributes.new) {
+            _this.processing++;
+            $.ajax({
+                url: "/api/TestCases/create/" + _this.projectId + "/" + _this.testPlanId + "/" + _this.scope.suite.id,
+                type: "POST",
+                data: data,
+                success: function (data) {
+                    testCase.id = data;
+                    _this.processing--;
+                },
+                error: function() {
+                    _this.processing--;
+                },
+                async: false
+            });
+        } else if (testCase.attributes.changed) {
+            _this.processing++;
+            $.ajax({
+                url: "/api/TestCases/edit/" +_this.projectId + "/" + _this.testPlanId + "/" + testCase.id,
+                type: "PUT",
+                data: data,
+                success: function (data) {
+                    _this.processing--;
+                },
+                error: function() {
+                    _this.processing--;
+                },
+                async: false
+            });
+        }
+    }
+
+    this.syncStep = function (step) {
+        
+        var data = "=" + JSON.stringify(step);
+        if (step.attributes.new) {
+            _this.processing++;
+            $.ajax({
+                url: "/api/Steps/create/" + _this.projectId + "/" + _this.testPlanId + "/" + step.parent,
+                type: "POST",
+                data: data,
+                success: function (data) {
+                    step.id = data;
+                    _this.processing--;
+                },
+                error: function () {
+                    _this.processing--;
+                },
+                async: false
+            });
+        } else if(step.attributes.changed) {
+            _this.processing++;
+            $.ajax({
+                url: "/api/Steps/edit/" + _this.projectId + "/" + _this.testPlanId + "/" + step.parent,
+                type: "PUT",
+                data: data,
+                success: function (data) {
+                    _this.processing--;
+                },
+                error: function () {
+                    _this.processing--;
+                },
+                async: false
+            });
+        }
+    }
+
+    this.mergeCheckFinished = function() {
+        var interval;
+        var method = function() {
+            clearInterval(interval);
+            console.log(_this.processing);
+            if(_this.processing > 0)
+                _this.mergeCheckFinished();
+            else {
+                _this.scope.getTestCases();
+            }
+        };
+        
+        inteveral= setTimeout(method, 1000);
+    }
+
     this.mergeTestPlan = function (data) {
-        if (data.length <= 0)
+        _this.REC_mergeTestPlan(_this.scope.entries, data);
+        _this.scope.$apply();
+    };
+
+    this.REC_mergeTestPlan = function (destination, source, parent) {
+        if (!source || source.length <= 0)
             return;
-        $.each(data, function (index, value) {
+        $.each(source, function (index, srcSuite) {
             var hasMatching = false;
-            if(scope.entries.length > 0)
-                $.each(scope.entries, function (sIndex, sValue) {
-                    if (sValue.id === value.Id) {
-                        if (sValue.name != value.Name)
-                            sValue.attributes.changed = true;
+            if (destination && destination.length > 0)
+                $.each(destination, function (destIndex, destSuite) {
+                    if (destSuite.id == srcSuite.Id) {
+                        destSuite.attributes.new = false;
+                        if (destSuite.name != srcSuite.Name)
+                            destSuite.attributes.changed = true;
+                        else
+                            destSuite.attributes.changed = false;
                         hasMatching = true;
-                        return false; //break
+
+                        _this.REC_mergeTestPlan(destSuite.suites, srcSuite.SubSuites, destSuite);
                     }
                 });
             if (!hasMatching) {
-                var newSuite = _this.SuiteHelper.addSuite(value.Name);
-                newSuite.id = value.Id;
-                newSuite.summary = value.Description;
+                var newSuite;
+                if (typeof parent != "undefined")
+                    newSuite = _this.SuiteHelper.addSuite(srcSuite.Name, parent);
+                else
+                    newSuite = _this.SuiteHelper.addSuite(srcSuite.Name);
+                newSuite.id = srcSuite.Id;
+                newSuite.summary = srcSuite.Description;
+                newSuite.attributes.new = false
+
+                _this.REC_mergeTestPlan(null, srcSuite.SubSuites, newSuite);
             }
         });
-        _this.SuiteHelper.makeActive(0);
+    };
+
+    this.mergeTestCases = function ( data ) {
+        if (!data || data.length <= 0)
+            return;
+        $.each(data, function (index, srcCase) {
+            var hasMatching = false;
+            if (_this.scope.suite.children && _this.scope.suite.children.length > 0) {
+                $.each(_this.scope.suite.children, function (iIndex, destCase) {
+                    if (destCase.id == srcCase.Id) {
+                        destCase.attributes.new = false;
+                        hasMatching = true;
+                        if (destCase.name != srcCase.Name)
+                            destCase.attributes.changed = true;
+                        else
+                            destCase.attributes.changed = false;
+
+                        _this.mergeSteps(destCase, srcCase.Steps);
+                    }
+                });
+            }
+            if (!hasMatching) {
+                var newCase = _this.CaseHelper.addCase(srcCase.Name, _this.scope.suite);
+                newCase.summary = srcCase.Description;
+                newCase.id = srcCase.Id;
+                newCase.attributes.new = false;
+                _this.mergeSteps(newCase, srcCase.Steps);
+            }
+        });
+        _this.scope.$apply();
+    }
+
+    this.mergeSteps = function (testCase, data) {
+        if (!data || data.length <= 0)
+            return;
+        $.each(data, function (index, srcStep) {
+            var hasMatching = false;
+            if(testCase.children || testCase.children.length <= 0)
+            {
+                $.each(testCase.children, function (iIndex, destStep) {
+                    if(destStep.id == srcStep.Id)
+                    {
+                        hasMatching = true;
+                        destStep.attributes.new = false;
+                        if (destStep.name != srcStep.Name || destStep.result != srcStep.Result)
+                            destStep.attributes.changed = true;
+                        else
+                            destStep.attributes.changed = false;
+                    }
+                });
+            }
+
+            if (!hasMatching) {
+                var newStep = _this.StepHelper.createStep(srcStep.Name);
+                newStep.result = srcStep.Result;
+                newStep.id = srcStep.Id;
+                newStep.attributes.new = false;
+                testCase.children.push(newStep);
+            }
+        });
+        _this.scope.$apply();
     }
 
     

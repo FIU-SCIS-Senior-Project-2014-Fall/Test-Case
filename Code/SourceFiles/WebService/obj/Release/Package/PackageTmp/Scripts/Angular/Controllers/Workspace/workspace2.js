@@ -42,6 +42,8 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 
 	$scope.makeActive = function(index, parent, root) {
 	    testFlow.SuiteHelper.makeActive(index, parent, root);
+        if(!$scope.suite.attributes.new)
+	        $scope.getTestCases();
 	}
 
 	$scope.isActive = function(id) {
@@ -100,8 +102,13 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
         testFlow.CaseHelper.addStep("", $scope.suite.children[index]);
     };
 
-    $scope.removeEntryClicked = function(index) {
-    	$scope.entries.splice(index, 1);
+    $scope.removeEntryClicked = function () {
+        if ($scope.active.root < 0 && $scope.active.parent < 0)
+            $scope.entries.splice($scope.active.index, 1);
+        else if ($scope.active.root < 0)
+            $scope.entries[$scope.active.parent].suites.splice($scope.active.index, 1);
+        else
+            $scope.entries[$scope.active.root].suites[$scope.active.parent].suites.splice($scope.active.index, 1);
     	$scope.makeActive(0);
     };
 
@@ -252,23 +259,69 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 		$("#myModal").modal('show');
 	}
 
-	testManager.reloadWorkspaceDelegate = function (projectId, testPlanId) {
+	$scope.changeSuite = function (suiteId) {
+
+	}
+
+	$scope.sync = function () {
+	    testFlow.sync();
+	}
+
+	$scope.changed = function (obj) {
+	    testFlow.changed(obj);
+	}
+
+	$scope.getTestCases = function () {
+	    testManager.loader("Retrieving test plan suite...", true, true);
 	    $.ajax({
-	        url: '/api/TestPlans/' + projectId + "/" + testPlanId,
+	        url: '/api/TestCases/' + testFlow.projectId + "/" + testFlow.testPlanId + "/" + $scope.suite.id,
 	        type: 'GET',
 	        dataType: 'json',
 	        success: function (data) {
-	            $scope.testPlan = data.Name;
-	            localStorage.setItem("entry:" + testFlow.projectId + ":" + testFlow.testPlanId, JSON.stringify($scope.entries));
-	            $scope.entries = JSON.parse(localStorage.getItem("entry:" + projectId + ":" + testPlanId));
-	            if ($scope.entries != null || !$.isArray($scope.entries))
-	                $scope.entries = [];
-	            testFlow.mergeTestPlan(data.Suites);
+	            testFlow.mergeTestCases(data);
+	            $scope.$apply();
+	            testManager.loader("", false, false);
+	        },
+	        error: function (data) {
+
+	        }
+	    });
+	}
+
+	testManager.reloadWorkspaceDelegate = function (projectId, testPlanId, testPlanName) {
+	    $.ajax({
+	        url: '/api/Suites/' + projectId + "/" + testPlanId,
+	        type: 'GET',
+	        dataType: 'json',
+	        success: function (data) {
+                // set plan name
+	            $scope.testPlan = testPlanName;
+	            var lastProject = localStorage.getItem("project"); // get last project and testplan
+	            var lastPlan = localStorage.getItem("testplan");
+
+                // don't do anything if they are the same.
+	            if ((lastPlan && lastProject) || (projectId != lastProject && testPlanId != lastPlan)) {
+	                localStorage.setItem("entry:" + lastProject + ":" + lastPlan, JSON.stringify($scope.entries));
+	                $scope.entries = JSON.parse(localStorage.getItem("entry:" + projectId + ":" + testPlanId));
+	                if ($scope.entries == null || !$.isArray($scope.entries))
+	                    $scope.entries = [];
+	            }
+
+                // merge the data into plan
+	            testFlow.mergeTestPlan(data);
+
+                // set as current
 	            testFlow.projectId = projectId;
 	            testFlow.testPlanId = testPlanId;
 	            $scope.$apply();
+
+                // store current
+	            localStorage.setItem("testplan", testPlanId);
+	            localStorage.setItem("project", projectId);
+
+                // make the suite active
+	            $scope.makeActive(0);
 	            $scope.$apply();
-	            testManager.loader("", false, false);
 	        },
 	        error: function () {
 	            $("#myModal").find(".modal-title").html("Error Requesting Project Test Plan");
@@ -378,7 +431,9 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 	  		}
 	  		else if (testFlow.keys[9] && testFlow.keys[16]) {
 	  			e.preventDefault();
-	  			if($(element).attr("e-type") == "step") {
+	  			if ($(element).attr("e-type") == "step") {
+	  			    if (!scope.suite.children[$(element).attr("entry")].children[$(element).attr("step-entry")].attributes.new)
+	  			        return;
 	  				scope.addNewCaseFromKeyPress(Number($(element).attr("entry")) + 1);
 					scope.suite.children[$(element).attr("entry")].children.splice($(element).attr("step-entry"), 1);
 					scope.suite.children[Number($(element).attr("entry")) + 1].name = $(element).val();
@@ -388,7 +443,9 @@ angular.module('initProjApp').directive("tfProcesskey", function()
 	  		} else if(e.which == 9) {
 	  			e.preventDefault();
 	  			if($(element).attr("e-type") == "case" && $(element).attr("entry") > 0) {
-	  				var title = $(element).val();
+	  			    var title = $(element).val();
+	  			    if (!scope.suite.children[$(element).attr("entry")].attributes.new)
+	  			        return;
 	  				scope.suite.children.splice($(element).attr("entry"), 1);
 	  				scope.addNewStepFromKeyPress(scope.suite.children[$(element).attr("entry") - 1].children.length, ($(element).attr("entry") - 1));
 	  				scope.toggle($(element).attr("entry") - 1, true);

@@ -43,7 +43,11 @@ public class DataManagerFacade
 
     public List<Project> GetProjects()
     {
+        if (dataStores.tfStore == null)
+            return null;
         List<IDataStoreAdapter> dStores = ConfigurationStore.GetAllUserStores(dataStores.tfStore.User.User_Id);
+        if (dStores.Count <= 0)
+            return null;
         SyncManager.SyncProjects(dStores, dataStores.tfStore);
         TestFlowProjectHelper tfph = (TestFlowProjectHelper)dataStores.tfStore.Projects;
         return tfph.GetAll(dataStores.tfStore.User.User_Id);
@@ -86,16 +90,18 @@ public class DataManagerFacade
     // Suite Stuff
     //*****************************************************************************
 
-    public void CreateSuite(TestSuite Suite)
+    public int CreateSuite(TestSuite Suite)
     {
         Suite.ExternalId = dataStores.collection.Suites.Create(Suite);
-        dataStores.tfStore.Suites.Create(Suite);
+        return dataStores.tfStore.Suites.Create(Suite);
     }
 
-    public void EditSuite(TestSuite Suite)
+    public bool EditSuite(TestSuite Suite)
     {
         if (dataStores.collection.Suites.Edit(Suite))
-            dataStores.tfStore.Suites.Edit(Suite);
+            return dataStores.tfStore.Suites.Edit(Suite);
+        else
+            return false;
     }
 
     public TestSuite GetSuite(int id)
@@ -118,16 +124,19 @@ public class DataManagerFacade
     // TestCase Stuff
     //*****************************************************************************
 
-    public void CreateTestCase(TestCase TestCase)
+    public int CreateTestCase(TestCase TestCase)
     {
+        TestCase.TestSuite = GetSuite(TestCase.TestSuite.Id);
         TestCase.ExternalId = dataStores.collection.TestCases.Create(TestCase);
-        dataStores.tfStore.TestCases.Create(TestCase);
+        return dataStores.tfStore.TestCases.Create(TestCase);
     }
 
-    public void EditTestCase(TestCase TestCase)
+    public bool EditTestCase(TestCase TestCase)
     {
         if (dataStores.collection.TestCases.Edit(TestCase))
-            dataStores.tfStore.TestCases.Edit(TestCase);
+            return dataStores.tfStore.TestCases.Edit(TestCase);
+        else
+            return false;
     }
 
     public TestCase GetTestCase(int id)
@@ -135,10 +144,20 @@ public class DataManagerFacade
         return dataStores.tfStore.TestCases.Get(id);
     }
 
-    public List<TestCase> GetTestCases(int projectId)
+    public List<TestCase> GetTestCases(int suiteId)
     {
-        //call sync
-        return dataStores.tfStore.TestCases.GetFromParent(projectId);
+        TestSuite suite = GetSuite(suiteId);
+        List<TestCase> externalTestCases = dataStores.collection.TestCases.GetFromParent(suite.ExternalId);
+        List<TestCase> internalTestCases = dataStores.tfStore.TestCases.GetFromParent(suite.Id);
+        SyncManager.SyncTestCases(internalTestCases, externalTestCases, dataStores.tfStore, suiteId);
+        List<TestCase> results = dataStores.tfStore.TestCases.GetFromParent(suiteId);
+        
+        foreach(TestCase tc in results)
+        {
+            dataStores.collection.CreateStepHelper(tc.ExternalId);
+            tc.Steps = GetSteps(tc.Id);
+        }
+        return results;
     }
 
     //*****************************************************************************
@@ -147,16 +166,22 @@ public class DataManagerFacade
     // Step Stuff
     //*****************************************************************************
 
-    public void CreateStep(TestStep Step)
+    public int CreateStep(TestStep Step)
     {
+        TestCase tc = GetTestCase(Step.TestCase);
+        Step.ParentExternalId = tc.ExternalId;
         Step.ExternalId = dataStores.collection.Steps.Create(Step);
-        dataStores.tfStore.Steps.Create(Step);
+        return dataStores.tfStore.Steps.Create(Step);
     }
 
-    public void EditStep(TestStep Step)
+    public bool EditStep(TestStep Step)
     {
+        TestStep ts = GetStep(Step.Id);
+        Step.ExternalId = ts.ExternalId;
         if (dataStores.collection.Steps.Edit(Step))
-            dataStores.tfStore.Steps.Edit(Step);
+            return dataStores.tfStore.Steps.Edit(Step);
+        else
+            return false;
     }
 
     public TestStep GetStep(int id)
@@ -164,10 +189,13 @@ public class DataManagerFacade
         return dataStores.tfStore.Steps.Get(id);
     }
 
-    public List<TestStep> GetSteps(int projectId)
+    public List<TestStep> GetSteps(int testCaseId)
     {
-        //call sync
-        return dataStores.tfStore.Steps.GetFromParent(projectId);
+        TestCase testCase = GetTestCase(testCaseId);
+        List<TestStep> externalSteps = dataStores.collection.Steps.GetFromParent(testCase.ExternalId);
+        List<TestStep> internalSteps = dataStores.tfStore.Steps.GetFromParent(testCase.Id);
+        SyncManager.SyncTestSteps(internalSteps, externalSteps, dataStores.tfStore, testCase.Id);
+        return dataStores.tfStore.Steps.GetFromParent( testCaseId);
     }
 
     //*****************************************************************************

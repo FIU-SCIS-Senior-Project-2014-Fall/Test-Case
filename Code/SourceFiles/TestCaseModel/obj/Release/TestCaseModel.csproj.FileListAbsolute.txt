@@ -24,3 +24,10 @@ G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\TestCaseModel\bin\Release\Re
 G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\TestCaseModel\obj\Release\TestCaseModel.csprojResolveAssemblyReference.cache
 G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\TestCaseModel\obj\Release\TestCaseModel.dll
 G:\udocdownloads\docs\GitHub\Test-Case\code\Backend\TestCaseModel\obj\Release\TestCaseModel.pdb
+G:\udocdownloads\docs\GitHub\Test-Case\Code\SourceFiles\TestCaseModel\bin\Release\TestCaseModel.dll
+G:\udocdownloads\docs\GitHub\Test-Case\Code\SourceFiles\TestCaseModel\bin\Release\TestCaseModel.pdb
+G:\udocdownloads\docs\GitHub\Test-Case\Code\SourceFiles\TestCaseModel\bin\Release\FileStore.dll
+G:\udocdownloads\docs\GitHub\Test-Case\Code\SourceFiles\TestCaseModel\bin\Release\FileStore.pdb
+G:\udocdownloads\docs\GitHub\Test-Case\Code\SourceFiles\TestCaseModel\obj\Release\TestCaseModel.csprojResolveAssemblyReference.cache
+G:\udocdownloads\docs\GitHub\Test-Case\Code\SourceFiles\TestCaseModel\obj\Release\TestCaseModel.dll
+G:\udocdownloads\docs\GitHub\Test-Case\Code\SourceFiles\TestCaseModel\obj\Release\TestCaseModel.pdb

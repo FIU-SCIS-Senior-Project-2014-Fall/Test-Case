@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace DataStore.Adapters.TestFlow.Composites
@@ -13,17 +14,6 @@ namespace DataStore.Adapters.TestFlow.Composites
         public TestFlowStepHelper(testflowEntities context)
             : base(context)
         { }
-
-        public DataStore.Adapters.TestFlow.TestFlowManager TestFlowManager
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
     
         public int Create(TestStep item)
         {
@@ -32,10 +22,12 @@ namespace DataStore.Adapters.TestFlow.Composites
             dbStep.Results = item.Result;
             dbStep.Parent = item.Parent;
             dbStep.LastModifiedBy = item.LastModifiedBy;
-            dbStep.Modified = item.Modified;
-            dbStep.Created = item.Created;
+            dbStep.Modified = DateTime.Now;
+            dbStep.Created = DateTime.Now;
             dbStep.CreatedBy = item.CreatedBy;
             dbStep.TestCase_Id = item.TestCase;
+            dbStep.External_Id = item.ExternalId;
+            dbStep.Parent_External_Id = item.ParentExternalId;
 
             this.context.TF_Step.Add(dbStep);
 
@@ -92,14 +84,17 @@ namespace DataStore.Adapters.TestFlow.Composites
         {
             TestStep step = new TestStep();
             step.Id = dbStep.Step_Id;
-            step.Name = dbStep.Name;
-            step.Result = dbStep.Results;
+            step.Name = ScrubHtml(dbStep.Name);
+            step.Result = ScrubHtml(dbStep.Results);
             step.Created = dbStep.Created;
             step.CreatedBy = Convert.ToInt32(dbStep.CreatedBy); // weird
             step.LastModifiedBy = dbStep.LastModifiedBy;
             step.Modified = dbStep.Modified;
             step.Parent = dbStep.Parent;
             step.TestCase = dbStep.TestCase_Id;
+            step.ExternalId = dbStep.External_Id;
+            step.ParentExternalId = Convert.ToInt32(dbStep.Parent_External_Id);
+
             step.Children = new List<TestStep>();
 
             var dbSteps = from s in this.context.TF_Step
@@ -110,6 +105,13 @@ namespace DataStore.Adapters.TestFlow.Composites
 
             return step;
             
+        }
+
+        private string ScrubHtml(string value)
+        {
+            var step1 = Regex.Replace(value, @"<[^>]+>|&nbsp;", "").Trim();
+            var step2 = Regex.Replace(step1, @"\s{2,}", " ");
+            return step2;
         }
     }
 }

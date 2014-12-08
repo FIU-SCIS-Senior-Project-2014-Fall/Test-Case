@@ -7,21 +7,14 @@
                 <span class="glyphicon glyphicon-plus onlyHover" data-toggle="tooltip" data-placement="bottom"
             title="Create new test case" ng-click="addCaseClicked()" tf-tooltip></span>
                 <span class="glyphicon glyphicon-remove onlyHover" data-toggle="tooltip" data-placement="bottom"
-            title="Delete suite" ng-click="removeEntryClicked()" tf-tooltip></span>
+            title="Delete suite" ng-click="removeEntryClicked()" ng-if="suite.attributes.new" tf-tooltip></span>
                 <span>
-                  <strong>ID: </strong> TestSuite{{suite.id}}
+                  <strong>ID: </strong> TestSuite{{suite.id}} <span ng-if="suite.attributes.changed && !suite.attributes.new" data-toggle="tooltip" data-placement="bottom"
+      title="Test suite has changed from original test plan." class="glyphicon glyphicon-exclamation-sign yellow" tf-tooltip></span>
+<span ng-if="suite.attributes.new" data-toggle="tooltip" data-placement="bottom" title="Test suite does not exist in test plan yet." class="glyphicon glyphicon-plus-sign blue" tf-tooltip></span>
                 </span>
               </span>
-              <input type="text" id="s{{ suite.id }}" e-type="suite" entry="-1" class="form-control tf-proc-control edit-title" ng-model="suite.name" tf-processkey="edit-title">
-              <div class="input-group-btn">
-                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-ok-sign green"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="caret"></span></button>
-                <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                  <li><a href="#">{{ resc.filesOk }}</a></li>
-                  <li class="divider"></li>
-                  <li><a href="#">{{ resc.cpyChd }}</a></li>
-                  <li><a href="#">{{ resc.ascFile }}</a></li>
-                </ul>
-              </div><!-- /btn-group -->
+              <input type="text" id="s{{ suite.id }}" e-type="suite" entry="-1" class="form-control tf-proc-control edit-title" ng-model="suite.name" ng-change="changed(suite)" tf-processkey="edit-title">
             </div><!-- /input-group -->
           </div>
         </div>

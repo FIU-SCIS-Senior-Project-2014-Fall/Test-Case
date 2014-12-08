@@ -91,14 +91,14 @@ public class TestFlowManager
         return dataManager.GetSuites(testPlanId);
     }
 
-    public void EditSuite(TestSuite suite)
+    public bool EditSuite(TestSuite suite)
     {
-        dataManager.EditSuite(suite);
+        return dataManager.EditSuite(suite);
     }
 
-    public void CreateSuite(TestSuite suite)
+    public int CreateSuite(TestSuite suite)
     {
-        dataManager.CreateSuite(suite);
+        return dataManager.CreateSuite(suite);
     }
     // *********************************************************************************
     // end Suite Stuff
@@ -115,14 +115,14 @@ public class TestFlowManager
         return dataManager.GetTestCases(suiteId);
     }
 
-    public void EditTestCase(TestCase testCase)
+    public bool EditTestCase(TestCase testCase)
     {
-        dataManager.EditTestCase(testCase);
+        return dataManager.EditTestCase(testCase);
     }
 
-    public void CreateTestCase(TestCase testCase)
+    public int CreateTestCase(TestCase testCase)
     {
-        dataManager.CreateTestCase(testCase);
+        return dataManager.CreateTestCase(testCase);
     }
     // *********************************************************************************
     // end TestCase Stuff
@@ -139,14 +139,14 @@ public class TestFlowManager
         return dataManager.GetSteps(projectId);
     }
 
-    public void EditTestStep(TestStep step)
+    public bool EditTestStep(TestStep step)
     {
-        dataManager.EditStep(step);
+        return dataManager.EditStep(step);
     }
 
-    public void CreateTestStep(TestStep step)
+    public int CreateTestStep(TestStep step)
     {
-        dataManager.CreateStep(step);
+        return dataManager.CreateStep(step);
     }
     // *********************************************************************************
     // end Step Stuff

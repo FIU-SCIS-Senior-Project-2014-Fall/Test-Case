@@ -15,6 +15,7 @@ namespace TestFlow.Controllers
         public ActionResult Index()
         {
             TestFlowManager serviceFacade = new TestFlowManager(User, true);
+            ViewBag.UserName = User.Identity.Name;
             return View(serviceFacade.GetCollections());
         }
 
@@ -22,6 +23,7 @@ namespace TestFlow.Controllers
         public ActionResult Details(int? id)
         {
             TestFlowManager serviceFacade = new TestFlowManager(User, true);
+            ViewBag.UserName = User.Identity.Name;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -48,6 +50,7 @@ namespace TestFlow.Controllers
         public ActionResult Create([Bind(Include = "Id,Name,Host,Type")] Collection collection)
         {
             TestFlowManager serviceFacade = new TestFlowManager(User, true);
+            ViewBag.UserName = User.Identity.Name;
             if (ModelState.IsValid)
             {
                 serviceFacade.CreateCollection(collection, collection.Type);
@@ -61,6 +64,7 @@ namespace TestFlow.Controllers
         public ActionResult Edit(int? id)
         {
             TestFlowManager serviceFacade = new TestFlowManager(User, true);
+            ViewBag.UserName = User.Identity.Name;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -81,6 +85,7 @@ namespace TestFlow.Controllers
         public ActionResult Edit([Bind(Include = "Id,Name,Host,Type")] Collection collection)
         {
             TestFlowManager serviceFacade = new TestFlowManager(User, true);
+            ViewBag.UserName = User.Identity.Name;
             if (ModelState.IsValid)
             {
                 serviceFacade.EditCollection(collection);

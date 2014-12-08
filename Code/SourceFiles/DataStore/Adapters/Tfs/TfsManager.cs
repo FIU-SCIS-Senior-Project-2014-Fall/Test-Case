@@ -16,6 +16,7 @@ namespace DataStore.Adapters.Tfs
         private ICredentials credentials;
         private ITestManagementService testManagementService;
         private TfsTeamProjectCollection teamProjectCollection;
+        private string projectName;
 
         private TfsProjectHelper projectsHelper;
         private TfsTestPlanHelper testPlanHelper;
@@ -78,6 +79,8 @@ namespace DataStore.Adapters.Tfs
             projectsHelper = new TfsProjectHelper(testManagementService, teamProjectCollection, projectName);
 
             testPlanHelper = new TfsTestPlanHelper(testManagementService, projectName);
+
+            this.projectName = projectName;
         }
         /// <summary>
         /// This constructor provides access to every helper but test steps, which needs a test case id
@@ -95,6 +98,8 @@ namespace DataStore.Adapters.Tfs
             suiteHelper = new TfsSuiteHelper(testManagementService, projectName, testPlanId);
 
             testCaseHelper = new TfsTestCaseHelper(testManagementService, projectName, testPlanId);
+
+            this.projectName = projectName;
         }
 
         /// <summary>
@@ -115,6 +120,14 @@ namespace DataStore.Adapters.Tfs
 
             testCaseHelper = new TfsTestCaseHelper(testManagementService, projectName, testPlanId);
 
+            stepHelper = new TfsStepHelper(testManagementService, projectName, testCaseId);
+
+            this.projectName = projectName;
+        }
+
+
+        public void CreateStepHelper(int testCaseId)
+        {
             stepHelper = new TfsStepHelper(testManagementService, projectName, testCaseId);
         }
     }

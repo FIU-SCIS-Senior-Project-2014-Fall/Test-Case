@@ -58,6 +58,13 @@ public class ConfigurationStore
                               select tp.External_Id).FirstOrDefault();
             }
 
+            if (testCaseId > 0)
+            {
+                testCaseId = (from tp in context.TF_TestCases
+                              where tp.TestCase_Id == testCaseId
+                              select tp.External_Id).FirstOrDefault();
+            }
+
             // this supports other future adapters
             switch(collection.Type_Id)
             {

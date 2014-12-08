@@ -49,19 +49,26 @@ namespace DataStore.Adapters.Tfs.Composites
 
         public bool Edit(TestSuite item)
         {
-            IStaticTestSuite suite = null;
-
-            suite = FindSuite(testPlan.RootSuite.Entries, item.Parent);
-
-            if(suite != null)
+            try
             {
-                suite.Title = item.Name;
-                suite.Description = item.Description;
+                IStaticTestSuite suite = null;
 
-                testPlan.Save();
-                return true;
+                suite = FindSuite(testPlan.RootSuite.Entries, item.ExternalId);
+
+                if(suite != null)
+                {
+                    suite.Title = item.Name;
+                    suite.Description = (item.Description != null) ? item.Description : "";
+
+                    testPlan.Save();
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch(Exception e)
+            {
+                return false;
+            }
         }
 
         public TestSuite Get(int id)

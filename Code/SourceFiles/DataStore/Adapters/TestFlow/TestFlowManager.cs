@@ -89,5 +89,11 @@ namespace DataStore.Adapters.TestFlow
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+
+        public void CreateStepHelper(int testCaseId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

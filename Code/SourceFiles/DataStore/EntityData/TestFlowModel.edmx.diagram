@@ -20,7 +20,6 @@
         <AssociationConnector Association="testflowModel.FK_TF_Projects_TF_Collections" ManuallyRouted="false" />
         <AssociationConnector Association="testflowModel.FK_TF_User_Permissions_TF_Collections" ManuallyRouted="false" />
         <AssociationConnector Association="testflowModel.FK_TF_TestPlan_TF_Projects" ManuallyRouted="false" />
-        <AssociationConnector Association="testflowModel.FK_TF_Step_TF_Step" ManuallyRouted="false" />
         <AssociationConnector Association="testflowModel.FK_TF_Step_TF_TestCases" ManuallyRouted="false" />
         <AssociationConnector Association="testflowModel.FK_TF_Suites_TF_TestPlan" ManuallyRouted="false" />
         <AssociationConnector Association="testflowModel.FK_TF_TestCases_TF_Suites" ManuallyRouted="false" />

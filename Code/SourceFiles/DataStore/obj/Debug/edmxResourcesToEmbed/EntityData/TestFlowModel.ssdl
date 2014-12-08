@@ -142,18 +142,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TF_Step_TF_Step">
-    <End Role="TF_Step" Type="Self.TF_Step" Multiplicity="1" />
-    <End Role="TF_Step1" Type="Self.TF_Step" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TF_Step">
-        <PropertyRef Name="Step_Id" />
-      </Principal>
-      <Dependent Role="TF_Step1">
-        <PropertyRef Name="Parent" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_TF_Step_TF_TestCases">
     <End Role="TF_TestCases" Type="Self.TF_TestCases" Multiplicity="1" />
     <End Role="TF_Step" Type="Self.TF_Step" Multiplicity="*" />
@@ -224,10 +212,6 @@
     <AssociationSet Name="FK_TF_Projects_TF_Collections" Association="Self.FK_TF_Projects_TF_Collections">
       <End Role="TF_Collections" EntitySet="TF_Collections" />
       <End Role="TF_Projects" EntitySet="TF_Projects" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TF_Step_TF_Step" Association="Self.FK_TF_Step_TF_Step">
-      <End Role="TF_Step" EntitySet="TF_Step" />
-      <End Role="TF_Step1" EntitySet="TF_Step" />
     </AssociationSet>
     <AssociationSet Name="FK_TF_Step_TF_TestCases" Association="Self.FK_TF_Step_TF_TestCases">
       <End Role="TF_TestCases" EntitySet="TF_TestCases" />

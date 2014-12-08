@@ -14,6 +14,8 @@ function ProjectManager() {
             type: 'GET',
             dataType: 'json',
             success: function (data) {
+                if (!data || data.length <= 0)
+                    window.location = "/Collections";
                 instance.registerProjects(data);
                 instance.loader("Choose a project.", false, true);
             },

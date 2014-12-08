@@ -103,14 +103,77 @@ namespace DataStore.SyncStores
             }
         }
 
-        public static void SyncTestCases(List<TestCase> testFlowProjects, List<TestCase> externalProjects)
+        public static void SyncTestCases(List<TestCase> testFlowTestCases, List<TestCase> externalTestCases, TestFlowManager tfStore, int suiteId)
         {
+            foreach(TestCase tc in externalTestCases)
+            {
+                bool exist = false;
+                foreach(TestCase iTc in testFlowTestCases)
+                {
+                    if(tc.ExternalId == iTc.ExternalId)
+                    {
+                        exist = true;
+                        bool hasChanges = false;
+                        if (!tc.Name.Equals(iTc.Name))
+                        {
+                            hasChanges = true;
+                            iTc.Name = tc.Name;
+                        }
+                            
+                        if (!tc.Description.Equals(iTc.Name))
+                        {
+                            hasChanges = true;
+                            iTc.Description = tc.Description;
+                        }
 
+                        if(hasChanges)
+                            tfStore.TestCases.Edit(iTc);
+                    }
+                }
+
+                if(!exist)
+                {
+                    tc.TestSuite = new TestSuite();
+                    tc.TestSuite.Id = suiteId;
+                    tfStore.TestCases.Create(tc);
+                }
+            }
         }
 
-        public static void SyncTestSteps(List<TestStep> testFlowProjects, List<TestStep> externalProjects)
+        public static void SyncTestSteps(List<TestStep> testFlowSteps, List<TestStep> externalSteps, TestFlowManager tfStore, int testCaseId)
         {
+            foreach(TestStep ts in externalSteps)
+            {
+                bool exist = false;
+                foreach(TestStep iTs in testFlowSteps)
+                {
+                    if(ts.ExternalId == iTs.ExternalId)
+                    {
+                        exist = true;
+                        bool hasChanged = false;
+                        if(!ts.Name.Equals(iTs.Name))
+                        {
+                            iTs.Name = ts.Name;
+                            hasChanged = true;
+                        }
 
+                        if(!ts.Result.Equals(iTs.Result))
+                        {
+                            iTs.Result = ts.Result;
+                            hasChanged = true;
+                        }
+
+                        if (hasChanged)
+                            tfStore.Steps.Edit(iTs);
+                    }
+                }
+
+                if(!exist)
+                {
+                    ts.TestCase = testCaseId;
+                    tfStore.Steps.Create(ts);
+                }
+            }
         }
     }
 }

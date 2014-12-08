@@ -20,17 +20,18 @@ namespace DataStore.Adapters.Tfs.Composites
     
         public int Create(TestCase item)
         {
-            IStaticTestSuite suite = FindSuite(testPlan.RootSuite.Entries, item.TestSuite.Id);
+            IStaticTestSuite suite = FindSuite(testPlan.RootSuite.Entries, item.TestSuite.ExternalId);
 
             if (suite == null)
                 return -1;
             ITestCase testCase = testManagementProject.TestCases.Create();
             testCase.Title = item.Name;
             testCase.Description = item.Description;
-
-            suite.TestCases.Add(testCase);
+            
             try
             {
+                testCase.Save();
+                suite.Entries.Add(testCase.TestSuiteEntry);
                 testPlan.Save();
                 return testCase.Id;
             }
@@ -47,7 +48,7 @@ namespace DataStore.Adapters.Tfs.Composites
             testCase.Description = item.Description;
             try
             {
-                testPlan.Save();
+                testCase.Save();
                 return true;
             }
             catch (Exception e)
@@ -79,12 +80,14 @@ namespace DataStore.Adapters.Tfs.Composites
 
             List<TestCase> testCases = new List<TestCase>();
 
-            foreach(ITestCase tc in suite.AllTestCases)
+            foreach(ITestSuiteEntry tc in suite.TestCases)
             {
                 TestCase testCase = new TestCase();
                 testCase.Name = tc.Title;
-                testCase.Description = tc.Description;
+                testCase.Description = tc.TestCase.Description;
                 testCase.ExternalId = tc.Id;
+                testCase.TestSuite = new TestSuite();
+                testCase.TestSuite.ExternalId = suite.Id;
                 testCases.Add(testCase);
             }
 

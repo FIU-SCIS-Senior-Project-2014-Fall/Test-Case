@@ -56,8 +56,6 @@
     <Property Name="LastModifiedBy" Type="Int32" Nullable="false" />
     <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Modified" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="TF_Step1" Relationship="Self.FK_TF_Step_TF_Step" FromRole="TF_Step" ToRole="TF_Step1" />
-    <NavigationProperty Name="TF_Step2" Relationship="Self.FK_TF_Step_TF_Step" FromRole="TF_Step1" ToRole="TF_Step" />
     <NavigationProperty Name="TF_TestCases" Relationship="Self.FK_TF_Step_TF_TestCases" FromRole="TF_Step" ToRole="TF_TestCases" />
     <Property Name="External_Id" Type="Int32" Nullable="false" />
     <Property Name="Parent_External_Id" Type="Int32" />
@@ -184,18 +182,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_TF_Step_TF_Step">
-    <End Role="TF_Step" Type="Self.TF_Step" Multiplicity="1" />
-    <End Role="TF_Step1" Type="Self.TF_Step" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TF_Step">
-        <PropertyRef Name="Step_Id" />
-      </Principal>
-      <Dependent Role="TF_Step1">
-        <PropertyRef Name="Parent" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_TF_Step_TF_TestCases">
     <End Role="TF_TestCases" Type="Self.TF_TestCases" Multiplicity="1" />
     <End Role="TF_Step" Type="Self.TF_Step" Multiplicity="*" />
@@ -262,10 +248,6 @@
     <AssociationSet Name="FK_TF_TestPlan_TF_Projects" Association="Self.FK_TF_TestPlan_TF_Projects">
       <End Role="TF_Projects" EntitySet="TF_Projects" />
       <End Role="TF_TestPlan" EntitySet="TF_TestPlan" />
-    </AssociationSet>
-    <AssociationSet Name="FK_TF_Step_TF_Step" Association="Self.FK_TF_Step_TF_Step">
-      <End Role="TF_Step" EntitySet="TF_Step" />
-      <End Role="TF_Step1" EntitySet="TF_Step" />
     </AssociationSet>
     <AssociationSet Name="FK_TF_Step_TF_TestCases" Association="Self.FK_TF_Step_TF_TestCases">
       <End Role="TF_TestCases" EntitySet="TF_TestCases" />

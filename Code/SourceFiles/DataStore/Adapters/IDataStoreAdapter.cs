@@ -18,6 +18,9 @@ namespace DataStore.Adapters
         ISuiteHelper Suites { get; }
         ITestCaseHelper TestCases { get; }
         IStepHelper Steps { get; }
+
+        // create instances of helpers after manager is created.
+        void CreateStepHelper(int testCaseId);
     }
 }
 

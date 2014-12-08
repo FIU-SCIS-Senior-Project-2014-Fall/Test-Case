@@ -7,13 +7,16 @@
     title="Show / hide test case" ng-click="toggle($index)" tf-tooltip></span>
         <span class="glyphicon glyphicon-plus onlyHover" data-toggle="tooltip" data-placement="bottom"
     title="Create step" ng-click="addStepClicked($index)" tf-tooltip></span>
-        <span class="glyphicon glyphicon-remove onlyHover" data-toggle="tooltip" data-placement="bottom"
-    title="Delete test case" ng-click="removeCaseEntryClicked($index)" tf-tooltip></span>
+          <span class="glyphicon glyphicon-remove onlyHover" data-toggle="tooltip" data-placement="bottom"
+                title="Delete test case" ng-click="removeCaseEntryClicked($parent.$index)" ng-if="case.attributes.new" tf-tooltip></span>
         <span class="id">
           <strong>ID: </strong> TestCase{{case.id}}
         </span>
+        <span ng-if="case.attributes.changed && !case.attributes.new" data-toggle="tooltip" data-placement="bottom"
+                title="Test case has changed from original test plan." class="glyphicon glyphicon-exclamation-sign yellow" tf-tooltip></span>
+        <span ng-if="case.attributes.new" data-toggle="tooltip" data-placement="bottom" title="Test case does not exist in test plan yet." class="glyphicon glyphicon-plus-sign blue" tf-tooltip></span> 
       </span>
-      <input type="text" id="c{{ case.id }}" e-type="case" entry="{{ $index }}" last="{{ suite.children.length - 1}}" class="form-control tf-proc-control edit-title" ng-model="case.name" tf-processkey="edit-title">
+        <input type="text" id="c{{ case.id }}" e-type="case" entry="{{ $index }}" last="{{ suite.children.length - 1}}" class="form-control tf-proc-control edit-title" ng-model="case.name" tf-processkey="edit-title" ng-change="changed(case)">
     </div><!-- /input-group -->
     <div class="case-data">
       <div id="case-body{{ case.id }}" class="animation case-body">

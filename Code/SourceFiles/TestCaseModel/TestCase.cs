@@ -49,50 +49,26 @@ public class TestCase : IUserInformation
 
     public int LastModifiedBy
     {
-        get
-        {
-            throw new NotImplementedException();
-        }
-        set
-        {
-            throw new NotImplementedException();
-        }
+        get;
+        set;
     }
 
     public int CreatedBy
     {
-        get
-        {
-            throw new NotImplementedException();
-        }
-        set
-        {
-            throw new NotImplementedException();
-        }
+        get;
+        set;
     }
 
     public DateTime Created
     {
-        get
-        {
-            throw new NotImplementedException();
-        }
-        set
-        {
-            throw new NotImplementedException();
-        }
+        get;
+        set;
     }
 
     public DateTime Modified
     {
-        get
-        {
-            throw new NotImplementedException();
-        }
-        set
-        {
-            throw new NotImplementedException();
-        }
+        get;
+        set;
     }
 
     public int ExternalId

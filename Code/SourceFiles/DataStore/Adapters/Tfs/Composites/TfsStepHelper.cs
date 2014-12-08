@@ -74,7 +74,8 @@ namespace DataStore.Adapters.Tfs.Composites
 
             foreach(ITestAction ta in testCase.Actions)
             {
-                if (ta.GetType() != typeof(ITestStep))
+                Type hello = ta.GetType();
+                if (!ta.GetType().Name.Equals("TestStep"))
                     continue;
                 ITestStep tfsStep = ta as ITestStep;
                 TestStep step = new TestStep();

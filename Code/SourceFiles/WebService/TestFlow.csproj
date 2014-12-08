@@ -172,10 +172,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\StepsController.cs" />
     <Compile Include="Controllers\SuitesController.cs" />
-    <Compile Include="Controllers\TestCaseController.cs" />
+    <Compile Include="Controllers\TestCasesController.cs" />
     <Compile Include="Controllers\TestPlansController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
