@@ -14,6 +14,5 @@ C:\Users\jack\Documents\GitHub\Test-Case\code\SourceFiles\FileStore\obj\Debug\Fi
 C:\Users\jack\Documents\GitHub\Test-Case\code\SourceFiles\FileStore\obj\Debug\FileStore.pdb
 G:\udocdownloads\docs\GitHub\Test-Case\Code\SourceFiles\FileStore\bin\Debug\FileStore.dll
 G:\udocdownloads\docs\GitHub\Test-Case\Code\SourceFiles\FileStore\bin\Debug\FileStore.pdb
-G:\udocdownloads\docs\GitHub\Test-Case\Code\SourceFiles\FileStore\obj\Debug\FileStore.csprojResolveAssemblyReference.cache
 G:\udocdownloads\docs\GitHub\Test-Case\Code\SourceFiles\FileStore\obj\Debug\FileStore.dll
 G:\udocdownloads\docs\GitHub\Test-Case\Code\SourceFiles\FileStore\obj\Debug\FileStore.pdb

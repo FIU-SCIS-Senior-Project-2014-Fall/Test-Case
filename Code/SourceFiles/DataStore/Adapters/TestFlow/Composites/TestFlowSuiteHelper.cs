@@ -25,10 +25,10 @@ namespace DataStore.Adapters.TestFlow.Composites
                                select s.Suite_Id).FirstOrDefault();
             }
             dbSuite.Parent = item.Parent;
-            dbSuite.Modified = item.Modified;
+            dbSuite.Modified = DateTime.Now;
             dbSuite.TestPlan_Id = item.TestPlan;
             dbSuite.LastModifiedBy = item.LastModifiedBy;
-            dbSuite.Created = item.Created;
+            dbSuite.Created = DateTime.Now;
             dbSuite.CreatedBy = item.CreatedBy;
             dbSuite.External_Id = item.ExternalId;
             dbSuite.Parent_External_Id = item.ParentExternalId;

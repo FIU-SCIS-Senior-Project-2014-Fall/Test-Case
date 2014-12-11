@@ -39,6 +39,7 @@ namespace TestFlow.Controllers
         // GET: Collections/Create
         public ActionResult Create()
         {
+            ViewBag.UserName = User.Identity.Name;
             return View();
         }
 

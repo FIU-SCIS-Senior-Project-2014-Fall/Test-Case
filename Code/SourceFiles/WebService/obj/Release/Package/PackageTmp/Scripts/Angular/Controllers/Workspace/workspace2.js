@@ -109,7 +109,8 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
             $scope.entries[$scope.active.parent].suites.splice($scope.active.index, 1);
         else
             $scope.entries[$scope.active.root].suites[$scope.active.parent].suites.splice($scope.active.index, 1);
-    	$scope.makeActive(0);
+        if($scope.entries.length > 0)
+    	    $scope.makeActive(0);
     };
 
     $scope.removeCaseEntryClicked = function(index) {
@@ -288,7 +289,11 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	    });
 	}
 
-	testManager.reloadWorkspaceDelegate = function (projectId, testPlanId, testPlanName) {
+	$scope.reset = function () {
+	    testManager.reloadWorkspaceDelegate(testFlow.projectId, testFlow.testPlanId, "", true);
+	}
+
+	testManager.reloadWorkspaceDelegate = function (projectId, testPlanId, testPlanName, reset) {
 	    $.ajax({
 	        url: '/api/Suites/' + projectId + "/" + testPlanId,
 	        type: 'GET',
@@ -300,11 +305,17 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	            var lastPlan = localStorage.getItem("testplan");
 
                 // don't do anything if they are the same.
-	            if ((lastPlan && lastProject) || (projectId != lastProject && testPlanId != lastPlan)) {
+	            if (((lastPlan && lastProject) && (typeof reset == "undefined" || !reset)) || ((projectId != lastProject && testPlanId != lastPlan) && (typeof reset == "undefined" || !reset))) {
 	                localStorage.setItem("entry:" + lastProject + ":" + lastPlan, JSON.stringify($scope.entries));
 	                $scope.entries = JSON.parse(localStorage.getItem("entry:" + projectId + ":" + testPlanId));
+	                localStorage.setItem("testPlanName", testPlanName);
 	                if ($scope.entries == null || !$.isArray($scope.entries))
 	                    $scope.entries = [];
+	            } else if (typeof reset != "undefined" && reset) {
+	                localStorage.removeItem("entry:" + projectId + ":" + testPlanId);
+	                $scope.entries = [];
+	                $scope.testPlan = localStorage.getItem("testPlanName");
+	                $scope.$apply();
 	            }
 
                 // merge the data into plan
@@ -319,9 +330,13 @@ angular.module('initProjApp').controller('WorkspaceCtrl', function ($scope, stor
 	            localStorage.setItem("testplan", testPlanId);
 	            localStorage.setItem("project", projectId);
 
-                // make the suite active
-	            $scope.makeActive(0);
+	            // make the suite active
+	            if ($scope.entries.length > 0)
+	                $scope.makeActive(0);
 	            $scope.$apply();
+
+                // ensure loader is gone.
+	            testManager.loader("", false, false);
 	        },
 	        error: function () {
 	            $("#myModal").find(".modal-title").html("Error Requesting Project Test Plan");

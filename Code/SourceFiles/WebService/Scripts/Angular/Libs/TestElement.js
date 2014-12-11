@@ -279,6 +279,7 @@ function TestFlow(scope, projectId, testPlanId) {
             _this.processing++;
             $.post('/api/Suites/create/' + _this.projectId + "/" + _this.testPlanId, "=" + JSON.stringify(_this.scope.suite), function (data) {
                 _this.processing--;
+                console.log(data);
                 if (data > 0) {
                     _this.scope.suite.id = data;
                     _this.scope.suite.attributes.new = false;
