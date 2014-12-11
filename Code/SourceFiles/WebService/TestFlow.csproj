@@ -245,6 +245,7 @@
     <Content Include="Scripts\Angular\angular-sanitize.min.js.map" />
     <Content Include="Scripts\Angular\angular-touch.min.js.map" />
     <Content Include="Scripts\jquery.min.map" />
+    <Content Include="TestFlowControllersClassDiagram.cd" />
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

@@ -13,17 +13,6 @@ namespace DataStore.Adapters.TestFlow.Composites
         public TestFlowProjectHelper(testflowEntities context)
             : base(context)
         { }
-
-        public DataStore.Adapters.TestFlow.TestFlowManager TestFlowManager
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
     
         public int Create(Project item)
         {

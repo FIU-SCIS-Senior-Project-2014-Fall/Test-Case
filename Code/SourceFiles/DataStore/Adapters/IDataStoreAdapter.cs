@@ -6,6 +6,9 @@ using System.Text;
 
 namespace DataStore.Adapters
 {
+    /// <summary>
+    /// Adapter interface providing common functionality for any data store connectivity.
+    /// </summary>
     public interface IDataStoreAdapter
     {
         Uri Host { get; set; }
